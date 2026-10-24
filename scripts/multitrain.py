@@ -1,7 +1,8 @@
 """Time-stepped multi-train run on the Port Washington Branch with a DC third-rail network solve.
 
 Each service runs on its own track at a fixed headway with one stopping pattern.
-Substations are diode rectifiers, and there is no regenerative braking.
+Braking trains regenerate into the third rail; substations are diode rectifiers and can't absorb it,
+so regen only helps other trains, and a train sheds regen once its voltage reaches V_REGEN_MAX.
 """
 import sys
 
@@ -10,6 +11,8 @@ import numpy as np
 import model as m
 
 DT = 0.5  # s
+REGEN_EFF = 0.80  # wheel to line
+V_REGEN_MAX = 900.0  # V
 
 
 class Run:
@@ -55,22 +58,22 @@ class Car:
         self.done = None
 
 
-def demand(train, car):
-    """Electrical power the train wants this step."""
+def demand(train, car, regen):
+    """Electrical power the train wants this step (negative when regenerating)."""
     r = car.run
     if car.dwell > 0:
         return train.aux
     i = min(int(car.p / r.ds), len(r.env) - 1)
+    j = min(int((car.p + car.v * DT) / r.ds), len(r.env) - 1)
     want = min(r.env[min(i + 1, len(r.env) - 1)], r.lim[i])
     v = max(car.v, 0.1)
     if car.v < want - 0.05:
-        f = train.f_max
-        mech = min(f * v, train.p_shaft)
-    elif car.v > 0.5 and r.env[i] >= car.v - 0.05:
-        mech = train.resist(car.v) * car.v  # cruise
-    else:
-        mech = 0.0  # braking or coasting into a restriction
-    return mech / 0.90 + train.aux
+        return min(train.f_max * v, train.p_shaft) / 0.90 + train.aux
+    if r.env[j] < car.v - 0.05:
+        # Braking: electric brake recovers what it can, up to rated power.
+        rec = min(train.m_eff * train.brake * car.v, train.p_shaft) * REGEN_EFF if regen else 0.0
+        return train.aux - rec
+    return train.resist(car.v) * car.v / 0.90 + train.aux  # cruise
 
 
 def solve(subs, cars, dem, train, n_tracks):
@@ -93,6 +96,7 @@ def solve(subs, cars, dem, train, n_tracks):
             G0[bb, bb] += g
             G0[a, bb] -= g
             G0[bb, a] -= g
+    shed = np.ones(len(cars))
     for _ in range(30):
         G = G0.copy()
         b = np.zeros(n)
@@ -104,9 +108,14 @@ def solve(subs, cars, dem, train, n_tracks):
         for j in range(len(cars)):
             k = n_sub + j
             Vt = max(V[k], 1.0)
-            I[j] = min(dem[j] / Vt, train.i_max)
-            if Vt < m.V_MIN:
-                I[j] *= max(Vt - 0.6 * m.V_MIN, 0) / (0.4 * m.V_MIN)  # shed load as voltage collapses
+            if dem[j] >= 0:
+                I[j] = min(dem[j] / Vt, train.i_max)
+                if Vt < m.V_MIN:
+                    I[j] *= max(Vt - 0.6 * m.V_MIN, 0) / (0.4 * m.V_MIN)  # shed load as voltage collapses
+            else:
+                if Vt > V_REGEN_MAX:
+                    shed[j] *= 0.8  # line not receptive: blend to friction brake
+                I[j] = max(dem[j] * shed[j] / Vt, -train.i_max)
             b[k] -= I[j]
         # Nodes with no branches (lone train on an isolated stretch) can't happen: subs bound every track.
         V_new = np.linalg.solve(G, b)
@@ -117,7 +126,7 @@ def solve(subs, cars, dem, train, n_tracks):
     return [V[n_sub + j] * I[j] for j in range(len(cars))], V[n_sub:]
 
 
-def simulate(line, train, kind, services, horizon, single=False):
+def simulate(line, train, kind, services, horizon, regen=True, single=False):
     """services: list of (name, stops, inbound, track, headway s, offset s)."""
     runs = {(nm, d): Run(line, train, kind, st, d) for nm, st, d, *_ in services}
     subs = list(line.subs)
@@ -134,7 +143,7 @@ def simulate(line, train, kind, services, horizon, single=False):
         active = [c for c in cars if c.done is None]
         if single and cars and not active:
             break
-        dem = [demand(train, c) for c in active]
+        dem = [demand(train, c, regen) for c in active]
         if train.supply == "third rail":
             pw, vt = solve(subs, active, dem, train, n_tracks)
             if len(vt):
@@ -181,15 +190,19 @@ if __name__ == "__main__":
     data = sys.argv[1]
     line = m.Line(f"{data}/pw_geom.json", f"{data}/substations.json", PW_STOPS)
     trains = [t for t in m.TRAINS if t.name in TRAINS]
-    print(f"{'pattern':8} {'train':28} {'kind':7} {'1 train':>8} {'5 min':>8} {'min V':>6}")
+    print(f"{'pattern':8} {'train':28} {'kind':7} {'1 train':>8} {'5 min':>8} {'no regen':>9} {'min V':>6}")
     for pname, stops in (("local", PW_STOPS), ("express", PW_EXPRESS)):
         services = [(pname, stops, True, 0, 300, 0), (pname, stops, False, 1, 300, 0)]
         for tr in trains:
             for kind in KINDS:
                 one, _ = simulate(line, tr, kind, services[:1], 3600, single=True)
                 t1 = (one[0].done - one[0].t0) / 60
-                many, vmin = simulate(line, tr, kind, services, 3 * 3600)
-                steady = [c for c in many if 3600 <= c.t0 < 7200 and c.run.inbound]
-                t5 = np.mean([(c.done - c.t0) / 60 for c in steady])
-                print(f"{pname:8} {tr.name:28} {kind:7} {t1:8.1f} {t5:8.1f} {min(vmin) if vmin else float('nan'):6.0f}",
+                row = []
+                for regen in (True, False):
+                    many, vmin = simulate(line, tr, kind, services, 3 * 3600, regen)
+                    steady = [c for c in many if 3600 <= c.t0 < 7200 and c.run.inbound]
+                    row.append(np.mean([(c.done - c.t0) / 60 for c in steady]))
+                    if regen:
+                        vlow = min(vmin) if vmin else float("nan")
+                print(f"{pname:8} {tr.name:28} {kind:7} {t1:8.1f} {row[0]:8.1f} {row[1]:9.1f} {vlow:6.0f}",
                       flush=True)
