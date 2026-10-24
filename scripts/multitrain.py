@@ -189,7 +189,7 @@ PW_STOPS = ["Penn Station", "Woodside", "Mets-Willets Point", "Flushing Main Str
             "Plandome", "Port Washington"]
 JAM_STOPS = ["Penn Station", "Woodside", "Forest Hills", "Kew Gardens", "Jamaica"]
 PW_EXPRESS = ["Penn Station", "Great Neck", "Manhasset", "Plandome", "Port Washington"]
-TRAINS = ("M7, 750 V third rail", "755/3 x4, 750 V third rail", "755/3 x4, 25 kV")
+TRAINS = ("M7, 750 V third rail", "M8, 25 kV")
 KINDS = ("posted", "60", "80", "100")
 
 
