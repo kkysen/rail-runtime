@@ -60,6 +60,7 @@ TRAINS = {
     # name: (tare t, seated load t, wheel power W, max accel mph/s, cars, vmax mph)
     "M7 10-car, 750 V DC": (5 * 115.0, 10 * 105 * 0.080, 40 * 200e3 * 0.97, 2.0, 10, 80),
     "M8 10-car, 25 kV": (5 * 129.2, 10 * 105 * 0.080, 40 * 200e3 * 0.97, 2.0, 10, 80),
+    "Class 700/1 12-car, 25 kV": (410.0, 666 * 0.080, 5000e3 * 0.97, 2.0, 12, 100),
 }
 BRAKE = 2.0 * MPH  # planning service brake, m/s^2
 DWELL = 30.0
