@@ -145,8 +145,7 @@ class Line:
                 out[k:] = np.minimum(out[k:], lim[:-k])
                 out[:-k] = np.minimum(out[:-k], lim[k:])
             lim = out
-        # Turnout limits the geometry can't see: keep posted 15 mph or less (Penn interlocking).
-        lim = np.where(self.posted <= 15, np.minimum(lim, self.posted), lim)
+        # The geometry cases assume every switch is rebuilt to curve speed; only the bumper stays slow.
         end = self.s > self.s[-1] - 150
         lim[end] = np.minimum(lim[end], 15)  # bumper approach at the outer terminal
         return lim
