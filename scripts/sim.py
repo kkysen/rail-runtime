@@ -62,6 +62,8 @@ TRAINS = {
     "M8 10-car, 25 kV": (5 * 129.2, 10 * 105 * 0.080, 40 * 200e3 * 0.97, 2.0, 10, 80),
     "Class 700/1 12-car, 25 kV": (410.0, 666 * 0.080, 5000e3 * 0.97, 2.0, 12, 100),
     "Class 423 x4 (16-car), AC": (4 * 105.0, 4 * 192 * 0.080, 4 * 2350e3 * 0.97, 1.0 / MPH, 16, 87),
+    # VR Sm5 FLIRT x3: 132 t, 2000 kW, 1.2 m/s^2.
+    "FLIRT Sm5 x3, 25 kV": (3 * 132.0, 3 * 230 * 0.080, 3 * 2000e3 * 0.97, 1.2 / MPH, 12, 100),
 }
 BRAKE_DEFAULT = 2.0 * MPH  # planning service brake, m/s^2
 BRAKE = BRAKE_DEFAULT
