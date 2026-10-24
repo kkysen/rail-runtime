@@ -178,7 +178,7 @@ if __name__ == "__main__":
     print(f"{'pattern':8} {'train':28} {'kind':7} {'1 train':>8} {'5 min':>8} {'min V':>6}")
     for pname, stops in pats.items():
         for tr in trains:
-            for kind in ("posted", "60 cap", "no cap"):
+            for kind in ("posted", "60", "80", "100"):
                 one, _ = simulate(line, tr, kind, stops, 0, 3600)
                 many, vmin = simulate(line, tr, kind, stops, 300, 3 * 3600)
                 steady = [c for c in many if 3600 <= c.t0 < 7200 and c.run.inbound]

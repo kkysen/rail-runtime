@@ -13,7 +13,6 @@ MPH = 0.44704
 MILE = 1609.34
 DWELL = 30.0
 EA, EU = 6.0, 3.0  # superelevation and unbalance, inches
-CAP = 60.0  # blanket cap, mph
 
 # --- Third rail -------------------------------------------------------------
 V0 = 750.0  # substation output, V (ORM tags the line 750 V)
@@ -140,7 +139,7 @@ class Line:
         if kind == "posted":
             lim = np.fmin(np.nan_to_num(self.posted, nan=vmax), vmax)
         else:
-            lim = np.minimum(self.curve, CAP if kind == "60 cap" else vmax)
+            lim = np.minimum(self.curve, float(kind))  # kind is the line speed cap in mph
             # A restriction holds until the whole train has cleared it.
             n = int(train_len / self.ds)
             out = lim.copy()

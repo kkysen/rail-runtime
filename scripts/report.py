@@ -5,7 +5,7 @@ from statistics import median
 import model as m
 
 data, date = sys.argv[1:3]
-KINDS = ["posted", "60 cap", "no cap"]
+KINDS = ["posted", "60", "80", "100"]
 
 PW_STOPS = ["Penn Station", "Woodside", "Mets-Willets Point", "Flushing Main Street", "Murray Hill",
             "Broadway", "Auburndale", "Bayside", "Douglaston", "Little Neck", "Great Neck", "Manhasset",
@@ -32,7 +32,7 @@ for origin, (line, stops, route) in lines.items():
           f"mean {sum(m7.power(x) for x in r) / len(r) / 1e6:.1f} MW of {m7.p_shaft / 1e6:.1f} MW rated")
     order = list(reversed(stops))
     trips = m.am_inbound(f"{data}/gtfs", date, None if route else origin, set(stops), route)
-    print("AM inbound, M7 750 V:   sched  posted 60cap  nocap")
+    print("AM inbound, M7 750 V:   sched  posted     60     80    100")
     if origin == "Port Washington":
         for t in trips:
             sims = [line.trip(m7, k, [s for s in order if s in t["stops"]]) for k in KINDS]
@@ -53,7 +53,7 @@ for origin, (line, stops, route) in lines.items():
             {"nonstop": ["Jamaica", "Penn Station"], "local": order,
              "Woodside only": ["Jamaica", "Woodside", "Penn Station"]})
     for pname, p in pats.items():
-        print(f"  {pname}: posted / 60cap / nocap")
+        print(f"  {pname}: posted / 60 / 80 / 100")
         for tr in m.TRAINS:
             print(f"    {tr.name:34} {fmt(line.trip(tr, k, p) for k in KINDS)}")
     print()
