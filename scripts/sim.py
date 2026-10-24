@@ -42,7 +42,8 @@ def train_clear(lim):
 
 
 def terminal(lim):
-    lim = lim.copy()
+    # Turnout restrictions curve geometry can't see: keep posted 15 mph or less (Penn interlocking).
+    lim = np.where(posted <= 15, np.minimum(lim, posted), lim)
     lim[s > s[-1] - 150] = np.minimum(lim[s > s[-1] - 150], 15)  # bumper approach
     return lim
 
