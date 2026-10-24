@@ -1,6 +1,6 @@
 """Build an ordered track centerline from Penn to a LIRR station from OSM and measure curvature.
 
-usage: geom.py RAIL_JSON ROUTE_JSON GTFS DEST_STOP OUT
+usage: geom.py RAIL_JSON ROUTE_JSON|- GTFS DEST_STOP OUT
 """
 import csv
 import json
@@ -12,14 +12,16 @@ import numpy as np
 rail_json, route_json, gtfs, dest, out = sys.argv[1:6]
 import heapq
 d = json.load(open(rail_json))["elements"]
-route_ways = {m["ref"] for e in json.load(open(route_json))["elements"] if e["type"] == "relation" for m in e["members"]}
+route_ways = set()
+if route_json != "-":
+    route_ways = {m["ref"] for e in json.load(open(route_json))["elements"] if e["type"] == "relation" for m in e["members"]}
 coord = {}
 adj = {}
 for w in d:
     t = w["tags"]
     if t.get("service") in ("yard", "spur") or t.get("usage") in ("industrial", "military"):
         continue
-    pen = 1.0 if w["id"] in route_ways else 3.0
+    pen = 1.0 if w["id"] in route_ways or (not route_ways and t.get("usage") == "main") else 3.0
     if t.get("service") in ("crossover", "siding"):
         pen = 10.0
     for n, g in zip(w["nodes"], w["geometry"]):

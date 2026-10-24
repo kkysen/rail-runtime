@@ -37,3 +37,6 @@ overpass '[out:json][timeout:90];rel(1834644);out body;way(r);out tags geom;node
 
 # Every rail way around western Queens and northern Nassau.
 overpass '[out:json][timeout:160];way["railway"="rail"](40.735,-74.0,40.835,-73.68);out body geom;' data/rail_bbox.json
+
+# A wider box reaching Jamaica.
+overpass '[out:json][timeout:160];way["railway"="rail"](40.695,-74.0,40.835,-73.68);out body geom;' data/rail_bbox2.json
