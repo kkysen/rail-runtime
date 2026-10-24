@@ -76,6 +76,9 @@ def demand(train, car, regen):
     return train.resist(car.v) * car.v / 0.90 + train.aux  # cruise
 
 
+NONCONVERGED = [0]
+
+
 def solve(subs, cars, dem, train, n_tracks):
     """Nodal solve of the DC network; returns (power to each train in W, train voltages)."""
     n_sub = len(subs)
@@ -97,7 +100,7 @@ def solve(subs, cars, dem, train, n_tracks):
             G0[a, bb] -= g
             G0[bb, a] -= g
     shed = np.ones(len(cars))
-    for _ in range(30):
+    for it in range(200):
         G = G0.copy()
         b = np.zeros(n)
         for k in range(n_sub):
@@ -118,11 +121,14 @@ def solve(subs, cars, dem, train, n_tracks):
                 I[j] = max(dem[j] * shed[j] / Vt, -train.i_max)
             b[k] -= I[j]
         # Nodes with no branches (lone train on an isolated stretch) can't happen: subs bound every track.
-        V_new = np.linalg.solve(G, b)
-        if np.max(np.abs(V_new - V)) < 0.5:
+        # Clamp to the physical range: below 0.6 V_MIN trains draw nothing, above V_REGEN_MAX they shed regen.
+        V_new = np.clip(np.linalg.solve(G, b), 0.6 * m.V_MIN, V_REGEN_MAX + 50)
+        if np.max(np.abs(V_new - V)) < 0.2:
             V = V_new
             break
-        V = 0.5 * V + 0.5 * V_new
+        V = 0.7 * V + 0.3 * V_new
+    else:
+        NONCONVERGED[0] += 1
     return [V[n_sub + j] * I[j] for j in range(len(cars))], V[n_sub:]
 
 
@@ -211,8 +217,8 @@ def report(line, cases, horizon, window):
                           if c.service == name and c.run.inbound and window[0] <= c.t0 < window[1]]
                     row.append(np.mean(xs))
                 vmin = min(res[True][1]) if res[True][1] else float("nan")
-                print(f"{name:16} {tr.name:28} {kind:6} {t1:8.1f} {row[0]:6.1f} {row[1]:14.1f} {vmin:6.0f}",
-                      flush=True)
+                print(f"{name:16} {tr.name:28} {kind:6} {t1:8.1f} {row[0]:6.1f} {row[1]:14.1f} {vmin:6.0f}"
+                      f"  nonconv {NONCONVERGED[0]}", flush=True)
 
 
 if __name__ == "__main__":
