@@ -55,24 +55,37 @@ LIMITS = {
     "curves only (80 mph M7 max)": terminal(train_clear(np.minimum(curve, VMAX))),
 }
 
-# --- Train: M7 married pair under 750 V DC third rail ----------------------
-EMPTY = 58.2 + 56.8  # t per pair
-LOAD = 2 * 105 * 0.080  # seated load, t
-M = (EMPTY + LOAD) * 1000
-M_EFF = M * 1.08  # rotating mass
-P_WHEEL = 8 * 200e3 * 0.97  # W: 8 x 200 kW motors at 750 V, gear losses
-F_MAX = M_EFF * 2.0 * MPH  # tractive-effort cap giving the rated 2 mph/s
-BRAKE = 2.0 * MPH  # planning service brake, m/s^2 (3 mph/s is the max)
+# --- Trains (whole consists, about 10 M7-car lengths) -----------------------
+TRAINS = {
+    # name: (tare t, seated load t, wheel power W, max accel mph/s, cars, vmax mph)
+    "M7 10-car, 750 V DC": (5 * 115.0, 10 * 105 * 0.080, 40 * 200e3 * 0.97, 2.0, 10, 80),
+    "M8 10-car, 25 kV": (5 * 129.2, 10 * 105 * 0.080, 40 * 200e3 * 0.97, 2.0, 10, 80),
+}
+BRAKE = 2.0 * MPH  # planning service brake, m/s^2
 DWELL = 30.0
+train = None
+
+
+def set_train(name):
+    global train, M_EFF, P_WHEEL, F_MAX, NCARS, M_T
+    tare, load, P_WHEEL, a0, NCARS, vmax = TRAINS[name]
+    M_T = tare + load
+    M_EFF = M_T * 1000 * 1.08  # rotating mass
+    F_MAX = M_EFF * a0 * MPH
+    train = name
+    return vmax
 
 
 def resist(v):
-    return 2.5e3 + 40 * v + 6.0 * v * v  # Davis, N for a pair
+    return 21.7 * M_T + 0.35 * M_T * v + 3.0 * NCARS * v * v  # Davis, N
 
 
 def accel(v):
     f = min(F_MAX, P_WHEEL / max(v, 0.1))
     return (f - resist(v)) / M_EFF
+
+
+set_train("M7 10-car, 750 V DC")
 
 
 def run(lim_mph, a, b):
