@@ -186,23 +186,38 @@ TRAINS = ("M7, 750 V third rail", "755/3 x4, 750 V third rail", "755/3 x4, 25 kV
 KINDS = ("posted", "60", "80", "100")
 
 
-if __name__ == "__main__":
-    data = sys.argv[1]
-    line = m.Line(f"{data}/pw_geom.json", f"{data}/substations.json", PW_STOPS)
-    trains = [t for t in m.TRAINS if t.name in TRAINS]
-    print(f"{'pattern':8} {'train':28} {'kind':7} {'1 train':>8} {'5 min':>8} {'no regen':>9} {'min V':>6}")
-    for pname, stops in (("local", PW_STOPS), ("express", PW_EXPRESS)):
-        services = [(pname, stops, True, 0, 300, 0), (pname, stops, False, 1, 300, 0)]
-        for tr in trains:
-            for kind in KINDS:
-                one, _ = simulate(line, tr, kind, services[:1], 3600, single=True)
+def report(line, cases, horizon, window):
+    print(f"{'service':16} {'train':28} {'kind':6} {'1 train':>8} {'busy':>6} {'busy no regen':>14} {'min V':>6}")
+    for tr in [t for t in m.TRAINS if t.name in TRAINS]:
+        for kind in KINDS:
+            res = {}
+            for regen in (True, False):
+                if not regen and tr.supply != "third rail":
+                    continue
+                done, vmin = simulate(line, tr, kind, cases, horizon, regen)
+                res[regen] = (done, vmin)
+            for name, stops, inbound, *_ in cases:
+                if not inbound:
+                    continue
+                one, _ = simulate(line, tr, kind, [c for c in cases if c[0] == name], horizon, single=True)
                 t1 = (one[0].done - one[0].t0) / 60
                 row = []
                 for regen in (True, False):
-                    many, vmin = simulate(line, tr, kind, services, 3 * 3600, regen)
-                    steady = [c for c in many if 3600 <= c.t0 < 7200 and c.run.inbound]
-                    row.append(np.mean([(c.done - c.t0) / 60 for c in steady]))
-                    if regen:
-                        vlow = min(vmin) if vmin else float("nan")
-                print(f"{pname:8} {tr.name:28} {kind:7} {t1:8.1f} {row[0]:8.1f} {row[1]:9.1f} {vlow:6.0f}",
+                    if regen not in res:
+                        row.append(float("nan"))
+                        continue
+                    xs = [(c.done - c.t0) / 60 for c in res[regen][0]
+                          if c.service == name and c.run.inbound and window[0] <= c.t0 < window[1]]
+                    row.append(np.mean(xs))
+                vmin = min(res[True][1]) if res[True][1] else float("nan")
+                print(f"{name:16} {tr.name:28} {kind:6} {t1:8.1f} {row[0]:6.1f} {row[1]:14.1f} {vmin:6.0f}",
                       flush=True)
+
+
+if __name__ == "__main__":
+    data = sys.argv[1]
+    line = m.Line(f"{data}/pw_geom.json", f"{data}/substations.json", PW_STOPS)
+    for name, stops in (("PW local", PW_STOPS), ("PW express", PW_EXPRESS)):
+        print(f"--- {name}, every 5 min each way ---")
+        cases = [(name, stops, True, 0, 300, 0), (name, stops, False, 1, 300, 150)]
+        report(line, cases, 3 * 3600, (3600, 7200))
