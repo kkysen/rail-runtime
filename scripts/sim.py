@@ -66,6 +66,9 @@ TRAINS = {
     "FLIRT Sm5 x3, 25 kV": (3 * 132.0, 3 * 230 * 0.080, 3 * 2000e3 * 0.97, 1.2 / MPH, 12, 100),
     # Sm5 body with FLIRT 160 datasheet max wheel power (3000 kW), pushed to 1.3 m/s^2.
     "FLIRT 1.3 x3, 25 kV": (3 * 132.0, 3 * 230 * 0.080, 3 * 3000e3, 1.3 / MPH, 12, 100),
+    # Class 755/3 bi-mode FLIRT in 25 kV mode: 2600 kW, 1.3 m/s^2, ~114 t (unverified), 65 m.
+    "Class 755/3 x4, 25 kV": (4 * 114.0, 4 * 144 * 0.080, 4 * 2600e3 * 0.97, 1.3 / MPH, 12, 100),
+    "Class 755/3 x4, 1.3 brake": (4 * 114.0, 4 * 144 * 0.080, 4 * 2600e3 * 0.97, 1.3 / MPH, 12, 100, 1.3),
     "FLIRT 1.3 x3, 1.3 brake": (3 * 132.0, 3 * 230 * 0.080, 3 * 3000e3, 1.3 / MPH, 12, 100, 1.3),
 }
 BRAKE_DEFAULT = 2.0 * MPH  # planning service brake, m/s^2
