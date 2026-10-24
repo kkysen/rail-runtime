@@ -36,25 +36,42 @@ wtags = {w["id"]: w["tags"] for w in d}
 stop = {r["stop_name"]: (float(r["stop_lat"]), float(r["stop_lon"])) for r in csv.DictReader(open(f"{gtfs}/stops.txt"))}
 near = lambda ll: min(adj, key=lambda n: (coord[n][0] - ll[0]) ** 2 + ((coord[n][1] - ll[1]) * 0.76) ** 2)
 src_n, dst_n = near(stop["Penn Station"]), near(stop[dest])
-dist = {src_n: 0.0}
+MAX_TURN = 30.0  # degrees between consecutive segments; more means reversing through a switch
+
+
+def turn(a, b, c):
+    (la, oa), (lb, ob), (lc, oc) = coord[a], coord[b], coord[c]
+    h1 = math.atan2(la - lb, (oa - ob) * 0.76)
+    h2 = math.atan2(lb - lc, (ob - oc) * 0.76)
+    return abs((math.degrees(h2 - h1) + 180) % 360 - 180)
+
+
+# Dijkstra over (node, previous node) states so the path can't double back through a switch.
+start = (src_n, None)
+dist = {start: 0.0}
 prev = {}
-pq = [(0.0, src_n)]
+pq = [(0.0, src_n, None)]
+end = None
 while pq:
-    du, u = heapq.heappop(pq)
+    du, u, p = heapq.heappop(pq)
     if u == dst_n:
+        end = (u, p)
         break
-    if du > dist[u]:
+    if du > dist[(u, p)]:
         continue
     for v, c, wid in adj[u]:
-        if du + c < dist.get(v, 1e18):
-            dist[v] = du + c
-            prev[v] = (u, wid)
-            heapq.heappush(pq, (du + c, v))
+        if v == p or (p is not None and turn(p, u, v) > MAX_TURN):
+            continue
+        if du + c < dist.get((v, u), 1e18):
+            dist[(v, u)] = du + c
+            prev[(v, u)] = ((u, p), wid)
+            heapq.heappush(pq, (du + c, v, u))
+state = end
 path = [dst_n]
 wpath = []
-while path[-1] != src_n:
-    u, wid = prev[path[-1]]
-    path.append(u)
+while state != start:
+    state, wid = prev[state]
+    path.append(state[0])
     wpath.append(wid)
 path.reverse()
 wpath.reverse()
