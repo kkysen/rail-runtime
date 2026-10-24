@@ -79,33 +79,33 @@ def solve(line, subs, cars, track_of, dem, train):
     if not cars:
         return [], []
     I = np.zeros(len(cars))
-    # Initial guess: nominal voltage.
     V = np.full(n, m.V0)
+    # Branch conductances only depend on positions.
+    G0 = np.zeros((n, n))
+    for track in (0, 1):
+        nodes = [(subs[k], k) for k in range(n_sub)]
+        nodes += [(c.run.chain(c.p), n_sub + j) for j, c in enumerate(cars) if track_of[j] == track]
+        nodes.sort()
+        for (xa, a), (xb, bb) in zip(nodes, nodes[1:]):
+            g = 1 / max((xb - xa) / m.MILE * m.R_LOOP, 1e-6)
+            G0[a, a] += g
+            G0[bb, bb] += g
+            G0[a, bb] -= g
+            G0[bb, a] -= g
     for _ in range(8):
-        G = np.zeros((n, n))
+        G = G0.copy()
         b = np.zeros(n)
         for k in range(n_sub):
             G[k, k] += 1 / m.R_SUB
             b[k] += m.V0 / m.R_SUB
-        for track in (0, 1):
-            nodes = [(subs[k], k) for k in range(n_sub)]
-            nodes += [(c.run.chain(c.p), n_sub + j) for j, c in enumerate(cars) if track_of[j] == track]
-            nodes.sort()
-            for (xa, a), (xb, bb) in zip(nodes, nodes[1:]):
-                g = 1 / max((xb - xa) / m.MILE * m.R_LOOP, 1e-6)
-                G[a, a] += g
-                G[bb, bb] += g
-                G[a, bb] -= g
-                G[bb, a] -= g
         for j in range(len(cars)):
             k = n_sub + j
-            if G[k, k] == 0:
-                G[k, k] = 1.0
             Vt = max(V[k], 1.0)
             I[j] = min(dem[j] / Vt, train.i_max)
             if Vt < m.V_MIN:
                 I[j] *= max(Vt - 0.6 * m.V_MIN, 0) / (0.4 * m.V_MIN)  # shed load as voltage collapses
             b[k] -= I[j]
+        # Nodes with no branches (lone train on an isolated stretch) can't happen: subs bound every track.
         V_new = np.linalg.solve(G, b)
         if np.max(np.abs(V_new - V)) < 0.5:
             V = V_new
