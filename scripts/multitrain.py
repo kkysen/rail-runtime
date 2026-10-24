@@ -92,12 +92,14 @@ def solve(line, subs, cars, track_of, dem, train):
             G0[bb, bb] += g
             G0[a, bb] -= g
             G0[bb, a] -= g
-    for _ in range(8):
+    for _ in range(30):
         G = G0.copy()
         b = np.zeros(n)
         for k in range(n_sub):
-            G[k, k] += 1 / m.R_SUB
-            b[k] += m.V0 / m.R_SUB
+            # Diode rectifier: conducts only outward (a tiny leak keeps the network grounded).
+            g = 1 / m.R_SUB if V[k] <= m.V0 + 1e-6 else 1e-6
+            G[k, k] += g
+            b[k] += m.V0 * g
         for j in range(len(cars)):
             k = n_sub + j
             Vt = max(V[k], 1.0)
