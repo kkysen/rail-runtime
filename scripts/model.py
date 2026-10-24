@@ -98,7 +98,7 @@ class Line:
         R = np.array([np.inf if r is None else r for r in g["R"]])
         self.posted = np.array([np.nan if v is None else v for v in g["maxspeed"]])
         # Interlockings (posted 20 mph or less): the traced path zig-zags through crossovers, whose kinks
-        # read as tiny radii. With switches rebuilt, measure curvature over a long chord instead.
+        # read as tiny radii. With switches rebuilt to geometry, measure curvature on a smoothed path instead.
         R = np.where(self.posted <= 20, np.maximum(R, self._long_chord_radius(g, 100.0)), R)
         deg = 5729.58 / (R * 3.2808)
         with np.errstate(divide="ignore"):
@@ -113,7 +113,11 @@ class Line:
         lonlat = np.array(g["lonlat"])
         lat0 = np.mean(lonlat[:, 1])
         xy = lonlat * [111320 * math.cos(math.radians(lat0)), 110540]
-        k = int(half / self.ds)
+        # Smooth over 2 * half first: a rebuilt crossover ladder is a gentle S, not a chain of kinks.
+        w = int(half / self.ds)
+        for c in range(2):
+            xy[:, c] = np.convolve(np.pad(xy[:, c], w, mode="edge"), np.ones(2 * w + 1) / (2 * w + 1), mode="valid")
+        k = int(half / 2 / self.ds)
         R = np.full(len(xy), np.inf)
         a, b, c = xy[:-2 * k], xy[k:-k], xy[2 * k:]
         cross = (b[:, 0] - a[:, 0]) * (c[:, 1] - a[:, 1]) - (b[:, 1] - a[:, 1]) * (c[:, 0] - a[:, 0])
