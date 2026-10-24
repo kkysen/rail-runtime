@@ -181,6 +181,7 @@ def simulate(line, train, kind, services, horizon, regen=True, single=False):
 PW_STOPS = ["Penn Station", "Woodside", "Mets-Willets Point", "Flushing Main Street", "Murray Hill",
             "Broadway", "Auburndale", "Bayside", "Douglaston", "Little Neck", "Great Neck", "Manhasset",
             "Plandome", "Port Washington"]
+JAM_STOPS = ["Penn Station", "Woodside", "Forest Hills", "Kew Gardens", "Jamaica"]
 PW_EXPRESS = ["Penn Station", "Great Neck", "Manhasset", "Plandome", "Port Washington"]
 TRAINS = ("M7, 750 V third rail", "755/3 x4, 750 V third rail", "755/3 x4, 25 kV")
 KINDS = ("posted", "60", "80", "100")
@@ -215,9 +216,17 @@ def report(line, cases, horizon, window):
 
 
 if __name__ == "__main__":
-    data = sys.argv[1]
-    line = m.Line(f"{data}/pw_geom.json", f"{data}/substations.json", PW_STOPS)
-    for name, stops in (("PW local", PW_STOPS), ("PW express", PW_EXPRESS)):
-        print(f"--- {name}, every 5 min each way ---")
-        cases = [(name, stops, True, 0, 300, 0), (name, stops, False, 1, 300, 150)]
-        report(line, cases, 3 * 3600, (3600, 7200))
+    data, which = sys.argv[1:3]
+    if which == "pw":
+        line = m.Line(f"{data}/pw_geom.json", f"{data}/substations.json", PW_STOPS)
+        for name, stops in (("PW local", PW_STOPS), ("PW express", PW_EXPRESS)):
+            print(f"--- {name}, every 5 min each way ---")
+            cases = [(name, stops, True, 0, 300, 0), (name, stops, False, 1, 300, 150)]
+            report(line, cases, 3 * 3600, (3600, 7200))
+    else:
+        line = m.Line(f"{data}/jam_geom.json", f"{data}/substations.json", JAM_STOPS)
+        nonstop = ["Penn Station", "Jamaica"]
+        print("--- Jamaica: locals and nonstops each every 2.5 min per direction (1.25 min combined) ---")
+        cases = [("Jamaica local", JAM_STOPS, True, 0, 150, 0), ("Jamaica nonstop", nonstop, True, 1, 150, 75),
+                 ("Jamaica local", JAM_STOPS, False, 2, 150, 40), ("Jamaica nonstop", nonstop, False, 3, 150, 115)]
+        report(line, cases, 5400, (1800, 3600))
