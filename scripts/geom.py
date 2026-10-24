@@ -1,4 +1,7 @@
-"""Build the ordered Penn-Port Washington track centerline from OSM and measure curvature."""
+"""Build an ordered track centerline from Penn to a LIRR station from OSM and measure curvature.
+
+usage: geom.py RAIL_JSON ROUTE_JSON GTFS DEST_STOP OUT
+"""
 import csv
 import json
 import math
@@ -6,7 +9,7 @@ import sys
 
 import numpy as np
 
-rail_json, route_json, gtfs, out = sys.argv[1:5]
+rail_json, route_json, gtfs, dest, out = sys.argv[1:6]
 import heapq
 d = json.load(open(rail_json))["elements"]
 route_ways = {m["ref"] for e in json.load(open(route_json))["elements"] if e["type"] == "relation" for m in e["members"]}
@@ -30,7 +33,7 @@ for w in d:
 wtags = {w["id"]: w["tags"] for w in d}
 stop = {r["stop_name"]: (float(r["stop_lat"]), float(r["stop_lon"])) for r in csv.DictReader(open(f"{gtfs}/stops.txt"))}
 near = lambda ll: min(adj, key=lambda n: (coord[n][0] - ll[0]) ** 2 + ((coord[n][1] - ll[1]) * 0.76) ** 2)
-src_n, dst_n = near(stop["Penn Station"]), near(stop["Port Washington"])
+src_n, dst_n = near(stop["Penn Station"]), near(stop[dest])
 dist = {src_n: 0.0}
 prev = {}
 pq = [(0.0, src_n)]
