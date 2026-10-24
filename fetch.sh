@@ -40,3 +40,6 @@ overpass '[out:json][timeout:160];way["railway"="rail"](40.735,-74.0,40.835,-73.
 
 # A wider box reaching Jamaica.
 overpass '[out:json][timeout:160];way["railway"="rail"](40.695,-74.0,40.835,-73.68);out body geom;' data/rail_bbox2.json
+
+# Substations, to place LIRR traction substations along each line.
+overpass '[out:json][timeout:160];nwr["power"="substation"](40.69,-74.0,40.835,-73.68);out center tags;' data/substations.json
