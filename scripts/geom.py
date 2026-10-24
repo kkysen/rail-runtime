@@ -6,36 +6,57 @@ import sys
 
 import numpy as np
 
-route_json, gtfs, out = sys.argv[1:4]
-d = json.load(open(route_json))["elements"]
-rel = next(e for e in d if e["type"] == "relation")
-ways = {e["id"]: e for e in d if e["type"] == "way"}
-
-# Chain ways in relation order, flipping each to continue from the previous end.
-pts = []
-tags = []
-for m in rel["members"]:
-    if m["type"] != "way":
+rail_json, route_json, gtfs, out = sys.argv[1:5]
+import heapq
+d = json.load(open(rail_json))["elements"]
+route_ways = {m["ref"] for e in json.load(open(route_json))["elements"] if e["type"] == "relation" for m in e["members"]}
+coord = {}
+adj = {}
+for w in d:
+    t = w["tags"]
+    if t.get("service") in ("yard", "spur") or t.get("usage") in ("industrial", "military"):
         continue
-    w = ways[m["ref"]]
-    g = [(p["lat"], p["lon"]) for p in w["geometry"]]
-    if pts:
-        end = pts[-1]
-        dist = lambda p: (p[0] - end[0]) ** 2 + (p[1] - end[1]) ** 2
-        if dist(g[-1]) < dist(g[0]):
-            g = g[::-1]
-        gap = math.sqrt(dist(g[0])) * 111e3
-        if gap > 30:
-            print(f"warning: {gap:.0f} m gap before way {w['id']}", file=sys.stderr)
-        g = g[1:]
-    elif len(rel["members"]) > 1:
-        pass
-    pts += g
-    tags += [w["tags"]] * len(g)
-
-# Ensure the path starts at Penn (west end).
-if pts[0][1] > pts[-1][1]:
-    pts, tags = pts[::-1], tags[::-1]
+    pen = 1.0 if w["id"] in route_ways else 3.0
+    if t.get("service") in ("crossover", "siding"):
+        pen = 10.0
+    for n, g in zip(w["nodes"], w["geometry"]):
+        coord[n] = (g["lat"], g["lon"])
+    for a, b in zip(w["nodes"], w["nodes"][1:]):
+        la, lo = coord[a]
+        lb, lob = coord[b]
+        L = math.hypot((la - lb) * 110540, (lo - lob) * 84000)
+        adj.setdefault(a, []).append((b, L * pen, w["id"]))
+        adj.setdefault(b, []).append((a, L * pen, w["id"]))
+wtags = {w["id"]: w["tags"] for w in d}
+stop = {r["stop_name"]: (float(r["stop_lat"]), float(r["stop_lon"])) for r in csv.DictReader(open(f"{gtfs}/stops.txt"))}
+near = lambda ll: min(adj, key=lambda n: (coord[n][0] - ll[0]) ** 2 + ((coord[n][1] - ll[1]) * 0.76) ** 2)
+src_n, dst_n = near(stop["Penn Station"]), near(stop["Port Washington"])
+dist = {src_n: 0.0}
+prev = {}
+pq = [(0.0, src_n)]
+while pq:
+    du, u = heapq.heappop(pq)
+    if u == dst_n:
+        break
+    if du > dist[u]:
+        continue
+    for v, c, wid in adj[u]:
+        if du + c < dist.get(v, 1e18):
+            dist[v] = du + c
+            prev[v] = (u, wid)
+            heapq.heappush(pq, (du + c, v))
+path = [dst_n]
+wpath = []
+while path[-1] != src_n:
+    u, wid = prev[path[-1]]
+    path.append(u)
+    wpath.append(wid)
+path.reverse()
+wpath.reverse()
+pts = [coord[n] for n in path]
+tags = [wtags[w] for w in wpath] + [wtags[wpath[-1]]]
+off = sum(1 for w in set(wpath) if w not in route_ways)
+print(f"path uses {len(set(wpath))} ways, {off} not in route relation", file=sys.stderr)
 
 lat0 = np.mean([p[0] for p in pts])
 xy = np.array([[(p[1]) * 111320 * math.cos(math.radians(lat0)), p[0] * 110540] for p in pts])

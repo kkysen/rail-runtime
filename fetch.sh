@@ -34,3 +34,6 @@ unzip -q data/gtfslirr.zip -d data/gtfs
 
 # Port Washington Branch route relation, with its ways and stops.
 overpass '[out:json][timeout:90];rel(1834644);out body;way(r);out tags geom;node(r);out;' data/pw_route.json
+
+# Every rail way around western Queens and northern Nassau.
+overpass '[out:json][timeout:160];way["railway"="rail"](40.735,-74.0,40.835,-73.68);out body geom;' data/rail_bbox.json
