@@ -31,7 +31,7 @@ for origin, (line, stops, route) in lines.items():
     print(f"M7 10-car power available: min {min(m7.power(x) for x in r) / 1e6:.1f} MW, "
           f"mean {sum(m7.power(x) for x in r) / len(r) / 1e6:.1f} MW of {m7.p_shaft / 1e6:.1f} MW rated")
     order = list(reversed(stops))
-    trips = m.am_inbound(f"{data}/gtfs", date, origin, set(stops), route)
+    trips = m.am_inbound(f"{data}/gtfs", date, None if route else origin, set(stops), route)
     print("AM inbound, M7 750 V:   sched  posted 60cap  nocap")
     if origin == "Port Washington":
         for t in trips:

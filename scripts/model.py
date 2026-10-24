@@ -188,9 +188,10 @@ def am_inbound(gtfs, date, origin, line_stops, route_id=None, arr_window=(360, 6
     for tid, ss in sts.items():
         ss.sort(key=lambda r: int(r["stop_sequence"]))
         stops = [names[r["stop_id"]] for r in ss]
-        if stops[-1] != "Penn Station" or origin not in stops:
+        on = [i for i, n in enumerate(stops) if n in line_stops]
+        if stops[-1] != "Penn Station" or (origin and origin not in stops) or len(on) < 2:
             continue
-        k = stops.index(origin)
+        k = stops.index(origin) if origin else on[0]
         arr = hm(ss[-1]["arrival_time"])
         if not arr_window[0] <= arr <= arr_window[1]:
             continue
