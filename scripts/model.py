@@ -97,6 +97,9 @@ class Line:
         self.ds = self.s[1] - self.s[0]
         R = np.array([np.inf if r is None else r for r in g["R"]])
         self.posted = np.array([np.nan if v is None else v for v in g["maxspeed"]])
+        # Interlockings (posted 20 mph or less): the traced path zig-zags through crossovers, whose kinks
+        # read as tiny radii. With switches rebuilt, measure curvature over a long chord instead.
+        R = np.where(self.posted <= 20, np.maximum(R, self._long_chord_radius(g, 100.0)), R)
         deg = 5729.58 / (R * 3.2808)
         with np.errstate(divide="ignore"):
             self.curve = np.sqrt((EA + EU) / (0.0007 * deg))
@@ -105,6 +108,18 @@ class Line:
         self.st[stations[-1]] = self.s[-1] - 60  # end of the path is the outer terminal
         self.lonlat = np.array(g["lonlat"])
         self._substations(substations_json)
+
+    def _long_chord_radius(self, g, half):
+        lonlat = np.array(g["lonlat"])
+        lat0 = np.mean(lonlat[:, 1])
+        xy = lonlat * [111320 * math.cos(math.radians(lat0)), 110540]
+        k = int(half / self.ds)
+        R = np.full(len(xy), np.inf)
+        a, b, c = xy[:-2 * k], xy[k:-k], xy[2 * k:]
+        cross = (b[:, 0] - a[:, 0]) * (c[:, 1] - a[:, 1]) - (b[:, 1] - a[:, 1]) * (c[:, 0] - a[:, 0])
+        with np.errstate(divide="ignore"):
+            R[k:-k] = (np.hypot(*(b - a).T) * np.hypot(*(c - b).T) * np.hypot(*(c - a).T)) / (2 * np.abs(cross))
+        return R
 
     def _substations(self, path):
         lat0 = np.mean(self.lonlat[:, 1])
