@@ -230,7 +230,7 @@ if __name__ == "__main__":
             cases = [(name, stops, True, 0, 300, 0), (name, stops, False, 1, 300, 150)]
             report(line, cases, 3 * 3600, (3600, 7200))
     else:
-        line = m.Line(f"{data}/jam_geom.json", f"{data}/substations.json", JAM_STOPS)
+        line = m.Line(f"{data}/jam_geom.json", f"{data}/substations.json", JAM_STOPS, terminal=False)
         nonstop = ["Penn Station", "Jamaica"]
         print("--- Jamaica: locals and nonstops each every 2.5 min per direction (1.25 min combined) ---")
         cases = [("Jamaica local", JAM_STOPS, True, 0, 150, 0), ("Jamaica nonstop", nonstop, True, 1, 150, 75),

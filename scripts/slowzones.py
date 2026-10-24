@@ -13,7 +13,7 @@ cases = {
     "Jamaica": ("jam_geom.json", JAM_STOPS, {"local": JAM_STOPS[::-1], "nonstop": ["Jamaica", "Penn Station"]}),
 }
 for name, (gf, stops, pats) in cases.items():
-    line = m.Line(f"{data}/{gf}", f"{data}/substations.json", stops)
+    line = m.Line(f"{data}/{gf}", f"{data}/substations.json", stops, terminal=name != "Jamaica")
     posted = line.limits("posted", 80)
     better = np.maximum(posted, line.limits("80", 80))
     # Zones: runs of constant posted speed below 80 mph, where the geometry allows more.

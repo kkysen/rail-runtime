@@ -91,7 +91,8 @@ TRAINS = [
 
 # --- Lines ------------------------------------------------------------------
 class Line:
-    def __init__(self, geom_json, substations_json, stations):
+    def __init__(self, geom_json, substations_json, stations, terminal=True):
+        self.terminal = terminal  # the outer end is a bumper, not a through station
         g = json.load(open(geom_json))
         self.s = np.array(g["s"])
         self.ds = self.s[1] - self.s[0]
@@ -165,8 +166,9 @@ class Line:
                 out[:-k] = np.minimum(out[:-k], lim[k:])
             lim = out
         # The geometry cases assume every switch is rebuilt to curve speed; only the bumper stays slow.
-        end = self.s > self.s[-1] - 150
-        lim[end] = np.minimum(lim[end], 15)  # bumper approach at the outer terminal
+        if self.terminal:
+            end = self.s > self.s[-1] - 150
+            lim[end] = np.minimum(lim[end], 15)  # bumper approach at the outer terminal
         return lim
 
     def run(self, train, lim_mph, a, b):

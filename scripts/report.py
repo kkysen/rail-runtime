@@ -14,7 +14,7 @@ JAM_STOPS = ["Penn Station", "Woodside", "Forest Hills", "Kew Gardens", "Jamaica
 
 lines = {
     "Port Washington": (m.Line(f"{data}/pw_geom.json", f"{data}/substations.json", PW_STOPS), PW_STOPS, "9"),
-    "Jamaica": (m.Line(f"{data}/jam_geom.json", f"{data}/substations.json", JAM_STOPS), JAM_STOPS, None),
+    "Jamaica": (m.Line(f"{data}/jam_geom.json", f"{data}/substations.json", JAM_STOPS, terminal=False), JAM_STOPS, None),
 }
 m7 = m.TRAINS[0]
 

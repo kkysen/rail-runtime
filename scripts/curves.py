@@ -13,7 +13,7 @@ cases = {
     "Jamaica": ("jam_geom.json", JAM_STOPS, {"local": JAM_STOPS[::-1], "nonstop": ["Jamaica", "Penn Station"]}),
 }
 for name, (gf, stops, pats) in cases.items():
-    line = m.Line(f"{data}/{gf}", f"{data}/substations.json", stops)
+    line = m.Line(f"{data}/{gf}", f"{data}/substations.json", stops, terminal=name != "Jamaica")
     lim80 = line.limits("80", 80)
     slow = lim80 < 79.5
     edges = np.flatnonzero(np.diff(np.concatenate([[0], slow.astype(int), [0]])))
