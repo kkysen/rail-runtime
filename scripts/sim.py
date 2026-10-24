@@ -63,14 +63,16 @@ TRAINS = {
     "Class 700/1 12-car, 25 kV": (410.0, 666 * 0.080, 5000e3 * 0.97, 2.0, 12, 100),
     "Class 423 x4 (16-car), AC": (4 * 105.0, 4 * 192 * 0.080, 4 * 2350e3 * 0.97, 1.0 / MPH, 16, 87),
 }
-BRAKE = 2.0 * MPH  # planning service brake, m/s^2
+BRAKE_DEFAULT = 2.0 * MPH  # planning service brake, m/s^2
+BRAKE = BRAKE_DEFAULT
 DWELL = 30.0
 train = None
 
 
 def set_train(name):
-    global train, M_EFF, P_WHEEL, F_MAX, NCARS, M_T
-    tare, load, P_WHEEL, a0, NCARS, vmax = TRAINS[name]
+    global train, M_EFF, P_WHEEL, F_MAX, NCARS, M_T, BRAKE
+    tare, load, P_WHEEL, a0, NCARS, vmax, *brake = TRAINS[name]
+    BRAKE = brake[0] if brake else BRAKE_DEFAULT
     M_T = tare + load
     M_EFF = M_T * 1000 * 1.08  # rotating mass
     F_MAX = M_EFF * a0 * MPH
