@@ -3,15 +3,16 @@
 import numpy as np
 
 from rail_runtime import model as m
-from rail_runtime.curves import CASES, Ranking, Zone, top_zones
+from rail_runtime.curves import Ranking, Zone, top_zones
+from rail_runtime.multitrain import SPECS
 
 
 def rank(data: str, top: int = 12) -> Ranking:
     """Per line: (name, base minutes by pattern, the posted zones costing the most)."""
     m7 = m.TRAINS[0]
     out: Ranking = []
-    for name, (gf, stops, pats) in CASES.items():
-        line = m.Line(f"{data}/{gf}", f"{data}/substations.json", stops, terminal=name != "Jamaica")
+    for name, spec in SPECS.items():
+        line, pats = spec.line(data), spec.patterns
         posted = line.limits("posted", 80)
         better = np.maximum(posted, line.limits("80", 80))
         # Zones: runs of constant posted speed below 80 mph, where the geometry allows more.

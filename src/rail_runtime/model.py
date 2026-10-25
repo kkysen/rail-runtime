@@ -97,7 +97,7 @@ TRAINS = [
 # --- Lines ------------------------------------------------------------------
 @dataclass
 class Geometry:
-    """A traced route: arrays by 5 m sample, and stations by distance from Penn (m)."""
+    """A traced route: arrays by 5 m sample, and stations by distance from its origin (m)."""
 
     s: Arr
     R: Arr  # curve radius, m; inf on straight track
@@ -249,9 +249,9 @@ def hm(t: str) -> float:
 @dataclass
 class Trip:
     num: str  # train number
-    arr: float  # arrival at Penn, minutes after midnight
+    arr: float  # arrival at the terminus, minutes after midnight
     first: str  # first stop, on or off this line
-    sched: float  # scheduled minutes from the first stop on this line to Penn
+    sched: float  # scheduled minutes from the first stop on this line to the terminus
     stops: list[str]  # stops on this line
 
 
@@ -261,9 +261,10 @@ def am_inbound(
     origin: str | None,
     line_stops: set[str],
     route_id: str | None = None,
+    terminus: str = "Penn Station",
     arr_window: tuple[float, float] = (360, 600),
 ) -> list[Trip]:
-    """Scheduled origin->Penn times for AM trips, with their stops on this line."""
+    """Scheduled origin->`terminus` times for AM trips, with their stops on this line."""
     names = {r["stop_id"]: r["stop_name"] for r in read_csv(f"{gtfs}/stops.txt")}
     svc = {
         c["service_id"]
@@ -284,7 +285,7 @@ def am_inbound(
         ss.sort(key=lambda r: int(r["stop_sequence"]))
         stops = [names[r["stop_id"]] for r in ss]
         on = [i for i, n in enumerate(stops) if n in line_stops]
-        if stops[-1] != "Penn Station" or (origin and origin not in stops) or len(on) < 2:
+        if stops[-1] != terminus or (origin and origin not in stops) or len(on) < 2:
             continue
         k = stops.index(origin) if origin else on[0]
         arr = hm(ss[-1]["arrival_time"])

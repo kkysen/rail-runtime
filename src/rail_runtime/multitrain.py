@@ -115,6 +115,40 @@ PW_STOPS = [
 ]
 JAM_STOPS = ["Penn Station", "Woodside", "Forest Hills", "Kew Gardens", "Jamaica"]
 PW_EXPRESS = ["Penn Station", "Great Neck", "Manhasset", "Plandome", "Port Washington"]
+
+
+class Spec(NamedTuple):
+    """A line: its traced geometry, its stops from the inner terminus out, and the inbound patterns to compare."""
+
+    geom: str
+    substations: str
+    stops: list[str]
+    patterns: dict[str, list[str]]
+    terminal: bool  # the outer end is a bumper, not a through station
+    route: str | None  # GTFS route_id of its timetable trips; None for every trip through the outer end
+
+    def line(self, data: str) -> Line:
+        return m.Line(f"{data}/{self.geom}", f"{data}/{self.substations}", self.stops, terminal=self.terminal)
+
+
+SPECS = {
+    "Port Washington": Spec(
+        "pw_geom.json",
+        "substations.json",
+        PW_STOPS,
+        {"local": PW_STOPS[::-1], "express": PW_EXPRESS[::-1]},
+        True,
+        "9",
+    ),
+    "Jamaica": Spec(
+        "jam_geom.json",
+        "substations.json",
+        JAM_STOPS,
+        {"local": JAM_STOPS[::-1], "nonstop": ["Jamaica", "Penn Station"]},
+        False,
+        None,
+    ),
+}
 TRAINS = ("M7, 750 V third rail", "M8, 25 kV")
 KINDS = ("posted", "60", "80", "100")
 
@@ -204,8 +238,8 @@ def runtime(c: Finished) -> float:
 
 def lines(data: str) -> dict[str, Setup]:
     """The busy-service setups: Port Washington local, express, and Jamaica."""
-    pw = m.Line(f"{data}/pw_geom.json", f"{data}/substations.json", PW_STOPS)
-    jam = m.Line(f"{data}/jam_geom.json", f"{data}/substations.json", JAM_STOPS, terminal=False)
+    pw = SPECS["Port Washington"].line(data)
+    jam = SPECS["Jamaica"].line(data)
     nonstop = ["Penn Station", "Jamaica"]
     out: dict[str, Setup] = {}
     for name, stops in (("PW local", PW_STOPS), ("PW express", PW_EXPRESS)):

@@ -5,20 +5,15 @@ from dataclasses import dataclass
 import numpy as np
 
 from rail_runtime import model as m
-from rail_runtime.multitrain import JAM_STOPS, PW_EXPRESS, PW_STOPS
-
-CASES = {
-    "Port Washington": ("pw_geom.json", PW_STOPS, {"local": PW_STOPS[::-1], "express": PW_EXPRESS[::-1]}),
-    "Jamaica": ("jam_geom.json", JAM_STOPS, {"local": JAM_STOPS[::-1], "nonstop": ["Jamaica", "Penn Station"]}),
-}
+from rail_runtime.multitrain import SPECS
 
 
 @dataclass
 class Zone:
     """A stretch of track and the minutes saved on each pattern by raising its limit."""
 
-    start: float  # mi from Penn
-    end: float  # mi from Penn
+    start: float  # mi from the inner terminus
+    end: float  # mi from the inner terminus
     near: str  # nearest station
     posted: float | None  # mph; None for a curve ranking
     allows: float  # mph: what the geometry allows, or the curve's own limit
@@ -41,8 +36,8 @@ def rank(data: str, top: int = 10) -> Ranking:
     """Per line: (name, base minutes by pattern, the curves costing the most)."""
     m7 = m.TRAINS[0]
     out: Ranking = []
-    for name, (gf, stops, pats) in CASES.items():
-        line = m.Line(f"{data}/{gf}", f"{data}/substations.json", stops, terminal=name != "Jamaica")
+    for name, spec in SPECS.items():
+        line, pats = spec.line(data), spec.patterns
         lim80 = line.limits("80", 80)
         slow = lim80 < 79.5
         edges = np.flatnonzero(np.diff(np.concatenate([[0], slow.astype(int), [0]])))
