@@ -181,8 +181,11 @@ SPECS = {
 
 @cache
 def spacing(data: str) -> float:
-    """The usual miles between substations: the median gap between consecutive LIRR-tagged ones on every line.
+    """The usual miles between substations, fit to the gaps between consecutive known LIRR ones on every line.
 
+    A long gap likely hides substations OSM doesn't map, so each gap is taken as a whole number of intervals,
+    and the spacing is the one whose intervals fit the gaps best (least squares, per interval),
+    no tighter than the closest two known substations.
     A gap shared by two lines, as on the Main Line, counts once.
     """
     gaps: dict[tuple[int, int], float] = {}
@@ -190,7 +193,13 @@ def spacing(data: str) -> float:
         subs = m.lirr_substations(m.load_geom(f"{data}/{spec.geom}"), f"{data}/{spec.substations}")
         for (a, ia), (b, ib) in pairwise(subs):
             gaps[(ia, ib) if ia < ib else (ib, ia)] = (b - a) / m.MILE
-    return float(np.median(list(gaps.values())))
+    g = np.array(list(gaps.values()))
+
+    def misfit(s: float) -> float:
+        k = np.maximum(1, np.round(g / s))
+        return float(((g - k * s) ** 2 / k).sum())
+
+    return min(np.arange(g.min(), g.max(), 0.01), key=misfit)
 
 
 TRAINS = ("M7, 750 V third rail", "M8, 25 kV")

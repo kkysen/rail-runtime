@@ -162,12 +162,26 @@ def load_geom(path: str) -> Geometry:
     )
 
 
-def system(tags: dict[str, str]) -> str | None:
+# Untagged OSM substations known from elsewhere to be the LIRR's, by OSM id.
+KNOWN = {
+    # Jamaica Substation, 130-49 92nd Avenue, feeding the Main Line and Atlantic Branch (MTA contract 6481).
+    295544919: "LIRR",
+    # Winfield Substation, 70-32 48th Avenue, Woodside, feeding Port Washington 1-2 and Main Line 1-4
+    # (MTA contract 6541), mapped as two buildings.
+    1057992619: "LIRR",
+    1057992620: "LIRR",
+}
+
+
+def system(e: dict[str, Any]) -> str | None:
     """Whose network an OSM substation feeds: LIRR, Amtrak, NYCT (the subway) or utility; None if untagged.
 
     Only LIRR substations feed LIRR lines, plus untagged ones beside the track;
     Amtrak and the subway are kept apart for when their lines are modeled.
     """
+    if e["id"] in KNOWN:
+        return KNOWN[e["id"]]
+    tags = e["tags"]
     who = tags.get("operator", "") + " " + tags.get("name", "")
     if "LIRR" in who or "Long Island Rail" in who:
         return "LIRR"
@@ -189,7 +203,7 @@ def lirr_substations(g: Geometry, substations_json: str) -> list[tuple[float, in
     kx, ky = 111320 * math.cos(math.radians(lat0)), 110540
     out: list[tuple[float, int]] = []
     for e in json.loads(Path(substations_json).read_text())["elements"]:
-        if system(e["tags"]) != "LIRR":
+        if system(e) != "LIRR":
             continue
         c = e.get("center", e)
         d = np.hypot((g.lonlat[:, 0] - c["lon"]) * kx, (g.lonlat[:, 1] - c["lat"]) * ky)
@@ -251,7 +265,7 @@ class Line:
         kx, ky = 111320 * math.cos(math.radians(lat0)), 110540
         untagged: list[float] = []
         for e in json.loads(Path(path).read_text())["elements"]:
-            if system(e["tags"]) is not None:
+            if system(e) is not None:
                 continue
             c = e.get("center", e)
             d = np.hypot((self.lonlat[:, 0] - c["lon"]) * kx, (self.lonlat[:, 1] - c["lat"]) * ky)

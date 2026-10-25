@@ -25,7 +25,7 @@ def jam() -> m.Line:
 
 @pytest.mark.parametrize(
     ("kind", "local", "express"),
-    [("posted", 34.9, 25.5), ("60", 33.4, 23.9), ("80", 32.1, 21.4), ("100", 32.0, 21.1)],
+    [("posted", 34.9, 25.5), ("60", 33.4, 23.9), ("80", 32.1, 21.4), ("100", 31.9, 21.0)],
 )
 def test_port_washington(kind: str, local: float, express: float) -> None:
     assert pw().trip(M7, kind, mt.PW_STOPS[::-1]) == pytest.approx(local, abs=0.05)
@@ -40,7 +40,7 @@ def test_atlantic(kind: str, local: float) -> None:
 
 @pytest.mark.parametrize(
     ("kind", "local", "express"),
-    [("posted", 17.0, 13.4), ("60", 15.0, 11.8), ("80", 13.5, 9.6), ("100", 13.2, 9.1)],
+    [("posted", 17.0, 13.4), ("60", 15.0, 11.8), ("80", 13.4, 9.5), ("100", 13.2, 9.0)],
 )
 def test_jamaica(kind: str, local: float, express: float) -> None:
     assert jam().trip(M7, kind, mt.JAM_STOPS[::-1]) == pytest.approx(local, abs=0.05)
