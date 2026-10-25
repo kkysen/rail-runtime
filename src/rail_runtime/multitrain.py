@@ -6,6 +6,8 @@ so regen only helps other trains, and a train sheds regen once its voltage reach
 """
 
 from dataclasses import dataclass
+from functools import cache
+from itertools import pairwise
 from typing import NamedTuple
 
 import numpy as np
@@ -137,6 +139,7 @@ class Spec(NamedTuple):
             f"{data}/{self.substations}",
             self.stops,
             self.bumpers,
+            spacing(data),
         )
 
 
@@ -174,6 +177,22 @@ SPECS = {
         None,
     ),
 }
+
+
+@cache
+def spacing(data: str) -> float:
+    """The usual miles between substations: the median gap between consecutive LIRR-tagged ones on every line.
+
+    A gap shared by two lines, as on the Main Line, counts once.
+    """
+    gaps: dict[tuple[int, int], float] = {}
+    for spec in SPECS.values():
+        subs = m.lirr_substations(m.load_geom(f"{data}/{spec.geom}"), f"{data}/{spec.substations}")
+        for (a, ia), (b, ib) in pairwise(subs):
+            gaps[(ia, ib) if ia < ib else (ib, ia)] = (b - a) / m.MILE
+    return float(np.median(list(gaps.values())))
+
+
 TRAINS = ("M7, 750 V third rail", "M8, 25 kV")
 KINDS = ("posted", "60", "80", "100")
 

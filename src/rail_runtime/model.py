@@ -29,7 +29,6 @@ EA, EU = 6.0, 3.0  # superelevation and unbalance, inches
 V0 = _sim.V0  # substation output, V (ORM tags the line 750 V)
 R_SUB = 0.010  # source resistance of a substation feeding one track, ohm; one feeding n tracks has R_SUB / n
 R_LOOP = 0.040  # contact rail plus running-rail return, ohm per mile
-MAX_GAP = 2.0  # miles; gaps between mapped substations are filled at this spacing
 V_MIN = _sim.V_MIN  # train cuts traction below this
 
 
@@ -95,14 +94,13 @@ TRAINS = [
 ]
 
 
-def spacing(train: Train) -> float:
-    """Miles between substations for `train` alone at full current midway between two to see `V_MIN`."""
-    r_mid = (V0 - V_MIN) / train.i_max  # effective source resistance there, fed from both sides
-    return 2 * (2 * r_mid - R_SUB) / R_LOOP
+def design_voltage(spacing: float, train: Train) -> float:
+    """Volts midway between substations `spacing` miles apart, with `train` at full current on every track.
 
-
-# Substations are no closer than they need to be, so one within half this of another is suspect.
-SPACING = spacing(TRAINS[0])
+    Each substation is sized for its tracks, so the track count cancels out:
+    each train draws half its current from either side, through `R_SUB` and half the gap of rail.
+    """
+    return V0 - train.i_max / 2 * (R_SUB + spacing / 2 * R_LOOP)
 
 
 # --- Lines ------------------------------------------------------------------
@@ -172,6 +170,26 @@ def system(tags: dict[str, str]) -> str | None:
     return None
 
 
+def lirr_substations(g: Geometry, substations_json: str) -> list[tuple[float, int]]:
+    """(chainage, OSM id) of each LIRR-tagged substation within 400 m of the path, in order.
+
+    One substation mapped twice, say as a building and its fence, counts once.
+    """
+    lat0 = float(np.mean(g.lonlat[:, 1]))
+    kx, ky = 111320 * math.cos(math.radians(lat0)), 110540
+    out: list[tuple[float, int]] = []
+    for e in json.loads(Path(substations_json).read_text())["elements"]:
+        if system(e["tags"]) != "LIRR":
+            continue
+        c = e.get("center", e)
+        d = np.hypot((g.lonlat[:, 0] - c["lon"]) * kx, (g.lonlat[:, 1] - c["lat"]) * ky)
+        i = int(np.argmin(d))
+        if d[i] < 400:
+            out.append((float(g.s[i]), e["id"]))
+    out.sort()
+    return [x for k, x in enumerate(out) if k == 0 or x[0] - out[k - 1][0] > 200]
+
+
 class Line:
     def __init__(
         self,
@@ -179,7 +197,9 @@ class Line:
         substations_json: str,
         stations: list[str],
         bumpers: tuple[bool, bool],
+        spacing: float,
     ) -> None:
+        """`spacing` is the usual miles between substations, to fill gaps where OSM maps none."""
         self.bumpers = bumpers  # whether the start and end of the path are bumpers, not through stations
         g = load_geom(geom_json)
         self.s = g.s
@@ -197,6 +217,8 @@ class Line:
         self.st[stations[-1]] = float(self.s[-1]) - 60  # the last station is at the end of the path
         self.lonlat = g.lonlat
         self.tracks = g.tracks
+        self.spacing = spacing
+        self.lirr = [x for x, _ in lirr_substations(g, substations_json)]
         self._substations(substations_json)
 
     def _long_chord_radius(self, lonlat: Arr, half: float) -> Arr:
@@ -217,32 +239,27 @@ class Line:
     def _substations(self, path: str) -> None:
         lat0 = float(np.mean(self.lonlat[:, 1]))
         kx, ky = 111320 * math.cos(math.radians(lat0)), 110540
-        lirr: list[float] = []
         untagged: list[float] = []
         for e in json.loads(Path(path).read_text())["elements"]:
-            sys_ = system(e["tags"])
-            if sys_ not in ("LIRR", None):
+            if system(e["tags"]) is not None:
                 continue
             c = e.get("center", e)
             d = np.hypot((self.lonlat[:, 0] - c["lon"]) * kx, (self.lonlat[:, 1] - c["lat"]) * ky)
             i = int(np.argmin(d))
-            if sys_ == "LIRR" and d[i] < 400:
-                lirr.append(float(self.s[i]))
-            elif sys_ is None and d[i] < 50:
+            if d[i] < 50:
                 untagged.append(float(self.s[i]))
-        # One substation mapped twice, say as a building and its fence, counts once.
-        lirr = sorted(lirr)
-        mapped = [x for k, x in enumerate(lirr) if k == 0 or x - lirr[k - 1] > 200]
+        mapped = list(self.lirr)
         # An untagged substation right beside the track counts only where the spacing leaves room for one,
-        # at least half of `SPACING` from every substation counted so far; that also drops its duplicates.
+        # at least half the usual spacing from every substation counted so far; that also drops its duplicates.
         for x in sorted(untagged):
-            if all(abs(x - y) >= SPACING / 2 * MILE for y in mapped):
+            if all(abs(x - y) >= self.spacing / 2 * MILE for y in mapped):
                 mapped.append(x)
         mapped.sort()
+        # Fill gaps at the usual spacing, as near as whole substations allow.
         pts = sorted({0.0, *mapped, float(self.s[-1])})
         subs: list[float] = []
         for a, b in pairwise(pts):
-            n = max(1, math.ceil((b - a) / (MAX_GAP * MILE)))
+            n = max(1, round((b - a) / (self.spacing * MILE)))
             subs += [a + (b - a) * k / n for k in range(n)]
         subs.append(pts[-1])
         self.mapped = sorted(mapped)
