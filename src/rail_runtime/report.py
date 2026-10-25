@@ -1,5 +1,6 @@
 """Print scheduled vs simulated runtimes for the Port Washington Branch and Jamaica-Penn."""
 
+from collections.abc import Iterable
 from statistics import median
 
 from rail_runtime import model as m
@@ -25,7 +26,7 @@ PW_STOPS = [
 JAM_STOPS = ["Penn Station", "Woodside", "Forest Hills", "Kew Gardens", "Jamaica"]
 
 
-def fmt(xs):
+def fmt(xs: Iterable[float]) -> str:
     return " ".join(f"{x:6.1f}" for x in xs)
 
 
