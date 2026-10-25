@@ -7,7 +7,10 @@ from rail_runtime.curves import CASES
 
 
 def rank(data, top=12):
-    """Per line: (name, base runtimes, rows of (max saved, from mi, to mi, posted, raised to, near, saved by pattern))."""
+    """Per line: (name, base runtimes, rows).
+
+    Each row is (max saved, from mi, to mi, posted, raised to, near, saved by pattern).
+    """
     m7 = m.TRAINS[0]
     out = []
     for name, (gf, stops, pats) in CASES.items():

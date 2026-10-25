@@ -5,6 +5,8 @@ Braking trains regenerate into the third rail; substations are diode rectifiers 
 so regen only helps other trains, and a train sheds regen once its voltage reaches V_REGEN_MAX.
 """
 
+from itertools import pairwise
+
 import numpy as np
 
 from rail_runtime import model as m
@@ -84,7 +86,7 @@ def solve(subs, cars, dem, train, n_tracks):
     n = n_sub + len(cars)
     if not cars:
         return [], []
-    I = np.zeros(len(cars))
+    cur = np.zeros(len(cars))
     V = np.full(n, m.V0)
     # Branch conductances only depend on positions.
     G0 = np.zeros((n, n))
@@ -92,14 +94,14 @@ def solve(subs, cars, dem, train, n_tracks):
         nodes = [(subs[k], k) for k in range(n_sub)]
         nodes += [(c.run.chain(c.p), n_sub + j) for j, c in enumerate(cars) if c.track == track]
         nodes.sort()
-        for (xa, a), (xb, bb) in zip(nodes, nodes[1:]):
+        for (xa, a), (xb, bb) in pairwise(nodes):
             g = 1 / max((xb - xa) / m.MILE * m.R_LOOP, 1e-6)
             G0[a, a] += g
             G0[bb, bb] += g
             G0[a, bb] -= g
             G0[bb, a] -= g
     shed = np.ones(len(cars))
-    for it in range(200):
+    for _ in range(200):
         G = G0.copy()
         b = np.zeros(n)
         for k in range(n_sub):
@@ -111,14 +113,14 @@ def solve(subs, cars, dem, train, n_tracks):
             k = n_sub + j
             Vt = max(V[k], 1.0)
             if dem[j] >= 0:
-                I[j] = min(dem[j] / Vt, train.i_max)
+                cur[j] = min(dem[j] / Vt, train.i_max)
                 if Vt < m.V_MIN:
-                    I[j] *= max(Vt - 0.6 * m.V_MIN, 0) / (0.4 * m.V_MIN)  # shed load as voltage collapses
+                    cur[j] *= max(Vt - 0.6 * m.V_MIN, 0) / (0.4 * m.V_MIN)  # shed load as voltage collapses
             else:
                 if Vt > V_REGEN_MAX:
                     shed[j] *= 0.8  # line not receptive: blend to friction brake
-                I[j] = max(dem[j] * shed[j] / Vt, -train.i_max)
-            b[k] -= I[j]
+                cur[j] = max(dem[j] * shed[j] / Vt, -train.i_max)
+            b[k] -= cur[j]
         # Nodes with no branches (lone train on an isolated stretch) can't happen: subs bound every track.
         # Clamp to the physical range: below 0.6 V_MIN trains draw nothing, above V_REGEN_MAX they shed regen.
         V_new = np.clip(np.linalg.solve(G, b), 0.6 * m.V_MIN, V_REGEN_MAX + 50)
@@ -128,7 +130,7 @@ def solve(subs, cars, dem, train, n_tracks):
         V = 0.7 * V + 0.3 * V_new
     else:
         NONCONVERGED[0] += 1
-    return [V[n_sub + j] * I[j] for j in range(len(cars))], V[n_sub:]
+    return [V[n_sub + j] * cur[j] for j in range(len(cars))], V[n_sub:]
 
 
 def simulate(line, train, kind, services, horizon, regen=True, single=False):
@@ -141,7 +143,7 @@ def simulate(line, train, kind, services, horizon, regen=True, single=False):
     t = 0.0
     next_dep = {i: sv[5] for i, sv in enumerate(services)}
     while t < horizon:
-        for i, (nm, st, d, track, hw, off) in enumerate(services):
+        for i, (nm, _st, d, track, hw, _off) in enumerate(services):
             if t >= next_dep[i] and not (single and cars):
                 cars.append(Car(runs[(nm, d)], t, track, nm))
                 next_dep[i] += hw
@@ -155,7 +157,7 @@ def simulate(line, train, kind, services, horizon, regen=True, single=False):
                 vmin.append(float(np.min(vt)))
         else:
             pw = dem
-        for c, pe in zip(active, pw):
+        for c, pe in zip(active, pw, strict=True):
             r = c.run
             if c.dwell > 0:
                 c.dwell -= DT
@@ -215,7 +217,7 @@ def busy(line, cases, horizon, window):
                     continue
                 done, vmin = simulate(line, tr, kind, cases, horizon, regen)
                 res[regen] = (done, vmin)
-            for name, stops, inbound, *_ in cases:
+            for name, _stops, inbound, *_ in cases:
                 if not inbound:
                     continue
                 one, _ = simulate(line, tr, kind, [c for c in cases if c[0] == name], horizon, single=True)

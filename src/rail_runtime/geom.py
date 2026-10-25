@@ -1,21 +1,27 @@
 """Build an ordered track centerline from Penn to a LIRR station from OSM and measure curvature."""
 
-import csv
 import heapq
 import json
 import math
 import sys
+from itertools import pairwise
+from pathlib import Path
 
 import numpy as np
+
+from rail_runtime.model import read_csv
 
 
 def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> None:
     """Trace Penn to `dest` and write the geometry to `out`; `route_json` may be `-` for main-line tracks."""
-    d = json.load(open(rail_json))["elements"]
+    d = json.loads(Path(rail_json).read_text())["elements"]
     route_ways = set()
     if route_json != "-":
         route_ways = {
-            m["ref"] for e in json.load(open(route_json))["elements"] if e["type"] == "relation" for m in e["members"]
+            m["ref"]
+            for e in json.loads(Path(route_json).read_text())["elements"]
+            if e["type"] == "relation"
+            for m in e["members"]
         }
     coord = {}
     adj = {}
@@ -26,19 +32,20 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
         pen = 1.0 if w["id"] in route_ways or (not route_ways and t.get("usage") == "main") else 3.0
         if t.get("service") in ("crossover", "siding"):
             pen = 10.0
-        for n, g in zip(w["nodes"], w["geometry"]):
+        for n, g in zip(w["nodes"], w["geometry"], strict=True):
             coord[n] = (g["lat"], g["lon"])
-        for a, b in zip(w["nodes"], w["nodes"][1:]):
+        for a, b in pairwise(w["nodes"]):
             la, lo = coord[a]
             lb, lob = coord[b]
             L = math.hypot((la - lb) * 110540, (lo - lob) * 84000)
             adj.setdefault(a, []).append((b, L * pen, w["id"]))
             adj.setdefault(b, []).append((a, L * pen, w["id"]))
     wtags = {w["id"]: w["tags"] for w in d}
-    stop = {
-        r["stop_name"]: (float(r["stop_lat"]), float(r["stop_lon"])) for r in csv.DictReader(open(f"{gtfs}/stops.txt"))
-    }
-    near = lambda ll: min(adj, key=lambda n: (coord[n][0] - ll[0]) ** 2 + ((coord[n][1] - ll[1]) * 0.76) ** 2)
+    stop = {r["stop_name"]: (float(r["stop_lat"]), float(r["stop_lon"])) for r in read_csv(f"{gtfs}/stops.txt")}
+
+    def near(ll: tuple[float, float]) -> int:
+        return min(adj, key=lambda n: (coord[n][0] - ll[0]) ** 2 + ((coord[n][1] - ll[1]) * 0.76) ** 2)
+
     src_n, dst_n = near(stop["Penn Station"]), near(stop[dest])
     MAX_TURN = 30.0  # degrees between consecutive segments; more means reversing through a switch
 
@@ -114,7 +121,7 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
 
     # Station positions: GTFS stop coordinates projected onto the path.
     stations = []
-    for r in csv.DictReader(open(f"{gtfs}/stops.txt")):
+    for r in read_csv(f"{gtfs}/stops.txt"):
         p = np.array([float(r["stop_lon"]) * 111320 * math.cos(math.radians(lat0)), float(r["stop_lat"]) * 110540])
         dd = np.hypot(*(rs - p).T)
         i = int(np.argmin(dd))
@@ -140,7 +147,7 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
                         "lat": round(float(la), 7),
                     }
                 )
-                for x, r, v, (lo, la) in zip(ss, R, maxspeed, lonlat)
+                for x, r, v, (lo, la) in zip(ss, R, maxspeed, lonlat, strict=True)
             )
         )
         f.write("\n  ]\n}\n")

@@ -7,6 +7,8 @@ import csv
 import json
 import math
 from collections import defaultdict
+from itertools import pairwise
+from pathlib import Path
 
 import numpy as np
 
@@ -94,7 +96,7 @@ TRAINS = [
 # --- Lines ------------------------------------------------------------------
 def load_geom(path):
     """Read a `geom.py` file into parallel arrays."""
-    g = json.load(open(path))
+    g = json.loads(Path(path).read_text())
     sm = g["samples"]
     return {
         "s": [x["s"] for x in sm],
@@ -145,7 +147,7 @@ class Line:
         lat0 = np.mean(self.lonlat[:, 1])
         kx, ky = 111320 * math.cos(math.radians(lat0)), 110540
         mapped = []
-        for e in json.load(open(path))["elements"]:
+        for e in json.loads(Path(path).read_text())["elements"]:
             t = e["tags"]
             if (
                 "LIRR" not in (t.get("operator", "") + t.get("name", ""))
@@ -159,7 +161,7 @@ class Line:
                 mapped.append(self.s[i])
         pts = sorted(set([0.0] + mapped + [self.s[-1]]))
         subs = []
-        for a, b in zip(pts, pts[1:]):
+        for a, b in pairwise(pts):
             n = max(1, math.ceil((b - a) / (MAX_GAP * MILE)))
             subs += [a + (b - a) * k / n for k in range(n)]
         subs.append(pts[-1])
@@ -208,11 +210,16 @@ class Line:
     def trip(self, train, kind, stops):
         lim = self.limits(kind, train.vmax)
         xs = [self.st[n] for n in stops]
-        t = sum(self.run(train, lim, a, b)[0] for a, b in zip(xs, xs[1:]))
+        t = sum(self.run(train, lim, a, b)[0] for a, b in pairwise(xs))
         return (t + DWELL * (len(stops) - 2)) / 60
 
 
 # --- Timetable --------------------------------------------------------------
+def read_csv(path: str) -> list[dict[str, str]]:
+    with open(path, newline="") as f:
+        return list(csv.DictReader(f))
+
+
 def hm(t):
     h, m, s = map(int, t.split(":"))
     return h * 60 + m + s / 60
@@ -220,16 +227,19 @@ def hm(t):
 
 def am_inbound(gtfs, date, origin, line_stops, route_id=None, arr_window=(360, 600)):
     """Scheduled origin->Penn times for AM trips, with their stops on this line."""
-    rd = lambda f: list(csv.DictReader(open(f"{gtfs}/{f}")))
-    names = {r["stop_id"]: r["stop_name"] for r in rd("stops.txt")}
-    svc = {c["service_id"] for c in rd("calendar_dates.txt") if c["date"] == date and c["exception_type"] == "1"}
+    names = {r["stop_id"]: r["stop_name"] for r in read_csv(f"{gtfs}/stops.txt")}
+    svc = {
+        c["service_id"]
+        for c in read_csv(f"{gtfs}/calendar_dates.txt")
+        if c["date"] == date and c["exception_type"] == "1"
+    }
     trips = {
         t["trip_id"]: t
-        for t in rd("trips.txt")
+        for t in read_csv(f"{gtfs}/trips.txt")
         if t["service_id"] in svc and (route_id is None or t["route_id"] == route_id)
     }
     sts = defaultdict(list)
-    for r in rd("stop_times.txt"):
+    for r in read_csv(f"{gtfs}/stop_times.txt"):
         if r["trip_id"] in trips:
             sts[r["trip_id"]].append(r)
     out = []

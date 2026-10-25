@@ -23,7 +23,7 @@ def rank(data, top=10):
         orig = line.limits
         base = {k: line.trip(m7, "80", p) for k, p in pats.items()}
         rows = []
-        for i, j in zip(edges[::2], edges[1::2]):
+        for i, j in zip(edges[::2], edges[1::2], strict=True):
             lim = lim80.copy()
             lim[i:j] = 80
             line.limits = lambda kind, vmax, _l=lim: _l
