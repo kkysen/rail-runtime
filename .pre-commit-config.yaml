@@ -1,0 +1,39 @@
+repos:
+  - repo: local
+    hooks:
+      # Every Python tool runs from the project's own environment,
+      # at the version `uv.lock` pins, rather than from a copy pinned here:
+      # two pins for one tool drift apart, and a hook and CI then disagree.
+      - id: ruff-check
+        name: ruff check
+        entry: uv run ruff check
+        language: system
+        types_or: [python, pyi]
+
+      - id: ruff-format
+        name: ruff format
+        entry: uv run ruff format --check
+        language: system
+        types_or: [python, pyi]
+
+      - id: ty
+        name: ty
+        entry: uv run ty check
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      - id: pyrefly
+        name: pyrefly
+        entry: uv run pyrefly check
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      # About a second, on the committed geometry.
+      - id: pytest
+        name: pytest
+        entry: uv run pytest
+        language: system
+        pass_filenames: false
+        always_run: true
