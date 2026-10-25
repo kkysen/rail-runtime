@@ -1,0 +1,11 @@
+//! The runtime simulation's hot loops, for `rail_runtime`.
+//! Python drives it through the `rail_runtime._sim` module (the `python` feature).
+
+#[cfg(feature = "python")]
+mod python;
+
+#[global_allocator]
+static ALLOCATOR: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
+/// mph to m/s.
+pub const MPH: f64 = 0.44704;

@@ -12,8 +12,27 @@ dependencies = [
 rail-runtime = "rail_runtime.cli:app"
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["maturin>=1.15,<2"]
+build-backend = "maturin"
+
+# The `sim` crate, built as the `rail_runtime._sim` extension module.
+[tool.maturin]
+manifest-path = "sim/Cargo.toml"
+python-source = "src"
+module-name = "rail_runtime._sim"
+bindings = "pyo3"
+features = ["python"]
+# The simulations are the slow part, so even an editable install is optimized.
+profile = "release"
+
+# Rebuild the extension when the crate changes, not just `pyproject.toml`.
+[tool.uv]
+cache-keys = [
+    { file = "pyproject.toml" },
+    { file = "sim/Cargo.toml" },
+    { file = "sim/Cargo.lock" },
+    { file = "sim/src/**/*.rs" },
+]
 
 [project.urls]
 Repository = "https://github.com/kkysen/rail-runtime"

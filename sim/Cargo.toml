@@ -1,0 +1,17 @@
+[package]
+name = "sim"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+mimalloc = "0.1.52"
+pyo3 = { version = "0.30.1", optional = true }
+
+[features]
+# The `rail_runtime._sim` bindings, which `maturin` builds with.
+# Off for `cargo test`, whose binary would otherwise link `libpython`,
+# and fail to load wherever its directory isn't on the loader path (as with `mise`'s Python).
+python = ["dep:pyo3"]

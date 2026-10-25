@@ -15,6 +15,16 @@ jobs:
         with:
           enable-cache: true
 
+      # `uv run` builds the `sim` extension with the runner's `cargo`.
+      - name: cargo fmt
+        run: cargo fmt --manifest-path sim/Cargo.toml --check
+
+      - name: cargo clippy
+        run: cargo clippy --manifest-path sim/Cargo.toml --all-targets --all-features -- -D warnings
+
+      - name: cargo test
+        run: cargo test --manifest-path sim/Cargo.toml
+
       - name: ruff format
         run: uv run ruff format --check
 

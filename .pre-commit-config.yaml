@@ -37,3 +37,24 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+
+  - repo: local
+    hooks:
+      - id: cargo-fmt
+        name: cargo fmt
+        entry: cargo fmt --manifest-path sim/Cargo.toml --check
+        language: system
+        files: ^sim/
+        pass_filenames: false
+      - id: cargo-clippy
+        name: cargo clippy
+        entry: cargo clippy --manifest-path sim/Cargo.toml --all-targets --all-features -- -D warnings
+        language: system
+        files: ^sim/
+        pass_filenames: false
+      - id: cargo-test
+        name: cargo test
+        entry: cargo test --manifest-path sim/Cargo.toml
+        language: system
+        files: ^sim/
+        pass_filenames: false

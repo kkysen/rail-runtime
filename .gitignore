@@ -5,6 +5,9 @@
 !/data/substations.json
 /.cache/
 __pycache__/
+/sim/target/
+# The `sim` extension module, built by `maturin`.
+/src/rail_runtime/_sim.*.so
 /.venv/
 /.ruff_cache/
 
