@@ -160,7 +160,7 @@ SPECS = {
         "substations.json",
         GCM_STOPS,
         {"local": GCM_STOPS[::-1], "express": ["Jamaica", "Grand Central"]},
-        (True, False),
+        (False, False),
         None,
     ),
     "Atlantic": Spec(

@@ -25,7 +25,7 @@ and into Atlantic Terminal, the Atlantic Branch from Jamaica.
     through interlockings, curvature is measured on a path smoothed over 200 m
     so crossover kinks don't count as curves.
   - A restriction holds until the whole train has cleared it,
-    and a bumper terminal like Port Washington, GCM or Atlantic Terminal is approached at 15 mph.
+    and a bumper terminal like Port Washington or Atlantic Terminal is approached at 15 mph.
 - **Trains:** tractive effort up to the rated acceleration,
   then constant power, minus Davis resistance,
   with 8% rotating mass and a 2 mph/s service brake unless noted.
@@ -113,11 +113,11 @@ AM inbound trips arriving at Penn, GCM or Atlantic 6-10 AM on 2026-10-27, groupe
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Jamaica, nonstop | 22 | 19 | 12.9 | 11.6 | 9.9 | 9.6 |
-| Jamaica, stops at Woodside | 8 | 19 | 14.0 | 12.7 | 11.2 | 10.9 |
-| Jamaica, stops at Forest Hills | 4 | 20 | 14.3 | 12.7 | 11.3 | 11.2 |
-| Jamaica, stops at Kew Gardens | 4 | 19 | 14.2 | 12.7 | 11.3 | 11.1 |
-| Jamaica, skips Woodside | 2 | 21 | 15.5 | 13.8 | 12.7 | 12.5 |
+| Jamaica, nonstop | 22 | 19 | 12.9 | 11.4 | 9.7 | 9.4 |
+| Jamaica, stops at Woodside | 8 | 19 | 14.0 | 12.5 | 11.0 | 10.7 |
+| Jamaica, stops at Forest Hills | 4 | 20 | 14.3 | 12.5 | 11.1 | 11.0 |
+| Jamaica, stops at Kew Gardens | 4 | 19 | 14.2 | 12.5 | 11.1 | 10.9 |
+| Jamaica, skips Woodside | 2 | 21 | 15.5 | 13.6 | 12.5 | 12.3 |
 
 #### Jamaica - Atlantic
 
@@ -190,29 +190,29 @@ One train alone, minutes.
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 16.6 | 14.9 | 13.9 | 13.8 |
-| M7, 750 V third rail, full power | 16.4 | 14.7 | 13.6 | 13.3 |
-| M8, 25 kV | 16.4 | 14.7 | 13.6 | 13.4 |
-| Class 700/1, 25 kV | 16.5 | 14.7 | 13.7 | 13.6 |
-| Class 423 x4, AC | 16.1 | 14.5 | 13.2 | 12.9 |
-| FLIRT Sm5 x3, 25 kV | 16.2 | 14.5 | 13.3 | 13.1 |
-| 755/3 x4, 750 V third rail | 16.2 | 14.5 | 13.4 | 13.2 |
-| 755/3 x4, 25 kV | 15.9 | 14.3 | 13.0 | 12.6 |
-| 755/3 x4, 25 kV, 1.3 brake | 15.5 | 14.0 | 12.6 | 12.2 |
+| M7, 750 V third rail | 16.6 | 14.7 | 13.7 | 13.6 |
+| M7, 750 V third rail, full power | 16.4 | 14.5 | 13.4 | 13.1 |
+| M8, 25 kV | 16.4 | 14.5 | 13.5 | 13.2 |
+| Class 700/1, 25 kV | 16.5 | 14.5 | 13.5 | 13.4 |
+| Class 423 x4, AC | 16.1 | 14.3 | 13.0 | 12.7 |
+| FLIRT Sm5 x3, 25 kV | 16.2 | 14.3 | 13.1 | 12.9 |
+| 755/3 x4, 750 V third rail | 16.2 | 14.3 | 13.2 | 13.0 |
+| 755/3 x4, 25 kV | 15.9 | 14.1 | 12.8 | 12.4 |
+| 755/3 x4, 25 kV, 1.3 brake | 15.5 | 13.8 | 12.4 | 12.0 |
 
 #### GCM express
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 12.9 | 11.6 | 9.9 | 9.6 |
-| M7, 750 V third rail, full power | 12.9 | 11.6 | 9.8 | 9.3 |
-| M8, 25 kV | 12.9 | 11.6 | 9.8 | 9.4 |
-| Class 700/1, 25 kV | 12.9 | 11.6 | 9.9 | 9.5 |
-| Class 423 x4, AC | 12.8 | 11.5 | 9.7 | 9.1 |
-| FLIRT Sm5 x3, 25 kV | 12.8 | 11.5 | 9.8 | 9.3 |
-| 755/3 x4, 750 V third rail | 12.8 | 11.5 | 9.8 | 9.3 |
-| 755/3 x4, 25 kV | 12.8 | 11.5 | 9.7 | 9.0 |
-| 755/3 x4, 25 kV, 1.3 brake | 12.7 | 11.4 | 9.6 | 8.9 |
+| M7, 750 V third rail | 12.9 | 11.4 | 9.7 | 9.4 |
+| M7, 750 V third rail, full power | 12.9 | 11.4 | 9.6 | 9.1 |
+| M8, 25 kV | 12.9 | 11.4 | 9.6 | 9.2 |
+| Class 700/1, 25 kV | 12.9 | 11.4 | 9.7 | 9.3 |
+| Class 423 x4, AC | 12.8 | 11.3 | 9.5 | 8.9 |
+| FLIRT Sm5 x3, 25 kV | 12.8 | 11.3 | 9.6 | 9.1 |
+| 755/3 x4, 750 V third rail | 12.8 | 11.3 | 9.5 | 9.1 |
+| 755/3 x4, 25 kV | 12.8 | 11.3 | 9.4 | 8.8 |
+| 755/3 x4, 25 kV, 1.3 brake | 12.7 | 11.2 | 9.4 | 8.7 |
 
 #### Atlantic local
 
@@ -268,9 +268,9 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | GCM express | posted | 13.1 | 13.1 | 13.1 | 13.0 | 483 |
-|  | 60 mph | 11.6 | 11.6 | 11.6 | 11.6 | 504 |
-|  | 80 mph | 10.0 | 10.0 | 10.0 | 9.9 | 481 |
-|  | 100 mph | 9.6 | 9.7 | 9.7 | 9.5 | 474 |
+|  | 60 mph | 11.4 | 11.4 | 11.4 | 11.4 | 500 |
+|  | 80 mph | 9.8 | 9.8 | 9.8 | 9.7 | 484 |
+|  | 100 mph | 9.4 | 9.5 | 9.5 | 9.3 | 473 |
 
 #### Atlantic: 5 min headways each way
 
@@ -317,8 +317,8 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | From mi | To mi | Near | Posted | Raised to | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: | ---: |
 | 9.77 | 10.22 | Kew Gardens | 20 mph | 80 mph | 59 s | 65 s |
+| 0.00 | 0.22 | Grand Central | 15 mph | 73 mph | 28 s | 28 s |
 | 10.27 | 10.56 | Jamaica | 20 mph | 80 mph | 18 s | 18 s |
-| 0.00 | 0.22 | Grand Central | 15 mph | 73 mph | 17 s | 17 s |
 | 3.76 | 5.27 | Woodside | 60 mph | 80 mph | 5 s | 16 s |
 | 2.59 | 3.38 | Woodside | 45 mph | 80 mph | 12 s | 12 s |
 | 0.46 | 1.09 | Grand Central | 45 mph | 80 mph | 9 s | 9 s |
@@ -364,12 +364,12 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 10.57 | 11.17 | Jamaica | 57 mph | 3 s | 5 s |
 | 5.54 | 6.04 | Woodside | 71 mph | 0 s | 3 s |
 
-#### GCM (base: local 13.9 min, express 9.9 min)
+#### GCM (base: local 13.7 min, express 9.7 min)
 
 | From mi | To mi | Near | Allows | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: |
-| 0.00 | 1.08 | Grand Central | 15 mph | 30 s | 30 s |
 | 2.58 | 3.11 | Woodside | 53 mph | 20 s | 20 s |
+| 0.00 | 1.08 | Grand Central | 44 mph | 18 s | 18 s |
 | 9.86 | 10.45 | Jamaica | 47 mph | 7 s | 9 s |
 | 3.54 | 4.22 | Woodside | 65 mph | 3 s | 6 s |
 | 4.92 | 5.33 | Woodside | 70 mph | 0 s | 4 s |
