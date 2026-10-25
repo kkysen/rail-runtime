@@ -1,0 +1,38 @@
+[project]
+name = "rail-runtime"
+version = "0.1.0"
+description = "Minimum train runtimes from track geometry and train performance, compared with timetables."
+requires-python = ">=3.15"
+dependencies = [
+    "numpy>=2.5.4",
+]
+
+[project.urls]
+Repository = "https://github.com/kkysen/rail-runtime"
+
+[dependency-groups]
+dev = [
+    "pyrefly>=1.4.0",
+    "pytest>=9.1.1",
+    "ruff>=0.17.1",
+    "ty>=0.0.90",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF100"]
+
+[tool.pyrefly]
+preset = "strict"
+
+[tool.ty.rules]
+blanket-ignore-comment = "warn"
+division-by-zero = "warn"
+missing-override-decorator = "warn"
+missing-type-argument = "warn"
+possibly-missing-attribute = "warn"
+possibly-missing-import = "warn"
+possibly-unresolved-reference = "warn"
+unsupported-dynamic-base = "warn"
