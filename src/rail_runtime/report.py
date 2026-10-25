@@ -5,6 +5,7 @@ from statistics import median
 
 from rail_runtime import model as m
 from rail_runtime.multitrain import SPECS
+from rail_runtime.results import short
 
 KINDS = ["posted", "60", "80", "100"]
 # Patterns printed here beyond each line's own.
@@ -22,7 +23,7 @@ def report(data: str, date: str) -> None:
     m7 = m.TRAINS[0]
     for name, spec in SPECS.items():
         line, stops, route = spec.line(data), spec.stops, spec.route
-        print(f"=== {name} ===")
+        print(f"=== {short(stops[-1])} - {short(stops[0])} ===")
         print(
             "substations (mi):",
             " ".join(f"{x / m.MILE:.1f}{'*' if x in line.mapped else ''}" for x in line.subs),

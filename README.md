@@ -84,7 +84,7 @@ cargo test --manifest-path sim/Cargo.toml
 
 AM inbound trips arriving at Penn or Atlantic Terminal 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled minutes vs. one M7 running flat out on 750 V third rail with 30 s dwells.
 
-#### Port Washington
+#### Port Washington - Penn
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -96,7 +96,7 @@ AM inbound trips arriving at Penn or Atlantic Terminal 6-10 AM on 2026-10-27, gr
 | Port Washington, skips Auburndale, Broadway, Murray Hill, Flushing | 1 | 45 | 30.9 | 29.3 | 27.7 | 27.6 |
 | Port Washington, skips Auburndale, Broadway, Murray Hill, Flushing, Mets | 1 | 44 | 29.8 | 28.2 | 26.4 | 26.3 |
 
-#### Jamaica
+#### Jamaica - Penn
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -107,7 +107,7 @@ AM inbound trips arriving at Penn or Atlantic Terminal 6-10 AM on 2026-10-27, gr
 | Jamaica, skips Woodside | 2 | 22 | 16.1 | 14.0 | 12.4 | 12.2 |
 | Jamaica, all stops | 1 | 22 | 17.2 | 15.2 | 13.7 | 13.6 |
 
-#### Atlantic
+#### Jamaica - Atlantic
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
