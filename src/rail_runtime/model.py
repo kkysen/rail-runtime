@@ -27,7 +27,8 @@ EA, EU = 6.0, 3.0  # superelevation and unbalance, inches
 
 # --- Third rail -------------------------------------------------------------
 V0 = _sim.V0  # substation output, V (ORM tags the line 750 V)
-R_SUB = 0.010  # source resistance of a substation feeding one track, ohm; one feeding n tracks has R_SUB / n
+R_SUB = 0.010  # source resistance of one rectifier unit, ohm
+TRACKS_PER_UNIT = 2  # a substation has a rectifier unit per this many third-rail tracks it feeds, rounded up
 R_LOOP = 0.040  # contact rail plus running-rail return, ohm per mile
 V_MIN = _sim.V_MIN  # train cuts traction below this
 
@@ -97,10 +98,10 @@ TRAINS = [
 def design_voltage(spacing: float, train: Train) -> float:
     """Volts midway between substations `spacing` miles apart, with `train` at full current on every track.
 
-    Each substation is sized for its tracks, so the track count cancels out:
-    each train draws half its current from either side, through `R_SUB` and half the gap of rail.
+    Each train draws half its current from either side, through half the gap of rail,
+    and with a unit per `TRACKS_PER_UNIT` tracks, each unit carries that many trains' halves.
     """
-    return V0 - train.i_max / 2 * (R_SUB + spacing / 2 * R_LOOP)
+    return V0 - train.i_max / 2 * (TRACKS_PER_UNIT * R_SUB + spacing / 2 * R_LOOP)
 
 
 # --- Lines ------------------------------------------------------------------
@@ -295,9 +296,9 @@ class Line:
         subs.append(pts[-1])
         self.mapped = sorted(mapped)
         self.subs = np.array(subs)
-        # A substation is sized for the third-rail tracks it feeds, so its source resistance falls as they multiply.
+        # A substation has a rectifier unit per `TRACKS_PER_UNIT` third-rail tracks it feeds, in parallel.
         n = self.third_rail[np.clip(np.round(self.subs / self.ds).astype(int), 0, len(self.s) - 1)]
-        self.r_subs = R_SUB / np.maximum(n, 1)
+        self.r_subs = R_SUB / np.maximum(1, np.ceil(n / TRACKS_PER_UNIT))
         # Effective source resistance at each point: fed from both neighbouring substations.
         j = np.clip(np.searchsorted(self.subs, self.s), 1, len(self.subs) - 1)
         d1 = (self.s - self.subs[j - 1]) / MILE * R_LOOP + self.r_subs[j - 1]
