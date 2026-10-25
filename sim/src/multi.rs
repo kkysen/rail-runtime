@@ -13,8 +13,6 @@ pub const DT: f64 = 0.5;
 pub const REGEN_EFF: f64 = 0.80;
 /// A train sheds regen above this, V.
 pub const V_REGEN_MAX: f64 = 900.0;
-/// Substation source resistance, Ω.
-pub const R_SUB: f64 = 0.010;
 /// Contact rail plus running-rail return, Ω per mile.
 pub const R_LOOP: f64 = 0.040;
 pub const MILE: f64 = 1609.34;
@@ -46,6 +44,8 @@ pub struct Job {
     pub s_end: f64,
     /// Substation chainages, m.
     pub subs: Vec<f64>,
+    /// Substation source resistances, ohm.
+    pub r_subs: Vec<f64>,
     pub services: Vec<Service>,
     pub horizon: f64,
     pub regen: bool,
@@ -195,6 +195,7 @@ fn solve_dense(g: &mut [f64], b: &mut [f64], n: usize) {
 /// Returns whether the voltage iteration converged.
 fn solve(
     subs: &[f64],
+    r_subs: &[f64],
     cars: &[&Car],
     runs: &[Run],
     dem: &[f64],
@@ -233,7 +234,11 @@ fn solve(
         b.fill(0.0);
         for k in 0..n_sub {
             // Diode rectifier: conducts only outward (a tiny leak keeps the network grounded).
-            let gk = if v[k] <= V0 + 1e-6 { 1.0 / R_SUB } else { 1e-6 };
+            let gk = if v[k] <= V0 + 1e-6 {
+                1.0 / r_subs[k]
+            } else {
+                1e-6
+            };
             g[k * n + k] += gk;
             b[k] += V0 * gk;
         }
@@ -319,7 +324,8 @@ pub fn simulate(job: &Job) -> Outcome {
             .collect();
         let power = if train.supply == Supply::ThirdRail {
             let refs: Vec<&Car> = active.iter().map(|&k| &cars[k]).collect();
-            let (power, volts, converged) = solve(&job.subs, &refs, &runs, &dem, train, n_tracks);
+            let (power, volts, converged) =
+                solve(&job.subs, &job.r_subs, &refs, &runs, &dem, train, n_tracks);
             if let Some(lo) = volts.iter().copied().reduce(f64::min) {
                 vmin = Some(vmin.map_or(lo, |m| m.min(lo)));
             }
@@ -418,6 +424,7 @@ mod tests {
             ds: 5.0,
             s_end: 16_000.0,
             subs: (0..=8).map(|k| k as f64 * 2000.0).collect(),
+            r_subs: vec![0.010; 9],
             services: vec![
                 Service {
                     stops: vec![0.0, 8000.0, 15_900.0],

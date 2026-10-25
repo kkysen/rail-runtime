@@ -27,7 +27,7 @@ EA, EU = 6.0, 3.0  # superelevation and unbalance, inches
 
 # --- Third rail -------------------------------------------------------------
 V0 = _sim.V0  # substation output, V (ORM tags the line 750 V)
-R_SUB = 0.010  # substation source resistance, ohm
+R_SUB = 0.010  # source resistance of a substation feeding one track, ohm; one feeding n tracks has R_SUB / n
 R_LOOP = 0.040  # contact rail plus running-rail return, ohm per mile
 MAX_GAP = 2.0  # miles; gaps between mapped substations are filled at this spacing
 V_MIN = _sim.V_MIN  # train cuts traction below this
@@ -196,6 +196,7 @@ class Line:
         self.st = {n: st[n] for n in stations if n in st}
         self.st[stations[-1]] = float(self.s[-1]) - 60  # the last station is at the end of the path
         self.lonlat = g.lonlat
+        self.tracks = g.tracks
         self._substations(substations_json)
 
     def _long_chord_radius(self, lonlat: Arr, half: float) -> Arr:
@@ -246,10 +247,12 @@ class Line:
         subs.append(pts[-1])
         self.mapped = sorted(mapped)
         self.subs = np.array(subs)
+        # A substation is sized for the tracks it feeds, so its source resistance falls as they multiply.
+        self.r_subs = R_SUB / self.tracks[np.clip(np.round(self.subs / self.ds).astype(int), 0, len(self.s) - 1)]
         # Effective source resistance at each point: fed from both neighbouring substations.
         j = np.clip(np.searchsorted(self.subs, self.s), 1, len(self.subs) - 1)
-        d1 = (self.s - self.subs[j - 1]) / MILE * R_LOOP + R_SUB
-        d2 = (self.subs[j] - self.s) / MILE * R_LOOP + R_SUB
+        d1 = (self.s - self.subs[j - 1]) / MILE * R_LOOP + self.r_subs[j - 1]
+        d2 = (self.subs[j] - self.s) / MILE * R_LOOP + self.r_subs[j]
         self.r_eff = d1 * d2 / (d1 + d2)
 
     def limits(self, kind: str, vmax: float, train_len: float = 260.0) -> Arr:

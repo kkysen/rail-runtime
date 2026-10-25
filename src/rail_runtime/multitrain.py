@@ -35,6 +35,7 @@ class Job:
     ds: float  # m
     s_end: float  # m
     subs: list[float]  # substation chainages, m
+    r_subs: list[float]  # substation source resistances, ohm
     services: list[tuple[list[float], bool, int, float, float]]  # stop chainages, inbound, track, headway, offset
     horizon: float  # s
     regen: bool
@@ -69,6 +70,7 @@ def job(
         ds=line.ds,
         s_end=float(line.s[-1]),
         subs=[float(x) for x in line.subs],
+        r_subs=[float(x) for x in line.r_subs],
         services=[([line.st[n] for n in sv.stops], sv.inbound, sv.track, sv.headway, sv.offset) for sv in services],
         horizon=horizon,
         regen=regen,
