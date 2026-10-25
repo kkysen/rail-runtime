@@ -32,9 +32,13 @@ def fmt(xs: Iterable[float]) -> str:
 
 def report(data: str, date: str) -> None:
     lines = {
-        "Port Washington": (m.Line(f"{data}/pw_geom.json", f"{data}/substations.json", PW_STOPS), PW_STOPS, "9"),
+        "Port Washington": (
+            m.Line(f"{data}/pw_geom.json", f"{data}/substations.json", PW_STOPS, (False, True)),
+            PW_STOPS,
+            "9",
+        ),
         "Jamaica": (
-            m.Line(f"{data}/jam_geom.json", f"{data}/substations.json", JAM_STOPS, terminal=False),
+            m.Line(f"{data}/jam_geom.json", f"{data}/substations.json", JAM_STOPS, (False, False)),
             JAM_STOPS,
             None,
         ),

@@ -144,11 +144,9 @@ class Line:
         geom_json: str,
         substations_json: str,
         stations: list[str],
-        terminal: bool = True,
-        inner_terminal: bool = False,
+        bumpers: tuple[bool, bool],
     ) -> None:
-        self.terminal = terminal  # the outer end is a bumper, not a through station
-        self.inner_terminal = inner_terminal  # so is the inner end, unlike Penn
+        self.bumpers = bumpers  # whether the start and end of the path are bumpers, not through stations
         g = load_geom(geom_json)
         self.s = g.s
         self.ds = float(self.s[1] - self.s[0])
@@ -162,7 +160,7 @@ class Line:
             self.curve = np.sqrt((EA + EU) / (0.0007 * deg))
         st = dict(g.stations)
         self.st = {n: st[n] for n in stations if n in st}
-        self.st[stations[-1]] = float(self.s[-1]) - 60  # end of the path is the outer terminal
+        self.st[stations[-1]] = float(self.s[-1]) - 60  # the last station is at the end of the path
         self.lonlat = g.lonlat
         self._substations(substations_json)
 
@@ -224,11 +222,10 @@ class Line:
                 out[:-k] = np.minimum(out[:-k], lim[k:])
             lim = out
         # The geometry cases assume every switch is rebuilt to curve speed; only the bumper stays slow.
-        if self.terminal:
-            end = self.s > self.s[-1] - 150
-            lim[end] = np.minimum(lim[end], 15)  # bumper approach at the outer terminal
-        if self.inner_terminal:
-            lim[self.s < 150] = np.minimum(lim[self.s < 150], 15)
+        # Bumper approaches.
+        for bumper, near in zip(self.bumpers, (self.s < 150, self.s > self.s[-1] - 150), strict=True):
+            if bumper:
+                lim[near] = np.minimum(lim[near], 15)
         return lim
 
     def run(self, train: Train, lim_mph: Arr, a: float, b: float) -> float:

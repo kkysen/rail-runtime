@@ -12,8 +12,8 @@ from rail_runtime.multitrain import SPECS
 class Zone:
     """A stretch of track and the minutes saved on each pattern by raising its limit."""
 
-    start: float  # mi from the inner terminus
-    end: float  # mi from the inner terminus
+    start: float  # mi along the path
+    end: float  # mi along the path
     near: str  # nearest station
     posted: float | None  # mph; None for a curve ranking
     allows: float  # mph: what the geometry allows, or the curve's own limit

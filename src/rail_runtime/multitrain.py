@@ -119,23 +119,21 @@ ATL_STOPS = ["Atlantic Terminal", "Nostrand Avenue", "East New York", "Jamaica"]
 
 
 class Spec(NamedTuple):
-    """A line: its traced geometry, its stops from the inner terminus out, and the inbound patterns to compare."""
+    """A line: its traced geometry, its stops in path order, and the inbound patterns to compare."""
 
     geom: str
     substations: str
     stops: list[str]
     patterns: dict[str, list[str]]
-    terminal: bool  # the outer end is a bumper, not a through station
-    inner_terminal: bool  # so is the inner end
-    route: str | None  # GTFS route_id of its timetable trips; None for every trip through the outer end
+    bumpers: tuple[bool, bool]  # whether the start and end of the path are bumpers
+    route: str | None  # GTFS route_id of its timetable trips; None for every trip through the last stop
 
     def line(self, data: str) -> Line:
         return m.Line(
             f"{data}/{self.geom}",
             f"{data}/{self.substations}",
             self.stops,
-            terminal=self.terminal,
-            inner_terminal=self.inner_terminal,
+            self.bumpers,
         )
 
 
@@ -145,8 +143,7 @@ SPECS = {
         "substations.json",
         PW_STOPS,
         {"local": PW_STOPS[::-1], "express": PW_EXPRESS[::-1]},
-        True,
-        False,
+        (False, True),
         "9",
     ),
     "Jamaica": Spec(
@@ -154,8 +151,7 @@ SPECS = {
         "substations.json",
         JAM_STOPS,
         {"local": JAM_STOPS[::-1], "nonstop": ["Jamaica", "Penn Station"]},
-        False,
-        False,
+        (False, False),
         None,
     ),
     "Atlantic": Spec(
@@ -163,8 +159,7 @@ SPECS = {
         "substations.json",
         ATL_STOPS,
         {"local": ATL_STOPS[::-1]},
-        False,
-        True,
+        (True, False),
         None,
     ),
 }

@@ -15,12 +15,12 @@ M8 = next(t for t in m.TRAINS if t.name == "M8, 25 kV")
 
 @cache
 def pw() -> m.Line:
-    return m.Line(f"{DATA}/pw_geom.json", f"{DATA}/substations.json", mt.PW_STOPS)
+    return mt.SPECS["Port Washington"].line(DATA)
 
 
 @cache
 def jam() -> m.Line:
-    return m.Line(f"{DATA}/jam_geom.json", f"{DATA}/substations.json", mt.JAM_STOPS, terminal=False)
+    return mt.SPECS["Jamaica"].line(DATA)
 
 
 @pytest.mark.parametrize(
