@@ -32,7 +32,7 @@ and the Main Line from Jamaica.
   0.01 Ω source resistance and 0.04 Ω per mile of contact and return rail, fed from both sides.
   Trains draw up to their rated current and shed load below 500 V.
   25 kV trains get rated power everywhere.
-- **Busy service:** `rail_runtime.multitrain` steps every train on the line every 0.5 s,
+- **Busy service:** the `sim` crate steps every train on the line every 0.5 s,
   solving the DC network each step with diode rectifier substations.
   With regenerative braking, braking trains feed other trains at 80% efficiency,
   up to 900 V.
@@ -41,7 +41,9 @@ and the Main Line from Jamaica.
 ## Running
 
 `mise install` sets up `uv` and `pre-commit`;
-`uv` manages Python 3.15 and the dependencies.
+`uv` manages Python 3.15 and the dependencies,
+and builds the Rust simulation core in `sim/` with `maturin`, so `cargo` must be installed.
+Regenerating every result takes a couple of seconds.
 
 ```sh
 ./fetch.sh  # GTFS and OSM extracts into data/
@@ -60,8 +62,9 @@ so the tables below change with it.
 ## Development
 
 ```sh
-pre-commit install  # ruff, ty, pyrefly and pytest on every commit
-uv run pytest       # about a second, on the committed data; no fetch.sh needed
+pre-commit install  # ruff, ty, pyrefly, pytest, and cargo fmt, clippy and test, on every commit
+uv run pytest       # well under a second, on the committed data; no fetch.sh needed
+cargo test --manifest-path sim/Cargo.toml
 ```
 
 ## Results
