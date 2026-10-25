@@ -16,8 +16,8 @@ from rail_runtime.model import Geometry, read_csv
 type State = tuple[int, int | None]  # (node, previous node)
 
 
-def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str, origin: str = "Penn Station") -> None:
-    """Trace `origin` to `dest` and write the geometry to `out`; `route_json` may be `-` for main-line tracks."""
+def trace(rail_json: str, route_json: str, gtfs: str, stop_a: str, stop_b: str, out: str) -> None:
+    """Trace `stop_a` to `stop_b` and write the geometry to `out`; `route_json` may be `-` for main-line tracks."""
     d: list[dict[str, Any]] = json.loads(Path(rail_json).read_text())["elements"]
     route_ways: set[int] = set()
     if route_json != "-":
@@ -50,10 +50,16 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str, origi
     def near(ll: tuple[float, float], nodes: Iterable[int] = adj) -> int:
         return min(nodes, key=lambda n: (coord[n][0] - ll[0]) ** 2 + ((coord[n][1] - ll[1]) * 0.76) ** 2)
 
-    # Snap `dest` to the route's own tracks where there is a route, not to another line's platform there.
-    # Not `origin`: the route relation may stop short of Penn's platforms.
+    # Snap each end to the route's own tracks where they reach it, not to another line's platform there,
+    # but to any track where the route stops short, as it does of Penn's platforms.
     on_route = {n for w in d if w["id"] in route_ways for n in w["nodes"] if n in adj}
-    src_n, dst_n = near(stop[origin]), near(stop[dest], on_route or adj)
+
+    def snap(name: str) -> int:
+        n = near(stop[name], on_route or adj)
+        dy, dx = (coord[n][0] - stop[name][0]) * 110540, (coord[n][1] - stop[name][1]) * 84000
+        return n if math.hypot(dx, dy) < 150 else near(stop[name])
+
+    src_n, dst_n = snap(stop_a), snap(stop_b)
     MAX_TURN = 30.0  # degrees between consecutive segments; more means reversing through a switch
 
     def turn(a: int, b: int, c: int) -> float:
@@ -83,7 +89,7 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str, origi
                 prev[(v, u)] = ((u, p), wid)
                 heapq.heappush(pq, (du + c, v, u))
     if end is None:
-        raise SystemExit(f"no path from {origin} to {dest}")
+        raise SystemExit(f"no path from {stop_a} to {stop_b}")
     state = end
     path = [dst_n]
     wpath: list[int] = []

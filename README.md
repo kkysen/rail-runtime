@@ -53,9 +53,9 @@ Regenerating every result takes a couple of seconds.
 ```sh
 ./fetch.sh  # GTFS and OSM extracts into data/
 # Optional: retrace the geometry, which is committed in data/.
-uv run rail-runtime geom data/rail_bbox.json data/pw_route.json data/gtfs "Port Washington" data/pw_geom.json
-uv run rail-runtime geom data/rail_bbox2.json - data/gtfs Jamaica data/jam_geom.json
-uv run rail-runtime geom data/rail_bbox_atl.json data/atl_route.json data/gtfs Jamaica data/atl_geom.json --origin "Atlantic Terminal"
+uv run rail-runtime geom data/rail_bbox.json data/pw_route.json data/gtfs "Penn Station" "Port Washington" data/pw_geom.json
+uv run rail-runtime geom data/rail_bbox2.json - data/gtfs "Penn Station" Jamaica data/jam_geom.json
+uv run rail-runtime geom data/rail_bbox_atl.json data/atl_route.json data/gtfs "Atlantic Terminal" Jamaica data/atl_geom.json
 # Regenerate the results below.
 uv run rail-runtime results
 ```
