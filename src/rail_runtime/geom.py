@@ -34,6 +34,21 @@ def third_rail(w: dict[str, Any]) -> bool:
     )
 
 
+def catenary(w: dict[str, Any]) -> bool:
+    """Whether an OSM way is overhead-wire running track, which AC substations feed.
+
+    Not a yard, spur, siding or crossover.
+
+    Track with both, like Penn's tunnels, counts here and in `third_rail()`.
+    """
+    t = w["tags"]
+    return (
+        t.get("railway") == "rail"
+        and t.get("service") not in ("yard", "spur", "siding", "crossover")
+        and "contact_line" in t.get("electrified", "").split(";")
+    )
+
+
 def count_tracks(xy: Arr, ways: list[dict[str, Any]], k_xy: Arr) -> npt.NDArray[np.int_]:
     """Through tracks at each sample of path `xy` (m), from OSM `ways` scaled to metres by `k_xy`.
 
@@ -68,6 +83,8 @@ def count_tracks(xy: Arr, ways: list[dict[str, Any]], k_xy: Arr) -> npt.NDArray[
                 dead[v] = dv
                 heapq.heappush(pq, (dv, v))
     segs = [(a, b) for a, b in segs if min(dead.get(a, math.inf), dead.get(b, math.inf)) >= 300]
+    if not segs:
+        return np.zeros(len(xy), dtype=int)
     a = np.array([coord[x] for x, _ in segs])
     d = np.array([coord[y] for _, y in segs]) - a
     lo, hi = np.minimum(a, a + d), np.maximum(a, a + d)  # segment bounding boxes
@@ -91,9 +108,12 @@ def count_tracks(xy: Arr, ways: list[dict[str, Any]], k_xy: Arr) -> npt.NDArray[
         par = np.abs((dn / np.hypot(*dn.T)[:, None]) @ h) > math.cos(math.radians(60))
         offs = np.sort(t[ok & (u >= 0) & (u <= 1) & (np.abs(t) <= reach) & par])
         if len(offs) == 0:
-            counts.append(1)
+            counts.append(0)
             continue
         j0 = j1 = int(np.argmin(np.abs(offs)))
+        if abs(offs[j0]) > 40:  # none on the traced track's own corridor
+            counts.append(0)
+            continue
         while j0 > 0 and offs[j0] - offs[j0 - 1] <= 40:
             j0 -= 1
         while j1 < len(offs) - 1 and offs[j1 + 1] - offs[j1] <= 40:
@@ -237,8 +257,9 @@ def trace(rail_json: str, route_json: str, gtfs: str, stop_a: str, stop_b: str, 
 
     lonlat = rs / [111320 * math.cos(math.radians(lat0)), 110540]
     k_xy = np.array([111320 * math.cos(math.radians(lat0)), 110540])
-    tracks = count_tracks(rs, [w for w in d if third_rail(w)], k_xy)
-    Geometry(ss, R, np.array(maxspeed), lonlat, stations, tracks).save(out)
+    third = count_tracks(rs, [w for w in d if third_rail(w)], k_xy)
+    overhead = count_tracks(rs, [w for w in d if catenary(w)], k_xy)
+    Geometry(ss, R, np.array(maxspeed), lonlat, stations, third, overhead).save(out)
     print(f"length {s[-1] / 1609.34:.2f} mi, {len(ss)} samples")
     for n, x in stations:
         print(f"  {x / 1609.34:6.2f} mi  {n}")

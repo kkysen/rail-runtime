@@ -113,7 +113,8 @@ class Geometry:
     maxspeed: Arr  # posted, mph; nan where OSM has none
     lonlat: Arr
     stations: list[tuple[str, float]]
-    tracks: npt.NDArray[np.int_]  # parallel running tracks
+    third_rail: npt.NDArray[np.int_]  # through third-rail tracks, which DC substations feed
+    catenary: npt.NDArray[np.int_]  # through overhead-wire tracks, which AC substations feed
 
     def save(self, path: str) -> None:
         """Write pretty-printed, one station or sample per line, so diffs line up with places on the track."""
@@ -124,10 +125,18 @@ class Geometry:
                 "maxspeed": None if math.isnan(v) else float(v),
                 "lon": round(float(lo), 7),
                 "lat": round(float(la), 7),
-                "tracks": int(n),
+                "third_rail": int(n3),
+                "catenary": int(nc),
             }
-            for x, r, v, lo, la, n in zip(
-                self.s, self.R, self.maxspeed, self.lonlat[:, 0], self.lonlat[:, 1], self.tracks, strict=True
+            for x, r, v, lo, la, n3, nc in zip(
+                self.s,
+                self.R,
+                self.maxspeed,
+                self.lonlat[:, 0],
+                self.lonlat[:, 1],
+                self.third_rail,
+                self.catenary,
+                strict=True,
             )
         )
         with open(path, "w") as f:
@@ -148,7 +157,8 @@ def load_geom(path: str) -> Geometry:
         maxspeed=np.array([np.nan if x["maxspeed"] is None else x["maxspeed"] for x in sm], dtype=float),
         lonlat=np.array([[x["lon"], x["lat"]] for x in sm], dtype=float),
         stations=[(n, x) for n, x in g["stations"]],
-        tracks=np.array([x["tracks"] for x in sm], dtype=int),
+        third_rail=np.array([x["third_rail"] for x in sm], dtype=int),
+        catenary=np.array([x["catenary"] for x in sm], dtype=int),
     )
 
 
@@ -216,7 +226,7 @@ class Line:
         self.st = {n: st[n] for n in stations if n in st}
         self.st[stations[-1]] = float(self.s[-1]) - 60  # the last station is at the end of the path
         self.lonlat = g.lonlat
-        self.tracks = g.tracks
+        self.third_rail = g.third_rail
         self.spacing = spacing
         self.lirr = [x for x, _ in lirr_substations(g, substations_json)]
         self._substations(substations_json)
@@ -264,8 +274,9 @@ class Line:
         subs.append(pts[-1])
         self.mapped = sorted(mapped)
         self.subs = np.array(subs)
-        # A substation is sized for the tracks it feeds, so its source resistance falls as they multiply.
-        self.r_subs = R_SUB / self.tracks[np.clip(np.round(self.subs / self.ds).astype(int), 0, len(self.s) - 1)]
+        # A substation is sized for the third-rail tracks it feeds, so its source resistance falls as they multiply.
+        n = self.third_rail[np.clip(np.round(self.subs / self.ds).astype(int), 0, len(self.s) - 1)]
+        self.r_subs = R_SUB / np.maximum(n, 1)
         # Effective source resistance at each point: fed from both neighbouring substations.
         j = np.clip(np.searchsorted(self.subs, self.s), 1, len(self.subs) - 1)
         d1 = (self.s - self.subs[j - 1]) / MILE * R_LOOP + self.r_subs[j - 1]
