@@ -290,23 +290,23 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | From mi | To mi | Near | Posted | Raised to | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: | ---: |
 | 0.00 | 0.25 | Penn Station | 15 mph | 73 mph | 41 s | 41 s |
-| 9.64 | 13.45 | Flushing Main Street | 60 mph | 80 mph | 1 s | 40 s |
+| 9.64 | 13.45 | Auburndale | 60 mph | 80 mph | 1 s | 40 s |
 | 2.67 | 4.38 | Woodside | 50 mph | 80 mph | 37 s | 37 s |
-| 6.08 | 9.55 | Woodside | 60 mph | 80 mph | 23 s | 34 s |
-| 15.89 | 18.38 | Great Neck | 50 mph | 80 mph | 19 s | 19 s |
+| 6.08 | 9.55 | Mets-Willets Point | 60 mph | 80 mph | 23 s | 34 s |
+| 15.89 | 18.38 | Manhasset | 50 mph | 80 mph | 19 s | 19 s |
 | 0.26 | 2.67 | Penn Station | 60 mph | 80 mph | 14 s | 14 s |
 | 13.46 | 13.81 | Douglaston | 40 mph | 77 mph | 9 s | 14 s |
-| 13.81 | 15.89 | Douglaston | 60 mph | 80 mph | 1 s | 8 s |
-| 18.39 | 19.40 | Plandome | 40 mph | 65 mph | 8 s | 8 s |
+| 13.81 | 15.89 | Little Neck | 60 mph | 80 mph | 1 s | 8 s |
+| 18.39 | 19.40 | Port Washington | 40 mph | 65 mph | 8 s | 8 s |
 | 5.84 | 6.07 | Woodside | 40 mph | 49 mph | 7 s | 7 s |
 
 #### Jamaica (base: local 17.2 min, express 13.5 min)
 
 | From mi | To mi | Near | Posted | Raised to | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: | ---: |
-| 10.49 | 10.88 | Kew Gardens | 20 mph | 80 mph | 54 s | 60 s |
+| 10.49 | 10.88 | Jamaica | 20 mph | 80 mph | 54 s | 60 s |
 | 0.00 | 0.30 | Penn Station | 15 mph | 80 mph | 50 s | 50 s |
-| 2.55 | 3.98 | Penn Station | 50 mph | 80 mph | 29 s | 29 s |
+| 2.55 | 3.98 | Woodside | 50 mph | 80 mph | 29 s | 29 s |
 | 10.98 | 11.27 | Jamaica | 20 mph | 80 mph | 20 s | 20 s |
 | 4.45 | 5.98 | Woodside | 60 mph | 80 mph | 3 s | 13 s |
 | 0.30 | 2.55 | Penn Station | 60 mph | 80 mph | 13 s | 13 s |
@@ -316,7 +316,7 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 
 | From mi | To mi | Near | Posted | Raised to | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: | ---: |
-| 9.77 | 10.22 | Kew Gardens | 20 mph | 80 mph | 59 s | 65 s |
+| 9.77 | 10.22 | Jamaica | 20 mph | 80 mph | 59 s | 65 s |
 | 0.00 | 0.22 | Grand Central | 15 mph | 73 mph | 28 s | 28 s |
 | 10.27 | 10.56 | Jamaica | 20 mph | 80 mph | 18 s | 18 s |
 | 3.76 | 5.27 | Woodside | 60 mph | 80 mph | 5 s | 16 s |
@@ -330,7 +330,7 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 
 | From mi | To mi | Near | Posted | Raised to | local saves |
 | ---: | ---: | --- | ---: | ---: | ---: |
-| 1.41 | 3.98 | Nostrand Avenue | 45 mph | 80 mph | 54 s |
+| 1.41 | 3.98 | East New York | 45 mph | 80 mph | 54 s |
 | 8.77 | 9.19 | Jamaica | 20 mph | 80 mph | 37 s |
 | 0.00 | 0.07 | Atlantic Terminal | 5 mph | 15 mph | 31 s |
 | 4.03 | 8.27 | East New York | 70 mph | 80 mph | 18 s |

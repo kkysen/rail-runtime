@@ -64,7 +64,7 @@ def test_curve_ranking() -> None:
 def test_slow_zone_ranking() -> None:
     _, _, zones = slowzones.rank(DATA)[1]
     top = zones[0]
-    assert (top.near, top.posted, round(top.allows)) == ("Kew Gardens", 20, 80)
+    assert (top.near, top.posted, round(top.allows)) == ("Jamaica", 20, 80)
     assert top.saved["express"] * 60 == pytest.approx(60, abs=1)
 
 

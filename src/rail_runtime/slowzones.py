@@ -31,7 +31,8 @@ def rank(data: str, top: int = 12) -> Ranking:
             lim = posted.copy()
             lim[i : j + 1] = better[i : j + 1]
             saved = {k: base[k] - line.trip(m7, "posted", p, lim) for k, p in pats.items()}
-            near = min(line.st, key=lambda n: abs(line.st[n] - line.s[i]))
+            mid = (line.s[i] + line.s[j]) / 2
+            near = min(line.st, key=lambda n: abs(line.st[n] - mid))
             rows.append(
                 Zone(
                     float(line.s[i]) / m.MILE,
