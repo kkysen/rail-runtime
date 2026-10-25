@@ -3,10 +3,57 @@
 Minimum train runtimes from track geometry and train performance,
 compared with what timetables schedule.
 
-Licensed under the [MIT License](LICENSE).
+So far this covers two LIRR services into Penn Station:
+the Port Washington Branch (all stops, and expresses nonstop from Great Neck)
+and the Main Line from Jamaica.
 
-The traced track geometry in `data/` is derived from OpenStreetMap,
-© OpenStreetMap contributors, and is under the ODbL; see [`data/LICENSE`](data/LICENSE).
+## Method
+
+- **Track:** `scripts/geom.py` traces the route from Penn over OpenStreetMap rail ways
+  (the OSM route relation where there is one, otherwise `usage=main` tracks),
+  with a shortest-path search that can't reverse through a switch.
+  It resamples the path every 5 m and measures curve radius
+  from a circle through points 40 m either side, after smoothing.
+- **Speed limits:** four cases.
+  - "Posted" uses OSM `maxspeed`.
+  - "60", "80" and "100 mph" use curve speed only,
+    with 6 in of superelevation and 3 in of unbalance,
+    capped at that speed, which also replaces each train's own top speed.
+    They assume every switch is rebuilt to curve speed:
+    through interlockings, curvature is measured on a path smoothed over 200 m
+    so crossover kinks don't count as curves.
+  - A restriction holds until the whole train has cleared it,
+    and a bumper terminal like Port Washington is approached at 15 mph.
+- **Trains:** tractive effort up to the rated acceleration,
+  then constant power, minus Davis resistance,
+  with 8% rotating mass and a 2 mph/s service brake unless noted.
+  Dwells are 30 s and runs are flat, with no schedule padding.
+- **Third rail:** 750 V substations from OSM, with gaps filled at 2 mile spacing,
+  0.01 Ω source resistance and 0.04 Ω per mile of contact and return rail, fed from both sides.
+  Trains draw up to their rated current and shed load below 500 V.
+  25 kV trains get rated power everywhere.
+- **Busy service:** `scripts/multitrain.py` steps every train on the line every 0.5 s,
+  solving the DC network each step with diode rectifier substations.
+  With regenerative braking, braking trains feed other trains at 80% efficiency,
+  up to 900 V.
+- **Timetable:** AM inbound trips from the LIRR GTFS feed.
+
+## Running
+
+Needs Python with `numpy`, e.g. through `uv`.
+
+```sh
+./fetch.sh  # GTFS and OSM extracts into data/
+cd scripts
+# Optional: retrace the geometry, which is committed in data/.
+uv run --with numpy python geom.py ../data/rail_bbox.json ../data/pw_route.json ../data/gtfs "Port Washington" ../data/pw_geom.json
+uv run --with numpy python geom.py ../data/rail_bbox2.json - ../data/gtfs Jamaica ../data/jam_geom.json
+# Regenerate the results below.
+uv run --with numpy python results.py ../data
+```
+
+`report.py`, `multitrain.py`, `slowzones.py` and `curves.py`
+print the same results as plain text.
 
 ## Results
 
@@ -192,3 +239,9 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 5.54 | 6.04 | Woodside | 71 mph | 0 s | 4 s |
 
 <!-- END results -->
+
+## License
+
+The code is under the [MIT License](LICENSE).
+The traced track geometry in `data/` is derived from OpenStreetMap,
+© OpenStreetMap contributors, and is under the ODbL; see [`data/LICENSE`](data/LICENSE).
