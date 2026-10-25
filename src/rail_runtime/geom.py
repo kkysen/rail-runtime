@@ -6,16 +6,19 @@ import math
 import sys
 from itertools import pairwise
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 
 from rail_runtime.model import read_csv
 
+type State = tuple[int, int | None]  # (node, previous node)
+
 
 def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> None:
     """Trace Penn to `dest` and write the geometry to `out`; `route_json` may be `-` for main-line tracks."""
-    d = json.loads(Path(rail_json).read_text())["elements"]
-    route_ways = set()
+    d: list[dict[str, Any]] = json.loads(Path(rail_json).read_text())["elements"]
+    route_ways: set[int] = set()
     if route_json != "-":
         route_ways = {
             m["ref"]
@@ -23,8 +26,8 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
             if e["type"] == "relation"
             for m in e["members"]
         }
-    coord = {}
-    adj = {}
+    coord: dict[int, tuple[float, float]] = {}
+    adj: dict[int, list[tuple[int, float, int]]] = {}
     for w in d:
         t = w["tags"]
         if t.get("service") in ("yard", "spur") or t.get("usage") in ("industrial", "military"):
@@ -49,18 +52,18 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
     src_n, dst_n = near(stop["Penn Station"]), near(stop[dest])
     MAX_TURN = 30.0  # degrees between consecutive segments; more means reversing through a switch
 
-    def turn(a, b, c):
+    def turn(a: int, b: int, c: int) -> float:
         (la, oa), (lb, ob), (lc, oc) = coord[a], coord[b], coord[c]
         h1 = math.atan2(la - lb, (oa - ob) * 0.76)
         h2 = math.atan2(lb - lc, (ob - oc) * 0.76)
         return abs((math.degrees(h2 - h1) + 180) % 360 - 180)
 
     # Dijkstra over (node, previous node) states so the path can't double back through a switch.
-    start = (src_n, None)
-    dist = {start: 0.0}
-    prev = {}
-    pq = [(0.0, src_n, None)]
-    end = None
+    start: State = (src_n, None)
+    dist: dict[State, float] = {start: 0.0}
+    prev: dict[State, tuple[State, int]] = {}
+    pq: list[tuple[float, int, int | None]] = [(0.0, src_n, None)]
+    end: State | None = None
     while pq:
         du, u, p = heapq.heappop(pq)
         if u == dst_n:
@@ -75,9 +78,11 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
                 dist[(v, u)] = du + c
                 prev[(v, u)] = ((u, p), wid)
                 heapq.heappush(pq, (du + c, v, u))
+    if end is None:
+        raise SystemExit(f"no path from Penn Station to {dest}")
     state = end
     path = [dst_n]
-    wpath = []
+    wpath: list[int] = []
     while state != start:
         state, wid = prev[state]
         path.append(state[0])
@@ -89,7 +94,7 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
     off = sum(1 for w in set(wpath) if w not in route_ways)
     print(f"path uses {len(set(wpath))} ways, {off} not in route relation", file=sys.stderr)
 
-    lat0 = np.mean([p[0] for p in pts])
+    lat0 = float(np.mean([p[0] for p in pts]))
     xy = np.array([[(p[1]) * 111320 * math.cos(math.radians(lat0)), p[0] * 110540] for p in pts])
     seg = np.hypot(*np.diff(xy, axis=0).T)
     s = np.concatenate([[0], np.cumsum(seg)])
