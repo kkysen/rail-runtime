@@ -193,8 +193,8 @@ TRAINS = ("M7, 750 V third rail", "M8, 25 kV")
 KINDS = ("posted", "60", "80", "100")
 
 
-def report(line, cases, horizon, window):
-    print(f"{'service':16} {'train':28} {'kind':6} {'1 train':>8} {'busy':>6} {'busy no regen':>14} {'min V':>6}")
+def busy(line, cases, horizon, window):
+    """Yield dicts of service, train, kind, one-train and busy runtimes (min), and the lowest train voltage."""
     for tr in [t for t in m.TRAINS if t.name in TRAINS]:
         for kind in KINDS:
             res = {}
@@ -207,32 +207,43 @@ def report(line, cases, horizon, window):
                 if not inbound:
                     continue
                 one, _ = simulate(line, tr, kind, [c for c in cases if c[0] == name], horizon, single=True)
-                t1 = (one[0].done - one[0].t0) / 60
-                row = []
+                row = {}
                 for regen in (True, False):
                     if regen not in res:
-                        row.append(float("nan"))
+                        row[regen] = float("nan")
                         continue
                     xs = [(c.done - c.t0) / 60 for c in res[regen][0]
                           if c.service == name and c.run.inbound and window[0] <= c.t0 < window[1]]
-                    row.append(np.mean(xs))
-                vmin = min(res[True][1]) if res[True][1] else float("nan")
-                print(f"{name:16} {tr.name:28} {kind:6} {t1:8.1f} {row[0]:6.1f} {row[1]:14.1f} {vmin:6.0f}"
-                      f"  nonconv {NONCONVERGED[0]}", flush=True)
+                    row[regen] = np.mean(xs)
+                yield dict(service=name, train=tr, kind=kind, one=(one[0].done - one[0].t0) / 60,
+                           regen=row[True], no_regen=row[False],
+                           vmin=min(res[True][1]) if res[True][1] else float("nan"))
+
+
+def lines(data):
+    """Per line: (title, Line, cases, horizon s, steady-state departure window s)."""
+    pw = m.Line(f"{data}/pw_geom.json", f"{data}/substations.json", PW_STOPS)
+    jam = m.Line(f"{data}/jam_geom.json", f"{data}/substations.json", JAM_STOPS, terminal=False)
+    nonstop = ["Penn Station", "Jamaica"]
+    out = {}
+    for name, stops in (("PW local", PW_STOPS), ("PW express", PW_EXPRESS)):
+        out[name] = (f"{name}, every 5 min each way", pw,
+                     [(name, stops, True, 0, 300, 0), (name, stops, False, 1, 300, 150)], 3 * 3600, (3600, 7200))
+    out["Jamaica"] = ("Jamaica: locals and nonstops each every 2.5 min per direction (1.25 min combined)", jam,
+                      [("Jamaica local", JAM_STOPS, True, 0, 150, 0), ("Jamaica nonstop", nonstop, True, 1, 150, 75),
+                       ("Jamaica local", JAM_STOPS, False, 2, 150, 40),
+                       ("Jamaica nonstop", nonstop, False, 3, 150, 115)],
+                      5400, (1800, 3600))
+    return out
 
 
 if __name__ == "__main__":
     data, which = sys.argv[1:3]
-    if which == "pw":
-        line = m.Line(f"{data}/pw_geom.json", f"{data}/substations.json", PW_STOPS)
-        for name, stops in (("PW local", PW_STOPS), ("PW express", PW_EXPRESS)):
-            print(f"--- {name}, every 5 min each way ---")
-            cases = [(name, stops, True, 0, 300, 0), (name, stops, False, 1, 300, 150)]
-            report(line, cases, 3 * 3600, (3600, 7200))
-    else:
-        line = m.Line(f"{data}/jam_geom.json", f"{data}/substations.json", JAM_STOPS, terminal=False)
-        nonstop = ["Penn Station", "Jamaica"]
-        print("--- Jamaica: locals and nonstops each every 2.5 min per direction (1.25 min combined) ---")
-        cases = [("Jamaica local", JAM_STOPS, True, 0, 150, 0), ("Jamaica nonstop", nonstop, True, 1, 150, 75),
-                 ("Jamaica local", JAM_STOPS, False, 2, 150, 40), ("Jamaica nonstop", nonstop, False, 3, 150, 115)]
-        report(line, cases, 5400, (1800, 3600))
+    for key, (title, line, cases, horizon, window) in lines(data).items():
+        if (which == "pw") != key.startswith("PW"):
+            continue
+        print(f"--- {title} ---")
+        print(f"{'service':16} {'train':28} {'kind':6} {'1 train':>8} {'busy':>6} {'busy no regen':>14} {'min V':>6}")
+        for r in busy(line, cases, horizon, window):
+            print(f"{r['service']:16} {r['train'].name:28} {r['kind']:6} {r['one']:8.1f} {r['regen']:6.1f} "
+                  f"{r['no_regen']:14.1f} {r['vmin']:6.0f}  nonconv {NONCONVERGED[0]}", flush=True)
