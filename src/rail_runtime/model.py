@@ -120,6 +120,25 @@ class Geometry:
     lonlat: Arr
     stations: list[tuple[str, float]]
 
+    def save(self, path: str) -> None:
+        """Write pretty-printed, one station or sample per line, so diffs line up with places on the track."""
+        samples = (
+            {
+                "s": round(float(x), 1),
+                "R": None if math.isinf(r) else round(float(r), 1),
+                "maxspeed": None if math.isnan(v) else float(v),
+                "lon": round(float(lo), 7),
+                "lat": round(float(la), 7),
+            }
+            for x, r, v, lo, la in zip(self.s, self.R, self.maxspeed, self.lonlat[:, 0], self.lonlat[:, 1], strict=True)
+        )
+        with open(path, "w") as f:
+            f.write('{\n  "stations": [\n')
+            f.write(",\n".join(f"    {json.dumps([n, round(x, 1)])}" for n, x in self.stations))
+            f.write('\n  ],\n  "samples": [\n')
+            f.write(",\n".join(f"    {json.dumps(x)}" for x in samples))
+            f.write("\n  ]\n}\n")
+
 
 def load_geom(path: str) -> Geometry:
     """Read a `geom.py` file."""

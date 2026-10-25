@@ -10,7 +10,7 @@ from typing import Any
 
 import numpy as np
 
-from rail_runtime.model import read_csv
+from rail_runtime.model import Geometry, read_csv
 
 type State = tuple[int, int | None]  # (node, previous node)
 
@@ -134,28 +134,8 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
             stations.append((r["stop_name"], float(ss[i])))
     stations.sort(key=lambda t: t[1])
 
-    # Pretty-printed, one station or sample per line, so diffs line up with places on the track.
     lonlat = rs / [111320 * math.cos(math.radians(lat0)), 110540]
-    with open(out, "w") as f:
-        f.write('{\n  "stations": [\n')
-        f.write(",\n".join(f"    {json.dumps([n, round(x, 1)])}" for n, x in stations))
-        f.write('\n  ],\n  "samples": [\n')
-        f.write(
-            ",\n".join(
-                "    "
-                + json.dumps(
-                    {
-                        "s": round(float(x), 1),
-                        "R": None if math.isinf(r) else round(float(r), 1),
-                        "maxspeed": None if math.isnan(v) else v,
-                        "lon": round(float(lo), 7),
-                        "lat": round(float(la), 7),
-                    }
-                )
-                for x, r, v, (lo, la) in zip(ss, R, maxspeed, lonlat, strict=True)
-            )
-        )
-        f.write("\n  ]\n}\n")
+    Geometry(ss, R, np.array(maxspeed), lonlat, stations).save(out)
     print(f"length {s[-1] / 1609.34:.2f} mi, {len(ss)} samples")
     for n, x in stations:
         print(f"  {x / 1609.34:6.2f} mi  {n}")
