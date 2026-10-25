@@ -39,12 +39,12 @@ def test_atlantic(kind: str, local: float) -> None:
 
 
 @pytest.mark.parametrize(
-    ("kind", "local", "nonstop"),
+    ("kind", "local", "express"),
     [("posted", 17.2, 13.5), ("60", 15.2, 11.8), ("80", 13.7, 9.7), ("100", 13.6, 9.3)],
 )
-def test_jamaica(kind: str, local: float, nonstop: float) -> None:
+def test_jamaica(kind: str, local: float, express: float) -> None:
     assert jam().trip(M7, kind, mt.JAM_STOPS[::-1]) == pytest.approx(local, abs=0.05)
-    assert jam().trip(M7, kind, ["Jamaica", "Penn Station"]) == pytest.approx(nonstop, abs=0.05)
+    assert jam().trip(M7, kind, ["Jamaica", "Penn Station"]) == pytest.approx(express, abs=0.05)
 
 
 def test_third_rail_costs_time() -> None:
@@ -65,7 +65,7 @@ def test_slow_zone_ranking() -> None:
     _, _, zones = slowzones.rank(DATA)[1]
     top = zones[0]
     assert (top.near, top.posted, round(top.allows)) == ("Kew Gardens", 20, 80)
-    assert top.saved["nonstop"] * 60 == pytest.approx(60, abs=1)
+    assert top.saved["express"] * 60 == pytest.approx(60, abs=1)
 
 
 def test_one_train_simulation_matches_model() -> None:

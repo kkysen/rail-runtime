@@ -150,7 +150,7 @@ SPECS = {
         "jam_geom.json",
         "substations.json",
         JAM_STOPS,
-        {"local": JAM_STOPS[::-1], "nonstop": ["Jamaica", "Penn Station"]},
+        {"local": JAM_STOPS[::-1], "express": ["Jamaica", "Penn Station"]},
         (False, False),
         None,
     ),
@@ -254,7 +254,7 @@ def lines(data: str) -> dict[str, Setup]:
     """The busy-service setups: Port Washington local, express, Jamaica, and Atlantic."""
     pw = SPECS["Port Washington"].line(data)
     jam = SPECS["Jamaica"].line(data)
-    nonstop = ["Penn Station", "Jamaica"]
+    jam_express = ["Penn Station", "Jamaica"]
     out: dict[str, Setup] = {}
     for name, stops in (("PW local", PW_STOPS), ("PW express", PW_EXPRESS)):
         out[name] = Setup(
@@ -265,13 +265,13 @@ def lines(data: str) -> dict[str, Setup]:
             (3600, 7200),
         )
     out["Jamaica"] = Setup(
-        "Jamaica: locals and nonstops each at 2.5 min headways each way (1.25 min combined)",
+        "Jamaica: locals and expresses each at 2.5 min headways each way (1.25 min combined)",
         jam,
         [
             Service("Jamaica local", JAM_STOPS, True, 0, 150, 0),
-            Service("Jamaica nonstop", nonstop, True, 1, 150, 75),
+            Service("Jamaica express", jam_express, True, 1, 150, 75),
             Service("Jamaica local", JAM_STOPS, False, 2, 150, 40),
-            Service("Jamaica nonstop", nonstop, False, 3, 150, 115),
+            Service("Jamaica express", jam_express, False, 3, 150, 115),
         ],
         5400,
         (1800, 3600),

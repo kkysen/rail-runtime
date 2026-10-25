@@ -112,7 +112,7 @@ AM inbound trips arriving at Penn or Atlantic Terminal 6-10 AM on 2026-10-27, gr
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Jamaica, all stops | 26 | 20 | 14.0 | 12.1 | 10.9 | 10.6 |
-| Jamaica, nonstop | 1 | 19 | 12.2 | 10.0 | 8.4 | 8.0 |
+| Jamaica, express | 1 | 19 | 12.2 | 10.0 | 8.4 | 8.0 |
 
 ### Trains
 
@@ -160,7 +160,7 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 16.4 | 14.5 | 12.6 | 12.2 |
 | 755/3 x4, 25 kV, 1.3 brake | 16.0 | 14.2 | 12.2 | 11.7 |
 
-#### Jamaica nonstop
+#### Jamaica express
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
@@ -210,7 +210,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 80 mph | 21.6 | 21.6 | 21.6 | 21.4 | 467 |
 |  | 100 mph | 21.3 | 21.4 | 21.4 | 21.0 | 466 |
 
-#### Jamaica: locals and nonstops each at 2.5 min headways each way (1.25 min combined)
+#### Jamaica: locals and expresses each at 2.5 min headways each way (1.25 min combined)
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -218,7 +218,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 60 mph | 15.2 | 15.6 | 15.5 | 15.0 | 433 |
 |  | 80 mph | 13.7 | 14.7 | 14.5 | 13.3 | 393 |
 |  | 100 mph | 13.6 | 14.9 | 14.6 | 13.1 | 397 |
-| Jamaica nonstop | posted | 13.5 | 13.7 | 13.6 | 13.4 | 416 |
+| Jamaica express | posted | 13.5 | 13.7 | 13.6 | 13.4 | 416 |
 |  | 60 mph | 11.8 | 11.8 | 11.8 | 11.8 | 433 |
 |  | 80 mph | 9.5 | 9.7 | 9.6 | 9.5 | 393 |
 |  | 100 mph | 9.1 | 9.6 | 9.5 | 9.0 | 397 |
@@ -251,9 +251,9 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 18.39 | 19.40 | Plandome | 40 mph | 65 mph | 8 s | 8 s |
 | 5.84 | 6.07 | Woodside | 40 mph | 49 mph | 7 s | 7 s |
 
-#### Jamaica (base: local 17.2 min, nonstop 13.5 min)
+#### Jamaica (base: local 17.2 min, express 13.5 min)
 
-| From mi | To mi | Near | Posted | Raised to | local saves | nonstop saves |
+| From mi | To mi | Near | Posted | Raised to | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: | ---: |
 | 10.49 | 10.88 | Kew Gardens | 20 mph | 80 mph | 54 s | 60 s |
 | 0.00 | 0.30 | Penn Station | 15 mph | 80 mph | 50 s | 50 s |
@@ -293,9 +293,9 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 15.25 | 15.77 | Great Neck | 55 mph | 3 s | 3 s |
 | 8.87 | 9.23 | Mets-Willets Point | 69 mph | 0 s | 3 s |
 
-#### Jamaica (base: local 13.7 min, nonstop 9.7 min)
+#### Jamaica (base: local 13.7 min, express 9.7 min)
 
-| From mi | To mi | Near | Allows | local saves | nonstop saves |
+| From mi | To mi | Near | Allows | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: |
 | 4.32 | 5.07 | Woodside | 65 mph | 4 s | 9 s |
 | 10.57 | 11.17 | Jamaica | 57 mph | 3 s | 5 s |

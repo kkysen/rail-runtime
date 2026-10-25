@@ -48,9 +48,10 @@ def report(data: str, date: str) -> None:
             by = {}
             for t in trips:
                 by.setdefault(tuple(s for s in order if s in t.stops), []).append(t.sched)
+            only_express = sum(len(p) < len(stops) for p in by) == 1
             for pat, sch in sorted(by.items(), key=lambda kv: len(kv[0])):
                 sims = [line.trip(m7, k, list(pat)) for k in KINDS]
-                mid = " > ".join(p.split()[0] for p in pat[1:-1]) or "nonstop"
+                mid = " > ".join(p.split()[0] for p in pat[1:-1]) or ("express" if only_express else "nonstop")
                 print(f"  {mid:28} n={len(sch):2} sched med {median(sch):4.0f} (min {min(sch):.0f}) {fmt(sims)}")
         for pname, p in (spec.patterns | EXTRA.get(name, {})).items():
             print(f"  {pname}: posted / 60 / 80 / 100")

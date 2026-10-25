@@ -43,13 +43,18 @@ def short(name: str) -> str:
     )
 
 
-def pattern(stops: list[str], line_stops: list[str]) -> str:
-    """Label a stopping pattern by its origin and the stations it skips."""
+def pattern(stops: list[str], line_stops: list[str], only_express: bool = False) -> str:
+    """Label a stopping pattern by its origin and the stations it skips.
+
+    With `only_express`, the line has one express pattern, so it's just "express".
+    """
     order = [s for s in reversed(line_stops)]
     first = order.index(stops[0])
     skipped = [s for s in order[first:] if s not in stops]
     if not skipped:
         return f"{short(stops[0])}, all stops"
+    if only_express:
+        return f"{short(stops[0])}, express"
     if len(stops) == 2:
         return f"{short(stops[0])}, nonstop"
     via = stops[1:-1]
@@ -69,9 +74,11 @@ def timetable(data: str, date: str) -> str:
         for t in trips:
             by[tuple(s for s in order if s in t.stops)].append(t.sched)
         rows = []
+        only_express = sum(len(p) < len(stops) for p in by) == 1
         for pat, sch in sorted(by.items(), key=lambda kv: (-len(kv[1]), kv[0])):
             sims = [line.trip(m7, k, list(pat)) for k in KINDS]
-            rows.append([pattern(list(pat), stops), str(len(sch)), f"{median(sch):.0f}", *map(f1, sims)])
+            label = pattern(list(pat), stops, only_express)
+            rows.append([label, str(len(sch)), f"{median(sch):.0f}", *map(f1, sims)])
         out.append(
             f"#### {short(stops[-1])} - {short(stops[0])}\n\n"
             + table(["Pattern", "Trips", "Scheduled", "Posted", "60 mph", "80 mph", "100 mph"], rows)
