@@ -2,9 +2,11 @@
 
 use numpy::PyReadonlyArray1;
 use pyo3::exceptions::PyValueError;
+use pyo3::pyclass;
 use pyo3::types::{PyAnyMethods, PyModule, PyModuleMethods};
 use pyo3::{Bound, PyAny, PyResult, pyfunction, pymodule, wrap_pyfunction};
 
+use crate::multi::{self, Job, Outcome, Service};
 use crate::train::{Supply, Train, V_MIN, V0};
 
 /// Read a `rail_runtime.model.Train`.
@@ -53,6 +55,64 @@ fn run(
     Ok(crate::single::run(&train(t)?, lim_mph, r_eff, ds))
 }
 
+/// Read a `rail_runtime.multitrain.Job`.
+fn job(j: &Bound<'_, PyAny>) -> PyResult<Job> {
+    let services: Vec<(Vec<f64>, bool, usize, f64, f64)> = j.getattr("services")?.extract()?;
+    let lim: PyReadonlyArray1<'_, f64> = j.getattr("lim_mph")?.extract()?;
+    Ok(Job {
+        train: train(&j.getattr("train")?)?,
+        lim_mph: lim.as_slice()?.to_vec(),
+        ds: j.getattr("ds")?.extract()?,
+        s_end: j.getattr("s_end")?.extract()?,
+        subs: j.getattr("subs")?.extract()?,
+        services: services
+            .into_iter()
+            .map(|(stops, inbound, track, headway, offset)| Service {
+                stops,
+                inbound,
+                track,
+                headway,
+                offset,
+            })
+            .collect(),
+        horizon: j.getattr("horizon")?.extract()?,
+        regen: j.getattr("regen")?.extract()?,
+        single: j.getattr("single")?.extract()?,
+    })
+}
+
+/// What a simulation produced.
+#[pyclass(frozen, get_all, name = "Outcome")]
+struct PyOutcome {
+    /// (service index, departure s, arrival s) for each train that finished, in departure order.
+    finished: Vec<(usize, f64, f64)>,
+    /// Lowest train voltage, V; `None` off third rail.
+    vmin: Option<f64>,
+    /// Steps whose network solve didn't converge.
+    nonconverged: u32,
+}
+
+impl From<Outcome> for PyOutcome {
+    fn from(o: Outcome) -> Self {
+        PyOutcome {
+            finished: o
+                .finished
+                .into_iter()
+                .map(|f| (f.service, f.t0, f.done))
+                .collect(),
+            vmin: o.vmin,
+            nonconverged: o.nonconverged,
+        }
+    }
+}
+
+/// Run one time-stepped multi-train simulation.
+#[pyfunction]
+fn simulate(py: pyo3::Python<'_>, j: &Bound<'_, PyAny>) -> PyResult<PyOutcome> {
+    let j = job(j)?;
+    Ok(py.detach(|| multi::simulate(&j)).into())
+}
+
 #[pymodule]
 #[pyo3(name = "_sim")]
 fn sim_module(m: &Bound<'_, PyModule>) -> PyResult<()> {
@@ -61,5 +121,7 @@ fn sim_module(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add("V_MIN", V_MIN)?;
     m.add_function(wrap_pyfunction!(power, m)?)?;
     m.add_function(wrap_pyfunction!(run, m)?)?;
+    m.add_function(wrap_pyfunction!(simulate, m)?)?;
+    m.add_class::<PyOutcome>()?;
     Ok(())
 }

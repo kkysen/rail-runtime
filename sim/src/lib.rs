@@ -1,6 +1,7 @@
 //! The runtime simulation's hot loops, for `rail_runtime`.
 //! Python drives it through the `rail_runtime._sim` module (the `python` feature).
 
+pub mod multi;
 #[cfg(feature = "python")]
 mod python;
 pub mod single;
