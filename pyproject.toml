@@ -21,7 +21,6 @@ manifest-path = "sim/Cargo.toml"
 python-source = "src"
 module-name = "rail_runtime._sim"
 bindings = "pyo3"
-features = ["python"]
 # The simulations are the slow part, so even an editable install is optimized.
 profile = "release"
 

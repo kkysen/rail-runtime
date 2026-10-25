@@ -294,6 +294,7 @@ dependencies = [
  "mimalloc",
  "numpy",
  "pyo3",
+ "pyo3-build-config",
  "rayon",
 ]
 

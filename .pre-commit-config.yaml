@@ -48,7 +48,7 @@ repos:
         pass_filenames: false
       - id: cargo-clippy
         name: cargo clippy
-        entry: cargo clippy --manifest-path sim/Cargo.toml --all-targets --all-features -- -D warnings
+        entry: cargo clippy --manifest-path sim/Cargo.toml --all-targets -- -D warnings
         language: system
         files: ^sim/
         pass_filenames: false

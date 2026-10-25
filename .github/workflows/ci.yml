@@ -15,12 +15,16 @@ jobs:
         with:
           enable-cache: true
 
-      # `uv run` builds the `sim` extension with the runner's `cargo`.
+      # Builds the `sim` extension with the runner's `cargo`,
+      # and makes `.venv/bin/python`, which `.cargo/config.toml` points `pyo3` at.
+      - name: uv sync
+        run: uv sync
+
       - name: cargo fmt
         run: cargo fmt --manifest-path sim/Cargo.toml --check
 
       - name: cargo clippy
-        run: cargo clippy --manifest-path sim/Cargo.toml --all-targets --all-features -- -D warnings
+        run: cargo clippy --manifest-path sim/Cargo.toml --all-targets -- -D warnings
 
       - name: cargo test
         run: cargo test --manifest-path sim/Cargo.toml

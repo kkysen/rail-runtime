@@ -21,7 +21,5 @@
     },
     // Its own target directory, so its checks don't wait on `uv sync`'s build or `cargo`'s.
     "rust-analyzer.cargo.targetDir": true,
-    "rust-analyzer.check.command": "clippy",
-    // The `python` feature has the bindings; `maturin` builds with it.
-    "rust-analyzer.cargo.features": ["python"]
+    "rust-analyzer.check.command": "clippy"
 }
