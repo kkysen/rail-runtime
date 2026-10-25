@@ -20,15 +20,12 @@ def rank(data, top=10):
         lim80 = line.limits("80", 80)
         slow = lim80 < 79.5
         edges = np.flatnonzero(np.diff(np.concatenate([[0], slow.astype(int), [0]])))
-        orig = line.limits
         base = {k: line.trip(m7, "80", p) for k, p in pats.items()}
         rows = []
         for i, j in zip(edges[::2], edges[1::2], strict=True):
             lim = lim80.copy()
             lim[i:j] = 80
-            line.limits = lambda kind, vmax, _l=lim: _l
-            saved = {k: base[k] - line.trip(m7, "80", p) for k, p in pats.items()}
-            line.limits = orig
+            saved = {k: base[k] - line.trip(m7, "80", p, lim) for k, p in pats.items()}
             k = i + int(np.argmin(lim80[i:j]))
             near = min(line.st, key=lambda n: abs(line.st[n] - line.s[k]))
             rows.append((max(saved.values()), line.s[i] / m.MILE, line.s[j - 1] / m.MILE, lim80[k], near, saved))

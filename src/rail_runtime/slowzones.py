@@ -32,10 +32,7 @@ def rank(data, top=12):
         for i, j in zones:
             lim = posted.copy()
             lim[i : j + 1] = better[i : j + 1]
-            orig = line.limits
-            line.limits = lambda kind, vmax, _l=lim: _l
-            saved = {k: base[k] - line.trip(m7, "posted", p) for k, p in pats.items()}
-            line.limits = orig
+            saved = {k: base[k] - line.trip(m7, "posted", p, lim) for k, p in pats.items()}
             near = min(line.st, key=lambda n: abs(line.st[n] - line.s[i]))
             rows.append(
                 (

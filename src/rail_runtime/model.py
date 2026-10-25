@@ -207,8 +207,10 @@ class Line:
         vm = np.maximum((v[1:] + v[:-1]) / 2, 0.3)
         return float(np.sum(self.ds / vm)), v
 
-    def trip(self, train, kind, stops):
-        lim = self.limits(kind, train.vmax)
+    def trip(self, train, kind, stops, lim=None):
+        """Minutes from the first stop to the last; `lim` (mph by sample) overrides `kind`'s limits."""
+        if lim is None:
+            lim = self.limits(kind, train.vmax)
         xs = [self.st[n] for n in stops]
         t = sum(self.run(train, lim, a, b)[0] for a, b in pairwise(xs))
         return (t + DWELL * (len(stops) - 2)) / 60
