@@ -8,8 +8,8 @@ pub const V_MIN: f64 = 500.0;
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Supply {
     ThirdRail,
-    /// Rated power everywhere: a third rail that doesn't sag.
-    Stiff,
+    /// Rated power everywhere: a third rail with no voltage drop.
+    FullPower,
     Ac,
 }
 

@@ -32,6 +32,8 @@ and the Main Line from Jamaica.
   0.01 Ω source resistance and 0.04 Ω per mile of contact and return rail, fed from both sides.
   Trains draw up to their rated current and shed load below 500 V.
   25 kV trains get rated power everywhere.
+  The "full power" M7 is the same train on a third rail with no voltage drop,
+  so it also gets rated power everywhere: the gap to the plain M7 is what voltage drop costs.
 - **Busy service:** the `sim` crate steps every train on the line every 0.5 s,
   solving the DC network each step with diode rectifier substations.
   With regenerative braking, braking trains feed other trains at 80% efficiency,
@@ -107,7 +109,7 @@ One train alone, minutes.
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
 | M7, 750 V third rail | 35.2 | 33.7 | 32.5 | 32.5 |
-| M7, stiff supply (no sag) | 34.6 | 33.1 | 31.7 | 31.4 |
+| M7, 750 V third rail, full power | 34.6 | 33.1 | 31.7 | 31.4 |
 | M8, 25 kV | 34.8 | 33.2 | 31.9 | 31.7 |
 | Class 700/1, 25 kV | 34.8 | 33.3 | 32.0 | 31.8 |
 | Class 423 x4, AC | 34.0 | 32.5 | 30.8 | 30.4 |
@@ -121,7 +123,7 @@ One train alone, minutes.
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
 | M7, 750 V third rail | 25.6 | 23.9 | 21.6 | 21.4 |
-| M7, stiff supply (no sag) | 25.4 | 23.8 | 21.2 | 20.7 |
+| M7, 750 V third rail, full power | 25.4 | 23.8 | 21.2 | 20.7 |
 | M8, 25 kV | 25.5 | 23.8 | 21.3 | 20.8 |
 | Class 700/1, 25 kV | 25.5 | 23.8 | 21.4 | 21.0 |
 | Class 423 x4, AC | 25.2 | 23.6 | 20.8 | 20.2 |
@@ -135,7 +137,7 @@ One train alone, minutes.
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
 | M7, 750 V third rail | 17.2 | 15.1 | 13.7 | 13.6 |
-| M7, stiff supply (no sag) | 16.9 | 14.9 | 13.2 | 12.9 |
+| M7, 750 V third rail, full power | 16.9 | 14.9 | 13.2 | 12.9 |
 | M8, 25 kV | 16.9 | 14.9 | 13.3 | 13.0 |
 | Class 700/1, 25 kV | 17.0 | 15.0 | 13.4 | 13.2 |
 | Class 423 x4, AC | 16.6 | 14.7 | 12.8 | 12.5 |
@@ -149,7 +151,7 @@ One train alone, minutes.
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
 | M7, 750 V third rail | 13.5 | 11.8 | 9.7 | 9.3 |
-| M7, stiff supply (no sag) | 13.3 | 11.8 | 9.5 | 8.9 |
+| M7, 750 V third rail, full power | 13.3 | 11.8 | 9.5 | 8.9 |
 | M8, 25 kV | 13.4 | 11.8 | 9.5 | 9.0 |
 | Class 700/1, 25 kV | 13.4 | 11.8 | 9.5 | 9.1 |
 | Class 423 x4, AC | 13.3 | 11.7 | 9.4 | 8.7 |

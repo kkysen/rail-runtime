@@ -42,9 +42,9 @@ def test_jamaica(kind: str, local: float, nonstop: float) -> None:
 
 
 def test_third_rail_costs_time() -> None:
-    """The same M7 with rated power everywhere runs the local faster than on sagging third rail."""
-    stiff = next(t for t in m.TRAINS if t.supply == "stiff")
-    assert pw().trip(stiff, "80", mt.PW_STOPS[::-1]) < pw().trip(M7, "80", mt.PW_STOPS[::-1]) - 0.5
+    """The same M7 with rated power everywhere runs the local faster than with voltage drop on third rail."""
+    full = next(t for t in m.TRAINS if t.supply == "full power")
+    assert pw().trip(full, "80", mt.PW_STOPS[::-1]) < pw().trip(M7, "80", mt.PW_STOPS[::-1]) - 0.5
 
 
 def test_curve_ranking() -> None:

@@ -55,7 +55,7 @@ class Train:
         self.f_max = self.m_eff * a0
         self.cars = cars
         self.vmax = vmax
-        self.supply = supply  # "third rail", "stiff" (rated power everywhere), or "25 kV"
+        self.supply = supply  # "third rail", "full power" (third rail with no voltage drop), or "25 kV"
         self.brake = brake
         self.aux = aux_per_car * cars
         # Trains drawing from the same substation section at once: scales the source resistance.
@@ -83,7 +83,7 @@ def c755(name: str, supply: str, sharing: float = 1.0, brake: float = 2.0 * MPH)
 
 TRAINS = [
     m7_like("M7, 750 V third rail", "third rail"),
-    m7_like("M7, stiff supply (no sag)", "stiff"),
+    m7_like("M7, 750 V third rail, full power", "full power"),
     Train("M8, 25 kV", 5 * 129.2, 10 * 105 * 0.080, 40 * 200e3, 2.0 * MPH, 10, 80, "25 kV"),
     Train("Class 700/1, 25 kV", 410.0, 666 * 0.080, 5000e3, 2.0 * MPH, 12, 100, "25 kV"),
     Train("Class 423 x4, AC", 4 * 105.0, 4 * 192 * 0.080, 4 * 2350e3, 1.0, 16, 87, "25 kV"),

@@ -61,7 +61,7 @@ mod tests {
 
     /// Third rail with no resistance gives rated power, so it matches 25 kV.
     #[test]
-    fn stiff_third_rail_matches_ac() {
+    fn zero_resistance_third_rail_matches_ac() {
         let ac = m8();
         let rail = Train {
             supply: Supply::ThirdRail,

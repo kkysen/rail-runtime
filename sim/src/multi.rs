@@ -440,7 +440,7 @@ mod tests {
         }
     }
 
-    /// Busy third rail sags, so trains run slower than a lone train; 25 kV doesn't.
+    /// Busy third rail drops voltage, so trains run slower than a lone train; 25 kV doesn't.
     #[test]
     fn busy_third_rail_is_slower() {
         let mean = |o: &Outcome| {

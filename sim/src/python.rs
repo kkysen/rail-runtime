@@ -22,7 +22,7 @@ fn train(t: &Bound<'_, PyAny>) -> PyResult<Train> {
         cars: f("cars")?,
         supply: match supply.as_str() {
             "third rail" => Supply::ThirdRail,
-            "stiff" => Supply::Stiff,
+            "full power" => Supply::FullPower,
             "25 kV" => Supply::Ac,
             _ => return Err(PyValueError::new_err(format!("unknown supply {supply:?}"))),
         },
