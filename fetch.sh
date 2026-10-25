@@ -43,3 +43,15 @@ overpass '[out:json][timeout:160];way["railway"="rail"](40.695,-74.0,40.835,-73.
 
 # Substations, to place LIRR traction substations along each line.
 overpass '[out:json][timeout:160];nwr["power"="substation"](40.69,-74.0,40.835,-73.68);out center tags;' data/substations.json
+# Committed, so rewritten one element per line for diffs that line up with substations.
+python3 - data/substations.json <<'PY'
+import json, sys
+path = sys.argv[1]
+with open(path) as f:
+    d = json.load(f)
+lines = ["{"]
+lines += [f"  {json.dumps(k)}: {json.dumps(v, ensure_ascii=False)}," for k, v in d.items() if k != "elements"]
+lines += ['  "elements": [', ",\n".join("    " + json.dumps(e, ensure_ascii=False) for e in d["elements"]), "  ]", "}"]
+with open(path, "w") as f:
+    f.write("\n".join(lines) + "\n")
+PY
