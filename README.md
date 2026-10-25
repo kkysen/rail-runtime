@@ -31,7 +31,8 @@ and into Atlantic Terminal, the Atlantic Branch from Jamaica.
   with 8% rotating mass and a 2 mph/s service brake unless noted.
   Dwells are 30 s and runs are flat, with no schedule padding.
 - **Third rail:** 750 V substations from OSM, with gaps filled at 2 mile spacing,
-  counting the LIRR's own and any untagged substation within 50 m of the track,
+  counting the LIRR's own and any untagged substation within 50 m of the track
+  at least 0.6 mi from the others, where the roughly 1 mile spacing leaves room for one,
   but not Amtrak's, the subway's or the utilities',
   which are kept for when those lines are modeled.
   Each has 0.01 Ω source resistance, with 0.04 Ω per mile of contact and return rail, fed from both sides.

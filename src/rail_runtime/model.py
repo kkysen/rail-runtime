@@ -30,6 +30,7 @@ V0 = _sim.V0  # substation output, V (ORM tags the line 750 V)
 R_SUB = 0.010  # substation source resistance, ohm
 R_LOOP = 0.040  # contact rail plus running-rail return, ohm per mile
 MAX_GAP = 2.0  # miles; gaps between mapped substations are filled at this spacing
+MIN_SPACING = 0.6  # miles; LIRR substations are about 1 mile apart, so an untagged one nearer another isn't one
 V_MIN = _sim.V_MIN  # train cuts traction below this
 
 
@@ -201,7 +202,8 @@ class Line:
     def _substations(self, path: str) -> None:
         lat0 = float(np.mean(self.lonlat[:, 1]))
         kx, ky = 111320 * math.cos(math.radians(lat0)), 110540
-        mapped: list[float] = []
+        lirr: list[float] = []
+        untagged: list[float] = []
         for e in json.loads(Path(path).read_text())["elements"]:
             sys_ = system(e["tags"])
             if sys_ not in ("LIRR", None):
@@ -209,11 +211,19 @@ class Line:
             c = e.get("center", e)
             d = np.hypot((self.lonlat[:, 0] - c["lon"]) * kx, (self.lonlat[:, 1] - c["lat"]) * ky)
             i = int(np.argmin(d))
-            # An unattributed substation counts only right beside the track.
-            if d[i] < (400 if sys_ == "LIRR" else 50):
-                mapped.append(float(self.s[i]))
+            if sys_ == "LIRR" and d[i] < 400:
+                lirr.append(float(self.s[i]))
+            elif sys_ is None and d[i] < 50:
+                untagged.append(float(self.s[i]))
         # One substation mapped twice, say as a building and its fence, counts once.
-        mapped = [x for k, x in enumerate(sorted(mapped)) if k == 0 or x - sorted(mapped)[k - 1] > 200]
+        lirr = sorted(lirr)
+        mapped = [x for k, x in enumerate(lirr) if k == 0 or x - lirr[k - 1] > 200]
+        # An untagged substation right beside the track counts only where the spacing leaves room for one,
+        # at least MIN_SPACING from every substation counted so far; that also drops its duplicates.
+        for x in sorted(untagged):
+            if all(abs(x - y) >= MIN_SPACING * MILE for y in mapped):
+                mapped.append(x)
+        mapped.sort()
         pts = sorted({0.0, *mapped, float(self.s[-1])})
         subs: list[float] = []
         for a, b in pairwise(pts):
