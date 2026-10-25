@@ -29,7 +29,10 @@ EA, EU = 6.0, 3.0  # superelevation and unbalance, inches
 V0 = _sim.V0  # substation output, V (ORM tags the line 750 V)
 R_SUB = 0.010  # source resistance of one rectifier unit, ohm
 TRACKS_PER_UNIT = 2  # a substation has a rectifier unit per this many third-rail tracks it feeds, rounded up
-R_LOOP = 0.040  # contact rail plus running-rail return, ohm per mile
+R_CONTACT = 0.020  # contact rail, ohm per mile: about 150 lb/yd of steel
+# Running-rail return, ohm per mile: two rails of about 136 lb/yd of steel.
+# The running rails of parallel tracks are bonded together, so n tracks' return has R_RETURN / n.
+R_RETURN = 0.020
 V_MIN = _sim.V_MIN  # train cuts traction below this
 
 
@@ -100,8 +103,9 @@ def design_voltage(spacing: float, train: Train) -> float:
 
     Each train draws half its current from either side, through half the gap of rail,
     and with a unit per `TRACKS_PER_UNIT` tracks, each unit carries that many trains' halves.
+    With every track loaded alike, bonding the running rails doesn't help: each track's return carries its own train.
     """
-    return V0 - train.i_max / 2 * (TRACKS_PER_UNIT * R_SUB + spacing / 2 * R_LOOP)
+    return V0 - train.i_max / 2 * (TRACKS_PER_UNIT * R_SUB + spacing / 2 * (R_CONTACT + R_RETURN))
 
 
 # --- Lines ------------------------------------------------------------------
@@ -299,11 +303,23 @@ class Line:
         # A substation has a rectifier unit per `TRACKS_PER_UNIT` third-rail tracks it feeds, in parallel.
         n = self.third_rail[np.clip(np.round(self.subs / self.ds).astype(int), 0, len(self.s) - 1)]
         self.r_subs = R_SUB / np.maximum(1, np.ceil(n / TRACKS_PER_UNIT))
-        # Effective source resistance at each point: fed from both neighbouring substations.
+        # Running-rail return from chainage 0 to each sample, with parallel tracks' running rails bonded.
+        self.r_return = np.concatenate(
+            [[0.0], np.cumsum(R_RETURN / np.maximum(self.third_rail[:-1], 1) * self.ds / MILE)]
+        )
+        # Effective source resistance at each point for a train alone: fed from both neighbouring substations.
         j = np.clip(np.searchsorted(self.subs, self.s), 1, len(self.subs) - 1)
-        d1 = (self.s - self.subs[j - 1]) / MILE * R_LOOP + self.r_subs[j - 1]
-        d2 = (self.subs[j] - self.s) / MILE * R_LOOP + self.r_subs[j]
+        ret = self.return_at(self.s)
+        d1 = (
+            (self.s - self.subs[j - 1]) / MILE * R_CONTACT + ret - self.return_at(self.subs[j - 1]) + self.r_subs[j - 1]
+        )
+        d2 = (self.subs[j] - self.s) / MILE * R_CONTACT + self.return_at(self.subs[j]) - ret + self.r_subs[j]
         self.r_eff = d1 * d2 / (d1 + d2)
+
+    def return_at(self, x: Arr) -> Arr:
+        """Running-rail return resistance from chainage 0 to `x`, carried on linearly past either end."""
+        k = np.clip(np.floor(x / self.ds).astype(int), 0, len(self.s) - 2)
+        return self.r_return[k] + (self.r_return[k + 1] - self.r_return[k]) * (x / self.ds - k)
 
     def limits(self, kind: str, vmax: float, train_len: float = 260.0) -> Arr:
         if kind == "posted":

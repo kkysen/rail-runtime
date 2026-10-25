@@ -67,6 +67,7 @@ fn job(j: &Bound<'_, PyAny>) -> PyResult<Job> {
         s_end: j.getattr("s_end")?.extract()?,
         subs: j.getattr("subs")?.extract()?,
         r_subs: j.getattr("r_subs")?.extract()?,
+        r_return: j.getattr("r_return")?.extract()?,
         services: services
             .into_iter()
             .map(|(stops, inbound, track, headway, offset)| Service {

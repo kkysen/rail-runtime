@@ -13,8 +13,8 @@ pub const DT: f64 = 0.5;
 pub const REGEN_EFF: f64 = 0.80;
 /// A train sheds regen above this, V.
 pub const V_REGEN_MAX: f64 = 900.0;
-/// Contact rail plus running-rail return, Ω per mile.
-pub const R_LOOP: f64 = 0.040;
+/// Contact rail, Ω per mile: about 150 lb/yd of steel.
+pub const R_CONTACT: f64 = 0.020;
 pub const MILE: f64 = 1609.34;
 /// Dwell at each intermediate stop, s.
 pub const DWELL: f64 = 30.0;
@@ -46,6 +46,9 @@ pub struct Job {
     pub subs: Vec<f64>,
     /// Substation source resistances, ohm.
     pub r_subs: Vec<f64>,
+    /// Running-rail return resistance from chainage 0 to each sample, Ω,
+    /// with every parallel track's running rails bonded together.
+    pub r_return: Vec<f64>,
     pub services: Vec<Service>,
     pub horizon: f64,
     pub regen: bool,
@@ -191,42 +194,75 @@ fn solve_dense(g: &mut [f64], b: &mut [f64], n: usize) {
     }
 }
 
+/// Running-rail return resistance from chainage 0 to `x`, Ω, carried on linearly past either end.
+fn r_return(job: &Job, x: f64) -> f64 {
+    let r = &job.r_return;
+    let k = ((x / job.ds).floor() as isize).clamp(0, r.len() as isize - 2) as usize;
+    r[k] + (r[k + 1] - r[k]) * (x / job.ds - k as f64)
+}
+
 /// Nodal solve of the DC network: power delivered to each active car, W, and the car voltages.
 /// Returns whether the voltage iteration converged.
+///
+/// Nodes are each substation's positive bus, which every track's contact rail meets,
+/// then each car's contact-rail node, then each car's running-rail node.
+/// Contact rails run per track; the running rails of every track are bonded into one return,
+/// grounded at each substation's negative.
 fn solve(
-    subs: &[f64],
-    r_subs: &[f64],
+    job: &Job,
     cars: &[&Car],
     runs: &[Run],
     dem: &[f64],
     train: &Train,
     n_tracks: usize,
 ) -> (Vec<f64>, Vec<f64>, bool) {
+    let subs = &job.subs;
     let n_sub = subs.len();
-    let n = n_sub + cars.len();
+    let n_car = cars.len();
+    let n = n_sub + 2 * n_car;
+    let contact = |j: usize| n_sub + j;
+    let ret = |j: usize| n_sub + n_car + j;
+    let pos: Vec<f64> = cars.iter().map(|c| runs[c.run].chain(c.p)).collect();
     // Branch conductances only depend on positions.
     let mut g0 = vec![0.0; n * n];
+    let link = |g0: &mut Vec<f64>, a: Option<usize>, b: Option<usize>, r: f64| {
+        let g = 1.0 / r.max(1e-6);
+        for (x, y) in [(a, b), (b, a)] {
+            if let Some(x) = x {
+                g0[x * n + x] += g;
+                if let Some(y) = y {
+                    g0[x * n + y] -= g;
+                }
+            }
+        }
+    };
     for track in 0..n_tracks {
         let mut nodes: Vec<(f64, usize)> = subs.iter().copied().zip(0..).collect();
         nodes.extend(
-            cars.iter()
-                .enumerate()
-                .filter(|(_, c)| c.track == track)
-                .map(|(j, c)| (runs[c.run].chain(c.p), n_sub + j)),
+            (0..n_car)
+                .filter(|&j| cars[j].track == track)
+                .map(|j| (pos[j], contact(j))),
         );
         nodes.sort_by(|x, y| x.0.total_cmp(&y.0).then(x.1.cmp(&y.1)));
         for w in nodes.windows(2) {
-            let ((xa, a), (xb, bb)) = (w[0], w[1]);
-            let g = 1.0 / ((xb - xa) / MILE * R_LOOP).max(1e-6);
-            g0[a * n + a] += g;
-            g0[bb * n + bb] += g;
-            g0[a * n + bb] -= g;
-            g0[bb * n + a] -= g;
+            let ((xa, a), (xb, b)) = (w[0], w[1]);
+            link(&mut g0, Some(a), Some(b), (xb - xa) / MILE * R_CONTACT);
         }
     }
-    let mut v = vec![V0; n];
-    let mut cur = vec![0.0; cars.len()];
-    let mut shed = vec![1.0; cars.len()];
+    // The bonded return: substations are ground (None), cars their running-rail nodes.
+    let mut nodes: Vec<(f64, Option<usize>)> = subs.iter().map(|&x| (x, None)).collect();
+    nodes.extend((0..n_car).map(|j| (pos[j], Some(ret(j)))));
+    nodes.sort_by(|x, y| x.0.total_cmp(&y.0));
+    for w in nodes.windows(2) {
+        let ((xa, a), (xb, b)) = (w[0], w[1]);
+        if a.is_some() || b.is_some() {
+            link(&mut g0, a, b, r_return(job, xb) - r_return(job, xa));
+        }
+    }
+    let mut v = vec![0.0; n];
+    v[..n_sub + n_car].fill(V0);
+    let mut cur = vec![0.0; n_car];
+    let mut shed = vec![1.0; n_car];
     let mut converged = false;
     let (mut g, mut b) = (vec![0.0; n * n], vec![0.0; n]);
     for _ in 0..200 {
@@ -235,16 +271,15 @@ fn solve(
         for k in 0..n_sub {
             // Diode rectifier: conducts only outward (a tiny leak keeps the network grounded).
             let gk = if v[k] <= V0 + 1e-6 {
-                1.0 / r_subs[k]
+                1.0 / job.r_subs[k]
             } else {
                 1e-6
             };
             g[k * n + k] += gk;
             b[k] += V0 * gk;
         }
-        for j in 0..cars.len() {
-            let k = n_sub + j;
-            let vt = v[k].max(1.0);
+        for j in 0..n_car {
+            let vt = (v[contact(j)] - v[ret(j)]).max(1.0);
             if dem[j] >= 0.0 {
                 cur[j] = (dem[j] / vt).min(train.i_max);
                 if vt < V_MIN {
@@ -257,12 +292,18 @@ fn solve(
                 }
                 cur[j] = (dem[j] * shed[j] / vt).max(-train.i_max);
             }
-            b[k] -= cur[j];
+            b[contact(j)] -= cur[j];
+            b[ret(j)] += cur[j];
         }
         solve_dense(&mut g, &mut b, n);
         // Clamp to the physical range: below 0.6 V_MIN trains draw nothing, above V_REGEN_MAX they shed regen.
-        for x in &mut b {
+        // With every rectifier blocking, the positive side floats, so substation buses are clamped too.
+        for x in &mut b[..n_sub] {
             *x = x.clamp(0.6 * V_MIN, V_REGEN_MAX + 50.0);
+        }
+        for j in 0..n_car {
+            let vr = b[ret(j)];
+            b[contact(j)] = vr + (b[contact(j)] - vr).clamp(0.6 * V_MIN, V_REGEN_MAX + 50.0);
         }
         let diff = v
             .iter()
@@ -278,8 +319,9 @@ fn solve(
             *a = 0.7 * *a + 0.3 * c;
         }
     }
-    let power = (0..cars.len()).map(|j| v[n_sub + j] * cur[j]).collect();
-    (power, v[n_sub..].to_vec(), converged)
+    let volts: Vec<f64> = (0..n_car).map(|j| v[contact(j)] - v[ret(j)]).collect();
+    let power = volts.iter().zip(&cur).map(|(vt, i)| vt * i).collect();
+    (power, volts, converged)
 }
 
 pub fn simulate(job: &Job) -> Outcome {
@@ -324,8 +366,7 @@ pub fn simulate(job: &Job) -> Outcome {
             .collect();
         let power = if train.supply == Supply::ThirdRail {
             let refs: Vec<&Car> = active.iter().map(|&k| &cars[k]).collect();
-            let (power, volts, converged) =
-                solve(&job.subs, &job.r_subs, &refs, &runs, &dem, train, n_tracks);
+            let (power, volts, converged) = solve(job, &refs, &runs, &dem, train, n_tracks);
             if let Some(lo) = volts.iter().copied().reduce(f64::min) {
                 vmin = Some(vmin.map_or(lo, |m| m.min(lo)));
             }
@@ -423,8 +464,9 @@ mod tests {
             lim_mph: vec![80.0; n],
             ds: 5.0,
             s_end: 16_000.0,
-            subs: (0..=8).map(|k| k as f64 * 2000.0).collect(),
-            r_subs: vec![0.010; 9],
+            subs: (0..=4).map(|k| k as f64 * 4000.0).collect(),
+            r_subs: vec![0.010; 5],
+            r_return: (0..n).map(|k| k as f64 * 5.0 / MILE * 0.020).collect(),
             services: vec![
                 Service {
                     stops: vec![0.0, 8000.0, 15_900.0],
