@@ -58,7 +58,7 @@ def pattern(stops: list[str], line_stops: list[str]) -> str:
 def timetable(data: str, date: str) -> str:
     out: list[str] = []
     m7 = m.TRAINS[0]
-    for spec in mt.SPECS.values():
+    for name, spec in mt.SPECS.items():
         line, stops, route = spec.line(data), spec.stops, spec.route
         order = list(reversed(stops))
         trips = m.am_inbound(f"{data}/gtfs", date, None if route else stops[-1], set(stops), route, stops[0])
@@ -70,8 +70,7 @@ def timetable(data: str, date: str) -> str:
             sims = [line.trip(m7, k, list(pat)) for k in KINDS]
             rows.append([pattern(list(pat), stops), str(len(sch)), f"{median(sch):.0f}", *map(f1, sims)])
         out.append(
-            f"#### {short(stops[-1])} to {short(stops[0])}\n\n"
-            + table(["Pattern", "Trips", "Scheduled", "Posted", "60 mph", "80 mph", "100 mph"], rows)
+            f"#### {name}\n\n" + table(["Pattern", "Trips", "Scheduled", "Posted", "60 mph", "80 mph", "100 mph"], rows)
         )
     return "\n\n".join(out)
 

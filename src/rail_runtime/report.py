@@ -22,7 +22,7 @@ def report(data: str, date: str) -> None:
     m7 = m.TRAINS[0]
     for name, spec in SPECS.items():
         line, stops, route = spec.line(data), spec.stops, spec.route
-        print(f"=== {stops[-1]} -> {stops[0]} ===")
+        print(f"=== {name} ===")
         print(
             "substations (mi):",
             " ".join(f"{x / m.MILE:.1f}{'*' if x in line.mapped else ''}" for x in line.subs),
