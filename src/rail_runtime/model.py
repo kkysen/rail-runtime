@@ -139,8 +139,16 @@ def load_geom(path: str) -> Geometry:
 
 
 class Line:
-    def __init__(self, geom_json: str, substations_json: str, stations: list[str], terminal: bool = True) -> None:
+    def __init__(
+        self,
+        geom_json: str,
+        substations_json: str,
+        stations: list[str],
+        terminal: bool = True,
+        inner_terminal: bool = False,
+    ) -> None:
         self.terminal = terminal  # the outer end is a bumper, not a through station
+        self.inner_terminal = inner_terminal  # so is the inner end, unlike Penn
         g = load_geom(geom_json)
         self.s = g.s
         self.ds = float(self.s[1] - self.s[0])
@@ -219,6 +227,8 @@ class Line:
         if self.terminal:
             end = self.s > self.s[-1] - 150
             lim[end] = np.minimum(lim[end], 15)  # bumper approach at the outer terminal
+        if self.inner_terminal:
+            lim[self.s < 150] = np.minimum(lim[self.s < 150], 15)
         return lim
 
     def run(self, train: Train, lim_mph: Arr, a: float, b: float) -> float:

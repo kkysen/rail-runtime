@@ -32,6 +32,12 @@ def test_port_washington(kind: str, local: float, express: float) -> None:
     assert pw().trip(M7, kind, mt.PW_EXPRESS[::-1]) == pytest.approx(express, abs=0.05)
 
 
+@pytest.mark.parametrize(("kind", "local"), [("posted", 14.0), ("60", 12.1), ("80", 10.9), ("100", 10.6)])
+def test_atlantic(kind: str, local: float) -> None:
+    atl = mt.SPECS["Atlantic"].line(DATA)
+    assert atl.trip(M7, kind, mt.ATL_STOPS[::-1]) == pytest.approx(local, abs=0.05)
+
+
 @pytest.mark.parametrize(
     ("kind", "local", "nonstop"),
     [("posted", 17.2, 13.5), ("60", 15.1, 11.8), ("80", 13.7, 9.7), ("100", 13.6, 9.3)],

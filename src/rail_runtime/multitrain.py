@@ -115,6 +115,7 @@ PW_STOPS = [
 ]
 JAM_STOPS = ["Penn Station", "Woodside", "Forest Hills", "Kew Gardens", "Jamaica"]
 PW_EXPRESS = ["Penn Station", "Great Neck", "Manhasset", "Plandome", "Port Washington"]
+ATL_STOPS = ["Atlantic Terminal", "Nostrand Avenue", "East New York", "Jamaica"]
 
 
 class Spec(NamedTuple):
@@ -125,10 +126,17 @@ class Spec(NamedTuple):
     stops: list[str]
     patterns: dict[str, list[str]]
     terminal: bool  # the outer end is a bumper, not a through station
+    inner_terminal: bool  # so is the inner end
     route: str | None  # GTFS route_id of its timetable trips; None for every trip through the outer end
 
     def line(self, data: str) -> Line:
-        return m.Line(f"{data}/{self.geom}", f"{data}/{self.substations}", self.stops, terminal=self.terminal)
+        return m.Line(
+            f"{data}/{self.geom}",
+            f"{data}/{self.substations}",
+            self.stops,
+            terminal=self.terminal,
+            inner_terminal=self.inner_terminal,
+        )
 
 
 SPECS = {
@@ -138,6 +146,7 @@ SPECS = {
         PW_STOPS,
         {"local": PW_STOPS[::-1], "express": PW_EXPRESS[::-1]},
         True,
+        False,
         "9",
     ),
     "Jamaica": Spec(
@@ -146,6 +155,16 @@ SPECS = {
         JAM_STOPS,
         {"local": JAM_STOPS[::-1], "nonstop": ["Jamaica", "Penn Station"]},
         False,
+        False,
+        None,
+    ),
+    "Atlantic": Spec(
+        "atl_geom.json",
+        "substations_atl.json",
+        ATL_STOPS,
+        {"local": ATL_STOPS[::-1]},
+        False,
+        True,
         None,
     ),
 }
@@ -237,7 +256,7 @@ def runtime(c: Finished) -> float:
 
 
 def lines(data: str) -> dict[str, Setup]:
-    """The busy-service setups: Port Washington local, express, and Jamaica."""
+    """The busy-service setups: Port Washington local, express, Jamaica, and Atlantic."""
     pw = SPECS["Port Washington"].line(data)
     jam = SPECS["Jamaica"].line(data)
     nonstop = ["Penn Station", "Jamaica"]
@@ -262,12 +281,26 @@ def lines(data: str) -> dict[str, Setup]:
         5400,
         (1800, 3600),
     )
+    # Two tracks, so one service each way, at the Port Washington headway.
+    # Each train runs on its own track, with no signals or turnbacks at Atlantic Terminal's stub tracks,
+    # so the headway only loads the power network.
+    out["Atlantic"] = Setup(
+        "Atlantic: locals every 5 min each way",
+        SPECS["Atlantic"].line(data),
+        [
+            Service("Atlantic local", ATL_STOPS, True, 0, 300, 0),
+            Service("Atlantic local", ATL_STOPS, False, 1, 300, 150),
+        ],
+        3 * 3600,
+        (3600, 7200),
+    )
     return out
 
 
 def show(data: str, which: str) -> None:
-    """Print busy-service runs for `which`: `pw` or `jam`."""
-    setups = [st for key, st in lines(data).items() if (which == "pw") == key.startswith("PW")]
+    """Print busy-service runs for `which`: `pw`, `jam` or `atl`."""
+    prefix = {"pw": "PW", "jam": "Jamaica", "atl": "Atlantic"}[which]
+    setups = [st for key, st in lines(data).items() if key.startswith(prefix)]
     for st, rows in zip(setups, busy(setups), strict=True):
         print(f"--- {st.title} ---")
         print(f"{'service':16} {'train':28} {'kind':6} {'1 train':>8} {'busy':>6} {'busy no regen':>14} {'min V':>6}")

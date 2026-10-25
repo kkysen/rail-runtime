@@ -3,13 +3,14 @@
 Minimum train runtimes from track geometry and train performance,
 compared with what timetables schedule.
 
-So far this covers two LIRR services into Penn Station:
-the Port Washington Branch (all stops, and expresses nonstop from Great Neck)
-and the Main Line from Jamaica.
+So far this covers three LIRR services:
+into Penn Station, the Port Washington Branch (all stops, and expresses nonstop from Great Neck)
+and the Main Line from Jamaica,
+and into Atlantic Terminal, the Atlantic Branch from Jamaica.
 
 ## Method
 
-- **Track:** `rail_runtime.geom` traces the route from Penn over OpenStreetMap rail ways
+- **Track:** `rail_runtime.geom` traces the route from Penn or Atlantic Terminal over OpenStreetMap rail ways
   (the OSM route relation where there is one, otherwise `usage=main` tracks),
   with a shortest-path search that can't reverse through a switch.
   It resamples the path every 5 m and measures curve radius
@@ -23,7 +24,7 @@ and the Main Line from Jamaica.
     through interlockings, curvature is measured on a path smoothed over 200 m
     so crossover kinks don't count as curves.
   - A restriction holds until the whole train has cleared it,
-    and a bumper terminal like Port Washington is approached at 15 mph.
+    and a bumper terminal like Port Washington or Atlantic Terminal is approached at 15 mph.
 - **Trains:** tractive effort up to the rated acceleration,
   then constant power, minus Davis resistance,
   with 8% rotating mass and a 2 mph/s service brake unless noted.
@@ -38,6 +39,8 @@ and the Main Line from Jamaica.
   solving the DC network each step with diode rectifier substations.
   With regenerative braking, braking trains feed other trains at 80% efficiency,
   up to 900 V.
+  Each service has its own track, with no signals or terminal turnbacks,
+  so a headway loads the power network but isn't checked against track capacity.
 - **Timetable:** AM inbound trips from the LIRR GTFS feed.
 
 ## Running
@@ -52,6 +55,7 @@ Regenerating every result takes a couple of seconds.
 # Optional: retrace the geometry, which is committed in data/.
 uv run rail-runtime geom data/rail_bbox.json data/pw_route.json data/gtfs "Port Washington" data/pw_geom.json
 uv run rail-runtime geom data/rail_bbox2.json - data/gtfs Jamaica data/jam_geom.json
+uv run rail-runtime geom data/rail_bbox_atl.json data/atl_route.json data/gtfs Jamaica data/atl_geom.json --origin "Atlantic Terminal"
 # Regenerate the results below.
 uv run rail-runtime results
 ```
@@ -75,7 +79,7 @@ cargo test --manifest-path sim/Cargo.toml
 
 ### Timetable vs. model
 
-AM inbound trips arriving at Penn 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled minutes vs. one M7 running flat out on 750 V third rail with 30 s dwells.
+AM inbound trips arriving at Penn or Atlantic Terminal 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled minutes vs. one M7 running flat out on 750 V third rail with 30 s dwells.
 
 #### Port Washington to Penn
 
@@ -99,6 +103,13 @@ AM inbound trips arriving at Penn 6-10 AM on 2026-10-27, grouped by stopping pat
 | Jamaica, stops at Kew Gardens | 4 | 19 | 14.8 | 12.9 | 11.1 | 10.8 |
 | Jamaica, skips Woodside | 2 | 22 | 16.1 | 14.0 | 12.4 | 12.3 |
 | Jamaica, all stops | 1 | 22 | 17.2 | 15.1 | 13.7 | 13.6 |
+
+#### Jamaica to Atlantic Terminal
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Jamaica, all stops | 26 | 20 | 14.0 | 12.1 | 10.9 | 10.6 |
+| Jamaica, nonstop | 1 | 19 | 12.2 | 10.0 | 8.4 | 8.0 |
 
 ### Trains
 
@@ -160,6 +171,20 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 13.2 | 11.7 | 9.3 | 8.6 |
 | 755/3 x4, 25 kV, 1.3 brake | 13.1 | 11.6 | 9.2 | 8.5 |
 
+#### Atlantic local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 14.0 | 12.1 | 10.9 | 10.6 |
+| M7, 750 V third rail, full power | 13.9 | 12.0 | 10.5 | 10.0 |
+| M8, 25 kV | 13.9 | 12.0 | 10.6 | 10.1 |
+| Class 700/1, 25 kV | 13.9 | 12.0 | 10.7 | 10.3 |
+| Class 423 x4, AC | 13.7 | 11.8 | 10.2 | 9.5 |
+| FLIRT Sm5 x3, 25 kV | 13.7 | 11.8 | 10.3 | 9.8 |
+| 755/3 x4, 750 V third rail | 13.8 | 11.8 | 10.4 | 9.9 |
+| 755/3 x4, 25 kV | 13.6 | 11.7 | 10.0 | 9.3 |
+| 755/3 x4, 25 kV, 1.3 brake | 13.5 | 11.5 | 9.7 | 9.0 |
+
 ### Busy service
 
 Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking.
@@ -195,6 +220,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 80 mph | 9.6 | 10.0 | 9.8 | 9.5 | 396 |
 |  | 100 mph | 9.2 | 10.0 | 9.7 | 9.0 | 394 |
 
+#### Atlantic: locals every 5 min each way
+
+| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Atlantic local | posted | 14.0 | 14.0 | 14.0 | 13.9 | 466 |
+|  | 60 mph | 12.2 | 12.2 | 12.2 | 12.1 | 468 |
+|  | 80 mph | 10.8 | 10.8 | 10.8 | 10.6 | 465 |
+|  | 100 mph | 10.4 | 10.5 | 10.5 | 10.1 | 469 |
+
 ### Posted slow zones
 
 One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
@@ -226,6 +260,18 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 0.30 | 2.55 | Penn Station | 60 mph | 80 mph | 14 s | 14 s |
 | 3.99 | 4.45 | Woodside | 50 mph | 80 mph | 7 s | 7 s |
 
+#### Atlantic (base: local 14.0 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 1.41 | 3.98 | Nostrand Avenue | 45 mph | 80 mph | 54 s |
+| 8.77 | 9.19 | Jamaica | 20 mph | 80 mph | 37 s |
+| 0.00 | 0.07 | Atlantic Terminal | 5 mph | 15 mph | 31 s |
+| 4.03 | 8.27 | East New York | 70 mph | 80 mph | 18 s |
+| 0.09 | 1.25 | Atlantic Terminal | 45 mph | 80 mph | 15 s |
+| 8.27 | 8.77 | Jamaica | 45 mph | 80 mph | 11 s |
+| 1.25 | 1.40 | Nostrand Avenue | 30 mph | 53 mph | 7 s |
+
 ### Limiting curves
 
 One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
@@ -251,6 +297,12 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 4.32 | 5.07 | Woodside | 65 mph | 4 s | 8 s |
 | 10.57 | 11.17 | Jamaica | 57 mph | 3 s | 5 s |
 | 5.54 | 6.04 | Woodside | 71 mph | 0 s | 4 s |
+
+#### Atlantic (base: local 10.9 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 0.00 | 0.31 | Atlantic Terminal | 15 mph | 13 s |
 
 <!-- END results -->
 

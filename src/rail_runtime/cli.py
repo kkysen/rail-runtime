@@ -39,7 +39,7 @@ def report(data: DataDir = Path("data"), date: Date = "20261027") -> None:
 
 @app.command()
 def multitrain(
-    which: Annotated[str, typer.Argument(help="`pw` for Port Washington, `jam` for Jamaica.")],
+    which: Annotated[str, typer.Argument(help="`pw` for Port Washington, `jam` for Jamaica, `atl` for Atlantic.")],
     data: DataDir = Path("data"),
 ) -> None:
     """Print busy-service runs from the time-stepped multi-train simulation."""
