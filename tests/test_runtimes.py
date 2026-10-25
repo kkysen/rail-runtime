@@ -25,7 +25,7 @@ def jam() -> m.Line:
 
 @pytest.mark.parametrize(
     ("kind", "local", "express"),
-    [("posted", 35.2, 25.6), ("60", 33.7, 23.9), ("80", 32.5, 21.6), ("100", 32.5, 21.4)],
+    [("posted", 35.1, 25.6), ("60", 33.6, 23.9), ("80", 32.4, 21.6), ("100", 32.3, 21.3)],
 )
 def test_port_washington(kind: str, local: float, express: float) -> None:
     assert pw().trip(M7, kind, mt.PW_STOPS[::-1]) == pytest.approx(local, abs=0.05)
@@ -40,7 +40,7 @@ def test_atlantic(kind: str, local: float) -> None:
 
 @pytest.mark.parametrize(
     ("kind", "local", "nonstop"),
-    [("posted", 17.2, 13.5), ("60", 15.1, 11.8), ("80", 13.7, 9.7), ("100", 13.6, 9.3)],
+    [("posted", 17.2, 13.5), ("60", 15.2, 11.8), ("80", 13.7, 9.7), ("100", 13.6, 9.3)],
 )
 def test_jamaica(kind: str, local: float, nonstop: float) -> None:
     assert jam().trip(M7, kind, mt.JAM_STOPS[::-1]) == pytest.approx(local, abs=0.05)
@@ -58,7 +58,7 @@ def test_curve_ranking() -> None:
     assert name == "Port Washington"
     assert base["express"] == pytest.approx(21.6, abs=0.05)
     top = zones[0]
-    assert (top.near, round(top.allows), round(top.saved["express"] * 60)) == ("Woodside", 48, 30)
+    assert (top.near, round(top.allows), round(top.saved["express"] * 60)) == ("Woodside", 48, 27)
 
 
 def test_slow_zone_ranking() -> None:

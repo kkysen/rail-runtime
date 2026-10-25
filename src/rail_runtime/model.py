@@ -6,6 +6,7 @@ Every run is flat (no grades), one train on the line, 30 s dwells, no schedule p
 import csv
 import json
 import math
+import re
 from collections import defaultdict
 from dataclasses import dataclass
 from itertools import pairwise
@@ -138,6 +139,24 @@ def load_geom(path: str) -> Geometry:
     )
 
 
+def system(tags: dict[str, str]) -> str | None:
+    """Whose network an OSM substation feeds: LIRR, Amtrak, NYCT (the subway) or utility; None if untagged.
+
+    Only LIRR substations feed LIRR lines, plus untagged ones beside the track;
+    Amtrak and the subway are kept apart for when their lines are modeled.
+    """
+    who = tags.get("operator", "") + " " + tags.get("name", "")
+    if "LIRR" in who or "Long Island Rail" in who:
+        return "LIRR"
+    if "Amtrak" in who:
+        return "Amtrak"
+    if "New York City Transit" in who or re.search(r"\b(IRT|BMT|IND)\b", who):
+        return "NYCT"
+    if tags.get("operator"):
+        return "utility"
+    return None
+
+
 class Line:
     def __init__(
         self,
@@ -184,17 +203,17 @@ class Line:
         kx, ky = 111320 * math.cos(math.radians(lat0)), 110540
         mapped: list[float] = []
         for e in json.loads(Path(path).read_text())["elements"]:
-            t = e["tags"]
-            if (
-                "LIRR" not in (t.get("operator", "") + t.get("name", ""))
-                and t.get("operator") != "Long Island Rail Road"
-            ):
+            sys_ = system(e["tags"])
+            if sys_ not in ("LIRR", None):
                 continue
             c = e.get("center", e)
             d = np.hypot((self.lonlat[:, 0] - c["lon"]) * kx, (self.lonlat[:, 1] - c["lat"]) * ky)
             i = int(np.argmin(d))
-            if d[i] < 400:
+            # An unattributed substation counts only right beside the track.
+            if d[i] < (400 if sys_ == "LIRR" else 50):
                 mapped.append(float(self.s[i]))
+        # One substation mapped twice, say as a building and its fence, counts once.
+        mapped = [x for k, x in enumerate(sorted(mapped)) if k == 0 or x - sorted(mapped)[k - 1] > 200]
         pts = sorted({0.0, *mapped, float(self.s[-1])})
         subs: list[float] = []
         for a, b in pairwise(pts):
