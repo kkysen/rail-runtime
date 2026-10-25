@@ -160,7 +160,7 @@ SPECS = {
     ),
     "Atlantic": Spec(
         "atl_geom.json",
-        "substations_atl.json",
+        "substations.json",
         ATL_STOPS,
         {"local": ATL_STOPS[::-1]},
         False,

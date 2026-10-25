@@ -4,7 +4,6 @@
 !/data/jam_geom.json
 !/data/substations.json
 !/data/atl_geom.json
-!/data/substations_atl.json
 /.cache/
 __pycache__/
 /sim/target/
