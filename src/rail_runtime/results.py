@@ -38,6 +38,7 @@ def short(name: str) -> str:
     return (
         name.replace(" Station", "")
         .replace(" Terminal", "")
+        .replace("Grand Central", "GCM")
         .replace("Mets-Willets Point", "Mets")
         .replace("Flushing Main Street", "Flushing")
     )
@@ -154,7 +155,7 @@ def main(data: str, date: str = "20261027") -> None:
     sections = [
         (
             "Timetable vs. model",
-            f"AM inbound trips arriving at Penn or Atlantic Terminal 6-10 AM on {date[:4]}-{date[4:6]}-{date[6:]}, "
+            f"AM inbound trips arriving at Penn, GCM or Atlantic 6-10 AM on {date[:4]}-{date[4:6]}-{date[6:]}, "
             "grouped by stopping pattern: median scheduled minutes vs. one M7 running flat out "
             "on 750 V third rail with 30 s dwells.",
             timetable(data, date),

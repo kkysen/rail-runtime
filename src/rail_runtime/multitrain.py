@@ -115,6 +115,7 @@ PW_STOPS = [
 ]
 JAM_STOPS = ["Penn Station", "Woodside", "Forest Hills", "Kew Gardens", "Jamaica"]
 PW_EXPRESS = ["Penn Station", "Great Neck", "Manhasset", "Plandome", "Port Washington"]
+GCM_STOPS = ["Grand Central", "Woodside", "Forest Hills", "Kew Gardens", "Jamaica"]
 ATL_STOPS = ["Atlantic Terminal", "Nostrand Avenue", "East New York", "Jamaica"]
 
 
@@ -152,6 +153,14 @@ SPECS = {
         JAM_STOPS,
         {"local": JAM_STOPS[::-1], "express": ["Jamaica", "Penn Station"]},
         (False, False),
+        None,
+    ),
+    "GCM": Spec(
+        "gcm_geom.json",
+        "substations.json",
+        GCM_STOPS,
+        {"local": GCM_STOPS[::-1], "express": ["Jamaica", "Grand Central"]},
+        (True, False),
         None,
     ),
     "Atlantic": Spec(
@@ -251,7 +260,7 @@ def runtime(c: Finished) -> float:
 
 
 def lines(data: str) -> dict[str, Setup]:
-    """The busy-service setups: Port Washington local, express, Jamaica, and Atlantic."""
+    """The busy-service setups: Port Washington local, express, Jamaica, GCM, and Atlantic."""
     pw = SPECS["Port Washington"].line(data)
     jam = SPECS["Jamaica"].line(data)
     jam_express = ["Penn Station", "Jamaica"]
@@ -272,6 +281,19 @@ def lines(data: str) -> dict[str, Setup]:
             Service("Jamaica express", jam_express, True, 1, 150, 75),
             Service("Jamaica local", JAM_STOPS, False, 2, 150, 40),
             Service("Jamaica express", jam_express, False, 3, 150, 115),
+        ],
+        5400,
+        (1800, 3600),
+    )
+    # Two tracks through the 63rd Street Tunnel, so one service each way: the express, most of GCM's AM trips.
+    # 2.5 min headways, Jamaica's per track, against about 3.5 min scheduled at the peak (17 to 18 in an hour).
+    gcm_express = ["Grand Central", "Jamaica"]
+    out["GCM"] = Setup(
+        "GCM: 2.5 min headways each way",
+        SPECS["GCM"].line(data),
+        [
+            Service("GCM express", gcm_express, True, 0, 150, 0),
+            Service("GCM express", gcm_express, False, 1, 150, 75),
         ],
         5400,
         (1800, 3600),
@@ -297,8 +319,8 @@ def lines(data: str) -> dict[str, Setup]:
 
 
 def show(data: str, which: str) -> None:
-    """Print busy-service runs for `which`: `pw`, `jam` or `atl`."""
-    prefix = {"pw": "PW", "jam": "Jamaica", "atl": "Atlantic"}[which]
+    """Print busy-service runs for `which`: `pw`, `jam`, `gcm` or `atl`."""
+    prefix = {"pw": "PW", "jam": "Jamaica", "gcm": "GCM", "atl": "Atlantic"}[which]
     setups = [st for key, st in lines(data).items() if key.startswith(prefix)]
     for st, rows in zip(setups, busy(setups), strict=True):
         print(f"--- {st.title} ---")
