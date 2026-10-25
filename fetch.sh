@@ -44,6 +44,10 @@ overpass '[out:json][timeout:160];way["railway"="rail"](40.695,-74.0,40.835,-73.
 # Far Rockaway Branch route relation, for its Atlantic Branch ways from Atlantic Terminal to Jamaica.
 overpass '[out:json][timeout:90];rel(8712205);out body;way(r);out tags geom;node(r);out;' data/atl_route.json
 
+# The Grand Central Branch, from Grand Central Madison through the 63rd Street Tunnel to the Main Line;
+# it has no route relation, and Metro-North's tracks lie closer to the stop than its own.
+overpass '[out:json][timeout:90];way["railway"="rail"]["name"="Grand Central Branch"](40.695,-74.0,40.835,-73.68);out ids;' data/gcm_route.json
+
 # Every rail way across Brooklyn to Jamaica.
 overpass '[out:json][timeout:160];way["railway"="rail"](40.66,-73.99,40.71,-73.78);out body geom;' data/rail_bbox_atl.json
 
