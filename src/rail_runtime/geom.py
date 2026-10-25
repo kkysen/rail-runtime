@@ -17,16 +17,18 @@ type State = tuple[int, int | None]  # (node, previous node)
 
 
 def trace(rail_json: str, route_json: str, gtfs: str, stop_a: str, stop_b: str, out: str) -> None:
-    """Trace `stop_a` to `stop_b` and write the geometry to `out`; `route_json` may be `-` for main-line tracks."""
+    """Trace `stop_a` to `stop_b` and write the geometry to `out`.
+
+    `route_json` is Overpass JSON whose relations' members and ways are the route, or `-` for main-line tracks.
+    """
     d: list[dict[str, Any]] = json.loads(Path(rail_json).read_text())["elements"]
     route_ways: set[int] = set()
     if route_json != "-":
-        route_ways = {
-            m["ref"]
-            for e in json.loads(Path(route_json).read_text())["elements"]
-            if e["type"] == "relation"
-            for m in e["members"]
-        }
+        for e in json.loads(Path(route_json).read_text())["elements"]:
+            if e["type"] == "relation":
+                route_ways |= {m["ref"] for m in e["members"]}
+            elif e["type"] == "way":
+                route_ways.add(e["id"])
     coord: dict[int, tuple[float, float]] = {}
     adj: dict[int, list[tuple[int, float, int]]] = {}
     for w in d:
