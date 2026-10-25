@@ -90,10 +90,18 @@ TRAINS = [
 
 
 # --- Lines ------------------------------------------------------------------
+def load_geom(path):
+    """Read a `geom.py` file into parallel arrays."""
+    g = json.load(open(path))
+    sm = g["samples"]
+    return {"s": [x["s"] for x in sm], "R": [x["R"] for x in sm], "maxspeed": [x["maxspeed"] for x in sm],
+            "lonlat": [[x["lon"], x["lat"]] for x in sm], "stations": g["stations"]}
+
+
 class Line:
     def __init__(self, geom_json, substations_json, stations, terminal=True):
         self.terminal = terminal  # the outer end is a bumper, not a through station
-        g = json.load(open(geom_json))
+        g = load_geom(geom_json)
         self.s = np.array(g["s"])
         self.ds = self.s[1] - self.s[0]
         R = np.array([np.inf if r is None else r for r in g["R"]])

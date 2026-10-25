@@ -120,10 +120,18 @@ for r in csv.DictReader(open(f"{gtfs}/stops.txt")):
         stations.append((r["stop_name"], float(ss[i])))
 stations.sort(key=lambda t: t[1])
 
-json.dump({"s": ss.tolist(), "R": [None if math.isinf(x) else x for x in R],
-           "maxspeed": [None if math.isnan(x) else x for x in maxspeed],
-           "stations": stations, "lonlat": (rs / [111320 * math.cos(math.radians(lat0)), 110540]).tolist()},
-          open(out, "w"))
+# Pretty-printed, one station or sample per line, so diffs line up with places on the track.
+lonlat = rs / [111320 * math.cos(math.radians(lat0)), 110540]
+with open(out, "w") as f:
+    f.write('{\n  "stations": [\n')
+    f.write(",\n".join(f"    {json.dumps([n, round(x, 1)])}" for n, x in stations))
+    f.write('\n  ],\n  "samples": [\n')
+    f.write(",\n".join(
+        "    " + json.dumps({"s": round(float(x), 1), "R": None if math.isinf(r) else round(float(r), 1),
+                            "maxspeed": None if math.isnan(v) else v,
+                            "lon": round(float(lo), 7), "lat": round(float(la), 7)})
+        for x, r, v, (lo, la) in zip(ss, R, maxspeed, lonlat)))
+    f.write("\n  ]\n}\n")
 print(f"length {s[-1] / 1609.34:.2f} mi, {len(ss)} samples")
 for n, x in stations:
     print(f"  {x / 1609.34:6.2f} mi  {n}")

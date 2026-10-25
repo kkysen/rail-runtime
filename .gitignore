@@ -1,3 +1,6 @@
-/data/
+/data/*
+!/data/LICENSE
+!/data/pw_geom.json
+!/data/jam_geom.json
 /.cache/
 __pycache__/
