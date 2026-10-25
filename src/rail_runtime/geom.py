@@ -1,9 +1,10 @@
-"""Build an ordered track centerline from Penn to a LIRR station from OSM and measure curvature."""
+"""Build an ordered track centerline between two LIRR stations from OSM and measure curvature."""
 
 import heapq
 import json
 import math
 import sys
+from collections.abc import Iterable
 from itertools import pairwise
 from pathlib import Path
 from typing import Any
@@ -15,8 +16,8 @@ from rail_runtime.model import Geometry, read_csv
 type State = tuple[int, int | None]  # (node, previous node)
 
 
-def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> None:
-    """Trace Penn to `dest` and write the geometry to `out`; `route_json` may be `-` for main-line tracks."""
+def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str, origin: str = "Penn Station") -> None:
+    """Trace `origin` to `dest` and write the geometry to `out`; `route_json` may be `-` for main-line tracks."""
     d: list[dict[str, Any]] = json.loads(Path(rail_json).read_text())["elements"]
     route_ways: set[int] = set()
     if route_json != "-":
@@ -46,10 +47,13 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
     wtags = {w["id"]: w["tags"] for w in d}
     stop = {r["stop_name"]: (float(r["stop_lat"]), float(r["stop_lon"])) for r in read_csv(f"{gtfs}/stops.txt")}
 
-    def near(ll: tuple[float, float]) -> int:
-        return min(adj, key=lambda n: (coord[n][0] - ll[0]) ** 2 + ((coord[n][1] - ll[1]) * 0.76) ** 2)
+    def near(ll: tuple[float, float], nodes: Iterable[int] = adj) -> int:
+        return min(nodes, key=lambda n: (coord[n][0] - ll[0]) ** 2 + ((coord[n][1] - ll[1]) * 0.76) ** 2)
 
-    src_n, dst_n = near(stop["Penn Station"]), near(stop[dest])
+    # Snap `dest` to the route's own tracks where there is a route, not to another line's platform there.
+    # Not `origin`: the route relation may stop short of Penn's platforms.
+    on_route = {n for w in d if w["id"] in route_ways for n in w["nodes"] if n in adj}
+    src_n, dst_n = near(stop[origin]), near(stop[dest], on_route or adj)
     MAX_TURN = 30.0  # degrees between consecutive segments; more means reversing through a switch
 
     def turn(a: int, b: int, c: int) -> float:
@@ -79,7 +83,7 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
                 prev[(v, u)] = ((u, p), wid)
                 heapq.heappush(pq, (du + c, v, u))
     if end is None:
-        raise SystemExit(f"no path from Penn Station to {dest}")
+        raise SystemExit(f"no path from {origin} to {dest}")
     state = end
     path = [dst_n]
     wpath: list[int] = []

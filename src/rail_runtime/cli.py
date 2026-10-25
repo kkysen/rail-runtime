@@ -23,11 +23,12 @@ def geom(
     rail_json: Path,
     route_json: Annotated[str, typer.Argument(help="OSM route relation JSON, or `-` to prefer main-line tracks.")],
     gtfs: Path,
-    dest: Annotated[str, typer.Argument(help="GTFS stop name to trace to from Penn.")],
+    dest: Annotated[str, typer.Argument(help="GTFS stop name to trace to.")],
     out: Path,
+    origin: Annotated[str, typer.Option(help="GTFS stop name to trace from.")] = "Penn Station",
 ) -> None:
-    """Trace a route from Penn over OSM rail and write its geometry."""
-    geom_.trace(str(rail_json), route_json, str(gtfs), dest, str(out))
+    """Trace a route from `origin` over OSM rail and write its geometry."""
+    geom_.trace(str(rail_json), route_json, str(gtfs), dest, str(out), origin)
 
 
 @app.command()
