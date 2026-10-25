@@ -4,7 +4,6 @@ Each service runs on its own track at a fixed headway with one stopping pattern.
 Braking trains regenerate into the third rail; substations are diode rectifiers and can't absorb it,
 so regen only helps other trains, and a train sheds regen once its voltage reaches V_REGEN_MAX.
 """
-import sys
 
 import numpy as np
 
@@ -237,8 +236,8 @@ def lines(data):
     return out
 
 
-if __name__ == "__main__":
-    data, which = sys.argv[1:3]
+def show(data: str, which: str) -> None:
+    """Print busy-service runs for `which`: `pw` or `jam`."""
     for key, (title, line, cases, horizon, window) in lines(data).items():
         if (which == "pw") != key.startswith("PW"):
             continue

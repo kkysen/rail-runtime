@@ -1,7 +1,5 @@
 """Regenerate the results tables in `README.md`.
 
-usage: python -m rail_runtime.results DATA [YYYYMMDD]
-
 Everything between the BEGIN and END results markers in `README.md` is replaced.
 """
 import os
@@ -129,9 +127,7 @@ def ranking(rank, kind):
     return "\n\n".join(out)
 
 
-def main():
-    data = sys.argv[1]
-    date = sys.argv[2] if len(sys.argv) > 2 else "20261027"
+def main(data: str, date: str = "20261027") -> None:
     print("timetable", file=sys.stderr, flush=True)
     sections = [
         ("Timetable vs. model",
@@ -163,6 +159,3 @@ def main():
         readme = readme.rstrip("\n") + "\n\n## Results\n\n" + block + "\n"
     open(README, "w").write(readme)
 
-
-if __name__ == "__main__":
-    main()

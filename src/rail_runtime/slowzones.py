@@ -1,6 +1,4 @@
 """Rank posted slow zones by the time they cost, raising one zone at a time to its curve limit (80 mph cap)."""
-import sys
-
 import numpy as np
 
 from rail_runtime import model as m
@@ -42,8 +40,8 @@ def rank(data, top=12):
     return out
 
 
-if __name__ == "__main__":
-    for name, base, rows in rank(sys.argv[1]):
+def show(data: str) -> None:
+    for name, base, rows in rank(data):
         print(f"=== {name} (M7, base {', '.join(f'{k} {v:.1f}' for k, v in base.items())} min) ===")
         for r in rows:
             print(f"  {r[1]:5.2f}-{r[2]:5.2f} mi  near {r[5]:22} posted {r[3]:3.0f} -> {r[4]:3.0f}  "

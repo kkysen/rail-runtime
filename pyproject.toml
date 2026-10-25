@@ -5,7 +5,11 @@ description = "Minimum train runtimes from track geometry and train performance,
 requires-python = ">=3.15"
 dependencies = [
     "numpy>=2.5.4",
+    "typer>=0.27.3",
 ]
+
+[project.scripts]
+rail-runtime = "rail_runtime.cli:app"
 
 [build-system]
 requires = ["hatchling"]

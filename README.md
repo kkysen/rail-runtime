@@ -45,13 +45,13 @@ Needs `uv` (`mise install` sets it up).
 ```sh
 ./fetch.sh  # GTFS and OSM extracts into data/
 # Optional: retrace the geometry, which is committed in data/.
-uv run python -m rail_runtime.geom data/rail_bbox.json data/pw_route.json data/gtfs "Port Washington" data/pw_geom.json
-uv run python -m rail_runtime.geom data/rail_bbox2.json - data/gtfs Jamaica data/jam_geom.json
+uv run rail-runtime geom data/rail_bbox.json data/pw_route.json data/gtfs "Port Washington" data/pw_geom.json
+uv run rail-runtime geom data/rail_bbox2.json - data/gtfs Jamaica data/jam_geom.json
 # Regenerate the results below.
-uv run python -m rail_runtime.results data
+uv run rail-runtime results
 ```
 
-`rail_runtime.report`, `rail_runtime.multitrain`, `rail_runtime.slowzones` and `rail_runtime.curves`
+`rail-runtime report`, `multitrain`, `slowzones` and `curves`
 print the same results as plain text.
 
 ## Results
