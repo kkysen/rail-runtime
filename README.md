@@ -94,11 +94,11 @@ AM inbound trips arriving at Penn, GCM or Atlantic 6-10 AM on 2026-10-27, groupe
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Great Neck, skips Mets | 2 | 39 | 26.2 | 25.1 | 23.7 | 23.6 |
+| Great Neck, skips Mets | 2 | 39 | 26.2 | 25.1 | 23.7 | 23.5 |
 | Port Washington, stops at Plandome, Manhasset, Great Neck | 2 | 38 | 25.6 | 23.9 | 21.5 | 21.2 |
 | Great Neck, all stops | 1 | 38 | 27.3 | 26.1 | 25.0 | 24.8 |
-| Port Washington, stops at Plandome, Manhasset, Great Neck, Bayside | 1 | 40 | 26.6 | 24.9 | 22.8 | 22.6 |
-| Port Washington, all stops | 1 | 49 | 35.0 | 33.5 | 32.2 | 32.1 |
+| Port Washington, stops at Plandome, Manhasset, Great Neck, Bayside | 1 | 40 | 26.6 | 24.9 | 22.8 | 22.5 |
+| Port Washington, all stops | 1 | 49 | 35.0 | 33.4 | 32.2 | 32.1 |
 | Port Washington, skips Auburndale, Broadway, Murray Hill, Flushing | 1 | 45 | 30.8 | 29.2 | 27.5 | 27.4 |
 | Port Washington, skips Auburndale, Broadway, Murray Hill, Flushing, Mets | 1 | 44 | 29.7 | 28.2 | 26.3 | 26.1 |
 
@@ -106,12 +106,12 @@ AM inbound trips arriving at Penn, GCM or Atlantic 6-10 AM on 2026-10-27, groupe
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Jamaica, nonstop | 38 | 19 | 13.4 | 11.8 | 9.6 | 9.2 |
+| Jamaica, nonstop | 38 | 19 | 13.4 | 11.8 | 9.6 | 9.1 |
 | Jamaica, stops at Woodside | 6 | 20 | 14.5 | 12.9 | 10.9 | 10.4 |
 | Jamaica, stops at Forest Hills | 4 | 19 | 14.7 | 12.9 | 10.9 | 10.7 |
-| Jamaica, stops at Kew Gardens | 4 | 19 | 14.7 | 12.9 | 11.0 | 10.6 |
-| Jamaica, skips Woodside | 2 | 22 | 16.0 | 14.0 | 12.3 | 12.1 |
-| Jamaica, all stops | 1 | 22 | 17.1 | 15.1 | 13.5 | 13.3 |
+| Jamaica, stops at Kew Gardens | 4 | 19 | 14.7 | 12.9 | 10.9 | 10.6 |
+| Jamaica, skips Woodside | 2 | 22 | 16.0 | 13.9 | 12.3 | 12.0 |
+| Jamaica, all stops | 1 | 22 | 17.1 | 15.0 | 13.5 | 13.3 |
 
 #### Jamaica - GCM
 
@@ -138,13 +138,13 @@ One train alone, minutes.
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 35.0 | 33.5 | 32.2 | 32.1 |
+| M7, 750 V third rail | 35.0 | 33.4 | 32.2 | 32.1 |
 | M7, 750 V third rail, full power | 34.6 | 33.1 | 31.7 | 31.4 |
 | M8, 25 kV | 34.8 | 33.2 | 31.9 | 31.7 |
 | Class 700/1, 25 kV | 34.8 | 33.3 | 32.0 | 31.8 |
 | Class 423 x4, AC | 34.0 | 32.5 | 30.8 | 30.4 |
 | FLIRT Sm5 x3, 25 kV | 33.9 | 32.4 | 31.0 | 30.7 |
-| 755/3 x4, 750 V third rail | 33.7 | 32.1 | 30.6 | 30.4 |
+| 755/3 x4, 750 V third rail | 33.7 | 32.1 | 30.6 | 30.3 |
 | 755/3 x4, 25 kV | 33.4 | 31.9 | 30.1 | 29.7 |
 | 755/3 x4, 25 kV, 1.3 brake | 32.5 | 30.9 | 29.0 | 28.5 |
 
@@ -158,7 +158,7 @@ One train alone, minutes.
 | Class 700/1, 25 kV | 25.5 | 23.8 | 21.4 | 21.0 |
 | Class 423 x4, AC | 25.2 | 23.6 | 20.8 | 20.2 |
 | FLIRT Sm5 x3, 25 kV | 25.2 | 23.6 | 21.0 | 20.5 |
-| 755/3 x4, 750 V third rail | 25.2 | 23.5 | 20.9 | 20.4 |
+| 755/3 x4, 750 V third rail | 25.2 | 23.5 | 20.9 | 20.3 |
 | 755/3 x4, 25 kV | 25.1 | 23.4 | 20.6 | 19.9 |
 | 755/3 x4, 25 kV, 1.3 brake | 24.8 | 23.2 | 20.3 | 19.5 |
 
@@ -166,7 +166,7 @@ One train alone, minutes.
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 17.1 | 15.1 | 13.5 | 13.3 |
+| M7, 750 V third rail | 17.1 | 15.0 | 13.5 | 13.3 |
 | M7, 750 V third rail, full power | 16.9 | 14.9 | 13.2 | 12.9 |
 | M8, 25 kV | 16.9 | 14.9 | 13.3 | 13.0 |
 | Class 700/1, 25 kV | 17.0 | 15.0 | 13.4 | 13.2 |
@@ -180,13 +180,13 @@ One train alone, minutes.
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 13.4 | 11.8 | 9.6 | 9.2 |
+| M7, 750 V third rail | 13.4 | 11.8 | 9.6 | 9.1 |
 | M7, 750 V third rail, full power | 13.3 | 11.8 | 9.5 | 8.9 |
 | M8, 25 kV | 13.4 | 11.8 | 9.5 | 9.0 |
 | Class 700/1, 25 kV | 13.4 | 11.8 | 9.5 | 9.1 |
 | Class 423 x4, AC | 13.3 | 11.7 | 9.4 | 8.7 |
 | FLIRT Sm5 x3, 25 kV | 13.3 | 11.7 | 9.4 | 8.9 |
-| 755/3 x4, 750 V third rail | 13.3 | 11.7 | 9.4 | 8.8 |
+| 755/3 x4, 750 V third rail | 13.2 | 11.7 | 9.4 | 8.8 |
 | 755/3 x4, 25 kV | 13.2 | 11.7 | 9.3 | 8.6 |
 | 755/3 x4, 25 kV, 1.3 brake | 13.1 | 11.6 | 9.2 | 8.5 |
 
@@ -240,48 +240,48 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| PW local | posted | 35.2 | 35.2 | 35.2 | 35.0 | 493 |
+| PW local | posted | 35.2 | 35.2 | 35.2 | 35.0 | 495 |
 |  | 60 mph | 33.7 | 33.7 | 33.7 | 33.6 | 490 |
-|  | 80 mph | 32.4 | 32.4 | 32.4 | 32.2 | 490 |
-|  | 100 mph | 32.3 | 32.4 | 32.4 | 32.0 | 482 |
+|  | 80 mph | 32.4 | 32.4 | 32.4 | 32.2 | 494 |
+|  | 100 mph | 32.3 | 32.3 | 32.3 | 32.0 | 492 |
 
 #### PW express: 5 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| PW express | posted | 25.6 | 25.6 | 25.6 | 25.6 | 492 |
-|  | 60 mph | 24.0 | 24.0 | 24.0 | 23.9 | 495 |
-|  | 80 mph | 21.5 | 21.6 | 21.6 | 21.4 | 486 |
-|  | 100 mph | 21.2 | 21.3 | 21.2 | 21.0 | 487 |
+| PW express | posted | 25.6 | 25.6 | 25.6 | 25.6 | 495 |
+|  | 60 mph | 24.0 | 24.0 | 24.0 | 23.9 | 497 |
+|  | 80 mph | 21.5 | 21.6 | 21.6 | 21.4 | 490 |
+|  | 100 mph | 21.2 | 21.2 | 21.3 | 21.0 | 490 |
 
 #### Jamaica: locals and expresses each at 2.5 min headways each way (1.25 min combined)
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Jamaica local | posted | 17.2 | 17.3 | 17.3 | 17.0 | 475 |
-|  | 60 mph | 15.1 | 15.2 | 15.2 | 15.0 | 486 |
-|  | 80 mph | 13.6 | 13.7 | 13.7 | 13.3 | 472 |
-|  | 100 mph | 13.4 | 13.6 | 13.6 | 13.1 | 463 |
-| Jamaica express | posted | 13.5 | 13.5 | 13.5 | 13.4 | 475 |
-|  | 60 mph | 11.8 | 11.8 | 11.8 | 11.8 | 486 |
-|  | 80 mph | 9.5 | 9.5 | 9.5 | 9.5 | 472 |
-|  | 100 mph | 9.1 | 9.1 | 9.1 | 9.0 | 463 |
+| Jamaica local | posted | 17.2 | 17.3 | 17.3 | 17.0 | 492 |
+|  | 60 mph | 15.1 | 15.2 | 15.1 | 15.0 | 491 |
+|  | 80 mph | 13.5 | 13.6 | 13.6 | 13.3 | 485 |
+|  | 100 mph | 13.4 | 13.6 | 13.6 | 13.1 | 481 |
+| Jamaica express | posted | 13.5 | 13.5 | 13.5 | 13.4 | 492 |
+|  | 60 mph | 11.8 | 11.8 | 11.8 | 11.8 | 491 |
+|  | 80 mph | 9.5 | 9.5 | 9.5 | 9.5 | 485 |
+|  | 100 mph | 9.1 | 9.1 | 9.1 | 9.0 | 481 |
 
 #### GCM: 2.5 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| GCM express | posted | 13.0 | 13.1 | 13.1 | 13.0 | 521 |
-|  | 60 mph | 11.4 | 11.4 | 11.4 | 11.4 | 548 |
-|  | 80 mph | 9.7 | 9.8 | 9.8 | 9.7 | 523 |
-|  | 100 mph | 9.3 | 9.4 | 9.3 | 9.3 | 519 |
+| GCM express | posted | 13.0 | 13.1 | 13.1 | 13.0 | 533 |
+|  | 60 mph | 11.4 | 11.4 | 11.4 | 11.4 | 551 |
+|  | 80 mph | 9.7 | 9.7 | 9.7 | 9.7 | 524 |
+|  | 100 mph | 9.3 | 9.3 | 9.3 | 9.3 | 521 |
 
 #### Atlantic: 5 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Atlantic local | posted | 13.9 | 13.9 | 13.9 | 13.9 | 493 |
-|  | 60 mph | 12.1 | 12.1 | 12.1 | 12.1 | 492 |
+| Atlantic local | posted | 13.9 | 13.9 | 13.9 | 13.9 | 496 |
+|  | 60 mph | 12.1 | 12.1 | 12.1 | 12.1 | 495 |
 |  | 80 mph | 10.7 | 10.7 | 10.7 | 10.6 | 491 |
 |  | 100 mph | 10.3 | 10.3 | 10.3 | 10.1 | 490 |
 
@@ -298,7 +298,7 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 2.67 | 4.38 | Woodside | 50 mph | 80 mph | 39 s | 39 s |
 | 6.08 | 9.55 | Mets-Willets Point | 60 mph | 80 mph | 24 s | 35 s |
 | 15.89 | 18.38 | Manhasset | 50 mph | 80 mph | 19 s | 19 s |
-| 0.26 | 2.67 | Penn Station | 60 mph | 80 mph | 17 s | 17 s |
+| 0.26 | 2.67 | Penn Station | 60 mph | 80 mph | 18 s | 18 s |
 | 13.46 | 13.81 | Douglaston | 40 mph | 77 mph | 9 s | 14 s |
 | 13.81 | 15.89 | Little Neck | 60 mph | 80 mph | 1 s | 9 s |
 | 18.39 | 19.40 | Port Washington | 40 mph | 65 mph | 8 s | 8 s |
@@ -328,7 +328,7 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 1.09 | 2.59 | Grand Central | 60 mph | 80 mph | 10 s | 10 s |
 | 0.46 | 1.09 | Grand Central | 45 mph | 80 mph | 9 s | 9 s |
 | 0.22 | 0.45 | Grand Central | 30 mph | 46 mph | 7 s | 7 s |
-| 3.38 | 3.76 | Woodside | 50 mph | 80 mph | 3 s | 3 s |
+| 3.38 | 3.76 | Woodside | 50 mph | 80 mph | 4 s | 4 s |
 
 #### Atlantic (base: local 14.0 min)
 
@@ -338,7 +338,7 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 8.77 | 9.19 | Jamaica | 20 mph | 80 mph | 37 s |
 | 0.00 | 0.07 | Atlantic Terminal | 5 mph | 15 mph | 31 s |
 | 4.03 | 8.27 | East New York | 70 mph | 80 mph | 19 s |
-| 0.09 | 1.25 | Atlantic Terminal | 45 mph | 80 mph | 16 s |
+| 0.09 | 1.25 | Atlantic Terminal | 45 mph | 80 mph | 17 s |
 | 8.27 | 8.77 | Jamaica | 45 mph | 80 mph | 11 s |
 | 1.25 | 1.40 | Nostrand Avenue | 30 mph | 53 mph | 7 s |
 
