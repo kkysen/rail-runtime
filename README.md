@@ -220,14 +220,14 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 80 mph | 9.6 | 10.0 | 9.8 | 9.5 | 396 |
 |  | 100 mph | 9.2 | 10.0 | 9.7 | 9.0 | 394 |
 
-#### Atlantic: locals every 5 min each way
+#### Atlantic: locals 11 an hour each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Atlantic local | posted | 14.0 | 14.0 | 14.0 | 13.9 | 466 |
-|  | 60 mph | 12.2 | 12.2 | 12.2 | 12.1 | 468 |
-|  | 80 mph | 10.8 | 10.8 | 10.8 | 10.6 | 465 |
-|  | 100 mph | 10.4 | 10.5 | 10.5 | 10.1 | 469 |
+| Atlantic local | posted | 14.0 | 14.0 | 14.0 | 13.9 | 488 |
+|  | 60 mph | 12.2 | 12.1 | 12.1 | 12.1 | 485 |
+|  | 80 mph | 10.8 | 10.9 | 10.9 | 10.6 | 467 |
+|  | 100 mph | 10.4 | 10.5 | 10.5 | 10.1 | 463 |
 
 ### Posted slow zones
 

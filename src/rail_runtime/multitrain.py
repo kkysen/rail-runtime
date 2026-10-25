@@ -276,15 +276,17 @@ def lines(data: str) -> dict[str, Setup]:
         5400,
         (1800, 3600),
     )
-    # Two tracks, so one service each way, at the Port Washington headway.
+    # Two tracks, so one service each way, at the most Atlantic Terminal has scheduled:
+    # 11 trains an hour out in the PM peak in the 2015 and 2016 GTFS feeds, 10 in in the AM.
     # Each train runs on its own track, with no signals or turnbacks at Atlantic Terminal's stub tracks,
     # so the headway only loads the power network.
+    atl_headway = 3600 / 11
     out["Atlantic"] = Setup(
-        "Atlantic: locals every 5 min each way",
+        "Atlantic: locals 11 an hour each way",
         SPECS["Atlantic"].line(data),
         [
-            Service("Atlantic local", ATL_STOPS, True, 0, 300, 0),
-            Service("Atlantic local", ATL_STOPS, False, 1, 300, 150),
+            Service("Atlantic local", ATL_STOPS, True, 0, atl_headway, 0),
+            Service("Atlantic local", ATL_STOPS, False, 1, atl_headway, atl_headway / 2),
         ],
         3 * 3600,
         (3600, 7200),
