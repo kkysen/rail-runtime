@@ -115,6 +115,7 @@ class Geometry:
     maxspeed: Arr  # posted, mph; nan where OSM has none
     lonlat: Arr
     stations: list[tuple[str, float]]
+    tracks: npt.NDArray[np.int_]  # parallel running tracks
 
     def save(self, path: str) -> None:
         """Write pretty-printed, one station or sample per line, so diffs line up with places on the track."""
@@ -125,8 +126,11 @@ class Geometry:
                 "maxspeed": None if math.isnan(v) else float(v),
                 "lon": round(float(lo), 7),
                 "lat": round(float(la), 7),
+                "tracks": int(n),
             }
-            for x, r, v, lo, la in zip(self.s, self.R, self.maxspeed, self.lonlat[:, 0], self.lonlat[:, 1], strict=True)
+            for x, r, v, lo, la, n in zip(
+                self.s, self.R, self.maxspeed, self.lonlat[:, 0], self.lonlat[:, 1], self.tracks, strict=True
+            )
         )
         with open(path, "w") as f:
             f.write('{\n  "stations": [\n')
@@ -146,6 +150,7 @@ def load_geom(path: str) -> Geometry:
         maxspeed=np.array([np.nan if x["maxspeed"] is None else x["maxspeed"] for x in sm], dtype=float),
         lonlat=np.array([[x["lon"], x["lat"]] for x in sm], dtype=float),
         stations=[(n, x) for n, x in g["stations"]],
+        tracks=np.array([x["tracks"] for x in sm], dtype=int),
     )
 
 

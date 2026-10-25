@@ -10,10 +10,44 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+import numpy.typing as npt
 
-from rail_runtime.model import Geometry, read_csv
+from rail_runtime.model import Arr, Geometry, read_csv
 
 type State = tuple[int, int | None]  # (node, previous node)
+
+
+def main(w: dict[str, Any]) -> bool:
+    """Whether an OSM way is running track: not a yard, spur, siding or crossover."""
+    t = w["tags"]
+    return t.get("railway") == "rail" and t.get("service") not in ("yard", "spur", "siding", "crossover")
+
+
+def count_tracks(xy: Arr, ways: list[Arr]) -> npt.NDArray[np.int_]:
+    """Parallel running tracks at each sample of path `xy` (m), from `ways` (each an array of points, m).
+
+    A track counts where it runs within 20 degrees of the path's heading and 15 m either side of it,
+    with tracks told apart by lateral offsets 2.5 m or more apart (track centres are about 4 m).
+    A 500 m running median smooths over the extra tracks at interlockings.
+    """
+    a = np.concatenate([w[:-1] for w in ways])
+    d = np.concatenate([np.diff(w, axis=0) for w in ways])
+    l2 = np.maximum((d**2).sum(1), 1e-9)
+    lo, hi = np.minimum(a, a + d), np.maximum(a, a + d)  # segment bounding boxes
+    out = np.zeros(len(xy), dtype=int)
+    for i, p in enumerate(xy):
+        h = xy[min(i + 4, len(xy) - 1)] - xy[max(i - 4, 0)]
+        h = h / np.hypot(*h)
+        near = ((lo < p + 60) & (hi > p - 60)).all(1)
+        u = np.clip(((p - a[near]) * d[near]).sum(1) / l2[near], 0, 1)
+        q = a[near] + u[:, None] * d[near] - p
+        off = q @ np.array([-h[1], h[0]])
+        par = np.abs((d[near] / np.sqrt(l2[near])[:, None]) @ h) > math.cos(math.radians(20))
+        o = np.sort(off[par & (np.abs(off) < 15) & (np.abs(q @ h) < 5)])
+        out[i] = 1 + int((np.diff(o) > 2.5).sum()) if len(o) else 1
+    w = 50  # samples either side: 500 m in all
+    padded = np.pad(out, w, mode="edge")
+    return np.array([int(np.median(padded[i : i + 2 * w + 1])) for i in range(len(out))])
 
 
 def trace(rail_json: str, route_json: str, gtfs: str, stop_a: str, stop_b: str, out: str) -> None:
@@ -147,7 +181,9 @@ def trace(rail_json: str, route_json: str, gtfs: str, stop_a: str, stop_b: str, 
     stations.sort(key=lambda t: t[1])
 
     lonlat = rs / [111320 * math.cos(math.radians(lat0)), 110540]
-    Geometry(ss, R, np.array(maxspeed), lonlat, stations).save(out)
+    k_xy = np.array([111320 * math.cos(math.radians(lat0)), 110540])
+    tracks = count_tracks(rs, [np.array([[p["lon"], p["lat"]] for p in w["geometry"]]) * k_xy for w in d if main(w)])
+    Geometry(ss, R, np.array(maxspeed), lonlat, stations, tracks).save(out)
     print(f"length {s[-1] / 1609.34:.2f} mi, {len(ss)} samples")
     for n, x in stations:
         print(f"  {x / 1609.34:6.2f} mi  {n}")
