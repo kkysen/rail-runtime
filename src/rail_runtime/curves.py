@@ -3,8 +3,8 @@ import sys
 
 import numpy as np
 
-import model as m
-from multitrain import JAM_STOPS, PW_EXPRESS, PW_STOPS
+from rail_runtime import model as m
+from rail_runtime.multitrain import JAM_STOPS, PW_EXPRESS, PW_STOPS
 
 CASES = {
     "Port Washington": ("pw_geom.json", PW_STOPS, {"local": PW_STOPS[::-1], "express": PW_EXPRESS[::-1]}),

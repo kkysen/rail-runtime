@@ -1,6 +1,6 @@
 """Build an ordered track centerline from Penn to a LIRR station from OSM and measure curvature.
 
-usage: geom.py RAIL_JSON ROUTE_JSON|- GTFS DEST_STOP OUT
+usage: python -m rail_runtime.geom RAIL_JSON ROUTE_JSON|- GTFS DEST_STOP OUT
 """
 import csv
 import json

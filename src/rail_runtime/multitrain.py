@@ -8,7 +8,7 @@ import sys
 
 import numpy as np
 
-import model as m
+from rail_runtime import model as m
 
 DT = 0.5  # s
 REGEN_EFF = 0.80  # wheel to line

@@ -3,8 +3,8 @@ import sys
 
 import numpy as np
 
-import model as m
-from curves import CASES
+from rail_runtime import model as m
+from rail_runtime.curves import CASES
 
 
 def rank(data, top=12):

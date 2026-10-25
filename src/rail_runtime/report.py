@@ -2,7 +2,7 @@
 import sys
 from statistics import median
 
-import model as m
+from rail_runtime import model as m
 
 data, date = sys.argv[1:3]
 KINDS = ["posted", "60", "80", "100"]
