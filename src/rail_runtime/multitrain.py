@@ -258,14 +258,14 @@ def lines(data: str) -> dict[str, Setup]:
     out: dict[str, Setup] = {}
     for name, stops in (("PW local", PW_STOPS), ("PW express", PW_EXPRESS)):
         out[name] = Setup(
-            f"{name}, every 5 min each way",
+            f"{name}: 5 min headways each way",
             pw,
             [Service(name, stops, True, 0, 300, 0), Service(name, stops, False, 1, 300, 150)],
             3 * 3600,
             (3600, 7200),
         )
     out["Jamaica"] = Setup(
-        "Jamaica: locals and nonstops each every 2.5 min per direction (1.25 min combined)",
+        "Jamaica: locals and nonstops each at 2.5 min headways each way (1.25 min combined)",
         jam,
         [
             Service("Jamaica local", JAM_STOPS, True, 0, 150, 0),
@@ -276,14 +276,15 @@ def lines(data: str) -> dict[str, Setup]:
         5400,
         (1800, 3600),
     )
-    # Two tracks, so one service each way, at 12 trains an hour,
-    # a little above the most Atlantic Terminal has scheduled:
-    # 11 an hour out in the PM peak in the 2015 and 2016 GTFS feeds, 10 in in the AM.
+    # Two tracks, so one service each way, at 5 min headways,
+    # a little tighter than the most Atlantic Terminal has scheduled:
+    # about 5.5 min out in the PM peak in the 2015 and 2016 GTFS feeds (11 in the busiest hour),
+    # and 6 min in in the AM (10).
     # Each train runs on its own track, with no signals or turnbacks at Atlantic Terminal's stub tracks,
     # so the headway only loads the power network.
-    atl_headway = 3600 / 12
+    atl_headway = 300
     out["Atlantic"] = Setup(
-        "Atlantic: locals 12 an hour each way",
+        "Atlantic: 5 min headways each way",
         SPECS["Atlantic"].line(data),
         [
             Service("Atlantic local", ATL_STOPS, True, 0, atl_headway, 0),

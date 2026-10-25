@@ -192,7 +192,7 @@ One train alone, minutes.
 
 Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking.
 
-#### PW local, every 5 min each way
+#### PW local: 5 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -201,7 +201,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 80 mph | 32.5 | 32.6 | 32.6 | 32.2 | 466 |
 |  | 100 mph | 32.5 | 32.6 | 32.5 | 32.0 | 461 |
 
-#### PW express, every 5 min each way
+#### PW express: 5 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -210,7 +210,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 80 mph | 21.6 | 21.6 | 21.6 | 21.4 | 467 |
 |  | 100 mph | 21.3 | 21.4 | 21.4 | 21.0 | 466 |
 
-#### Jamaica: locals and nonstops each every 2.5 min per direction (1.25 min combined)
+#### Jamaica: locals and nonstops each at 2.5 min headways each way (1.25 min combined)
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -223,7 +223,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 80 mph | 9.5 | 9.7 | 9.6 | 9.5 | 393 |
 |  | 100 mph | 9.1 | 9.6 | 9.5 | 9.0 | 397 |
 
-#### Atlantic: locals 12 an hour each way
+#### Atlantic: 5 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
