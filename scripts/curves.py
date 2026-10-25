@@ -28,11 +28,10 @@ for name, (gf, stops, pats) in cases.items():
         line.limits = orig
         k = i + int(np.argmin(lim80[i:j]))
         near = min(line.st, key=lambda n: abs(line.st[n] - line.s[k]))
-        R = 5729.58 / 3.2808 / ((EAEU := m.EA + m.EU) / (0.0007 * line.curve[k] ** 2)) if np.isfinite(line.curve[k]) else np.inf
-        rows.append((max(saved.values()), line.s[i] / m.MILE, line.s[j - 1] / m.MILE, lim80[k], R, near, saved))
+        rows.append((max(saved.values()), line.s[i] / m.MILE, line.s[j - 1] / m.MILE, lim80[k], near, saved))
     print(f"=== {name} (M7, 80 mph, base {', '.join(f'{k} {v:.1f}' for k, v in base.items())} min) ===")
     for r in sorted(rows, reverse=True)[:10]:
         if r[0] < 0.05:
             break
-        print(f"  {r[1]:5.2f}-{r[2]:5.2f} mi  near {r[5]:22} {r[3]:3.0f} mph  R {r[4]:5.0f} m  "
-              + "  ".join(f"{k} {v * 60:4.0f}s" for k, v in r[6].items()))
+        print(f"  {r[1]:5.2f}-{r[2]:5.2f} mi  near {r[4]:22} {r[3]:3.0f} mph  "
+              + "  ".join(f"{k} {v * 60:4.0f}s" for k, v in r[5].items()))
