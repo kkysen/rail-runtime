@@ -2,6 +2,7 @@
 !/data/LICENSE
 !/data/pw_geom.json
 !/data/jam_geom.json
+!/data/substations.json
 /.cache/
 __pycache__/
 /.venv/

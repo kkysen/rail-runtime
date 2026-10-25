@@ -1,0 +1,2280 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-24T01:41:16Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 368062840,
+  "lat": 40.8045454,
+  "lon": -73.9029142,
+  "tags": {
+    "addr:state": "NY",
+    "ele": "2",
+    "gnis:feature_id": "2062029",
+    "name": "Port Morris Power Station",
+    "power": "substation",
+    "source": "USGS Geonames"
+  }
+},
+{
+  "type": "way",
+  "id": 95000543,
+  "center": {
+    "lat": 40.7547877,
+    "lon": -73.6990838
+  },
+  "tags": {
+    "name": "Sperry Substation",
+    "power": "substation",
+    "ref": "3X"
+  }
+},
+{
+  "type": "way",
+  "id": 108298302,
+  "center": {
+    "lat": 40.7631961,
+    "lon": -73.9430390
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Rainey Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "345000;138000"
+  }
+},
+{
+  "type": "way",
+  "id": 108318934,
+  "center": {
+    "lat": 40.7877350,
+    "lon": -73.9092013
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "138000"
+  }
+},
+{
+  "type": "way",
+  "id": 108322562,
+  "center": {
+    "lat": 40.7580187,
+    "lon": -73.9469007
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Vernon Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "138000"
+  }
+},
+{
+  "type": "way",
+  "id": 108331538,
+  "center": {
+    "lat": 40.7816895,
+    "lon": -73.9068156
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "North Queens Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "138000;27000"
+  }
+},
+{
+  "type": "way",
+  "id": 168659473,
+  "center": {
+    "lat": 40.8276059,
+    "lon": -73.6874850
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "3H Port Washington Substation",
+    "operator": "Long Island Power Authority",
+    "operator:wikidata": "Q17035174",
+    "operator:wikipedia": "en:Long Island Power Authority",
+    "power": "substation",
+    "ref": "3H",
+    "substation": "distribution"
+  }
+},
+{
+  "type": "way",
+  "id": 168659474,
+  "center": {
+    "lat": 40.8260825,
+    "lon": -73.6862814
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "LIRR Port Washington Substation",
+    "operator": "Long Island Rail Road",
+    "power": "substation",
+    "ref": "N12",
+    "substation": "distribution",
+    "voltage": "69000"
+  }
+},
+{
+  "type": "way",
+  "id": 187973503,
+  "center": {
+    "lat": 40.7097706,
+    "lon": -73.6855364
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Whiteside Substation",
+    "operator": "Long Island Power Authority",
+    "operator:wikidata": "Q17035174",
+    "power": "substation",
+    "ref": "3J",
+    "substation": "transmission",
+    "voltage": "69000;33000"
+  }
+},
+{
+  "type": "way",
+  "id": 187984305,
+  "center": {
+    "lat": 40.6991852,
+    "lon": -73.8139076
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Jamaica Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "138000;27000"
+  }
+},
+{
+  "type": "way",
+  "id": 188367030,
+  "center": {
+    "lat": 40.7660030,
+    "lon": -73.9958842
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "indoor",
+    "name": "West 49th Street Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "345000"
+  }
+},
+{
+  "type": "way",
+  "id": 190592965,
+  "center": {
+    "lat": 40.7886905,
+    "lon": -73.7206290
+  },
+  "tags": {
+    "name": "Great Neck Substation",
+    "operator": "Long Island Power Authority",
+    "operator:wikidata": "Q17035174",
+    "power": "substation",
+    "ref": "3A"
+  }
+},
+{
+  "type": "way",
+  "id": 211672807,
+  "center": {
+    "lat": 40.7252927,
+    "lon": -73.7020950
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Floral Park Substation",
+    "operator": "Long Island Power Authority",
+    "operator:wikidata": "Q17035174",
+    "operator:wikipedia": "en:Long Island Power Authority",
+    "power": "substation",
+    "ref": "3B",
+    "substation": "minor_distribution"
+  }
+},
+{
+  "type": "way",
+  "id": 232053177,
+  "center": {
+    "lat": 40.7562920,
+    "lon": -73.9382318
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Queensbridge Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "138000;69000"
+  }
+},
+{
+  "type": "way",
+  "id": 247488316,
+  "center": {
+    "lat": 40.6920094,
+    "lon": -73.8614456
+  },
+  "tags": {
+    "addr:housenumber": "80-24",
+    "addr:postcode": "11421",
+    "addr:street": "Jamaica Avenue",
+    "building": "service",
+    "height": "6.0",
+    "name": "Forest Parkway Substation",
+    "nycdcp:uid": "1aadc5a408c9e23ecd9a3ba0914e1ac1",
+    "nycdoitt:bin": "4000000",
+    "operator": "New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 248829017,
+  "center": {
+    "lat": 40.6928195,
+    "lon": -73.7336421
+  },
+  "tags": {
+    "addr:housenumber": "227-16",
+    "addr:postcode": "11411",
+    "addr:street": "Linden Boulevard",
+    "building": "yes",
+    "frequency": "60",
+    "height": "3.2",
+    "name": "Linden Substation",
+    "nycdoitt:bin": "4274576",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 249657384,
+  "center": {
+    "lat": 40.7371476,
+    "lon": -73.9873374
+  },
+  "tags": {
+    "building": "service",
+    "height": "18.3",
+    "name": "IRT Substation #12",
+    "nycdcp:uid": "5b8059b1344690bbd265c1d20c9f4651",
+    "nycdoitt:bin": "1017904",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 250266578,
+  "center": {
+    "lat": 40.7214549,
+    "lon": -73.9870314
+  },
+  "tags": {
+    "building": "service",
+    "height": "11.8",
+    "heritage": "2",
+    "heritage:operator": "nrhp",
+    "historic": "yes",
+    "name": "Stanton Substation",
+    "nycdcp:uid": "cb42cf4dbf8a05f2923a678975410abb",
+    "nycdoitt:bin": "1005425",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "ref:nrhp": "06000020",
+    "substation": "traction",
+    "wikidata": "Q6134973"
+  }
+},
+{
+  "type": "way",
+  "id": 250317212,
+  "center": {
+    "lat": 40.6967203,
+    "lon": -73.9355927
+  },
+  "tags": {
+    "addr:housenumber": "1164",
+    "addr:postcode": "11221",
+    "addr:street": "Myrtle Avenue",
+    "building": "service",
+    "height": "5.0",
+    "name": "BMT Substation",
+    "nycdcp:uid": "eddc0e6ca688e6ce143e7caba3685aa6",
+    "nycdoitt:bin": "3342946",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 250367086,
+  "center": {
+    "lat": 40.6924933,
+    "lon": -73.9823297
+  },
+  "tags": {
+    "addr:housenumber": "161",
+    "addr:postcode": "11201",
+    "addr:street": "Prince Street",
+    "building": "service",
+    "height": "6.2",
+    "name": "Flatbush-Willoughby Substation",
+    "nycdcp:uid": "34b0b061041aaca645e448b06a8870fa",
+    "nycdoitt:bin": "3340747",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 250374489,
+  "center": {
+    "lat": 40.6981081,
+    "lon": -73.9872869
+  },
+  "tags": {
+    "NY_mta:propcode": "xbl30520",
+    "addr:housenumber": "212",
+    "addr:postcode": "11201",
+    "addr:street": "Jay Street",
+    "building": "service",
+    "height": "11.7",
+    "name": "Jay Street Substation",
+    "nycdoitt:bin": "3000174",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction",
+    "wikidata": "Q6134973"
+  }
+},
+{
+  "type": "way",
+  "id": 250386730,
+  "center": {
+    "lat": 40.7033420,
+    "lon": -73.9818541
+  },
+  "tags": {
+    "addr:housenumber": "290",
+    "addr:postcode": "11201",
+    "addr:street": "Plymouth Street",
+    "building": "yes",
+    "frequency": "60",
+    "height": "8.7",
+    "location": "indoor",
+    "name": "Water Street Substation",
+    "nycdoitt:bin": "3333429",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "138000;27000"
+  }
+},
+{
+  "type": "way",
+  "id": 250386956,
+  "center": {
+    "lat": 40.7017008,
+    "lon": -73.9872586
+  },
+  "tags": {
+    "addr:housenumber": "95",
+    "addr:postcode": "11201",
+    "addr:street": "York Street",
+    "building": "service",
+    "height": "8.2",
+    "name": "York Street Substation",
+    "nycdoitt:bin": "3395562",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 250426673,
+  "center": {
+    "lat": 40.6997708,
+    "lon": -73.9123399
+  },
+  "tags": {
+    "addr:housenumber": "1551",
+    "addr:postcode": "11237",
+    "addr:street": "Gates Avenue",
+    "building": "yes",
+    "height": "12.8",
+    "nycdoitt:bin": "3076374",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 251879805,
+  "center": {
+    "lat": 40.7273270,
+    "lon": -73.9740551
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "69000"
+  }
+},
+{
+  "type": "way",
+  "id": 264635236,
+  "center": {
+    "lat": 40.7393796,
+    "lon": -73.9981313
+  },
+  "tags": {
+    "addr:housenumber": "150",
+    "addr:postcode": "10011",
+    "addr:street": "West 16th Street",
+    "building": "service",
+    "height": "18.0",
+    "name": "IRT Substation #41",
+    "nycdcp:uid": "8826ae031713a3f025d3226f2ee36fb4",
+    "nycdoitt:bin": "1080573",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 264644824,
+  "center": {
+    "lat": 40.7412580,
+    "lon": -73.9973235
+  },
+  "tags": {
+    "building": "yes",
+    "frequency": "60",
+    "height": "8.2",
+    "location": "indoor",
+    "name": "West 19th Street",
+    "nycdoitt:bin": "1014710",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "69000;13200"
+  }
+},
+{
+  "type": "way",
+  "id": 265040100,
+  "center": {
+    "lat": 40.7433212,
+    "lon": -73.9831563
+  },
+  "tags": {
+    "building": "yes",
+    "height": "7.1",
+    "nycdoitt:bin": "1018205",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 265159390,
+  "center": {
+    "lat": 40.7429820,
+    "lon": -73.9315491
+  },
+  "tags": {
+    "building": "yes",
+    "frequency": "60",
+    "height": "8.2",
+    "location": "outdoor",
+    "name": "Newtown Substation",
+    "nycdoitt:bin": "4539950",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "138000;27000"
+  }
+},
+{
+  "type": "way",
+  "id": 265260927,
+  "center": {
+    "lat": 40.7467831,
+    "lon": -73.9874005
+  },
+  "tags": {
+    "addr:housenumber": "14",
+    "addr:street": "West 31st Street",
+    "building": "yes",
+    "height": "15.7",
+    "name": "Murray Hill Substation",
+    "nycdoitt:bin": "1015780",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 265356034,
+  "center": {
+    "lat": 40.7657031,
+    "lon": -73.9951970
+  },
+  "tags": {
+    "building": "yes",
+    "height": "7.9",
+    "nycdoitt:bin": "1089009",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 265356062,
+  "center": {
+    "lat": 40.7661943,
+    "lon": -73.9962254
+  },
+  "tags": {
+    "building": "yes",
+    "height": "12.9",
+    "nycdoitt:bin": "1086175",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 265516418,
+  "center": {
+    "lat": 40.7485675,
+    "lon": -73.9686893
+  },
+  "tags": {
+    "addr:city": "New York",
+    "addr:housenumber": "421",
+    "addr:postcode": "10017",
+    "addr:street": "East 42nd Street",
+    "building": "service",
+    "exit": "emergency",
+    "height": "4.7",
+    "name": "Tudor Substation",
+    "nycdcp:uid": "db2fd35b313a02a783bb7823c5c26e38",
+    "nycdoitt:bin": "1040071",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 266155245,
+  "center": {
+    "lat": 40.7639467,
+    "lon": -73.9835537
+  },
+  "tags": {
+    "addr:housenumber": "225",
+    "addr:postcode": "10019",
+    "addr:street": "West 53rd Street",
+    "building": "service",
+    "height": "18.2",
+    "name": "IRT Substation #13",
+    "nycdcp:uid": "e42eefe696d5f59b8de13ca791516442",
+    "nycdoitt:bin": "1024834",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 266170565,
+  "center": {
+    "lat": 40.7621769,
+    "lon": -73.9806910
+  },
+  "tags": {
+    "addr:housenumber": "126",
+    "addr:postcode": "10019",
+    "addr:street": "West 53rd Street",
+    "building": "service",
+    "building:colour": "#675846",
+    "building:material": "brick",
+    "height": "27.2",
+    "name": "Central Substation",
+    "nycdcp:uid": "941d3ec9cf1c8a3aa9afe59d1b4cb352",
+    "nycdoitt:bin": "1023162",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "roof:material": "concrete",
+    "roof:shape": "flat",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 266212005,
+  "center": {
+    "lat": 40.7602779,
+    "lon": -73.9684205
+  },
+  "tags": {
+    "addr:housenumber": "152",
+    "addr:postcode": "10022",
+    "addr:street": "East 57th Street",
+    "building": "service",
+    "building:colour": "#49413F",
+    "building:material": "brick",
+    "height": "17.8",
+    "name": "IRT Substation #42",
+    "nycdcp:uid": "7bfad51cd622c406a713e3f9d2915f52",
+    "nycdoitt:bin": "1036883",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "roof:material": "concrete",
+    "roof:shape": "flat",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 266924622,
+  "center": {
+    "lat": 40.7871464,
+    "lon": -73.9483792
+  },
+  "tags": {
+    "addr:housenumber": "1782",
+    "addr:postcode": "10029",
+    "addr:street": "3rd Avenue",
+    "building": "service",
+    "disused": "yes",
+    "height": "17.6",
+    "name": "IRT Substation #7",
+    "nycdcp:uid": "99bd73bdff0d1f3058a14c8a1559baa4",
+    "nycdoitt:bin": "1051753",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction",
+    "wikidata": "Q16900829",
+    "wikipedia": "en:Substation 7"
+  }
+},
+{
+  "type": "way",
+  "id": 269233313,
+  "center": {
+    "lat": 40.7754755,
+    "lon": -73.9869953
+  },
+  "tags": {
+    "addr:city": "New York",
+    "addr:housenumber": "128",
+    "addr:postcode": "10023",
+    "addr:state": "NY",
+    "addr:street": "West End Avenue",
+    "building": "yes",
+    "frequency": "50",
+    "height": "24.7",
+    "name": "West 65th Street Substation",
+    "nycdoitt:bin": "1030342",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "minor_distribution",
+    "voltage": "138000;13200"
+  }
+},
+{
+  "type": "way",
+  "id": 271199175,
+  "center": {
+    "lat": 40.8024648,
+    "lon": -73.9635974
+  },
+  "tags": {
+    "addr:housenumber": "1001",
+    "addr:postcode": "10025",
+    "addr:street": "Amsterdam Avenue",
+    "building": "yes",
+    "height": "18.3",
+    "name": "West 110th Street Substation",
+    "nycdoitt:bin": "1087871",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "distribution"
+  }
+},
+{
+  "type": "way",
+  "id": 271609420,
+  "center": {
+    "lat": 40.8077461,
+    "lon": -73.9365563
+  },
+  "tags": {
+    "addr:housenumber": "1901",
+    "addr:postcode": "10035",
+    "addr:street": "Park Avenue Northbound Roadbed",
+    "building": "yes",
+    "frequency": "60",
+    "height": "14.5",
+    "location": "outdoor",
+    "name": "Parkview Substation",
+    "nycdoitt:bin": "1054509",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "138000;13200"
+  }
+},
+{
+  "type": "way",
+  "id": 271824540,
+  "center": {
+    "lat": 40.8157008,
+    "lon": -73.9480630
+  },
+  "tags": {
+    "addr:housenumber": "311",
+    "addr:postcode": "10030",
+    "addr:street": "West 133rd Street",
+    "alt_name": "Harlem Substation",
+    "building": "service",
+    "height": "16.5",
+    "name": "Substation 219",
+    "nycdoitt:bin": "1059447",
+    "operator": "New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction",
+    "wikidata": "Q7632100",
+    "wikipedia": "en:Substation 219"
+  }
+},
+{
+  "type": "way",
+  "id": 274996706,
+  "center": {
+    "lat": 40.8306151,
+    "lon": -73.9366069
+  },
+  "tags": {
+    "addr:housenumber": "2981A",
+    "addr:postcode": "10039",
+    "addr:street": "Frederick Douglass Boulevard",
+    "destination": "Harlem River Drive South;RFK Bridge;FDR Drive",
+    "height": "4.2",
+    "name": "Building 6",
+    "nycdoitt:bin": "1087107",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 275081116,
+  "center": {
+    "lat": 40.8252447,
+    "lon": -73.9522487
+  },
+  "tags": {
+    "addr:housenumber": "606",
+    "addr:postcode": "10031",
+    "addr:street": "West 143rd Street",
+    "building": "service",
+    "height": "20.8",
+    "name": "West 143rd Street Substation",
+    "nycdcp:uid": "83b110cfd367ed5e9f5f3e7aada81f4c",
+    "nycdoitt:bin": "1062348",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 275265379,
+  "center": {
+    "lat": 40.8104533,
+    "lon": -73.9233916
+  },
+  "tags": {
+    "addr:housenumber": "351",
+    "addr:postcode": "10454",
+    "addr:street": "East 139th Street",
+    "building": "service",
+    "height": "13.5",
+    "name": "IRT Substation #43",
+    "nycdcp:uid": "2ded2ddb47460ea2030a824766daaff5",
+    "nycdoitt:bin": "2000627",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 275282973,
+  "center": {
+    "lat": 40.8078407,
+    "lon": -73.9065647
+  },
+  "tags": {
+    "addr:housenumber": "415",
+    "addr:postcode": "10454",
+    "addr:street": "Bruckner Boulevard",
+    "building": "yes",
+    "frequency": "60",
+    "height": "16.9",
+    "location": "indoor",
+    "name": "Mott Haven Substation",
+    "nycdoitt:bin": "2097196",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "345000;138000;13200"
+  }
+},
+{
+  "type": "way",
+  "id": 275355498,
+  "center": {
+    "lat": 40.8302851,
+    "lon": -73.9249777
+  },
+  "tags": {
+    "NY_mta:propcode": "tje35301",
+    "building": "service",
+    "height": "13.1",
+    "name": "IRT Substation #44",
+    "nycdoitt:bin": "2003020",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 275989355,
+  "center": {
+    "lat": 40.8244731,
+    "lon": -73.8932392
+  },
+  "tags": {
+    "addr:housenumber": "1043",
+    "addr:postcode": "10459",
+    "addr:street": "Simpson Street",
+    "alt_name": "Westchester-Simpson Street Substation",
+    "building": "service",
+    "height": "16.9",
+    "name": "IRT Substation #18",
+    "nycdoitt:bin": "2005797",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "power": "substation",
+    "substation": "traction",
+    "wikidata": "Q2612718"
+  }
+},
+{
+  "type": "way",
+  "id": 278327651,
+  "center": {
+    "lat": 40.7449471,
+    "lon": -73.9713364
+  },
+  "tags": {
+    "building": "yes",
+    "frequency": "60",
+    "height": "11.1",
+    "location": "outdoor",
+    "name": "East 36th Street Substation",
+    "nycdoitt:bin": "1084769",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "roof:material": "concrete",
+    "roof:shape": "flat",
+    "substation": "distribution",
+    "voltage": "138000;13200"
+  }
+},
+{
+  "type": "way",
+  "id": 280569732,
+  "center": {
+    "lat": 40.7505072,
+    "lon": -73.9217193
+  },
+  "tags": {
+    "building": "yes",
+    "height": "6.0",
+    "name": "Sunnyside Yard Static Converter",
+    "nycdoitt:bin": "4550242",
+    "operator": "Amtrak",
+    "power": "substation",
+    "substation": "converter"
+  }
+},
+{
+  "type": "way",
+  "id": 284429117,
+  "center": {
+    "lat": 40.7597002,
+    "lon": -73.7708014
+  },
+  "tags": {
+    "addr:housenumber": "212-06",
+    "addr:postcode": "11361",
+    "addr:street": "Northern Boulevard",
+    "building": "yes",
+    "frequency": "60",
+    "height": "3.0",
+    "name": "Bayside Substation",
+    "nycdoitt:bin": "4156882",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 284485817,
+  "center": {
+    "lat": 40.7393148,
+    "lon": -73.7965808
+  },
+  "tags": {
+    "addr:housenumber": "59-37",
+    "addr:postcode": "11365",
+    "addr:street": "Fresh Meadow Lane",
+    "building": "yes",
+    "frequency": "60",
+    "height": "5.3",
+    "location": "outdoor",
+    "name": "Fresh Meadows Substation",
+    "nycdoitt:bin": "4148766",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 284683850,
+  "center": {
+    "lat": 40.7491657,
+    "lon": -73.8649054
+  },
+  "tags": {
+    "building": "service",
+    "height": "6.4",
+    "name": "Spruce Street Substation",
+    "nycdcp:uid": "6280c26bbf05fc25831cfa5b1223da9f",
+    "nycdoitt:bin": "4558326",
+    "operator": "New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 295544919,
+  "center": {
+    "lat": 40.6983850,
+    "lon": -73.8171540
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 328876917,
+  "center": {
+    "lat": 40.7204221,
+    "lon": -73.7229949
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 329177732,
+  "center": {
+    "lat": 40.7105822,
+    "lon": -73.7657075
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 339711332,
+  "center": {
+    "lat": 40.7049968,
+    "lon": -73.9844863
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Farragut Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "source": "Bing",
+    "substation": "transmission",
+    "voltage": "345000;138000"
+  }
+},
+{
+  "type": "way",
+  "id": 370556535,
+  "center": {
+    "lat": 40.7628665,
+    "lon": -73.9610225
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "East 63rd Street Substation",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "69000;13200"
+  }
+},
+{
+  "type": "way",
+  "id": 370675159,
+  "center": {
+    "lat": 40.7684344,
+    "lon": -73.9504422
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "East 75th Street Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "138000;13200"
+  }
+},
+{
+  "type": "way",
+  "id": 383102707,
+  "center": {
+    "lat": 40.7113638,
+    "lon": -73.9906927
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Cherry Street Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "69000;13200"
+  }
+},
+{
+  "type": "way",
+  "id": 383102724,
+  "center": {
+    "lat": 40.7039295,
+    "lon": -73.9818308
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Hudson Avenue Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "138000"
+  }
+},
+{
+  "type": "way",
+  "id": 383110525,
+  "center": {
+    "lat": 40.7992124,
+    "lon": -73.9111717
+  },
+  "tags": {
+    "barrier": "wall",
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Bruckner Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "138000;13200"
+  }
+},
+{
+  "type": "way",
+  "id": 383110528,
+  "center": {
+    "lat": 40.7403021,
+    "lon": -73.8621314
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Corona Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "138000;27000"
+  }
+},
+{
+  "type": "way",
+  "id": 383110529,
+  "center": {
+    "lat": 40.7042962,
+    "lon": -73.9826749
+  },
+  "tags": {
+    "barrier": "fence",
+    "fixme": "name",
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Farragut Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "source": "Bing",
+    "substation": "transmission",
+    "voltage": "345000;138000"
+  }
+},
+{
+  "type": "way",
+  "id": 383110530,
+  "center": {
+    "lat": 40.7042709,
+    "lon": -73.9843074
+  },
+  "tags": {
+    "barrier": "fence",
+    "fixme": "name",
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Farragut Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "source": "Bing",
+    "substation": "transmission",
+    "voltage": "345000;138000"
+  }
+},
+{
+  "type": "way",
+  "id": 383110533,
+  "center": {
+    "lat": 40.7991168,
+    "lon": -73.9099521
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Hell Gate Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "138000;13200"
+  }
+},
+{
+  "type": "way",
+  "id": 383110539,
+  "center": {
+    "lat": 40.7039872,
+    "lon": -73.9834188
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Plymouth Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "138000;27000"
+  }
+},
+{
+  "type": "way",
+  "id": 383541577,
+  "center": {
+    "lat": 40.7373379,
+    "lon": -73.7069518
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Floral Park Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383541578,
+  "center": {
+    "lat": 40.7643175,
+    "lon": -73.8361300
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "indoor",
+    "name": "Flushing Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383541579,
+  "center": {
+    "lat": 40.7437630,
+    "lon": -73.7171467
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Glen Oaks Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383541580,
+  "center": {
+    "lat": 40.7242610,
+    "lon": -73.8044052
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Hillcrest Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383541581,
+  "center": {
+    "lat": 40.7133593,
+    "lon": -73.7548789
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "indoor",
+    "name": "Hollis Substation",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383575268,
+  "center": {
+    "lat": 40.7437233,
+    "lon": -73.7614847
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Alley Park Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383575270,
+  "center": {
+    "lat": 40.7765289,
+    "lon": -73.7993234
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Auburndale Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383575271,
+  "center": {
+    "lat": 40.7855126,
+    "lon": -73.7953270
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Beechhurst Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383575272,
+  "center": {
+    "lat": 40.6946608,
+    "lon": -73.7880071
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Brinkerhoff Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383575274,
+  "center": {
+    "lat": 40.7788724,
+    "lon": -73.8418393
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Causeway Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383575277,
+  "center": {
+    "lat": 40.7842067,
+    "lon": -73.8509097
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Chisholm Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383575278,
+  "center": {
+    "lat": 40.7770615,
+    "lon": -73.7805881
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Clearview Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383575279,
+  "center": {
+    "lat": 40.7340407,
+    "lon": -73.7251935
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Creedmoor Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383575280,
+  "center": {
+    "lat": 40.7279568,
+    "lon": -73.7840470
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Cunningham Substation",
+    "note": "Cunningham East and West Substations",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383575281,
+  "center": {
+    "lat": 40.7652421,
+    "lon": -73.7422974
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "Douglaston Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383575287,
+  "center": {
+    "lat": 40.7486549,
+    "lon": -73.7373849
+  },
+  "tags": {
+    "frequency": "60",
+    "location": "outdoor",
+    "name": "North Hills Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383585973,
+  "center": {
+    "lat": 40.6965338,
+    "lon": -73.7467534
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Cambria Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383585981,
+  "center": {
+    "lat": 40.7479008,
+    "lon": -73.7620572
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Oakland Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383585983,
+  "center": {
+    "lat": 40.7403152,
+    "lon": -73.7275566
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Parkway Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383585995,
+  "center": {
+    "lat": 40.7335059,
+    "lon": -73.7584612
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Union Substation",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383585996,
+  "center": {
+    "lat": 40.7887570,
+    "lon": -73.8120962
+  },
+  "tags": {
+    "frequency": "60",
+    "name": "Whitestone Substation",
+    "note": "Whitestone East and West Substations",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "operator:wikipedia": "en:Consolidated Edison",
+    "power": "substation",
+    "source": "FERC",
+    "substation": "distribution",
+    "voltage": "27000;4000"
+  }
+},
+{
+  "type": "way",
+  "id": 383604639,
+  "center": {
+    "lat": 40.6950007,
+    "lon": -73.8251792
+  },
+  "tags": {
+    "barrier": "fence",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 397039282,
+  "center": {
+    "lat": 40.7686930,
+    "lon": -73.9892348
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 588777274,
+  "center": {
+    "lat": 40.7838137,
+    "lon": -73.9034521
+  },
+  "tags": {
+    "barrier": "fence",
+    "name": "Astoria Annex",
+    "operator": "New York Power Authority",
+    "power": "substation",
+    "voltage": "345000"
+  }
+},
+{
+  "type": "way",
+  "id": 644536345,
+  "center": {
+    "lat": 40.7704822,
+    "lon": -73.8666747
+  },
+  "tags": {
+    "building": "yes",
+    "name": "LGA East End Substation",
+    "power": "substation",
+    "substation": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 727353580,
+  "center": {
+    "lat": 40.7575461,
+    "lon": -73.8315078
+  },
+  "tags": {
+    "operator": "Long Island Rail Road",
+    "power": "substation",
+    "substation": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 742070304,
+  "center": {
+    "lat": 40.7611007,
+    "lon": -73.7915956
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 801886604,
+  "center": {
+    "lat": 40.7419621,
+    "lon": -73.9517092
+  },
+  "tags": {
+    "building": "service",
+    "name": "IRT Substation",
+    "nycdcp:uid": "d01890c52afe01c65904b9b40ea42ef8",
+    "operator": "New York City Transit Authority",
+    "operator:wikidata": "Q1325591",
+    "operator:wikipedia": "en:New York City Transit Authority",
+    "power": "substation",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 837374547,
+  "center": {
+    "lat": 40.7061690,
+    "lon": -73.7107429
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 861227475,
+  "center": {
+    "lat": 40.7172647,
+    "lon": -73.9661040
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 861227477,
+  "center": {
+    "lat": 40.7538775,
+    "lon": -73.9514301
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 861227479,
+  "center": {
+    "lat": 40.7991111,
+    "lon": -73.9150125
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 925402944,
+  "center": {
+    "lat": 40.7793010,
+    "lon": -73.7349004
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 970237588,
+  "center": {
+    "lat": 40.8312351,
+    "lon": -73.9831059
+  },
+  "tags": {
+    "barrier": "fence",
+    "check_date": "2023-08-24",
+    "fence_type": "chain_link",
+    "fixme": "Determine name",
+    "operator": "PSE&G",
+    "operator:wikidata": "Q930919",
+    "power": "substation",
+    "substation": "minor_distribution",
+    "voltage": "26000;13800"
+  }
+},
+{
+  "type": "way",
+  "id": 999733644,
+  "center": {
+    "lat": 40.7183835,
+    "lon": -73.7265069
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1032054400,
+  "center": {
+    "lat": 40.8090904,
+    "lon": -73.6957920
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "LIRR Plandome Substation",
+    "operator": "Long Island Rail Road",
+    "power": "substation",
+    "ref": "N11",
+    "substation": "distribution"
+  }
+},
+{
+  "type": "way",
+  "id": 1035800626,
+  "center": {
+    "lat": 40.7233344,
+    "lon": -73.6824860
+  },
+  "tags": {
+    "operator": "Long Island Rail Road",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1050096334,
+  "center": {
+    "lat": 40.7262963,
+    "lon": -73.7018045
+  },
+  "tags": {
+    "power": "substation",
+    "substation": "minor_distribution"
+  }
+},
+{
+  "type": "way",
+  "id": 1050130524,
+  "center": {
+    "lat": 40.7669099,
+    "lon": -73.7505902
+  },
+  "tags": {
+    "name": "LIRR Douglaston Substation",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1054111198,
+  "center": {
+    "lat": 40.7939513,
+    "lon": -73.7056824
+  },
+  "tags": {
+    "name": "LIRR Manhasset Substation",
+    "operator": "Long Island Rail Road",
+    "power": "substation",
+    "ref": "N10",
+    "source": "survey"
+  }
+},
+{
+  "type": "way",
+  "id": 1054897596,
+  "center": {
+    "lat": 40.8142957,
+    "lon": -73.7395571
+  },
+  "tags": {
+    "name": "Kings Point Substation",
+    "operator": "Long Island Power Authority",
+    "operator:wikidata": "Q17035174",
+    "power": "substation",
+    "substation": "distribution"
+  }
+},
+{
+  "type": "way",
+  "id": 1057992619,
+  "center": {
+    "lat": 40.7375389,
+    "lon": -73.8915054
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1057992620,
+  "center": {
+    "lat": 40.7377001,
+    "lon": -73.8924788
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1063442522,
+  "center": {
+    "lat": 40.7642631,
+    "lon": -73.9053468
+  },
+  "tags": {
+    "description": "Paralleling",
+    "frequency": "60",
+    "name": "Bowery Bay Substation",
+    "note": "60Hz system only",
+    "operator": "Amtrak",
+    "power": "substation",
+    "ref": "45",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 1063444054,
+  "center": {
+    "lat": 40.7506834,
+    "lon": -73.9214374
+  },
+  "tags": {
+    "operator": "Amtrak",
+    "power": "substation",
+    "substation": "converter"
+  }
+},
+{
+  "type": "way",
+  "id": 1063444055,
+  "center": {
+    "lat": 40.7503425,
+    "lon": -73.9220647
+  },
+  "tags": {
+    "operator": "Amtrak",
+    "power": "substation",
+    "substation": "converter"
+  }
+},
+{
+  "type": "way",
+  "id": 1063447741,
+  "center": {
+    "lat": 40.7474297,
+    "lon": -73.9312185
+  },
+  "tags": {
+    "name": "Sunnyside Substation",
+    "operator": "Amtrak",
+    "power": "substation",
+    "ref": "44",
+    "substation": "traction"
+  }
+},
+{
+  "type": "way",
+  "id": 1095289259,
+  "center": {
+    "lat": 40.7439661,
+    "lon": -73.8697739
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1169738257,
+  "center": {
+    "lat": 40.7959004,
+    "lon": -73.9956193
+  },
+  "tags": {
+    "barrier": "fence",
+    "check_date": "2022-09-15",
+    "fence_type": "chain_link",
+    "name": "River Road Substation",
+    "note": "Reference the map on page 3 for information.",
+    "operator": "PSE&G",
+    "operator:wikidata": "Q930919",
+    "power": "substation",
+    "source": "https://www.pjm.com/-/media/committees-groups/committees/srrtep-ma/2022/20220915/item-03---reliability-analysis-update.ashx",
+    "substation": "minor_distribution",
+    "voltage": "69000"
+  }
+},
+{
+  "type": "way",
+  "id": 1237673961,
+  "center": {
+    "lat": 40.7383004,
+    "lon": -73.8172108
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1322825071,
+  "center": {
+    "lat": 40.7831492,
+    "lon": -73.9043894
+  },
+  "tags": {
+    "barrier": "fence",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1338654396,
+  "center": {
+    "lat": 40.7383956,
+    "lon": -73.9523568
+  },
+  "tags": {
+    "name": "11th Street Conduit",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1338654415,
+  "center": {
+    "lat": 40.7440616,
+    "lon": -73.9507545
+  },
+  "tags": {
+    "addr:city": "Long Island City",
+    "addr:housenumber": "47-27",
+    "addr:state": "NY",
+    "addr:street": "11th Street",
+    "name": "11th Street Conduit",
+    "operator": "Consolidated Edison",
+    "operator:wikidata": "Q1127536",
+    "power": "substation",
+    "substation": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1396129258,
+  "center": {
+    "lat": 40.7888079,
+    "lon": -73.7214834
+  },
+  "tags": {
+    "name": "LIRR Great Neck Substation",
+    "operator": "LIRR",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1429558302,
+  "center": {
+    "lat": 40.7511936,
+    "lon": -73.8467317
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1485150723,
+  "center": {
+    "lat": 40.7705181,
+    "lon": -73.8884372
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1485150724,
+  "center": {
+    "lat": 40.7817641,
+    "lon": -73.8981387
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1485150725,
+  "center": {
+    "lat": 40.7865113,
+    "lon": -73.9126132
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1485150726,
+  "center": {
+    "lat": 40.7862864,
+    "lon": -73.9129405
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1497175115,
+  "center": {
+    "lat": 40.7293044,
+    "lon": -73.6856261
+  },
+  "tags": {
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1540230931,
+  "center": {
+    "lat": 40.7070357,
+    "lon": -73.9704999
+  },
+  "tags": {
+    "abandoned": "building",
+    "alt_name": "Substation L",
+    "building": "yes",
+    "description": "Historical usage: Substation",
+    "name": "Building 390",
+    "note": "Not a contributing feature to the Brooklyn Navy Yard Historic District.",
+    "power": "substation",
+    "protection_title": "City of New York",
+    "source:1": "Digital Archive on NPGallery",
+    "source_ref:1": "https://npgallery.nps.gov/NRHP/AssetDetail/314d2a7b-7525-4998-8a77-dd3b9dba7073",
+    "start_date": "1942"
+  }
+},
+{
+  "type": "relation",
+  "id": 12529566,
+  "center": {
+    "lat": 40.7532913,
+    "lon": -73.7018020
+  },
+  "tags": {
+    "name": "Lake Success Substation",
+    "power": "substation",
+    "ref": "3AF",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 14695844,
+  "center": {
+    "lat": 40.7791439,
+    "lon": -73.7352688
+  },
+  "tags": {
+    "power": "substation",
+    "type": "multipolygon"
+  }
+}
+
+  ]
+}
