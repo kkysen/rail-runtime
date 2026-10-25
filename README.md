@@ -32,10 +32,11 @@ and into Atlantic Terminal, the Atlantic Branch from Jamaica.
   Dwells are 30 s and runs are flat, with no schedule padding.
 - **Third rail:** 750 V substations from OSM, with gaps filled at 2 mile spacing,
   counting the LIRR's own and any untagged substation within 50 m of the track
-  at least 0.6 mi from the others, where the roughly 1 mile spacing leaves room for one,
-  but not Amtrak's, the subway's or the utilities',
-  which are kept for when those lines are modeled.
-  Each has 0.01 Ω source resistance, with 0.04 Ω per mile of contact and return rail, fed from both sides.
+  at least half a substation spacing from the others, where there's room for one.
+  That spacing, 1.54 mi, is the gap at whose middle a lone M7 at full current sees 500 V.
+  Amtrak's, the subway's and the utilities' substations don't count,
+  and are kept for when those lines are modeled.
+  Each substation has 0.01 Ω source resistance, with 0.04 Ω per mile of contact and return rail, fed from both sides.
   Trains draw up to their rated current and shed load below 500 V.
   25 kV trains get rated power everywhere.
   The "full power" M7 is the same train on a third rail with no voltage drop,

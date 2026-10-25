@@ -30,7 +30,6 @@ V0 = _sim.V0  # substation output, V (ORM tags the line 750 V)
 R_SUB = 0.010  # substation source resistance, ohm
 R_LOOP = 0.040  # contact rail plus running-rail return, ohm per mile
 MAX_GAP = 2.0  # miles; gaps between mapped substations are filled at this spacing
-MIN_SPACING = 0.6  # miles; LIRR substations are about 1 mile apart, so an untagged one nearer another isn't one
 V_MIN = _sim.V_MIN  # train cuts traction below this
 
 
@@ -94,6 +93,16 @@ TRAINS = [
     c755("755/3 x4, 25 kV", "25 kV"),
     c755("755/3 x4, 25 kV, 1.3 brake", "25 kV", brake=1.3),
 ]
+
+
+def spacing(train: Train) -> float:
+    """Miles between substations for `train` alone at full current midway between two to see `V_MIN`."""
+    r_mid = (V0 - V_MIN) / train.i_max  # effective source resistance there, fed from both sides
+    return 2 * (2 * r_mid - R_SUB) / R_LOOP
+
+
+# Substations are no closer than they need to be, so one within half this of another is suspect.
+SPACING = spacing(TRAINS[0])
 
 
 # --- Lines ------------------------------------------------------------------
@@ -219,9 +228,9 @@ class Line:
         lirr = sorted(lirr)
         mapped = [x for k, x in enumerate(lirr) if k == 0 or x - lirr[k - 1] > 200]
         # An untagged substation right beside the track counts only where the spacing leaves room for one,
-        # at least MIN_SPACING from every substation counted so far; that also drops its duplicates.
+        # at least half of `SPACING` from every substation counted so far; that also drops its duplicates.
         for x in sorted(untagged):
-            if all(abs(x - y) >= MIN_SPACING * MILE for y in mapped):
+            if all(abs(x - y) >= SPACING / 2 * MILE for y in mapped):
                 mapped.append(x)
         mapped.sort()
         pts = sorted({0.0, *mapped, float(self.s[-1])})
