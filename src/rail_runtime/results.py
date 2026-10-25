@@ -65,7 +65,7 @@ def timetable(data, date):
         trips = m.am_inbound(f"{data}/gtfs", date, None if route else name, set(stops), route)
         by = defaultdict(list)
         for t in trips:
-            by[tuple(s for s in order if s in t["stops"])].append(t["sched"])
+            by[tuple(s for s in order if s in t.stops)].append(t.sched)
         rows = []
         for pat, sch in sorted(by.items(), key=lambda kv: (-len(kv[1]), kv[0])):
             sims = [line.trip(m7, k, list(pat)) for k in KINDS]

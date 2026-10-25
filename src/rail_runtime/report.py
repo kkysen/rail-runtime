@@ -56,15 +56,15 @@ def report(data: str, date: str) -> None:
         print("AM inbound, M7 750 V:   sched  posted     60     80    100")
         if origin == "Port Washington":
             for t in trips:
-                sims = [line.trip(m7, k, [s for s in order if s in t["stops"]]) for k in KINDS]
+                sims = [line.trip(m7, k, [s for s in order if s in t.stops]) for k in KINDS]
                 print(
-                    f"  {t['num']:>5} {int(t['arr'] // 60)}:{int(t['arr'] % 60):02d} {t['first'][:12]:12} "
-                    f"{len(t['stops']):2} stops {t['sched']:5.0f} {fmt(sims)}"
+                    f"  {t.num:>5} {int(t.arr // 60)}:{int(t.arr % 60):02d} {t.first[:12]:12} "
+                    f"{len(t.stops):2} stops {t.sched:5.0f} {fmt(sims)}"
                 )
         else:
             by = {}
             for t in trips:
-                by.setdefault(tuple(s for s in order if s in t["stops"]), []).append(t["sched"])
+                by.setdefault(tuple(s for s in order if s in t.stops), []).append(t.sched)
             for pat, sch in sorted(by.items(), key=lambda kv: len(kv[0])):
                 sims = [line.trip(m7, k, list(pat)) for k in KINDS]
                 mid = " > ".join(p.split()[0] for p in pat[1:-1]) or "nonstop"
