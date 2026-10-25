@@ -3,6 +3,8 @@
 
 #[cfg(feature = "python")]
 mod python;
+pub mod single;
+pub mod train;
 
 #[global_allocator]
 static ALLOCATOR: mimalloc::MiMalloc = mimalloc::MiMalloc;

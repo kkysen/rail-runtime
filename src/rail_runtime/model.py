@@ -15,6 +15,8 @@ from typing import Any
 import numpy as np
 import numpy.typing as npt
 
+from rail_runtime import _sim
+
 type Arr = npt.NDArray[np.float64]
 
 MPH = 0.44704
@@ -23,11 +25,11 @@ DWELL = 30.0
 EA, EU = 6.0, 3.0  # superelevation and unbalance, inches
 
 # --- Third rail -------------------------------------------------------------
-V0 = 750.0  # substation output, V (ORM tags the line 750 V)
+V0 = _sim.V0  # substation output, V (ORM tags the line 750 V)
 R_SUB = 0.010  # substation source resistance, ohm
 R_LOOP = 0.040  # contact rail plus running-rail return, ohm per mile
 MAX_GAP = 2.0  # miles; gaps between mapped substations are filled at this spacing
-V_MIN = 500.0  # train cuts traction below this
+V_MIN = _sim.V_MIN  # train cuts traction below this
 
 
 # --- Trains -----------------------------------------------------------------
@@ -67,24 +69,7 @@ class Train:
 
     def power(self, r_eff: float) -> float:
         """Shaft power available at a point fed through r_eff ohms."""
-        if self.supply != "third rail":
-            return self.p_shaft
-        r_eff *= self.sharing
-        demand = self.p_shaft / 0.90 + self.aux
-        disc = V0 * V0 - 4 * r_eff * demand
-        if disc >= 0:
-            v = (V0 + math.sqrt(disc)) / 2
-            i = demand / v
-        else:  # network can't deliver the demand: maximum power transfer
-            v, i = V0 / 2, V0 / (2 * r_eff)
-        if i > self.i_max:
-            i = self.i_max
-            v = V0 - i * r_eff
-        if v < V_MIN:
-            # Shed current until the train voltage is back at the cutoff.
-            i = (V0 - V_MIN) / r_eff
-            v = V_MIN
-        return max(v * i - self.aux, 0.0) * 0.90
+        return _sim.power(self, r_eff)
 
 
 def m7_like(name: str, supply: str, sharing: float = 1.0) -> Train:
@@ -236,28 +221,17 @@ class Line:
             lim[end] = np.minimum(lim[end], 15)  # bumper approach at the outer terminal
         return lim
 
-    def run(self, train: Train, lim_mph: Arr, a: float, b: float) -> tuple[float, Arr]:
-        i0, i1 = sorted((int(round(a / self.ds)), int(round(b / self.ds))))
-        vl = lim_mph[i0 : i1 + 1] * MPH
-        vl[0] = vl[-1] = 0  # stand at both stations
-        p = [train.power(r) for r in self.r_eff[i0 : i1 + 1]]
-        v = vl.copy()
-        for i in range(1, len(v)):
-            u = max(v[i - 1], 0.1)
-            f = min(train.f_max, p[i - 1] / u)
-            acc = (f - train.resist(u)) / train.m_eff
-            v[i] = min(vl[i], math.sqrt(max(v[i - 1] ** 2 + 2 * acc * self.ds, 0)))
-        for i in range(len(v) - 2, -1, -1):
-            v[i] = min(v[i], math.sqrt(v[i + 1] ** 2 + 2 * train.brake * self.ds))
-        vm = np.maximum((v[1:] + v[:-1]) / 2, 0.3)
-        return float(np.sum(self.ds / vm)), v
+    def run(self, train: Train, lim_mph: Arr, a: float, b: float) -> float:
+        """Seconds from standing at chainage `a` to standing at `b`."""
+        i0, i1 = sorted((round(a / self.ds), round(b / self.ds)))
+        return _sim.run(train, lim_mph[i0 : i1 + 1], self.r_eff[i0 : i1 + 1], self.ds)
 
     def trip(self, train: Train, kind: str, stops: list[str], lim: Arr | None = None) -> float:
         """Minutes from the first stop to the last; `lim` (mph by sample) overrides `kind`'s limits."""
         if lim is None:
             lim = self.limits(kind, train.vmax)
         xs = [self.st[n] for n in stops]
-        t = sum(self.run(train, lim, a, b)[0] for a, b in pairwise(xs))
+        t = sum(self.run(train, lim, a, b) for a, b in pairwise(xs))
         return (t + DWELL * (len(stops) - 2)) / 60
 
 
