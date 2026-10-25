@@ -7,3 +7,6 @@
 __pycache__/
 /.venv/
 /.ruff_cache/
+
+# Shared editor settings, re-included over a global ignore.
+!.vscode/
