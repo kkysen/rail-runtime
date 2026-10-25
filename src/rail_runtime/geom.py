@@ -34,32 +34,75 @@ def third_rail(w: dict[str, Any]) -> bool:
     )
 
 
-def count_tracks(xy: Arr, ways: list[Arr]) -> npt.NDArray[np.int_]:
-    """Parallel running tracks at each sample of path `xy` (m), from `ways` (each an array of points, m).
+def count_tracks(xy: Arr, ways: list[dict[str, Any]], k_xy: Arr) -> npt.NDArray[np.int_]:
+    """Through tracks at each sample of path `xy` (m), from OSM `ways` scaled to metres by `k_xy`.
 
-    A track counts where it runs within 30 degrees of the path's heading and 60 m either side of it,
-    wide enough for Harold,
-    with tracks told apart by lateral offsets 2.5 m or more apart (track centres are about 4 m).
-    A 500 m running median smooths over the extra tracks at interlockings.
+    Every 50 m, a cut across the path counts the tracks crossing it within 60 degrees of the path's heading:
+    the traced track's corridor, stepping outward while the next track is within 40 m,
+    so it takes in all of Harold's fan but not a separate line beyond.
+    Only through tracks count, at least 300 m from a dead end either way, so not stubs or leads,
+    with tracks told apart by crossings 2.5 m or more apart (track centres are about 4 m).
+    A 500 m running median smooths over interlockings.
     """
-    a = np.concatenate([w[:-1] for w in ways])
-    d = np.concatenate([np.diff(w, axis=0) for w in ways])
-    l2 = np.maximum((d**2).sum(1), 1e-9)
+    coord: dict[int, Arr] = {}
+    adj: dict[int, set[int]] = {}
+    segs: list[tuple[int, int]] = []
+    for w in ways:
+        for n, p in zip(w["nodes"], w["geometry"], strict=True):
+            coord[n] = np.array([p["lon"], p["lat"]]) * k_xy
+        for a, b in pairwise(w["nodes"]):
+            adj.setdefault(a, set()).add(b)
+            adj.setdefault(b, set()).add(a)
+            segs.append((a, b))
+    # Distance along the track from every node to the nearest dead end.
+    dead = {n: 0.0 for n, v in adj.items() if len(v) == 1}
+    pq = [(0.0, n) for n in dead]
+    heapq.heapify(pq)
+    while pq:
+        du, u = heapq.heappop(pq)
+        if du > dead[u]:
+            continue
+        for v in adj[u]:
+            dv = du + float(np.hypot(*(coord[u] - coord[v])))
+            if dv < dead.get(v, math.inf):
+                dead[v] = dv
+                heapq.heappush(pq, (dv, v))
+    segs = [(a, b) for a, b in segs if min(dead.get(a, math.inf), dead.get(b, math.inf)) >= 300]
+    a = np.array([coord[x] for x, _ in segs])
+    d = np.array([coord[y] for _, y in segs]) - a
     lo, hi = np.minimum(a, a + d), np.maximum(a, a + d)  # segment bounding boxes
-    out = np.zeros(len(xy), dtype=int)
-    for i, p in enumerate(xy):
+    reach = 500.0
+    every = 10  # samples: 50 m
+    counts = []
+    for i in range(0, len(xy), every):
+        p = xy[i]
         h = xy[min(i + 4, len(xy) - 1)] - xy[max(i - 4, 0)]
         h = h / np.hypot(*h)
-        near = ((lo < p + 110) & (hi > p - 110)).all(1)
-        u = np.clip(((p - a[near]) * d[near]).sum(1) / l2[near], 0, 1)
-        q = a[near] + u[:, None] * d[near] - p
-        off = q @ np.array([-h[1], h[0]])
-        par = np.abs((d[near] / np.sqrt(l2[near])[:, None]) @ h) > math.cos(math.radians(30))
-        o = np.sort(off[par & (np.abs(off) < 60) & (np.abs(q @ h) < 5)])
-        out[i] = 1 + int((np.diff(o) > 2.5).sum()) if len(o) else 1
-    w = 50  # samples either side: 500 m in all
-    padded = np.pad(out, w, mode="edge")
-    return np.array([int(np.median(padded[i : i + 2 * w + 1])) for i in range(len(out))])
+        nrm = np.array([-h[1], h[0]])
+        near = ((lo <= p + reach + 1) & (hi >= p - reach - 1)).all(1)
+        an, dn = a[near], d[near]
+        # Where each segment crosses the cut p + t * nrm.
+        den = dn[:, 0] * nrm[1] - dn[:, 1] * nrm[0]
+        ok = np.abs(den) > 1e-9
+        den = np.where(ok, den, 1)
+        r = p - an
+        u = (r[:, 0] * nrm[1] - r[:, 1] * nrm[0]) / den
+        t = (r[:, 0] * dn[:, 1] - r[:, 1] * dn[:, 0]) / den
+        par = np.abs((dn / np.hypot(*dn.T)[:, None]) @ h) > math.cos(math.radians(60))
+        offs = np.sort(t[ok & (u >= 0) & (u <= 1) & (np.abs(t) <= reach) & par])
+        if len(offs) == 0:
+            counts.append(1)
+            continue
+        j0 = j1 = int(np.argmin(np.abs(offs)))
+        while j0 > 0 and offs[j0] - offs[j0 - 1] <= 40:
+            j0 -= 1
+        while j1 < len(offs) - 1 and offs[j1 + 1] - offs[j1] <= 40:
+            j1 += 1
+        counts.append(1 + int((np.diff(offs[j0 : j1 + 1]) > 2.5).sum()))
+    w = 5  # cuts either side: 500 m in all
+    padded = np.pad(np.array(counts), w, mode="edge")
+    smooth = [int(np.median(padded[i : i + 2 * w + 1])) for i in range(len(counts))]
+    return np.repeat(smooth, every)[: len(xy)]
 
 
 def trace(rail_json: str, route_json: str, gtfs: str, stop_a: str, stop_b: str, out: str) -> None:
@@ -194,9 +237,7 @@ def trace(rail_json: str, route_json: str, gtfs: str, stop_a: str, stop_b: str, 
 
     lonlat = rs / [111320 * math.cos(math.radians(lat0)), 110540]
     k_xy = np.array([111320 * math.cos(math.radians(lat0)), 110540])
-    tracks = count_tracks(
-        rs, [np.array([[p["lon"], p["lat"]] for p in w["geometry"]]) * k_xy for w in d if third_rail(w)]
-    )
+    tracks = count_tracks(rs, [w for w in d if third_rail(w)], k_xy)
     Geometry(ss, R, np.array(maxspeed), lonlat, stations, tracks).save(out)
     print(f"length {s[-1] / 1609.34:.2f} mi, {len(ss)} samples")
     for n, x in stations:
