@@ -266,10 +266,17 @@ class Line:
                 mapped.append(x)
         mapped.sort()
         # Fill gaps at the usual spacing, as near as whole substations allow.
-        pts = sorted({0.0, *mapped, float(self.s[-1])})
+        # No substation is assumed at either end of the path: past the outermost mapped ones,
+        # they continue at the usual spacing to the first at or beyond each end.
+        sp = self.spacing * MILE
+        pts = sorted(mapped) or [float(self.s[-1]) / 2]
+        while pts[0] > 0:
+            pts.insert(0, pts[0] - sp)
+        while pts[-1] < self.s[-1]:
+            pts.append(pts[-1] + sp)
         subs: list[float] = []
         for a, b in pairwise(pts):
-            n = max(1, round((b - a) / (self.spacing * MILE)))
+            n = max(1, round((b - a) / sp))
             subs += [a + (b - a) * k / n for k in range(n)]
         subs.append(pts[-1])
         self.mapped = sorted(mapped)
