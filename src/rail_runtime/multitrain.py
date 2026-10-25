@@ -5,28 +5,44 @@ Braking trains regenerate into the third rail; substations are diode rectifiers 
 so regen only helps other trains, and a train sheds regen once its voltage reaches V_REGEN_MAX.
 """
 
+import math
+from collections.abc import Iterator
+from dataclasses import dataclass
 from itertools import pairwise
+from typing import NamedTuple
 
 import numpy as np
 
 from rail_runtime import model as m
+from rail_runtime.model import Arr, Line, Train
 
 DT = 0.5  # s
 REGEN_EFF = 0.80  # wheel to line
 V_REGEN_MAX = 900.0  # V
 
 
+class Service(NamedTuple):
+    """Trains on one stopping pattern in one direction, on their own track."""
+
+    name: str
+    stops: list[str]
+    inbound: bool
+    track: int
+    headway: float  # s
+    offset: float  # s, first departure
+
+
 class Run:
     """One train's pattern in its own direction: limits and braking envelope by distance travelled."""
 
-    def __init__(self, line, train, kind, stops, inbound):
+    def __init__(self, line: Line, train: Train, kind: str, stops: list[str], inbound: bool) -> None:
         lim = line.limits(kind, train.vmax) * m.MPH
         s = line.s
         if inbound:
             lim, pos = lim[::-1], s[-1] - s[::-1]
         else:
             pos = s
-        stop_p = sorted((s[-1] - line.st[n]) if inbound else line.st[n] for n in stops)
+        stop_p = sorted(float(s[-1] - line.st[n]) if inbound else line.st[n] for n in stops)
         self.p0, self.p1 = stop_p[0], stop_p[-1]
         self.stops = stop_p
         self.ds = line.ds
@@ -39,15 +55,15 @@ class Run:
         self.env = env
         self.lim = lim
         self.inbound = inbound
-        self.s_end = s[-1]
+        self.s_end = float(s[-1])
 
-    def chain(self, p):
+    def chain(self, p: float) -> float:
         """Track chainage (from Penn) for distance travelled p."""
         return self.s_end - p if self.inbound else p
 
 
 class Car:
-    def __init__(self, run, t0, track, service):
+    def __init__(self, run: Run, t0: float, track: int, service: str) -> None:
         self.run = run
         self.track = track
         self.service = service
@@ -56,21 +72,21 @@ class Car:
         self.dwell = 0.0
         self.t0 = t0
         self.next_stop = 1
-        self.done = None
+        self.done: float | None = None
 
 
-def demand(train, car, regen):
+def demand(train: Train, car: Car, regen: bool) -> float:
     """Electrical power the train wants this step (negative when regenerating)."""
     r = car.run
     if car.dwell > 0:
         return train.aux
     i = min(int(car.p / r.ds), len(r.env) - 1)
     j = min(int((car.p + car.v * DT) / r.ds), len(r.env) - 1)
-    want = min(r.env[min(i + 1, len(r.env) - 1)], r.lim[i])
+    want = min(float(r.env[min(i + 1, len(r.env) - 1)]), float(r.lim[i]))
     v = max(car.v, 0.1)
     if car.v < want - 0.05:
         return min(train.f_max * v, train.p_shaft) / 0.90 + train.aux
-    if r.env[j] < car.v - 0.05:
+    if float(r.env[j]) < car.v - 0.05:
         # Braking: electric brake recovers what it can, up to rated power.
         rec = min(train.m_eff * train.brake * car.v, train.p_shaft) * REGEN_EFF if regen else 0.0
         return train.aux - rec
@@ -80,18 +96,18 @@ def demand(train, car, regen):
 NONCONVERGED = [0]
 
 
-def solve(subs, cars, dem, train, n_tracks):
+def solve(subs: list[float], cars: list[Car], dem: list[float], train: Train, n_tracks: int) -> tuple[list[float], Arr]:
     """Nodal solve of the DC network; returns (power to each train in W, train voltages)."""
     n_sub = len(subs)
     n = n_sub + len(cars)
     if not cars:
-        return [], []
+        return [], np.zeros(0)
     cur = np.zeros(len(cars))
     V = np.full(n, m.V0)
     # Branch conductances only depend on positions.
     G0 = np.zeros((n, n))
     for track in range(n_tracks):
-        nodes = [(subs[k], k) for k in range(n_sub)]
+        nodes: list[tuple[float, int]] = [(subs[k], k) for k in range(n_sub)]
         nodes += [(c.run.chain(c.p), n_sub + j) for j, c in enumerate(cars) if c.track == track]
         nodes.sort()
         for (xa, a), (xb, bb) in pairwise(nodes):
@@ -111,7 +127,7 @@ def solve(subs, cars, dem, train, n_tracks):
             b[k] += m.V0 * g
         for j in range(len(cars)):
             k = n_sub + j
-            Vt = max(V[k], 1.0)
+            Vt = max(float(V[k]), 1.0)
             if dem[j] >= 0:
                 cur[j] = min(dem[j] / Vt, train.i_max)
                 if Vt < m.V_MIN:
@@ -130,23 +146,31 @@ def solve(subs, cars, dem, train, n_tracks):
         V = 0.7 * V + 0.3 * V_new
     else:
         NONCONVERGED[0] += 1
-    return [V[n_sub + j] * cur[j] for j in range(len(cars))], V[n_sub:]
+    return [float(V[n_sub + j] * cur[j]) for j in range(len(cars))], V[n_sub:]
 
 
-def simulate(line, train, kind, services, horizon, regen=True, single=False):
-    """services: list of (name, stops, inbound, track, headway s, offset s)."""
-    runs = {(nm, d): Run(line, train, kind, st, d) for nm, st, d, *_ in services}
-    subs = list(line.subs)
-    n_tracks = max(sv[3] for sv in services) + 1
-    cars = []
-    vmin = []
+def simulate(
+    line: Line,
+    train: Train,
+    kind: str,
+    services: list[Service],
+    horizon: float,
+    regen: bool = True,
+    single: bool = False,
+) -> tuple[list[Car], list[float]]:
+    """Run `services` for `horizon` s; returns the finished trains and each step's lowest train voltage."""
+    runs = {(sv.name, sv.inbound): Run(line, train, kind, sv.stops, sv.inbound) for sv in services}
+    subs = [float(x) for x in line.subs]
+    n_tracks = max(sv.track for sv in services) + 1
+    cars: list[Car] = []
+    vmin: list[float] = []
     t = 0.0
-    next_dep = {i: sv[5] for i, sv in enumerate(services)}
+    next_dep = {i: sv.offset for i, sv in enumerate(services)}
     while t < horizon:
-        for i, (nm, _st, d, track, hw, _off) in enumerate(services):
+        for i, sv in enumerate(services):
             if t >= next_dep[i] and not (single and cars):
-                cars.append(Car(runs[(nm, d)], t, track, nm))
-                next_dep[i] += hw
+                cars.append(Car(runs[(sv.name, sv.inbound)], t, sv.track, sv.name))
+                next_dep[i] += sv.headway
         active = [c for c in cars if c.done is None]
         if single and cars and not active:
             break
@@ -164,14 +188,14 @@ def simulate(line, train, kind, services, horizon, regen=True, single=False):
                 continue
             i = min(int(c.p / r.ds), len(r.env) - 1)
             u = max(c.v, 0.1)
-            mech = max(pe - train.aux, 0) * 0.90
+            mech = max(pe - train.aux, 0.0) * 0.90
             acc = (min(train.f_max, mech / u) - train.resist(c.v)) / train.m_eff
-            v_new = max(c.v + acc * DT, 0)
+            v_new = max(c.v + acc * DT, 0.0)
             j = min(int((c.p + c.v * DT) / r.ds), len(r.env) - 1)
-            v_new = min(v_new, r.env[j], r.lim[i])
+            v_new = min(v_new, float(r.env[j]), float(r.lim[i]))
             stop = r.stops[c.next_stop]
             if stop - c.p > 1.0:
-                v_new = max(v_new, min(1.0, np.sqrt(2 * train.brake * max(stop - c.p, 0))))
+                v_new = max(v_new, min(1.0, math.sqrt(2 * train.brake * max(stop - c.p, 0.0))))
             c.p += (c.v + v_new) / 2 * DT
             c.v = v_new
             if c.p >= stop - 1.0:
@@ -207,64 +231,90 @@ TRAINS = ("M7, 750 V third rail", "M8, 25 kV")
 KINDS = ("posted", "60", "80", "100")
 
 
-def busy(line, cases, horizon, window):
-    """Yield dicts of service, train, kind, one-train and busy runtimes (min), and the lowest train voltage."""
+@dataclass
+class BusyRow:
+    service: str
+    train: Train
+    kind: str
+    one: float  # minutes per inbound trip with one train alone
+    regen: float  # minutes per inbound trip in steady busy service
+    no_regen: float  # nan unless on third rail
+    vmin: float  # lowest train voltage, V; nan unless on third rail
+
+
+class Setup(NamedTuple):
+    title: str
+    line: Line
+    services: list[Service]
+    horizon: float  # s
+    window: tuple[float, float]  # departures counted as steady state, s
+
+
+def busy(line: Line, cases: list[Service], horizon: float, window: tuple[float, float]) -> Iterator[BusyRow]:
+    """Yield a row per inbound service, train and speed case."""
     for tr in [t for t in m.TRAINS if t.name in TRAINS]:
         for kind in KINDS:
-            res = {}
+            res: dict[bool, tuple[list[Car], list[float]]] = {}
             for regen in (True, False):
                 if not regen and tr.supply != "third rail":
                     continue
                 done, vmin = simulate(line, tr, kind, cases, horizon, regen)
                 res[regen] = (done, vmin)
-            for name, _stops, inbound, *_ in cases:
-                if not inbound:
+            for sv in cases:
+                if not sv.inbound:
                     continue
-                one, _ = simulate(line, tr, kind, [c for c in cases if c[0] == name], horizon, single=True)
-                row = {}
+                name = sv.name
+                one, _ = simulate(line, tr, kind, [c for c in cases if c.name == name], horizon, single=True)
+                row: dict[bool, float] = {}
                 for regen in (True, False):
                     if regen not in res:
                         row[regen] = float("nan")
                         continue
                     xs = [
-                        (c.done - c.t0) / 60
+                        runtime(c)
                         for c in res[regen][0]
                         if c.service == name and c.run.inbound and window[0] <= c.t0 < window[1]
                     ]
-                    row[regen] = np.mean(xs)
-                yield dict(
+                    row[regen] = float(np.mean(xs))
+                yield BusyRow(
                     service=name,
                     train=tr,
                     kind=kind,
-                    one=(one[0].done - one[0].t0) / 60,
+                    one=runtime(one[0]),
                     regen=row[True],
                     no_regen=row[False],
                     vmin=min(res[True][1]) if res[True][1] else float("nan"),
                 )
 
 
-def lines(data):
-    """Per line: (title, Line, cases, horizon s, steady-state departure window s)."""
+def runtime(c: Car) -> float:
+    """Minutes from departure to arrival of a finished train."""
+    assert c.done is not None
+    return (c.done - c.t0) / 60
+
+
+def lines(data: str) -> dict[str, Setup]:
+    """The busy-service setups: Port Washington local, express, and Jamaica."""
     pw = m.Line(f"{data}/pw_geom.json", f"{data}/substations.json", PW_STOPS)
     jam = m.Line(f"{data}/jam_geom.json", f"{data}/substations.json", JAM_STOPS, terminal=False)
     nonstop = ["Penn Station", "Jamaica"]
-    out = {}
+    out: dict[str, Setup] = {}
     for name, stops in (("PW local", PW_STOPS), ("PW express", PW_EXPRESS)):
-        out[name] = (
+        out[name] = Setup(
             f"{name}, every 5 min each way",
             pw,
-            [(name, stops, True, 0, 300, 0), (name, stops, False, 1, 300, 150)],
+            [Service(name, stops, True, 0, 300, 0), Service(name, stops, False, 1, 300, 150)],
             3 * 3600,
             (3600, 7200),
         )
-    out["Jamaica"] = (
+    out["Jamaica"] = Setup(
         "Jamaica: locals and nonstops each every 2.5 min per direction (1.25 min combined)",
         jam,
         [
-            ("Jamaica local", JAM_STOPS, True, 0, 150, 0),
-            ("Jamaica nonstop", nonstop, True, 1, 150, 75),
-            ("Jamaica local", JAM_STOPS, False, 2, 150, 40),
-            ("Jamaica nonstop", nonstop, False, 3, 150, 115),
+            Service("Jamaica local", JAM_STOPS, True, 0, 150, 0),
+            Service("Jamaica nonstop", nonstop, True, 1, 150, 75),
+            Service("Jamaica local", JAM_STOPS, False, 2, 150, 40),
+            Service("Jamaica nonstop", nonstop, False, 3, 150, 115),
         ],
         5400,
         (1800, 3600),
@@ -281,7 +331,7 @@ def show(data: str, which: str) -> None:
         print(f"{'service':16} {'train':28} {'kind':6} {'1 train':>8} {'busy':>6} {'busy no regen':>14} {'min V':>6}")
         for r in busy(line, cases, horizon, window):
             print(
-                f"{r['service']:16} {r['train'].name:28} {r['kind']:6} {r['one']:8.1f} {r['regen']:6.1f} "
-                f"{r['no_regen']:14.1f} {r['vmin']:6.0f}  nonconv {NONCONVERGED[0]}",
+                f"{r.service:16} {r.train.name:28} {r.kind:6} {r.one:8.1f} {r.regen:6.1f} "
+                f"{r.no_regen:14.1f} {r.vmin:6.0f}  nonconv {NONCONVERGED[0]}",
                 flush=True,
             )

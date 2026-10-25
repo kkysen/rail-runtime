@@ -108,7 +108,7 @@ def busy(data):
         print(f"  {title}", file=sys.stderr, flush=True)
         res = defaultdict(dict)
         for r in mt.busy(line, cases, horizon, window):
-            res[(r["service"], r["kind"])][r["train"].supply] = r
+            res[(r.service, r.kind)][r.train.supply] = r
         rows = []
         services = list(dict.fromkeys(c[0] for c in cases))
         for (service, kind), by in sorted(
@@ -119,11 +119,11 @@ def busy(data):
                 [
                     service if kind == "posted" else "",
                     SPEEDS[kind],
-                    f1(m7["one"]),
-                    f1(m7["no_regen"]),
-                    f1(m7["regen"]),
-                    f1(m8["regen"]),
-                    f"{m7['vmin']:.0f}",
+                    f1(m7.one),
+                    f1(m7.no_regen),
+                    f1(m7.regen),
+                    f1(m8.regen),
+                    f"{m7.vmin:.0f}",
                 ]
             )
         out.append(
