@@ -106,10 +106,10 @@ def trains(data: str) -> str:
 
 def busy(data: str) -> str:
     out: list[str] = []
-    for title, line, cases, horizon, window in mt.lines(data).values():
-        print(f"  {title}", file=sys.stderr, flush=True)
+    setups = list(mt.lines(data).values())
+    for (title, _, cases, _, _), busy_rows in zip(setups, mt.busy(setups), strict=True):
         res: defaultdict[tuple[str, str], dict[str, BusyRow]] = defaultdict(dict)
-        for r in mt.busy(line, cases, horizon, window):
+        for r in busy_rows:
             res[(r.service, r.kind)][r.train.supply] = r
         rows: list[list[str]] = []
         services = list(dict.fromkeys(c.name for c in cases))

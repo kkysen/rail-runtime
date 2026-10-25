@@ -5,6 +5,7 @@ use pyo3::exceptions::PyValueError;
 use pyo3::pyclass;
 use pyo3::types::{PyAnyMethods, PyModule, PyModuleMethods};
 use pyo3::{Bound, PyAny, PyResult, pyfunction, pymodule, wrap_pyfunction};
+use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
 
 use crate::multi::{self, Job, Outcome, Service};
 use crate::train::{Supply, Train, V_MIN, V0};
@@ -106,11 +107,12 @@ impl From<Outcome> for PyOutcome {
     }
 }
 
-/// Run one time-stepped multi-train simulation.
+/// Run time-stepped multi-train simulations, in parallel, without holding the GIL.
 #[pyfunction]
-fn simulate(py: pyo3::Python<'_>, j: &Bound<'_, PyAny>) -> PyResult<PyOutcome> {
-    let j = job(j)?;
-    Ok(py.detach(|| multi::simulate(&j)).into())
+fn simulate_many(py: pyo3::Python<'_>, jobs: Vec<Bound<'_, PyAny>>) -> PyResult<Vec<PyOutcome>> {
+    let jobs = jobs.iter().map(job).collect::<PyResult<Vec<_>>>()?;
+    let outcomes: Vec<Outcome> = py.detach(|| jobs.par_iter().map(multi::simulate).collect());
+    Ok(outcomes.into_iter().map(PyOutcome::from).collect())
 }
 
 #[pymodule]
@@ -121,7 +123,7 @@ fn sim_module(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add("V_MIN", V_MIN)?;
     m.add_function(wrap_pyfunction!(power, m)?)?;
     m.add_function(wrap_pyfunction!(run, m)?)?;
-    m.add_function(wrap_pyfunction!(simulate, m)?)?;
+    m.add_function(wrap_pyfunction!(simulate_many, m)?)?;
     m.add_class::<PyOutcome>()?;
     Ok(())
 }

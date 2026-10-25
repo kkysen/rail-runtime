@@ -5,7 +5,6 @@ Braking trains regenerate into the third rail; substations are diode rectifiers 
 so regen only helps other trains, and a train sheds regen once its voltage reaches 900 V.
 """
 
-from collections.abc import Iterator
 from dataclasses import dataclass
 from typing import NamedTuple
 
@@ -55,7 +54,7 @@ class Finished:
 NONCONVERGED = [0]
 
 
-def simulate(
+def job(
     line: Line,
     train: Train,
     kind: str,
@@ -63,9 +62,8 @@ def simulate(
     horizon: float,
     regen: bool = True,
     single: bool = False,
-) -> tuple[list[Finished], float]:
-    """Run `services` for `horizon` s; returns the finished trains and the lowest train voltage (nan off third rail)."""
-    job = Job(
+) -> Job:
+    return Job(
         train=train,
         lim_mph=line.limits(kind, train.vmax),
         ds=line.ds,
@@ -76,10 +74,27 @@ def simulate(
         regen=regen,
         single=single,
     )
-    out = _sim.simulate(job)
+
+
+def outcome(services: list[Service], out: _sim.Outcome) -> tuple[list[Finished], float]:
+    """The finished trains and the lowest train voltage (nan off third rail)."""
     NONCONVERGED[0] += out.nonconverged
     finished = [Finished(services[i].name, services[i].inbound, t0, done) for i, t0, done in out.finished]
     return finished, float("nan") if out.vmin is None else out.vmin
+
+
+def simulate(
+    line: Line,
+    train: Train,
+    kind: str,
+    services: list[Service],
+    horizon: float,
+    regen: bool = True,
+    single: bool = False,
+) -> tuple[list[Finished], float]:
+    """Run `services` for `horizon` s; returns the finished trains and the lowest train voltage (nan off third rail)."""
+    [out] = _sim.simulate_many([job(line, train, kind, services, horizon, regen, single)])
+    return outcome(services, out)
 
 
 PW_STOPS = [
@@ -123,41 +138,63 @@ class Setup(NamedTuple):
     window: tuple[float, float]  # departures counted as steady state, s
 
 
-def busy(line: Line, cases: list[Service], horizon: float, window: tuple[float, float]) -> Iterator[BusyRow]:
-    """Yield a row per inbound service, train and speed case."""
-    for tr in [t for t in m.TRAINS if t.name in TRAINS]:
-        for kind in KINDS:
-            res: dict[bool, tuple[list[Finished], float]] = {}
-            for regen in (True, False):
-                if not regen and tr.supply != "third rail":
-                    continue
-                done, vmin = simulate(line, tr, kind, cases, horizon, regen)
-                res[regen] = (done, vmin)
-            for sv in cases:
-                if not sv.inbound:
-                    continue
-                name = sv.name
-                one, _ = simulate(line, tr, kind, [c for c in cases if c.name == name], horizon, single=True)
-                row: dict[bool, float] = {}
+def busy(setups: list[Setup]) -> list[list[BusyRow]]:
+    """For each setup, a row per inbound service, train and speed case.
+
+    Every simulation for every setup goes to `sim` in one batch, which runs them in parallel.
+    """
+    trains = [t for t in m.TRAINS if t.name in TRAINS]
+    # (setup, train, kind, regen, the service run alone or None for all of them busy)
+    keys: list[tuple[int, str, str, bool, str | None]] = []
+    jobs: list[Job] = []
+    services: list[list[Service]] = []
+    for si, st in enumerate(setups):
+        for tr in trains:
+            for kind in KINDS:
                 for regen in (True, False):
-                    if regen not in res:
-                        row[regen] = float("nan")
+                    if regen or tr.supply == "third rail":
+                        keys.append((si, tr.name, kind, regen, None))
+                        services.append(st.services)
+                for sv in st.services:
+                    if sv.inbound:
+                        keys.append((si, tr.name, kind, True, sv.name))
+                        services.append([c for c in st.services if c.name == sv.name])
+    for (si, name, kind, regen, alone), svcs in zip(keys, services, strict=True):
+        tr = next(t for t in trains if t.name == name)
+        st = setups[si]
+        jobs.append(job(st.line, tr, kind, svcs, st.horizon, regen, single=alone is not None))
+    res = {k: outcome(svcs, out) for k, svcs, out in zip(keys, services, _sim.simulate_many(jobs), strict=True)}
+    out: list[list[BusyRow]] = []
+    for si, st in enumerate(setups):
+        lo, hi = st.window
+        rows: list[BusyRow] = []
+        for tr in trains:
+            for kind in KINDS:
+                for sv in st.services:
+                    if not sv.inbound:
                         continue
-                    xs = [
-                        runtime(c)
-                        for c in res[regen][0]
-                        if c.service == name and c.inbound and window[0] <= c.t0 < window[1]
-                    ]
-                    row[regen] = float(np.mean(xs))
-                yield BusyRow(
-                    service=name,
-                    train=tr,
-                    kind=kind,
-                    one=runtime(one[0]),
-                    regen=row[True],
-                    no_regen=row[False],
-                    vmin=res[True][1],
-                )
+                    busy_mean = {}
+                    for regen in (True, False):
+                        if (si, tr.name, kind, regen, None) not in res:
+                            busy_mean[regen] = float("nan")
+                            continue
+                        done, _ = res[(si, tr.name, kind, regen, None)]
+                        xs = [runtime(c) for c in done if c.service == sv.name and c.inbound and lo <= c.t0 < hi]
+                        busy_mean[regen] = float(np.mean(xs))
+                    one, _ = res[(si, tr.name, kind, True, sv.name)]
+                    rows.append(
+                        BusyRow(
+                            service=sv.name,
+                            train=tr,
+                            kind=kind,
+                            one=runtime(one[0]),
+                            regen=busy_mean[True],
+                            no_regen=busy_mean[False],
+                            vmin=res[(si, tr.name, kind, True, None)][1],
+                        )
+                    )
+        out.append(rows)
+    return out
 
 
 def runtime(c: Finished) -> float:
@@ -196,14 +233,13 @@ def lines(data: str) -> dict[str, Setup]:
 
 def show(data: str, which: str) -> None:
     """Print busy-service runs for `which`: `pw` or `jam`."""
-    for key, (title, line, cases, horizon, window) in lines(data).items():
-        if (which == "pw") != key.startswith("PW"):
-            continue
-        print(f"--- {title} ---")
+    setups = [st for key, st in lines(data).items() if (which == "pw") == key.startswith("PW")]
+    for st, rows in zip(setups, busy(setups), strict=True):
+        print(f"--- {st.title} ---")
         print(f"{'service':16} {'train':28} {'kind':6} {'1 train':>8} {'busy':>6} {'busy no regen':>14} {'min V':>6}")
-        for r in busy(line, cases, horizon, window):
+        for r in rows:
             print(
                 f"{r.service:16} {r.train.name:28} {r.kind:6} {r.one:8.1f} {r.regen:6.1f} "
-                f"{r.no_regen:14.1f} {r.vmin:6.0f}  nonconv {NONCONVERGED[0]}",
-                flush=True,
+                f"{r.no_regen:14.1f} {r.vmin:6.0f}"
             )
+    print(f"non-converged network solves: {NONCONVERGED[0]}")
