@@ -40,7 +40,8 @@ and the Main Line from Jamaica.
 
 ## Running
 
-Needs `uv` (`mise install` sets it up).
+`mise install` sets up `uv` and `pre-commit`;
+`uv` manages Python 3.15 and the dependencies.
 
 ```sh
 ./fetch.sh  # GTFS and OSM extracts into data/
@@ -53,6 +54,15 @@ uv run rail-runtime results
 
 `rail-runtime report`, `multitrain`, `slowzones` and `curves`
 print the same results as plain text.
+Rerun `rail-runtime results` in any commit that changes results,
+so the tables below change with it.
+
+## Development
+
+```sh
+pre-commit install  # ruff, ty, pyrefly and pytest on every commit
+uv run pytest       # about a second, on the committed data; no fetch.sh needed
+```
 
 ## Results
 
@@ -242,5 +252,5 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 ## License
 
 The code is under the [MIT License](LICENSE).
-The traced track geometry in `data/` is derived from OpenStreetMap,
-© OpenStreetMap contributors, and is under the ODbL; see [`data/LICENSE`](data/LICENSE).
+The traced track geometry and substations in `data/` are derived from OpenStreetMap,
+© OpenStreetMap contributors, and are under the ODbL; see [`data/LICENSE`](data/LICENSE).
