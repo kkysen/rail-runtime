@@ -2,6 +2,7 @@
 
 Everything between the BEGIN and END results markers in `README.md` is replaced.
 """
+
 import os
 import re
 import sys
@@ -33,7 +34,9 @@ def f1(x):
 
 
 def short(name):
-    return name.replace(" Station", "").replace("Mets-Willets Point", "Mets").replace("Flushing Main Street", "Flushing")
+    return (
+        name.replace(" Station", "").replace("Mets-Willets Point", "Mets").replace("Flushing Main Street", "Flushing")
+    )
 
 
 def pattern(stops, line_stops):
@@ -54,8 +57,10 @@ def pattern(stops, line_stops):
 def timetable(data, date):
     out = []
     m7 = m.TRAINS[0]
-    for name, gf, stops, route, terminal in (("Port Washington", "pw_geom.json", mt.PW_STOPS, "9", True),
-                                             ("Jamaica", "jam_geom.json", mt.JAM_STOPS, None, False)):
+    for name, gf, stops, route, terminal in (
+        ("Port Washington", "pw_geom.json", mt.PW_STOPS, "9", True),
+        ("Jamaica", "jam_geom.json", mt.JAM_STOPS, None, False),
+    ):
         line = m.Line(f"{data}/{gf}", f"{data}/substations.json", stops, terminal=terminal)
         order = list(reversed(stops))
         trips = m.am_inbound(f"{data}/gtfs", date, None if route else name, set(stops), route)
@@ -66,23 +71,35 @@ def timetable(data, date):
         for pat, sch in sorted(by.items(), key=lambda kv: (-len(kv[1]), kv[0])):
             sims = [line.trip(m7, k, list(pat)) for k in KINDS]
             rows.append([pattern(list(pat), stops), len(sch), f"{median(sch):.0f}", *map(f1, sims)])
-        out.append(f"#### {name} to Penn\n\n"
-                   + table(["Pattern", "Trips", "Scheduled", "Posted", "60 mph", "80 mph", "100 mph"], rows))
+        out.append(
+            f"#### {name} to Penn\n\n"
+            + table(["Pattern", "Trips", "Scheduled", "Posted", "60 mph", "80 mph", "100 mph"], rows)
+        )
     return "\n\n".join(out)
 
 
 def trains(data):
     out = []
     for name, gf, stops, pats, terminal in (
-            ("Port Washington", "pw_geom.json", mt.PW_STOPS,
-             {"local": mt.PW_STOPS[::-1], "express": mt.PW_EXPRESS[::-1]}, True),
-            ("Jamaica", "jam_geom.json", mt.JAM_STOPS,
-             {"local": mt.JAM_STOPS[::-1], "nonstop": ["Jamaica", "Penn Station"]}, False)):
+        (
+            "Port Washington",
+            "pw_geom.json",
+            mt.PW_STOPS,
+            {"local": mt.PW_STOPS[::-1], "express": mt.PW_EXPRESS[::-1]},
+            True,
+        ),
+        (
+            "Jamaica",
+            "jam_geom.json",
+            mt.JAM_STOPS,
+            {"local": mt.JAM_STOPS[::-1], "nonstop": ["Jamaica", "Penn Station"]},
+            False,
+        ),
+    ):
         line = m.Line(f"{data}/{gf}", f"{data}/substations.json", stops, terminal=terminal)
         for pname, p in pats.items():
             rows = [[tr.name, *(f1(line.trip(tr, k, p)) for k in KINDS)] for tr in m.TRAINS]
-            out.append(f"#### {name} {pname}\n\n"
-                       + table(["Train", "Posted", "60 mph", "80 mph", "100 mph"], rows))
+            out.append(f"#### {name} {pname}\n\n" + table(["Train", "Posted", "60 mph", "80 mph", "100 mph"], rows))
     return "\n\n".join(out)
 
 
@@ -95,13 +112,27 @@ def busy(data):
             res[(r["service"], r["kind"])][r["train"].supply] = r
         rows = []
         services = list(dict.fromkeys(c[0] for c in cases))
-        for (service, kind), by in sorted(res.items(), key=lambda kv: (services.index(kv[0][0]),
-                                                                       KINDS.index(kv[0][1]))):
+        for (service, kind), by in sorted(
+            res.items(), key=lambda kv: (services.index(kv[0][0]), KINDS.index(kv[0][1]))
+        ):
             m7, m8 = by["third rail"], by["25 kV"]
-            rows.append([service if kind == "posted" else "", SPEEDS[kind], f1(m7["one"]), f1(m7["no_regen"]),
-                         f1(m7["regen"]), f1(m8["regen"]), f"{m7['vmin']:.0f}"])
-        out.append(f"#### {title}\n\n" + table(
-            ["Service", "Speeds", "M7, 1 train", "M7, busy", "M7, busy + regen", "M8 25 kV", "Lowest V (M7)"], rows))
+            rows.append(
+                [
+                    service if kind == "posted" else "",
+                    SPEEDS[kind],
+                    f1(m7["one"]),
+                    f1(m7["no_regen"]),
+                    f1(m7["regen"]),
+                    f1(m8["regen"]),
+                    f"{m7['vmin']:.0f}",
+                ]
+            )
+        out.append(
+            f"#### {title}\n\n"
+            + table(
+                ["Service", "Speeds", "M7, 1 train", "M7, busy", "M7, busy + regen", "M8 25 kV", "Lowest V (M7)"], rows
+            )
+        )
     return "\n\n".join(out)
 
 
@@ -122,34 +153,47 @@ def ranking(rank, kind):
                 mid = [f"{mph:.0f} mph"]
             body.append([f"{a:.2f}", f"{b:.2f}", near, *mid, *(f"{saved[p] * 60:.0f} s" for p in pats)])
         basis = ", ".join(f"{p} {v:.1f} min" for p, v in base.items())
-        out.append(f"#### {name} (base: {basis})\n\n"
-                   + table(head, body, ["r", "r", "l"] + ["r"] * (len(head) - 3)))
+        out.append(f"#### {name} (base: {basis})\n\n" + table(head, body, ["r", "r", "l"] + ["r"] * (len(head) - 3)))
     return "\n\n".join(out)
 
 
 def main(data: str, date: str = "20261027") -> None:
     print("timetable", file=sys.stderr, flush=True)
     sections = [
-        ("Timetable vs. model",
-         f"AM inbound trips arriving at Penn 6-10 AM on {date[:4]}-{date[4:6]}-{date[6:]}, "
-         "grouped by stopping pattern: median scheduled minutes vs. one M7 running flat out "
-         "on 750 V third rail with 30 s dwells.",
-         timetable(data, date)),
+        (
+            "Timetable vs. model",
+            f"AM inbound trips arriving at Penn 6-10 AM on {date[:4]}-{date[4:6]}-{date[6:]}, "
+            "grouped by stopping pattern: median scheduled minutes vs. one M7 running flat out "
+            "on 750 V third rail with 30 s dwells.",
+            timetable(data, date),
+        ),
     ]
     print("trains", file=sys.stderr, flush=True)
     sections.append(("Trains", "One train alone, minutes.", trains(data)))
     print("busy service", file=sys.stderr, flush=True)
-    sections.append(("Busy service",
-                     "Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "
-                     "\"Busy\" is with the other trains on the line; \"+ regen\" adds regenerative braking.",
-                     busy(data)))
+    sections.append(
+        (
+            "Busy service",
+            "Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "
+            '"Busy" is with the other trains on the line; "+ regen" adds regenerative braking.',
+            busy(data),
+        )
+    )
     print("rankings", file=sys.stderr, flush=True)
-    sections.append(("Posted slow zones",
-                     "One M7, raising one posted zone at a time to what the curves allow (80 mph cap).",
-                     ranking(slowzones.rank(data), "zones")))
-    sections.append(("Limiting curves",
-                     "One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.",
-                     ranking(curves.rank(data), "curves")))
+    sections.append(
+        (
+            "Posted slow zones",
+            "One M7, raising one posted zone at a time to what the curves allow (80 mph cap).",
+            ranking(slowzones.rank(data), "zones"),
+        )
+    )
+    sections.append(
+        (
+            "Limiting curves",
+            "One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.",
+            ranking(curves.rank(data), "curves"),
+        )
+    )
     text = "\n\n".join(f"### {h}\n\n{intro}\n\n{body}" for h, intro, body in sections)
     readme = open(README).read()
     block = f"{BEGIN}\n\n{text}\n\n{END}"
@@ -158,4 +202,3 @@ def main(data: str, date: str = "20261027") -> None:
     else:
         readme = readme.rstrip("\n") + "\n\n## Results\n\n" + block + "\n"
     open(README, "w").write(readme)
-

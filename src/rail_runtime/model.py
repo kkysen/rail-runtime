@@ -2,6 +2,7 @@
 
 Every run is flat (no grades), one train on the line, 30 s dwells, no schedule padding.
 """
+
 import csv
 import json
 import math
@@ -24,8 +25,9 @@ V_MIN = 500.0  # train cuts traction below this
 
 # --- Trains -----------------------------------------------------------------
 class Train:
-    def __init__(self, name, tare, load, p_shaft, a0, cars, vmax, supply, brake=2.0 * MPH, aux_per_car=30e3,
-                 sharing=1.0):
+    def __init__(
+        self, name, tare, load, p_shaft, a0, cars, vmax, supply, brake=2.0 * MPH, aux_per_car=30e3, sharing=1.0
+    ):
         self.name = name
         self.m = (tare + load) * 1000
         self.m_eff = self.m * 1.08  # rotating mass
@@ -94,8 +96,13 @@ def load_geom(path):
     """Read a `geom.py` file into parallel arrays."""
     g = json.load(open(path))
     sm = g["samples"]
-    return {"s": [x["s"] for x in sm], "R": [x["R"] for x in sm], "maxspeed": [x["maxspeed"] for x in sm],
-            "lonlat": [[x["lon"], x["lat"]] for x in sm], "stations": g["stations"]}
+    return {
+        "s": [x["s"] for x in sm],
+        "R": [x["R"] for x in sm],
+        "maxspeed": [x["maxspeed"] for x in sm],
+        "lonlat": [[x["lon"], x["lat"]] for x in sm],
+        "stations": g["stations"],
+    }
 
 
 class Line:
@@ -128,7 +135,7 @@ class Line:
             xy[:, c] = np.convolve(np.pad(xy[:, c], w, mode="edge"), np.ones(2 * w + 1) / (2 * w + 1), mode="valid")
         k = int(half / 2 / self.ds)
         R = np.full(len(xy), np.inf)
-        a, b, c = xy[:-2 * k], xy[k:-k], xy[2 * k:]
+        a, b, c = xy[: -2 * k], xy[k:-k], xy[2 * k :]
         cross = (b[:, 0] - a[:, 0]) * (c[:, 1] - a[:, 1]) - (b[:, 1] - a[:, 1]) * (c[:, 0] - a[:, 0])
         with np.errstate(divide="ignore"):
             R[k:-k] = (np.hypot(*(b - a).T) * np.hypot(*(c - b).T) * np.hypot(*(c - a).T)) / (2 * np.abs(cross))
@@ -140,7 +147,10 @@ class Line:
         mapped = []
         for e in json.load(open(path))["elements"]:
             t = e["tags"]
-            if "LIRR" not in (t.get("operator", "") + t.get("name", "")) and t.get("operator") != "Long Island Rail Road":
+            if (
+                "LIRR" not in (t.get("operator", "") + t.get("name", ""))
+                and t.get("operator") != "Long Island Rail Road"
+            ):
                 continue
             c = e.get("center", e)
             d = np.hypot((self.lonlat[:, 0] - c["lon"]) * kx, (self.lonlat[:, 1] - c["lat"]) * ky)
@@ -213,8 +223,11 @@ def am_inbound(gtfs, date, origin, line_stops, route_id=None, arr_window=(360, 6
     rd = lambda f: list(csv.DictReader(open(f"{gtfs}/{f}")))
     names = {r["stop_id"]: r["stop_name"] for r in rd("stops.txt")}
     svc = {c["service_id"] for c in rd("calendar_dates.txt") if c["date"] == date and c["exception_type"] == "1"}
-    trips = {t["trip_id"]: t for t in rd("trips.txt")
-             if t["service_id"] in svc and (route_id is None or t["route_id"] == route_id)}
+    trips = {
+        t["trip_id"]: t
+        for t in rd("trips.txt")
+        if t["service_id"] in svc and (route_id is None or t["route_id"] == route_id)
+    }
     sts = defaultdict(list)
     for r in rd("stop_times.txt"):
         if r["trip_id"] in trips:
@@ -231,6 +244,13 @@ def am_inbound(gtfs, date, origin, line_stops, route_id=None, arr_window=(360, 6
         if not arr_window[0] <= arr <= arr_window[1]:
             continue
         on_line = [n for n in stops[k:] if n in line_stops]
-        out.append(dict(num=trips[tid]["trip_short_name"], arr=arr, first=stops[0],
-                        sched=arr - hm(ss[k]["departure_time"]), stops=on_line))
+        out.append(
+            dict(
+                num=trips[tid]["trip_short_name"],
+                arr=arr,
+                first=stops[0],
+                sched=arr - hm(ss[k]["departure_time"]),
+                stops=on_line,
+            )
+        )
     return sorted(out, key=lambda r: r["arr"])

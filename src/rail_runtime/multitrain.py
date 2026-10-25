@@ -183,9 +183,22 @@ def simulate(line, train, kind, services, horizon, regen=True, single=False):
     return [c for c in cars if c.done is not None], vmin
 
 
-PW_STOPS = ["Penn Station", "Woodside", "Mets-Willets Point", "Flushing Main Street", "Murray Hill",
-            "Broadway", "Auburndale", "Bayside", "Douglaston", "Little Neck", "Great Neck", "Manhasset",
-            "Plandome", "Port Washington"]
+PW_STOPS = [
+    "Penn Station",
+    "Woodside",
+    "Mets-Willets Point",
+    "Flushing Main Street",
+    "Murray Hill",
+    "Broadway",
+    "Auburndale",
+    "Bayside",
+    "Douglaston",
+    "Little Neck",
+    "Great Neck",
+    "Manhasset",
+    "Plandome",
+    "Port Washington",
+]
 JAM_STOPS = ["Penn Station", "Woodside", "Forest Hills", "Kew Gardens", "Jamaica"]
 PW_EXPRESS = ["Penn Station", "Great Neck", "Manhasset", "Plandome", "Port Washington"]
 TRAINS = ("M7, 750 V third rail", "M8, 25 kV")
@@ -211,12 +224,21 @@ def busy(line, cases, horizon, window):
                     if regen not in res:
                         row[regen] = float("nan")
                         continue
-                    xs = [(c.done - c.t0) / 60 for c in res[regen][0]
-                          if c.service == name and c.run.inbound and window[0] <= c.t0 < window[1]]
+                    xs = [
+                        (c.done - c.t0) / 60
+                        for c in res[regen][0]
+                        if c.service == name and c.run.inbound and window[0] <= c.t0 < window[1]
+                    ]
                     row[regen] = np.mean(xs)
-                yield dict(service=name, train=tr, kind=kind, one=(one[0].done - one[0].t0) / 60,
-                           regen=row[True], no_regen=row[False],
-                           vmin=min(res[True][1]) if res[True][1] else float("nan"))
+                yield dict(
+                    service=name,
+                    train=tr,
+                    kind=kind,
+                    one=(one[0].done - one[0].t0) / 60,
+                    regen=row[True],
+                    no_regen=row[False],
+                    vmin=min(res[True][1]) if res[True][1] else float("nan"),
+                )
 
 
 def lines(data):
@@ -226,13 +248,25 @@ def lines(data):
     nonstop = ["Penn Station", "Jamaica"]
     out = {}
     for name, stops in (("PW local", PW_STOPS), ("PW express", PW_EXPRESS)):
-        out[name] = (f"{name}, every 5 min each way", pw,
-                     [(name, stops, True, 0, 300, 0), (name, stops, False, 1, 300, 150)], 3 * 3600, (3600, 7200))
-    out["Jamaica"] = ("Jamaica: locals and nonstops each every 2.5 min per direction (1.25 min combined)", jam,
-                      [("Jamaica local", JAM_STOPS, True, 0, 150, 0), ("Jamaica nonstop", nonstop, True, 1, 150, 75),
-                       ("Jamaica local", JAM_STOPS, False, 2, 150, 40),
-                       ("Jamaica nonstop", nonstop, False, 3, 150, 115)],
-                      5400, (1800, 3600))
+        out[name] = (
+            f"{name}, every 5 min each way",
+            pw,
+            [(name, stops, True, 0, 300, 0), (name, stops, False, 1, 300, 150)],
+            3 * 3600,
+            (3600, 7200),
+        )
+    out["Jamaica"] = (
+        "Jamaica: locals and nonstops each every 2.5 min per direction (1.25 min combined)",
+        jam,
+        [
+            ("Jamaica local", JAM_STOPS, True, 0, 150, 0),
+            ("Jamaica nonstop", nonstop, True, 1, 150, 75),
+            ("Jamaica local", JAM_STOPS, False, 2, 150, 40),
+            ("Jamaica nonstop", nonstop, False, 3, 150, 115),
+        ],
+        5400,
+        (1800, 3600),
+    )
     return out
 
 
@@ -244,5 +278,8 @@ def show(data: str, which: str) -> None:
         print(f"--- {title} ---")
         print(f"{'service':16} {'train':28} {'kind':6} {'1 train':>8} {'busy':>6} {'busy no regen':>14} {'min V':>6}")
         for r in busy(line, cases, horizon, window):
-            print(f"{r['service']:16} {r['train'].name:28} {r['kind']:6} {r['one']:8.1f} {r['regen']:6.1f} "
-                  f"{r['no_regen']:14.1f} {r['vmin']:6.0f}  nonconv {NONCONVERGED[0]}", flush=True)
+            print(
+                f"{r['service']:16} {r['train'].name:28} {r['kind']:6} {r['one']:8.1f} {r['regen']:6.1f} "
+                f"{r['no_regen']:14.1f} {r['vmin']:6.0f}  nonconv {NONCONVERGED[0]}",
+                flush=True,
+            )

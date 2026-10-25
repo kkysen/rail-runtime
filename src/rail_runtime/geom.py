@@ -1,4 +1,5 @@
 """Build an ordered track centerline from Penn to a LIRR station from OSM and measure curvature."""
+
 import csv
 import heapq
 import json
@@ -13,7 +14,9 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
     d = json.load(open(rail_json))["elements"]
     route_ways = set()
     if route_json != "-":
-        route_ways = {m["ref"] for e in json.load(open(route_json))["elements"] if e["type"] == "relation" for m in e["members"]}
+        route_ways = {
+            m["ref"] for e in json.load(open(route_json))["elements"] if e["type"] == "relation" for m in e["members"]
+        }
     coord = {}
     adj = {}
     for w in d:
@@ -32,18 +35,18 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
             adj.setdefault(a, []).append((b, L * pen, w["id"]))
             adj.setdefault(b, []).append((a, L * pen, w["id"]))
     wtags = {w["id"]: w["tags"] for w in d}
-    stop = {r["stop_name"]: (float(r["stop_lat"]), float(r["stop_lon"])) for r in csv.DictReader(open(f"{gtfs}/stops.txt"))}
+    stop = {
+        r["stop_name"]: (float(r["stop_lat"]), float(r["stop_lon"])) for r in csv.DictReader(open(f"{gtfs}/stops.txt"))
+    }
     near = lambda ll: min(adj, key=lambda n: (coord[n][0] - ll[0]) ** 2 + ((coord[n][1] - ll[1]) * 0.76) ** 2)
     src_n, dst_n = near(stop["Penn Station"]), near(stop[dest])
     MAX_TURN = 30.0  # degrees between consecutive segments; more means reversing through a switch
-
 
     def turn(a, b, c):
         (la, oa), (lb, ob), (lc, oc) = coord[a], coord[b], coord[c]
         h1 = math.atan2(la - lb, (oa - ob) * 0.76)
         h2 = math.atan2(lb - lc, (ob - oc) * 0.76)
         return abs((math.degrees(h2 - h1) + 180) % 360 - 180)
-
 
     # Dijkstra over (node, previous node) states so the path can't double back through a switch.
     start = (src_n, None)
@@ -125,11 +128,21 @@ def trace(rail_json: str, route_json: str, gtfs: str, dest: str, out: str) -> No
         f.write('{\n  "stations": [\n')
         f.write(",\n".join(f"    {json.dumps([n, round(x, 1)])}" for n, x in stations))
         f.write('\n  ],\n  "samples": [\n')
-        f.write(",\n".join(
-            "    " + json.dumps({"s": round(float(x), 1), "R": None if math.isinf(r) else round(float(r), 1),
-                                "maxspeed": None if math.isnan(v) else v,
-                                "lon": round(float(lo), 7), "lat": round(float(la), 7)})
-            for x, r, v, (lo, la) in zip(ss, R, maxspeed, lonlat)))
+        f.write(
+            ",\n".join(
+                "    "
+                + json.dumps(
+                    {
+                        "s": round(float(x), 1),
+                        "R": None if math.isinf(r) else round(float(r), 1),
+                        "maxspeed": None if math.isnan(v) else v,
+                        "lon": round(float(lo), 7),
+                        "lat": round(float(la), 7),
+                    }
+                )
+                for x, r, v, (lo, la) in zip(ss, R, maxspeed, lonlat)
+            )
+        )
         f.write("\n  ]\n}\n")
     print(f"length {s[-1] / 1609.34:.2f} mi, {len(ss)} samples")
     for n, x in stations:

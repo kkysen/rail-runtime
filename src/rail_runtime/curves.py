@@ -1,4 +1,5 @@
 """Rank curves by the time they cost under curve-limited speeds (80 mph cap), one at a time."""
+
 import numpy as np
 
 from rail_runtime import model as m
@@ -40,5 +41,7 @@ def show(data: str) -> None:
     for name, base, rows in rank(data):
         print(f"=== {name} (M7, 80 mph, base {', '.join(f'{k} {v:.1f}' for k, v in base.items())} min) ===")
         for r in rows:
-            print(f"  {r[1]:5.2f}-{r[2]:5.2f} mi  near {r[4]:22} {r[3]:3.0f} mph  "
-                  + "  ".join(f"{k} {v * 60:4.0f}s" for k, v in r[5].items()))
+            print(
+                f"  {r[1]:5.2f}-{r[2]:5.2f} mi  near {r[4]:22} {r[3]:3.0f} mph  "
+                + "  ".join(f"{k} {v * 60:4.0f}s" for k, v in r[5].items())
+            )
