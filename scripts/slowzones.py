@@ -8,7 +8,7 @@ from curves import CASES
 
 
 def rank(data, top=12):
-    """Per line: (name, base runtimes, rows of (max saved, from mi, to mi, posted, raised, near, saved by pattern))."""
+    """Per line: (name, base runtimes, rows of (max saved, from mi, to mi, posted, raised to, near, saved by pattern))."""
     m7 = m.TRAINS[0]
     out = []
     for name, (gf, stops, pats) in CASES.items():
@@ -36,7 +36,7 @@ def rank(data, top=12):
             line.limits = orig
             near = min(line.st, key=lambda n: abs(line.st[n] - line.s[i]))
             rows.append((max(saved.values()), line.s[i] / m.MILE, line.s[j] / m.MILE, posted[i],
-                         better[i:j + 1].min(), near, saved))
+                         better[i:j + 1].max(), near, saved))
         rows = [r for r in sorted(rows, reverse=True)[:top] if r[0] >= 0.05]
         out.append((name, base, rows))
     return out
