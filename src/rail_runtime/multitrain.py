@@ -7,7 +7,6 @@ so regen only helps other trains, and a train sheds regen once its voltage reach
 
 from dataclasses import dataclass
 from functools import cache
-from itertools import pairwise
 from typing import NamedTuple
 
 import numpy as np
@@ -183,25 +182,17 @@ SPECS = {
 
 @cache
 def spacing(data: str) -> float:
-    """The usual miles between substations, fit to the gaps between consecutive known LIRR ones on every line.
+    """The usual miles between substations: the mean gap between known LIRR ones from Douglaston to Port Washington.
 
-    A long gap likely hides substations OSM doesn't map, so each gap is taken as a whole number of intervals,
-    and the spacing is the one whose intervals fit the gaps best (least squares, per interval),
-    no tighter than the closest two known substations.
-    A gap shared by two lines, as on the Main Line, counts once.
+    That stretch is the only one OSM seems to map in full, with no gap long enough to hide a substation.
+    Elsewhere a gap might hide any number of them, and fitting the gaps as whole numbers of intervals
+    favors ever tighter spacings, down to whatever floor the fit is given.
     """
-    gaps: dict[tuple[int, int], float] = {}
-    for spec in SPECS.values():
-        subs = m.lirr_substations(m.load_geom(f"{data}/{spec.geom}"), f"{data}/{spec.substations}")
-        for (a, ia), (b, ib) in pairwise(subs):
-            gaps[(ia, ib) if ia < ib else (ib, ia)] = (b - a) / m.MILE
-    g = np.array(list(gaps.values()))
-
-    def misfit(s: float) -> float:
-        k = np.maximum(1, np.round(g / s))
-        return float(((g - k * s) ** 2 / k).sum())
-
-    return min(np.arange(g.min(), g.max(), 0.01), key=misfit)
+    spec = SPECS["Port Washington"]
+    geom = m.load_geom(f"{data}/{spec.geom}")
+    start = dict(geom.stations)["Douglaston"]
+    xs = [x for x, _ in m.lirr_substations(geom, f"{data}/{spec.substations}") if x >= start]
+    return (xs[-1] - xs[0]) / (len(xs) - 1) / m.MILE
 
 
 TRAINS = ("M7, 750 V third rail", "M8, 25 kV")

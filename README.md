@@ -34,9 +34,10 @@ and into Atlantic Terminal, the Atlantic Branch from Jamaica.
   with gaps filled at the usual spacing, as near as whole substations allow,
   and continued at it past the outermost mapped ones to the first at or beyond each end of the line,
   rather than assuming one at the terminals.
-  That spacing, 1.17 mi, best fits the gaps between consecutive known LIRR substations,
-  each taken as a whole number of intervals, since a long gap likely hides ones OSM doesn't map;
-  with an M7 at full current on every track, it leaves 484 V midway between two,
+  That spacing, 1.17 mi, is the mean gap between known LIRR substations from Douglaston to Port Washington,
+  the one stretch OSM seems to map in full;
+  elsewhere a long gap likely hides ones OSM doesn't map, and how many is anyone's guess.
+  With an M7 at full current on every track, it leaves 484 V midway between two,
   below the 500 V cutoff, so they aren't spaced for every train drawing full current at once.
   Known means tagged as the LIRR's in OSM, or untagged there but identified elsewhere:
   the Jamaica and Winfield substations, from MTA contracts to replace them.
@@ -254,7 +255,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | PW local | posted | 35.1 | 35.2 | 35.1 | 35.0 | 521 |
 |  | 60 mph | 33.6 | 33.7 | 33.7 | 33.6 | 479 |
-|  | 80 mph | 32.3 | 32.4 | 32.3 | 32.2 | 521 |
+|  | 80 mph | 32.3 | 32.4 | 32.4 | 32.2 | 521 |
 |  | 100 mph | 32.2 | 32.3 | 32.3 | 32.0 | 503 |
 
 #### PW express: 5 min headways each way
@@ -273,11 +274,11 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Penn local | posted | 17.1 | 17.1 | 17.1 | 17.0 | 530 |
 |  | 60 mph | 15.0 | 15.0 | 15.0 | 15.0 | 598 |
 |  | 80 mph | 13.3 | 13.4 | 13.4 | 13.3 | 533 |
-|  | 100 mph | 13.2 | 13.3 | 13.3 | 13.1 | 526 |
+|  | 100 mph | 13.2 | 13.3 | 13.3 | 13.1 | 527 |
 | Penn express | posted | 13.4 | 13.5 | 13.5 | 13.4 | 530 |
 |  | 60 mph | 11.8 | 11.8 | 11.8 | 11.8 | 598 |
 |  | 80 mph | 9.5 | 9.5 | 9.5 | 9.5 | 533 |
-|  | 100 mph | 9.0 | 9.1 | 9.1 | 9.0 | 526 |
+|  | 100 mph | 9.0 | 9.1 | 9.1 | 9.0 | 527 |
 
 #### Main Line to GCM: 2.5 min headways each way
 
@@ -292,9 +293,9 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Atlantic local | posted | 13.9 | 13.9 | 13.9 | 13.9 | 570 |
-|  | 60 mph | 12.1 | 12.1 | 12.1 | 12.1 | 577 |
-|  | 80 mph | 10.6 | 10.7 | 10.7 | 10.6 | 553 |
+| Atlantic local | posted | 13.9 | 13.9 | 13.9 | 13.9 | 571 |
+|  | 60 mph | 12.1 | 12.1 | 12.1 | 12.1 | 579 |
+|  | 80 mph | 10.6 | 10.7 | 10.7 | 10.6 | 554 |
 |  | 100 mph | 10.2 | 10.2 | 10.2 | 10.1 | 534 |
 
 ### Posted slow zones
