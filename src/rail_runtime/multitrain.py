@@ -184,14 +184,15 @@ SPECS = {
 def spacing(data: str) -> float:
     """The usual miles between substations: the mean gap between known LIRR ones from Douglaston to Port Washington.
 
-    That stretch is the only one OSM seems to map in full, with no gap long enough to hide a substation.
+    That stretch, from the last one west of Douglaston, is the only one OSM seems to map continuously.
     Elsewhere a gap might hide any number of them, and fitting the gaps as whole numbers of intervals
     favors ever tighter spacings, down to whatever floor the fit is given.
     """
     spec = SPECS["Port Washington"]
     geom = m.load_geom(f"{data}/{spec.geom}")
     start = dict(geom.stations)["Douglaston"]
-    xs = [x for x, _ in m.lirr_substations(geom, f"{data}/{spec.substations}") if x >= start]
+    xs = [x for x, _ in m.lirr_substations(geom, f"{data}/{spec.substations}")]
+    xs = xs[max(i for i, x in enumerate(xs) if x <= start) :]
     return (xs[-1] - xs[0]) / (len(xs) - 1) / m.MILE
 
 
