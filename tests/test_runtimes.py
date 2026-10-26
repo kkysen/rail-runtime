@@ -19,8 +19,8 @@ def pw() -> m.Line:
 
 
 @cache
-def jam() -> m.Line:
-    return mt.SPECS["Jamaica"].line(DATA)
+def penn() -> m.Line:
+    return mt.SPECS["Main Line to Penn"].line(DATA)
 
 
 @pytest.mark.parametrize(
@@ -43,8 +43,8 @@ def test_atlantic(kind: str, local: float) -> None:
     [("posted", 17.0, 13.4), ("60", 15.0, 11.8), ("80", 13.4, 9.5), ("100", 13.1, 9.0)],
 )
 def test_jamaica(kind: str, local: float, express: float) -> None:
-    assert jam().trip(M7, kind, mt.JAM_STOPS[::-1]) == pytest.approx(local, abs=0.05)
-    assert jam().trip(M7, kind, ["Jamaica", "Penn Station"]) == pytest.approx(express, abs=0.05)
+    assert penn().trip(M7, kind, mt.JAM_STOPS[::-1]) == pytest.approx(local, abs=0.05)
+    assert penn().trip(M7, kind, ["Jamaica", "Penn Station"]) == pytest.approx(express, abs=0.05)
 
 
 def test_third_rail_costs_time() -> None:

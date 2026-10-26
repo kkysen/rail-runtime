@@ -174,7 +174,7 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 25.1 | 23.4 | 20.6 | 19.9 |
 | 755/3 x4, 25 kV, 1.3 brake | 24.8 | 23.2 | 20.3 | 19.5 |
 
-#### Jamaica local
+#### Main Line to Penn local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
@@ -188,7 +188,7 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 16.4 | 14.5 | 12.6 | 12.2 |
 | 755/3 x4, 25 kV, 1.3 brake | 16.0 | 14.2 | 12.2 | 11.7 |
 
-#### Jamaica express
+#### Main Line to Penn express
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
@@ -202,7 +202,7 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 13.2 | 11.7 | 9.3 | 8.6 |
 | 755/3 x4, 25 kV, 1.3 brake | 13.1 | 11.6 | 9.2 | 8.5 |
 
-#### GCM local
+#### Main Line to GCM local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
@@ -216,7 +216,7 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 15.9 | 14.1 | 12.8 | 12.4 |
 | 755/3 x4, 25 kV, 1.3 brake | 15.5 | 13.8 | 12.4 | 12.0 |
 
-#### GCM express
+#### Main Line to GCM express
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
@@ -266,20 +266,20 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 80 mph | 21.5 | 21.5 | 21.5 | 21.4 | 480 |
 |  | 100 mph | 21.1 | 21.2 | 21.2 | 21.0 | 496 |
 
-#### Jamaica: locals and expresses each at 2.5 min headways each way (1.25 min combined)
+#### Main Line to Penn: locals and expresses each at 2.5 min headways each way (1.25 min combined)
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Jamaica local | posted | 17.1 | 17.1 | 17.1 | 17.0 | 530 |
+| Penn local | posted | 17.1 | 17.1 | 17.1 | 17.0 | 530 |
 |  | 60 mph | 15.0 | 15.0 | 15.0 | 15.0 | 598 |
 |  | 80 mph | 13.3 | 13.4 | 13.4 | 13.3 | 533 |
 |  | 100 mph | 13.2 | 13.3 | 13.3 | 13.1 | 526 |
-| Jamaica express | posted | 13.4 | 13.5 | 13.5 | 13.4 | 530 |
+| Penn express | posted | 13.4 | 13.5 | 13.5 | 13.4 | 530 |
 |  | 60 mph | 11.8 | 11.8 | 11.8 | 11.8 | 598 |
 |  | 80 mph | 9.5 | 9.5 | 9.5 | 9.5 | 533 |
 |  | 100 mph | 9.0 | 9.1 | 9.1 | 9.0 | 526 |
 
-#### GCM: 2.5 min headways each way
+#### Main Line to GCM: 2.5 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -316,7 +316,7 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 18.39 | 19.40 | Port Washington | 40 mph | 65 mph | 8 s | 8 s |
 | 5.84 | 6.07 | Woodside | 40 mph | 49 mph | 7 s | 7 s |
 
-#### Jamaica (base: local 17.0 min, express 13.4 min)
+#### Main Line to Penn (base: local 17.0 min, express 13.4 min)
 
 | From mi | To mi | Near | Posted | Raised to | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: | ---: |
@@ -328,7 +328,7 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 4.45 | 5.98 | Woodside | 60 mph | 80 mph | 6 s | 17 s |
 | 3.99 | 4.45 | Woodside | 50 mph | 80 mph | 7 s | 7 s |
 
-#### GCM (base: local 16.5 min, express 12.9 min)
+#### Main Line to GCM (base: local 16.5 min, express 12.9 min)
 
 | From mi | To mi | Near | Posted | Raised to | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: | ---: |
@@ -372,7 +372,7 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 15.25 | 15.77 | Great Neck | 55 mph | 3 s | 3 s |
 | 8.87 | 9.23 | Mets-Willets Point | 69 mph | 0 s | 3 s |
 
-#### Jamaica (base: local 13.4 min, express 9.5 min)
+#### Main Line to Penn (base: local 13.4 min, express 9.5 min)
 
 | From mi | To mi | Near | Allows | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: |
@@ -380,7 +380,7 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 10.57 | 11.17 | Jamaica | 57 mph | 4 s | 5 s |
 | 5.54 | 6.04 | Woodside | 71 mph | 0 s | 3 s |
 
-#### GCM (base: local 13.5 min, express 9.7 min)
+#### Main Line to GCM (base: local 13.5 min, express 9.7 min)
 
 | From mi | To mi | Near | Allows | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: |

@@ -40,7 +40,10 @@ def report(data: DataDir = Path("data"), date: Date = "20261027") -> None:
 @app.command()
 def multitrain(
     which: Annotated[
-        str, typer.Argument(help="`pw` for Port Washington, `jam` for Jamaica, `gcm` for GCM, `atl` for Atlantic.")
+        str,
+        typer.Argument(
+            help="`pw` for Port Washington, `penn` or `gcm` for the Main Line to Penn or GCM, `atl` for Atlantic."
+        ),
     ],
     data: DataDir = Path("data"),
 ) -> None:

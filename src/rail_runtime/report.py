@@ -11,7 +11,7 @@ KINDS = ["posted", "60", "80", "100"]
 # Patterns printed here beyond each line's own.
 EXTRA = {
     "Port Washington": {"GN nonstop": ["Great Neck", "Penn Station"]},
-    "Jamaica": {"Woodside only": ["Jamaica", "Woodside", "Penn Station"]},
+    "Main Line to Penn": {"Woodside only": ["Jamaica", "Woodside", "Penn Station"]},
 }
 
 
