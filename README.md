@@ -84,7 +84,7 @@ Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, 
 `mise install` sets up `uv` and `pre-commit`;
 `uv` manages Python 3.15 and the dependencies,
 and builds the Rust simulation core in `sim/` with `maturin`, so `cargo` must be installed.
-Regenerating every result takes about 15 s.
+Regenerating every result takes about 4 s.
 
 ```sh
 ./fetch.sh  # GTFS and OSM extracts into data/

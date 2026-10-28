@@ -168,23 +168,16 @@ fn demand(train: &Train, car: &Car, r: &Run, regen: bool) -> f64 {
     train.resist(car.v) * car.v / 0.90 + train.aux // cruise
 }
 
-/// Solve `g x = b` in place by Gaussian elimination with partial pivoting; `g` is row-major `n` × `n`.
-fn solve_dense(g: &mut [f64], b: &mut [f64], n: usize) {
+/// Solve `g x = b` in place, where `g` is row-major `n` × `n` with nonzeros only within `kb` of the diagonal.
+/// No pivoting: a nodal conductance matrix is diagonally dominant.
+fn solve_banded(g: &mut [f64], b: &mut [f64], n: usize, kb: usize) {
     for c in 0..n {
-        let piv = (c..n)
-            .max_by(|&x, &y| g[x * n + c].abs().total_cmp(&g[y * n + c].abs()))
-            .unwrap();
-        if piv != c {
-            for k in 0..n {
-                g.swap(c * n + k, piv * n + k);
-            }
-            b.swap(c, piv);
-        }
         let d = g[c * n + c];
-        for r in c + 1..n {
+        let end = (c + kb + 1).min(n);
+        for r in c + 1..end {
             let f = g[r * n + c] / d;
             if f != 0.0 {
-                for k in c..n {
+                for k in c..end {
                     g[r * n + k] -= f * g[c * n + k];
                 }
                 b[r] -= f * b[c];
@@ -192,7 +185,8 @@ fn solve_dense(g: &mut [f64], b: &mut [f64], n: usize) {
         }
     }
     for c in (0..n).rev() {
-        let s: f64 = (c + 1..n).map(|k| g[c * n + k] * b[k]).sum();
+        let end = (c + kb + 1).min(n);
+        let s: f64 = (c + 1..end).map(|k| g[c * n + k] * b[k]).sum();
         b[c] = (b[c] - s) / g[c * n + c];
     }
 }
@@ -229,10 +223,24 @@ fn solve(
     let contact = |j: usize| n_sub + j;
     let ret = |j: usize| n_sub + n_car + j;
     let pos: Vec<f64> = cars.iter().map(|c| runs[c.run].chain(c.p)).collect();
+    // The matrix is laid out with nodes in chainage order, so every link is between nearby rows,
+    // and `kb` is the farthest any link reaches from the diagonal.
+    let mut order: Vec<(f64, usize)> = subs.iter().copied().zip(0..).collect();
+    order.extend((0..n_car).flat_map(|j| [(pos[j], contact(j)), (pos[j], ret(j))]));
+    order.sort_by(|x, y| x.0.total_cmp(&y.0).then(x.1.cmp(&y.1)));
+    let mut slot = vec![0; n];
+    for (i, &(_, node)) in order.iter().enumerate() {
+        slot[node] = i;
+    }
+    let mut kb = 0;
     // Branch conductances only depend on positions.
     let mut g0 = vec![0.0; n * n];
-    let link = |g0: &mut Vec<f64>, a: Option<usize>, b: Option<usize>, r: f64| {
+    let mut link = |g0: &mut Vec<f64>, a: Option<usize>, b: Option<usize>, r: f64| {
         let g = 1.0 / r.max(1e-6);
+        let (a, b) = (a.map(|x| slot[x]), b.map(|x| slot[x]));
+        if let (Some(a), Some(b)) = (a, b) {
+            kb = kb.max(a.abs_diff(b));
+        }
         for (x, y) in [(a, b), (b, a)] {
             if let Some(x) = x {
                 g0[x * n + x] += g;
@@ -274,7 +282,7 @@ fn solve(
     let mut cur = vec![0.0; n_car];
     let mut shed = vec![1.0; n_car];
     let mut converged = false;
-    let (mut g, mut b) = (vec![0.0; n * n], vec![0.0; n]);
+    let (mut g, mut b, mut bs) = (vec![0.0; n * n], vec![0.0; n], vec![0.0; n]);
     for _ in 0..200 {
         g.copy_from_slice(&g0);
         b.fill(0.0);
@@ -285,7 +293,7 @@ fn solve(
             } else {
                 1e-6
             };
-            g[k * n + k] += gk;
+            g[slot[k] * n + slot[k]] += gk;
             b[k] += V0 * gk;
         }
         for j in 0..n_car {
@@ -305,7 +313,13 @@ fn solve(
             b[contact(j)] -= cur[j];
             b[ret(j)] += cur[j];
         }
-        solve_dense(&mut g, &mut b, n);
+        for (i, &x) in b.iter().enumerate() {
+            bs[slot[i]] = x;
+        }
+        solve_banded(&mut g, &mut bs, n, kb);
+        for (i, x) in b.iter_mut().enumerate() {
+            *x = bs[slot[i]];
+        }
         // Clamp to the physical range: below 0.6 V_MIN trains draw nothing, above V_REGEN_MAX they shed regen.
         // With every rectifier blocking, the positive side floats, so substation buses are clamped too.
         for x in &mut b[..n_sub] {
@@ -452,10 +466,10 @@ mod tests {
     use super::*;
 
     #[test]
-    fn solves_dense_systems() {
+    fn solves_banded_systems() {
         let mut g = vec![2.0, 1.0, 0.0, 1.0, 3.0, 1.0, 0.0, 1.0, 4.0];
         let mut b = vec![3.0, 5.0, 5.0];
-        solve_dense(&mut g, &mut b, 3);
+        solve_banded(&mut g, &mut b, 3, 1);
         for (x, want) in b.iter().zip([1.0, 1.0, 1.0]) {
             assert!((x - want).abs() < 1e-12, "{b:?}");
         }
