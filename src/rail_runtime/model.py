@@ -383,7 +383,12 @@ def am_inbound(
     terminus: str = "Penn Station",
     arr_window: tuple[float, float] = (360, 600),
 ) -> list[Trip]:
-    """Scheduled origin->`terminus` times for AM trips, with their stops on this line."""
+    """Scheduled origin->`terminus` times for AM trips, with their stops on this line.
+
+    `terminus` may be partway along a trip, like Jamaica for a branch whose trains run on to Penn.
+    Without an `origin`, a trip counts only if it starts on this line,
+    so not a diesel through train that runs onto it.
+    """
     names = {r["stop_id"]: r["stop_name"] for r in read_csv(f"{gtfs}/stops.txt")}
     svc = {
         c["service_id"]
@@ -403,8 +408,12 @@ def am_inbound(
     for tid, ss in sts.items():
         ss.sort(key=lambda r: int(r["stop_sequence"]))
         stops = [names[r["stop_id"]] for r in ss]
+        if terminus not in stops:
+            continue
+        end = stops.index(terminus)
+        ss, stops = ss[: end + 1], stops[: end + 1]
         on = [i for i, n in enumerate(stops) if n in line_stops]
-        if stops[-1] != terminus or (origin and origin not in stops) or len(on) < 2:
+        if (origin and origin not in stops) or (not origin and stops[0] not in line_stops) or len(on) < 2:
             continue
         k = stops.index(origin) if origin else on[0]
         arr = hm(ss[-1]["arrival_time"])
