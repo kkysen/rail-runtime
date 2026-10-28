@@ -8,7 +8,7 @@ into Penn Station, the Port Washington Branch (all stops, and expresses nonstop 
 and the Main Line from Jamaica,
 into Grand Central Madison (GCM), the Main Line from Jamaica through the 63rd Street Tunnel,
 and into Atlantic Terminal, the Atlantic Branch from Jamaica.
-Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon, Long Beach and Far Rockaway.
+Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon, Long Beach, Far Rockaway and West Hempstead.
 
 ## Method
 
@@ -198,6 +198,12 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6
 | Far Rockaway, skips Rosedale | 1 | 35 | 23.8 | 21.9 | 21.2 | 21.2 |
 | Valley Stream, all stops | 1 | 16 | 10.4 | 10.2 | 9.7 | 9.7 |
 
+#### West Hempstead - Jamaica
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| West Hempstead, all stops | 4 | 28 | 19.5 | 17.9 | 17.0 | 16.9 |
+
 ### Trains
 
 One train alone, minutes.
@@ -356,6 +362,20 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 23.8 | 21.6 | 20.8 | 20.8 |
 | 755/3 x4, 25 kV, 1.3 brake | 23.1 | 20.8 | 19.9 | 19.8 |
 
+#### West Hempstead local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 19.5 | 17.9 | 17.0 | 16.9 |
+| M7, 750 V third rail, full power | 19.2 | 17.6 | 16.6 | 16.5 |
+| M8, 25 kV | 19.3 | 17.7 | 16.7 | 16.6 |
+| Class 700/1, 25 kV | 19.3 | 17.7 | 16.8 | 16.7 |
+| Class 423 x4, AC | 18.8 | 17.3 | 16.1 | 15.9 |
+| FLIRT Sm5 x3, 25 kV | 18.9 | 17.3 | 16.2 | 16.2 |
+| 755/3 x4, 750 V third rail | 18.8 | 17.3 | 16.1 | 16.0 |
+| 755/3 x4, 25 kV | 18.5 | 17.0 | 15.7 | 15.5 |
+| 755/3 x4, 25 kV, 1.3 brake | 18.0 | 16.6 | 15.2 | 14.9 |
+
 ### Busy service
 
 Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking.
@@ -444,6 +464,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 60 mph | 23.2 | 23.2 | 23.2 | 23.0 | 496 |
 |  | 80 mph | 22.8 | 22.8 | 22.8 | 22.5 | 495 |
 |  | 100 mph | 22.8 | 22.8 | 22.8 | 22.5 | 495 |
+
+#### West Hempstead: 60 min headways each way
+
+| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| West Hempstead local | posted | 19.6 | 19.6 | 19.6 | 19.4 | 528 |
+|  | 60 mph | 18.0 | 18.0 | 18.0 | 17.8 | 528 |
+|  | 80 mph | 17.1 | 17.1 | 17.1 | 16.9 | 528 |
+|  | 100 mph | 17.0 | 17.0 | 17.0 | 16.8 | 528 |
 
 ### Posted slow zones
 
@@ -559,6 +588,21 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 0.98 | 1.28 | Jamaica | 60 mph | 77 mph | 4 s |
 | 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 3 s |
 
+#### West Hempstead (base: local 19.5 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 7.41 | 7.59 | Westwood | 15 mph | 44 mph | 47 s |
+| 0.00 | 0.23 | Jamaica | 20 mph | 80 mph | 17 s |
+| 0.23 | 0.69 | Jamaica | 35 mph | 80 mph | 14 s |
+| 0.80 | 1.73 | Jamaica | 50 mph | 80 mph | 12 s |
+| 11.56 | 11.66 | West Hempstead | 10 mph | 80 mph | 10 s |
+| 3.73 | 5.41 | St. Albans | 60 mph | 80 mph | 9 s |
+| 3.47 | 3.73 | St. Albans | 50 mph | 80 mph | 6 s |
+| 5.41 | 6.76 | Westwood | 70 mph | 80 mph | 5 s |
+| 6.76 | 7.41 | Westwood | 60 mph | 80 mph | 4 s |
+| 1.74 | 3.47 | St. Albans | 60 mph | 80 mph | 4 s |
+
 ### Limiting curves
 
 One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
@@ -635,6 +679,16 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 0.02 | 0.85 | Jamaica | 39 mph | 11 s |
 | 6.24 | 6.73 | Valley Stream | 39 mph | 7 s |
 | 10.90 | 11.24 | Far Rockaway | 15 mph | 6 s |
+
+#### West Hempstead (base: local 17.0 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 7.24 | 7.74 | Westwood | 44 mph | 26 s |
+| 1.13 | 1.86 | St. Albans | 62 mph | 11 s |
+| 4.35 | 5.10 | St. Albans | 60 mph | 11 s |
+| 11.57 | 11.66 | West Hempstead | 15 mph | 6 s |
+| 0.12 | 0.58 | Jamaica | 55 mph | 4 s |
 
 <!-- END results -->
 

@@ -180,6 +180,15 @@ FRK_STOPS = [
     "Inwood",
     "Far Rockaway",
 ]
+WH_STOPS = [
+    "Jamaica",
+    "St. Albans",
+    "Westwood",
+    "Malverne",
+    "Lakeview",
+    "Hempstead Gardens",
+    "West Hempstead",
+]
 
 
 class Spec(NamedTuple):
@@ -266,6 +275,14 @@ SPECS = {
         {"local": FRK_STOPS[::-1]},
         (False, True),
         "7",
+    ),
+    "West Hempstead": Spec(
+        "wh_geom.json",
+        "substations.json",
+        WH_STOPS,
+        {"local": WH_STOPS[::-1]},
+        (False, True),
+        "8",
     ),
 }
 
@@ -449,7 +466,7 @@ def lines(data: str) -> dict[str, Setup]:
     return out
 
 
-BRANCH_KEYS = {"hem": "Hempstead", "bab": "Babylon", "lb": "Long Beach", "frk": "Far Rockaway"}
+BRANCH_KEYS = {"hem": "Hempstead", "bab": "Babylon", "lb": "Long Beach", "frk": "Far Rockaway", "wh": "West Hempstead"}
 
 # Seconds between trains, from the busiest hour of AM arrivals into Jamaica on 2026-10-27.
 BRANCH_HEADWAYS = {
@@ -457,6 +474,9 @@ BRANCH_HEADWAYS = {
     "Babylon": 450,  # 8 an hour
     "Long Beach": 720,  # 5 an hour
     "Far Rockaway": 900,  # 4 an hour
+    # 1 an hour, on mostly single track past Valley Stream, which the simulation doesn't model:
+    # each direction still gets its own track.
+    "West Hempstead": 3600,
 }
 
 
