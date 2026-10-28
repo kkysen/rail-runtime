@@ -8,7 +8,7 @@ into Penn Station, the Port Washington Branch (all stops, and expresses nonstop 
 and the Main Line from Jamaica,
 into Grand Central Madison (GCM), the Main Line from Jamaica through the 63rd Street Tunnel,
 and into Atlantic Terminal, the Atlantic Branch from Jamaica.
-Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead and Babylon.
+Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon and Long Beach.
 
 ## Method
 
@@ -65,6 +65,8 @@ Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead a
   so a headway loads the power network but isn't checked against track capacity.
   A branch beyond Jamaica runs one service each way,
   as often as its busiest hour of AM arrivals into Jamaica.
+  Each line is its own power network, even where lines share track,
+  like Babylon and Long Beach from Jamaica to Lynbrook, so neither loads the other's.
 - **Timetable:** AM inbound trips from the LIRR GTFS feed.
   A branch beyond Jamaica is timed into Jamaica, from trips that start on it.
 
@@ -177,6 +179,15 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6
 | Babylon, stops at Wantagh, Bellmore, Merrick, Freeport, Baldwin, Rockville Centre | 1 | 46 | 31.5 | 33.8 | 29.4 | 28.3 |
 | Babylon, stops at Wantagh, Bellmore, Merrick, Freeport | 1 | 47 | 28.8 | 31.7 | 26.8 | 25.4 |
 | Freeport, skips Lynbrook | 1 | 24 | 15.5 | 15.7 | 13.6 | 13.5 |
+
+#### Long Beach - Jamaica
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Long Beach, skips Rosedale, Laurelton, Locust Manor | 8 | 33 | 23.0 | 20.3 | 18.9 | 18.8 |
+| Long Beach, all stops | 2 | 37 | 26.3 | 23.5 | 22.8 | 22.8 |
+| Island Park, all stops | 1 | 30 | 22.1 | 21.5 | 20.7 | 20.7 |
+| Long Beach, skips Laurelton, Locust Manor | 1 | 36 | 24.1 | 21.4 | 20.3 | 20.2 |
 
 ### Trains
 
@@ -308,6 +319,20 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 37.4 | 39.5 | 35.6 | 34.9 |
 | 755/3 x4, 25 kV, 1.3 brake | 36.0 | 38.4 | 34.2 | 33.2 |
 
+#### Long Beach local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 26.3 | 23.5 | 22.8 | 22.8 |
+| M7, 750 V third rail, full power | 26.1 | 23.3 | 22.4 | 22.3 |
+| M8, 25 kV | 26.2 | 23.4 | 22.6 | 22.5 |
+| Class 700/1, 25 kV | 26.2 | 23.5 | 22.7 | 22.6 |
+| Class 423 x4, AC | 25.6 | 22.8 | 21.7 | 21.5 |
+| FLIRT Sm5 x3, 25 kV | 25.6 | 22.8 | 21.8 | 21.8 |
+| 755/3 x4, 750 V third rail | 25.3 | 22.5 | 21.4 | 21.4 |
+| 755/3 x4, 25 kV | 25.1 | 22.3 | 21.1 | 20.9 |
+| 755/3 x4, 25 kV, 1.3 brake | 24.4 | 21.6 | 20.2 | 20.0 |
+
 ### Busy service
 
 Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking.
@@ -378,6 +403,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 60 mph | 41.5 | 41.6 | 41.5 | 41.4 | 502 |
 |  | 80 mph | 38.9 | 39.1 | 39.0 | 38.5 | 512 |
 |  | 100 mph | 38.7 | 38.9 | 38.8 | 38.2 | 518 |
+
+#### Long Beach: 12 min headways each way
+
+| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Long Beach local | posted | 26.5 | 26.6 | 26.6 | 26.4 | 523 |
+|  | 60 mph | 23.8 | 23.8 | 23.8 | 23.6 | 535 |
+|  | 80 mph | 23.0 | 23.1 | 23.0 | 22.8 | 527 |
+|  | 100 mph | 23.0 | 23.1 | 23.0 | 22.8 | 527 |
 
 ### Posted slow zones
 
@@ -461,6 +495,23 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 0.98 | 1.28 | Jamaica | 60 mph | 77 mph | 4 s |
 | 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 3 s |
 
+#### Long Beach (base: local 26.3 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 12.92 | 13.15 | Long Beach | 5 mph | 55 mph | 108 s |
+| 11.41 | 11.74 | Island Park | 40 mph | 61 mph | 16 s |
+| 12.58 | 12.92 | Long Beach | 30 mph | 80 mph | 14 s |
+| 0.00 | 0.18 | Jamaica | 20 mph | 80 mph | 13 s |
+| 3.84 | 6.20 | Rosedale | 60 mph | 80 mph | 9 s |
+| 0.37 | 0.60 | Jamaica | 35 mph | 62 mph | 9 s |
+| 9.69 | 11.41 | Oceanside | 60 mph | 80 mph | 7 s |
+| 0.98 | 1.28 | Jamaica | 60 mph | 77 mph | 4 s |
+| 6.93 | 8.08 | Lynbrook | 60 mph | 80 mph | 4 s |
+| 8.09 | 8.89 | Centre Avenue | 45 mph | 80 mph | 4 s |
+| 6.20 | 6.70 | Valley Stream | 45 mph | 80 mph | 4 s |
+| 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 3 s |
+
 ### Limiting curves
 
 One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
@@ -519,6 +570,15 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | ---: | ---: | --- | ---: | ---: |
 | 0.02 | 0.85 | Jamaica | 39 mph | 11 s |
 | 6.29 | 6.63 | Lynbrook | 68 mph | 5 s |
+
+#### Long Beach (base: local 22.8 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 0.02 | 0.85 | Jamaica | 39 mph | 11 s |
+| 11.31 | 11.87 | Island Park | 60 mph | 9 s |
+| 12.81 | 13.15 | Long Beach | 15 mph | 7 s |
+| 7.81 | 8.44 | Lynbrook | 47 mph | 4 s |
 
 <!-- END results -->
 
