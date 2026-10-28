@@ -333,6 +333,8 @@ class Line:
                 out[k:] = np.minimum(out[k:], lim[:-k])
                 out[:-k] = np.minimum(out[:-k], lim[k:])
             lim = out
+            # Never slower than posted: where the posted speed beats the cap or the curve, it holds.
+            lim = np.fmax(lim, np.fmin(self.posted, vmax))
         # The geometry cases assume every switch is rebuilt to curve speed; only the bumper stays slow.
         # Bumper approaches.
         for bumper, near in zip(self.bumpers, (self.s < 150, self.s > self.s[-1] - 150), strict=True):

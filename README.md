@@ -22,6 +22,10 @@ Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, 
   - "60", "80" and "100 mph" use curve speed only,
     with 6 in of superelevation and 3 in of unbalance,
     capped at that speed, which also replaces each train's own top speed.
+    Where the posted speed is higher, up to the train's top speed, the posted speed holds instead,
+    so no case is slower than posted anywhere:
+    a 60 mph cap doesn't slow track already posted at 80,
+    and posted speeds above what the curve estimate allows are kept.
     They assume every switch is rebuilt to curve speed:
     through interlockings, curvature is measured on a path smoothed over 200 m
     so crossover kinks don't count as curves.
@@ -120,117 +124,117 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Great Neck, skips Mets | 2 | 39 | 26.2 | 25.0 | 23.7 | 23.5 |
-| Port Washington, stops at Plandome, Manhasset, Great Neck | 2 | 38 | 25.5 | 23.9 | 21.4 | 21.1 |
-| Great Neck, all stops | 1 | 38 | 27.3 | 26.1 | 24.9 | 24.7 |
-| Port Washington, stops at Plandome, Manhasset, Great Neck, Bayside | 1 | 40 | 26.6 | 24.9 | 22.7 | 22.4 |
-| Port Washington, all stops | 1 | 49 | 35.0 | 33.4 | 32.2 | 32.0 |
-| Port Washington, skips Auburndale, Broadway, Murray Hill, Flushing | 1 | 45 | 30.7 | 29.2 | 27.5 | 27.3 |
-| Port Washington, skips Auburndale, Broadway, Murray Hill, Flushing, Mets | 1 | 44 | 29.7 | 28.1 | 26.2 | 26.0 |
+| Great Neck, skips Mets | 2 | 39 | 26.2 | 24.9 | 23.5 | 23.2 |
+| Port Washington, stops at Plandome, Manhasset, Great Neck | 2 | 38 | 25.5 | 23.7 | 21.1 | 20.8 |
+| Great Neck, all stops | 1 | 38 | 27.3 | 26.0 | 24.7 | 24.5 |
+| Port Washington, stops at Plandome, Manhasset, Great Neck, Bayside | 1 | 40 | 26.6 | 24.8 | 22.4 | 22.2 |
+| Port Washington, all stops | 1 | 49 | 35.0 | 33.3 | 31.9 | 31.7 |
+| Port Washington, skips Auburndale, Broadway, Murray Hill, Flushing | 1 | 45 | 30.7 | 29.0 | 27.2 | 27.0 |
+| Port Washington, skips Auburndale, Broadway, Murray Hill, Flushing, Mets | 1 | 44 | 29.7 | 28.0 | 26.0 | 25.7 |
 
 #### Jamaica - Penn
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Jamaica, nonstop | 38 | 19 | 13.4 | 11.8 | 9.6 | 9.1 |
-| Jamaica, stops at Woodside | 6 | 20 | 14.4 | 12.9 | 10.8 | 10.3 |
-| Jamaica, stops at Forest Hills | 4 | 19 | 14.7 | 12.9 | 10.9 | 10.6 |
-| Jamaica, stops at Kew Gardens | 4 | 19 | 14.6 | 12.9 | 10.9 | 10.5 |
-| Jamaica, skips Woodside | 2 | 22 | 15.9 | 13.9 | 12.2 | 11.9 |
-| Jamaica, all stops | 1 | 22 | 17.0 | 15.0 | 13.4 | 13.2 |
+| Jamaica, nonstop | 38 | 19 | 13.4 | 10.8 | 9.6 | 9.1 |
+| Jamaica, stops at Woodside | 6 | 20 | 14.4 | 11.8 | 10.8 | 10.3 |
+| Jamaica, stops at Forest Hills | 4 | 19 | 14.7 | 12.1 | 10.9 | 10.6 |
+| Jamaica, stops at Kew Gardens | 4 | 19 | 14.6 | 12.1 | 10.9 | 10.5 |
+| Jamaica, skips Woodside | 2 | 22 | 15.9 | 13.4 | 12.2 | 11.9 |
+| Jamaica, all stops | 1 | 22 | 17.0 | 14.4 | 13.4 | 13.2 |
 
 #### Jamaica - GCM
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Jamaica, nonstop | 22 | 19 | 12.9 | 11.4 | 9.7 | 9.3 |
-| Jamaica, stops at Woodside | 8 | 19 | 14.0 | 12.5 | 10.9 | 10.5 |
-| Jamaica, stops at Forest Hills | 4 | 20 | 14.2 | 12.5 | 11.0 | 10.8 |
-| Jamaica, stops at Kew Gardens | 4 | 19 | 14.1 | 12.5 | 11.0 | 10.7 |
-| Jamaica, skips Woodside | 2 | 21 | 15.4 | 13.5 | 12.3 | 12.2 |
+| Jamaica, nonstop | 22 | 19 | 12.9 | 10.4 | 9.7 | 9.2 |
+| Jamaica, stops at Woodside | 8 | 19 | 14.0 | 11.4 | 10.9 | 10.5 |
+| Jamaica, stops at Forest Hills | 4 | 20 | 14.2 | 11.7 | 11.0 | 10.8 |
+| Jamaica, stops at Kew Gardens | 4 | 19 | 14.1 | 11.7 | 11.0 | 10.7 |
+| Jamaica, skips Woodside | 2 | 21 | 15.4 | 13.0 | 12.3 | 12.1 |
 
 #### Jamaica - Atlantic
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Jamaica, all stops | 26 | 20 | 13.9 | 12.1 | 10.8 | 10.4 |
-| Jamaica, express | 1 | 19 | 12.1 | 10.0 | 8.4 | 7.9 |
+| Jamaica, all stops | 26 | 20 | 13.9 | 11.6 | 10.8 | 10.4 |
+| Jamaica, express | 1 | 19 | 12.1 | 9.4 | 8.3 | 7.8 |
 
 #### Hempstead - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Hempstead, all stops | 7 | 31 | 22.4 | 20.7 | 20.3 | 20.3 |
-| Hempstead, express | 2 | 30 | 18.7 | 17.6 | 16.6 | 16.2 |
+| Hempstead, all stops | 7 | 31 | 22.4 | 20.2 | 20.2 | 20.2 |
+| Hempstead, express | 2 | 30 | 18.7 | 16.6 | 16.5 | 16.2 |
 
 #### Babylon - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre, Lynbrook | 8 | 46 | 32.8 | 34.9 | 30.8 | 29.9 |
-| Wantagh, skips Lynbrook | 7 | 30 | 22.5 | 22.9 | 20.6 | 20.5 |
-| Babylon, skips Lynbrook | 2 | 52 | 39.5 | 40.3 | 37.4 | 37.2 |
-| Wantagh, all stops | 2 | 32 | 23.6 | 24.0 | 22.0 | 21.8 |
-| Babylon, stops at Amityville, Massapequa, Bellmore, Freeport | 1 | 39 | 28.9 | 31.7 | 26.9 | 25.9 |
-| Babylon, skips Bellmore, Merrick, Freeport, Lynbrook | 1 | 49 | 35.5 | 37.1 | 33.4 | 32.8 |
-| Babylon, all stops | 1 | 53 | 40.6 | 41.4 | 38.7 | 38.6 |
-| Babylon, skips Freeport, Baldwin, Rockville Centre, Lynbrook | 1 | 49 | 35.4 | 37.1 | 33.4 | 32.9 |
-| Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre | 1 | 49 | 33.9 | 36.0 | 32.1 | 31.2 |
-| Babylon, stops at Wantagh, Bellmore, Merrick, Freeport, Baldwin, Rockville Centre | 1 | 46 | 31.5 | 33.8 | 29.4 | 28.3 |
-| Babylon, stops at Wantagh, Bellmore, Merrick, Freeport | 1 | 47 | 28.8 | 31.7 | 26.8 | 25.4 |
-| Freeport, skips Lynbrook | 1 | 24 | 15.5 | 15.7 | 13.6 | 13.5 |
+| Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre, Lynbrook | 8 | 46 | 32.8 | 32.1 | 30.7 | 29.7 |
+| Wantagh, skips Lynbrook | 7 | 30 | 22.5 | 21.9 | 20.6 | 20.4 |
+| Babylon, skips Lynbrook | 2 | 52 | 39.5 | 38.9 | 37.4 | 37.2 |
+| Wantagh, all stops | 2 | 32 | 23.6 | 23.0 | 21.9 | 21.8 |
+| Babylon, stops at Amityville, Massapequa, Bellmore, Freeport | 1 | 39 | 28.9 | 28.3 | 26.8 | 25.7 |
+| Babylon, skips Bellmore, Merrick, Freeport, Lynbrook | 1 | 49 | 35.5 | 34.9 | 33.4 | 32.8 |
+| Babylon, all stops | 1 | 53 | 40.6 | 40.0 | 38.7 | 38.5 |
+| Babylon, skips Freeport, Baldwin, Rockville Centre, Lynbrook | 1 | 49 | 35.4 | 34.8 | 33.3 | 32.7 |
+| Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre | 1 | 49 | 33.9 | 33.2 | 32.0 | 31.0 |
+| Babylon, stops at Wantagh, Bellmore, Merrick, Freeport, Baldwin, Rockville Centre | 1 | 46 | 31.5 | 30.9 | 29.4 | 28.3 |
+| Babylon, stops at Wantagh, Bellmore, Merrick, Freeport | 1 | 47 | 28.8 | 28.2 | 26.7 | 25.2 |
+| Freeport, skips Lynbrook | 1 | 24 | 15.5 | 14.9 | 13.6 | 13.4 |
 
 #### Long Beach - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Long Beach, skips Rosedale, Laurelton, Locust Manor | 8 | 33 | 23.0 | 20.3 | 18.9 | 18.8 |
-| Long Beach, all stops | 2 | 37 | 26.3 | 23.5 | 22.8 | 22.8 |
-| Island Park, all stops | 1 | 30 | 22.1 | 21.5 | 20.7 | 20.7 |
-| Long Beach, skips Laurelton, Locust Manor | 1 | 36 | 24.1 | 21.4 | 20.3 | 20.2 |
+| Long Beach, skips Rosedale, Laurelton, Locust Manor | 8 | 33 | 23.0 | 20.0 | 18.9 | 18.8 |
+| Long Beach, all stops | 2 | 37 | 26.3 | 23.3 | 22.8 | 22.8 |
+| Island Park, all stops | 1 | 30 | 22.1 | 21.2 | 20.7 | 20.7 |
+| Long Beach, skips Laurelton, Locust Manor | 1 | 36 | 24.1 | 21.0 | 20.3 | 20.2 |
 
 #### Far Rockaway - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Far Rockaway, all stops | 10 | 36 | 24.9 | 23.0 | 22.5 | 22.5 |
-| Far Rockaway, skips Rosedale, Laurelton, Locust Manor | 1 | 34 | 21.5 | 19.8 | 18.7 | 18.5 |
-| Far Rockaway, skips Rosedale | 1 | 35 | 23.8 | 21.9 | 21.2 | 21.2 |
-| Valley Stream, all stops | 1 | 16 | 10.4 | 10.2 | 9.7 | 9.7 |
+| Far Rockaway, all stops | 10 | 36 | 24.9 | 22.7 | 22.5 | 22.4 |
+| Far Rockaway, skips Rosedale, Laurelton, Locust Manor | 1 | 34 | 21.5 | 19.4 | 18.6 | 18.5 |
+| Far Rockaway, skips Rosedale | 1 | 35 | 23.8 | 21.6 | 21.2 | 21.2 |
+| Valley Stream, all stops | 1 | 16 | 10.4 | 10.0 | 9.7 | 9.7 |
 
 #### West Hempstead - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| West Hempstead, all stops | 4 | 28 | 19.5 | 17.9 | 17.0 | 16.9 |
+| West Hempstead, all stops | 4 | 28 | 19.5 | 17.6 | 16.9 | 16.8 |
 
 #### Huntington - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Huntington, skips Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 6 | 48 | 34.8 | 34.6 | 31.2 | 30.3 |
-| Huntington, skips Merillon Avenue, New Hyde Park, Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 2 | 46 | 32.2 | 32.5 | 28.6 | 27.3 |
-| Huntington, stops at Cold Spring Harbor, Syosset | 2 | 42 | 27.4 | 28.3 | 23.6 | 21.4 |
-| Westbury, skips Floral Park | 2 | 25 | 20.1 | 20.2 | 19.1 | 19.1 |
-| Hicksville, skips Elmont-UBS Arena, Queens Village, Hollis | 1 | 27 | 21.5 | 22.3 | 20.3 | 19.7 |
-| Hicksville, skips Floral Park, Elmont-UBS Arena | 1 | 32 | 22.8 | 23.4 | 21.6 | 21.4 |
-| Huntington, stops at Cold Spring Harbor, Syosset, Hicksville, Carle Place, Mineola | 1 | 43 | 30.9 | 31.5 | 27.3 | 25.9 |
-| Huntington, stops at Cold Spring Harbor, Syosset, Hicksville | 1 | 39 | 28.2 | 29.3 | 24.6 | 22.6 |
-| Huntington, skips Elmont-UBS Arena, Queens Village, Hollis | 1 | 48 | 36.2 | 35.7 | 32.6 | 31.9 |
-| Huntington, skips Carle Place, Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 1 | 44 | 33.5 | 33.6 | 29.9 | 28.9 |
+| Huntington, skips Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 6 | 48 | 34.8 | 31.6 | 31.2 | 30.3 |
+| Huntington, skips Merillon Avenue, New Hyde Park, Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 2 | 46 | 32.2 | 28.9 | 28.6 | 27.3 |
+| Huntington, stops at Cold Spring Harbor, Syosset | 2 | 42 | 27.4 | 24.0 | 23.5 | 21.4 |
+| Westbury, skips Floral Park | 2 | 25 | 20.1 | 19.2 | 19.1 | 19.1 |
+| Hicksville, skips Elmont-UBS Arena, Queens Village, Hollis | 1 | 27 | 21.5 | 20.4 | 20.3 | 19.7 |
+| Hicksville, skips Floral Park, Elmont-UBS Arena | 1 | 32 | 22.8 | 21.7 | 21.6 | 21.4 |
+| Huntington, stops at Cold Spring Harbor, Syosset, Hicksville, Carle Place, Mineola | 1 | 43 | 30.9 | 27.7 | 27.3 | 25.9 |
+| Huntington, stops at Cold Spring Harbor, Syosset, Hicksville | 1 | 39 | 28.2 | 25.0 | 24.6 | 22.5 |
+| Huntington, skips Elmont-UBS Arena, Queens Village, Hollis | 1 | 48 | 36.2 | 32.9 | 32.6 | 31.8 |
+| Huntington, skips Carle Place, Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 1 | 44 | 33.5 | 30.3 | 29.9 | 28.9 |
 
 #### Ronkonkoma - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage | 6 | 58 | 40.8 | 46.4 | 39.0 | 36.2 |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage, Hicksville | 3 | 60 | 41.6 | 47.4 | 40.1 | 37.3 |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage, Hicksville, Mineola | 2 | 59 | 42.9 | 48.4 | 41.4 | 39.0 |
-| Farmingdale, skips Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 1 | 38 | 27.6 | 29.0 | 26.0 | 25.2 |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park | 1 | 55 | 36.7 | 43.2 | 34.9 | 31.3 |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage, Floral Park | 1 | 61 | 42.1 | 47.5 | 40.4 | 38.0 |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Hicksville, Merillon Avenue, New Hyde Park | 1 | 61 | 42.9 | 48.4 | 41.3 | 38.9 |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Hicksville, Mineola | 1 | 61 | 40.2 | 46.3 | 38.6 | 35.9 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage | 6 | 58 | 40.8 | 39.3 | 39.0 | 36.2 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage, Hicksville | 3 | 60 | 41.6 | 40.3 | 40.0 | 37.3 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage, Hicksville, Mineola | 2 | 59 | 42.9 | 41.6 | 41.4 | 39.0 |
+| Farmingdale, skips Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 1 | 38 | 27.6 | 26.3 | 26.0 | 25.2 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park | 1 | 55 | 36.7 | 35.2 | 34.8 | 31.2 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage, Floral Park | 1 | 61 | 42.1 | 40.7 | 40.3 | 37.9 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Hicksville, Merillon Avenue, New Hyde Park | 1 | 61 | 42.9 | 41.6 | 41.3 | 38.9 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Hicksville, Mineola | 1 | 61 | 40.2 | 38.9 | 38.6 | 35.8 |
 
 ### Trains
 
@@ -240,197 +244,197 @@ One train alone, minutes.
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 35.0 | 33.4 | 32.2 | 32.0 |
-| M7, 750 V third rail, full power | 34.6 | 33.1 | 31.7 | 31.4 |
-| M8, 25 kV | 34.8 | 33.2 | 31.9 | 31.7 |
-| Class 700/1, 25 kV | 34.8 | 33.3 | 32.0 | 31.8 |
-| Class 423 x4, AC | 34.0 | 32.5 | 30.8 | 30.4 |
-| FLIRT Sm5 x3, 25 kV | 33.9 | 32.4 | 31.0 | 30.7 |
-| 755/3 x4, 750 V third rail | 33.6 | 32.1 | 30.5 | 30.2 |
-| 755/3 x4, 25 kV | 33.4 | 31.9 | 30.1 | 29.7 |
-| 755/3 x4, 25 kV, 1.3 brake | 32.5 | 30.9 | 29.0 | 28.5 |
+| M7, 750 V third rail | 35.0 | 33.3 | 31.9 | 31.7 |
+| M7, 750 V third rail, full power | 34.6 | 32.9 | 31.4 | 31.2 |
+| M8, 25 kV | 34.8 | 33.1 | 31.6 | 31.4 |
+| Class 700/1, 25 kV | 34.8 | 33.1 | 31.8 | 31.6 |
+| Class 423 x4, AC | 34.0 | 32.3 | 30.6 | 30.2 |
+| FLIRT Sm5 x3, 25 kV | 33.9 | 32.3 | 30.7 | 30.5 |
+| 755/3 x4, 750 V third rail | 33.6 | 31.9 | 30.3 | 29.9 |
+| 755/3 x4, 25 kV | 33.4 | 31.7 | 29.9 | 29.5 |
+| 755/3 x4, 25 kV, 1.3 brake | 32.5 | 30.7 | 28.7 | 28.3 |
 
 #### Port Washington express
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 25.5 | 23.9 | 21.4 | 21.1 |
-| M7, 750 V third rail, full power | 25.4 | 23.8 | 21.2 | 20.7 |
-| M8, 25 kV | 25.5 | 23.8 | 21.3 | 20.8 |
-| Class 700/1, 25 kV | 25.5 | 23.8 | 21.4 | 21.0 |
-| Class 423 x4, AC | 25.2 | 23.6 | 20.8 | 20.2 |
-| FLIRT Sm5 x3, 25 kV | 25.2 | 23.6 | 21.0 | 20.5 |
-| 755/3 x4, 750 V third rail | 25.2 | 23.5 | 20.8 | 20.2 |
-| 755/3 x4, 25 kV | 25.1 | 23.4 | 20.6 | 19.9 |
-| 755/3 x4, 25 kV, 1.3 brake | 24.8 | 23.2 | 20.3 | 19.5 |
+| M7, 750 V third rail | 25.5 | 23.7 | 21.1 | 20.8 |
+| M7, 750 V third rail, full power | 25.4 | 23.6 | 20.9 | 20.4 |
+| M8, 25 kV | 25.5 | 23.6 | 21.0 | 20.6 |
+| Class 700/1, 25 kV | 25.5 | 23.7 | 21.1 | 20.8 |
+| Class 423 x4, AC | 25.2 | 23.4 | 20.6 | 19.9 |
+| FLIRT Sm5 x3, 25 kV | 25.2 | 23.4 | 20.7 | 20.2 |
+| 755/3 x4, 750 V third rail | 25.2 | 23.3 | 20.5 | 19.9 |
+| 755/3 x4, 25 kV | 25.1 | 23.3 | 20.4 | 19.6 |
+| 755/3 x4, 25 kV, 1.3 brake | 24.8 | 23.0 | 20.0 | 19.2 |
 
 #### Main Line to Penn local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 17.0 | 15.0 | 13.4 | 13.2 |
-| M7, 750 V third rail, full power | 16.9 | 14.9 | 13.2 | 12.9 |
-| M8, 25 kV | 16.9 | 14.9 | 13.3 | 13.0 |
-| Class 700/1, 25 kV | 17.0 | 15.0 | 13.4 | 13.2 |
-| Class 423 x4, AC | 16.6 | 14.7 | 12.8 | 12.5 |
-| FLIRT Sm5 x3, 25 kV | 16.6 | 14.7 | 13.0 | 12.7 |
-| 755/3 x4, 750 V third rail | 16.5 | 14.5 | 12.8 | 12.4 |
-| 755/3 x4, 25 kV | 16.4 | 14.5 | 12.6 | 12.2 |
-| 755/3 x4, 25 kV, 1.3 brake | 16.0 | 14.2 | 12.2 | 11.7 |
+| M7, 750 V third rail | 17.0 | 14.4 | 13.4 | 13.2 |
+| M7, 750 V third rail, full power | 16.9 | 14.3 | 13.2 | 12.9 |
+| M8, 25 kV | 16.9 | 14.4 | 13.3 | 13.0 |
+| Class 700/1, 25 kV | 17.0 | 14.4 | 13.4 | 13.2 |
+| Class 423 x4, AC | 16.6 | 14.0 | 12.8 | 12.4 |
+| FLIRT Sm5 x3, 25 kV | 16.6 | 14.1 | 13.0 | 12.7 |
+| 755/3 x4, 750 V third rail | 16.5 | 13.9 | 12.8 | 12.4 |
+| 755/3 x4, 25 kV | 16.4 | 13.8 | 12.6 | 12.2 |
+| 755/3 x4, 25 kV, 1.3 brake | 16.0 | 13.4 | 12.2 | 11.7 |
 
 #### Main Line to Penn express
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 13.4 | 11.8 | 9.6 | 9.1 |
-| M7, 750 V third rail, full power | 13.3 | 11.8 | 9.5 | 8.9 |
-| M8, 25 kV | 13.4 | 11.8 | 9.5 | 9.0 |
-| Class 700/1, 25 kV | 13.4 | 11.8 | 9.5 | 9.1 |
-| Class 423 x4, AC | 13.3 | 11.7 | 9.4 | 8.7 |
-| FLIRT Sm5 x3, 25 kV | 13.3 | 11.7 | 9.4 | 8.9 |
-| 755/3 x4, 750 V third rail | 13.2 | 11.7 | 9.3 | 8.7 |
-| 755/3 x4, 25 kV | 13.2 | 11.7 | 9.3 | 8.6 |
-| 755/3 x4, 25 kV, 1.3 brake | 13.1 | 11.6 | 9.2 | 8.5 |
+| M7, 750 V third rail | 13.4 | 10.8 | 9.6 | 9.1 |
+| M7, 750 V third rail, full power | 13.3 | 10.7 | 9.5 | 8.9 |
+| M8, 25 kV | 13.4 | 10.7 | 9.5 | 9.0 |
+| Class 700/1, 25 kV | 13.4 | 10.8 | 9.5 | 9.1 |
+| Class 423 x4, AC | 13.3 | 10.6 | 9.4 | 8.7 |
+| FLIRT Sm5 x3, 25 kV | 13.3 | 10.7 | 9.4 | 8.9 |
+| 755/3 x4, 750 V third rail | 13.2 | 10.6 | 9.3 | 8.7 |
+| 755/3 x4, 25 kV | 13.2 | 10.6 | 9.3 | 8.6 |
+| 755/3 x4, 25 kV, 1.3 brake | 13.1 | 10.5 | 9.2 | 8.5 |
 
 #### Main Line to GCM local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 16.5 | 14.6 | 13.6 | 13.4 |
-| M7, 750 V third rail, full power | 16.4 | 14.5 | 13.4 | 13.1 |
-| M8, 25 kV | 16.4 | 14.5 | 13.5 | 13.2 |
-| Class 700/1, 25 kV | 16.5 | 14.5 | 13.5 | 13.4 |
-| Class 423 x4, AC | 16.1 | 14.3 | 13.0 | 12.7 |
-| FLIRT Sm5 x3, 25 kV | 16.2 | 14.3 | 13.1 | 12.9 |
-| 755/3 x4, 750 V third rail | 16.0 | 14.2 | 12.9 | 12.7 |
-| 755/3 x4, 25 kV | 15.9 | 14.1 | 12.8 | 12.4 |
-| 755/3 x4, 25 kV, 1.3 brake | 15.5 | 13.8 | 12.4 | 12.0 |
+| M7, 750 V third rail | 16.5 | 14.0 | 13.5 | 13.4 |
+| M7, 750 V third rail, full power | 16.4 | 13.9 | 13.4 | 13.1 |
+| M8, 25 kV | 16.4 | 13.9 | 13.4 | 13.2 |
+| Class 700/1, 25 kV | 16.5 | 14.0 | 13.5 | 13.3 |
+| Class 423 x4, AC | 16.1 | 13.6 | 13.0 | 12.7 |
+| FLIRT Sm5 x3, 25 kV | 16.2 | 13.7 | 13.1 | 12.9 |
+| 755/3 x4, 750 V third rail | 16.0 | 13.5 | 12.9 | 12.6 |
+| 755/3 x4, 25 kV | 15.9 | 13.4 | 12.7 | 12.4 |
+| 755/3 x4, 25 kV, 1.3 brake | 15.5 | 13.0 | 12.4 | 12.0 |
 
 #### Main Line to GCM express
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 12.9 | 11.4 | 9.7 | 9.3 |
-| M7, 750 V third rail, full power | 12.9 | 11.4 | 9.6 | 9.1 |
-| M8, 25 kV | 12.9 | 11.4 | 9.6 | 9.2 |
-| Class 700/1, 25 kV | 12.9 | 11.4 | 9.7 | 9.3 |
-| Class 423 x4, AC | 12.8 | 11.3 | 9.5 | 8.9 |
-| FLIRT Sm5 x3, 25 kV | 12.8 | 11.3 | 9.6 | 9.1 |
-| 755/3 x4, 750 V third rail | 12.8 | 11.3 | 9.5 | 8.9 |
-| 755/3 x4, 25 kV | 12.8 | 11.3 | 9.4 | 8.8 |
-| 755/3 x4, 25 kV, 1.3 brake | 12.7 | 11.2 | 9.4 | 8.7 |
+| M7, 750 V third rail | 12.9 | 10.4 | 9.7 | 9.2 |
+| M7, 750 V third rail, full power | 12.9 | 10.3 | 9.6 | 9.1 |
+| M8, 25 kV | 12.9 | 10.3 | 9.6 | 9.2 |
+| Class 700/1, 25 kV | 12.9 | 10.3 | 9.7 | 9.3 |
+| Class 423 x4, AC | 12.8 | 10.3 | 9.5 | 8.9 |
+| FLIRT Sm5 x3, 25 kV | 12.8 | 10.3 | 9.6 | 9.1 |
+| 755/3 x4, 750 V third rail | 12.8 | 10.2 | 9.5 | 8.9 |
+| 755/3 x4, 25 kV | 12.8 | 10.2 | 9.4 | 8.8 |
+| 755/3 x4, 25 kV, 1.3 brake | 12.7 | 10.1 | 9.3 | 8.7 |
 
 #### Atlantic local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 13.9 | 12.1 | 10.8 | 10.4 |
-| M7, 750 V third rail, full power | 13.9 | 12.0 | 10.5 | 10.0 |
-| M8, 25 kV | 13.9 | 12.0 | 10.6 | 10.1 |
-| Class 700/1, 25 kV | 13.9 | 12.0 | 10.7 | 10.3 |
-| Class 423 x4, AC | 13.7 | 11.8 | 10.2 | 9.5 |
-| FLIRT Sm5 x3, 25 kV | 13.7 | 11.8 | 10.3 | 9.8 |
-| 755/3 x4, 750 V third rail | 13.7 | 11.8 | 10.2 | 9.6 |
-| 755/3 x4, 25 kV | 13.6 | 11.7 | 10.0 | 9.3 |
-| 755/3 x4, 25 kV, 1.3 brake | 13.5 | 11.5 | 9.7 | 9.0 |
+| M7, 750 V third rail | 13.9 | 11.6 | 10.8 | 10.4 |
+| M7, 750 V third rail, full power | 13.9 | 11.4 | 10.5 | 10.0 |
+| M8, 25 kV | 13.9 | 11.5 | 10.6 | 10.1 |
+| Class 700/1, 25 kV | 13.9 | 11.5 | 10.7 | 10.3 |
+| Class 423 x4, AC | 13.7 | 11.3 | 10.2 | 9.5 |
+| FLIRT Sm5 x3, 25 kV | 13.7 | 11.3 | 10.3 | 9.8 |
+| 755/3 x4, 750 V third rail | 13.7 | 11.2 | 10.2 | 9.6 |
+| 755/3 x4, 25 kV | 13.6 | 11.1 | 10.0 | 9.3 |
+| 755/3 x4, 25 kV, 1.3 brake | 13.5 | 10.9 | 9.7 | 9.0 |
 
 #### Hempstead local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 22.4 | 20.7 | 20.3 | 20.3 |
-| M7, 750 V third rail, full power | 22.1 | 20.5 | 19.9 | 19.9 |
-| M8, 25 kV | 22.2 | 20.6 | 20.1 | 20.1 |
-| Class 700/1, 25 kV | 22.3 | 20.6 | 20.2 | 20.2 |
-| Class 423 x4, AC | 21.5 | 20.1 | 19.3 | 19.2 |
-| FLIRT Sm5 x3, 25 kV | 21.6 | 20.0 | 19.4 | 19.4 |
-| 755/3 x4, 750 V third rail | 21.2 | 19.8 | 19.1 | 19.0 |
-| 755/3 x4, 25 kV | 21.0 | 19.6 | 18.7 | 18.6 |
-| 755/3 x4, 25 kV, 1.3 brake | 20.2 | 18.8 | 17.9 | 17.7 |
+| M7, 750 V third rail | 22.4 | 20.2 | 20.2 | 20.2 |
+| M7, 750 V third rail, full power | 22.1 | 19.9 | 19.9 | 19.8 |
+| M8, 25 kV | 22.2 | 20.0 | 20.0 | 20.0 |
+| Class 700/1, 25 kV | 22.3 | 20.1 | 20.1 | 20.1 |
+| Class 423 x4, AC | 21.5 | 19.3 | 19.2 | 19.1 |
+| FLIRT Sm5 x3, 25 kV | 21.6 | 19.4 | 19.3 | 19.3 |
+| 755/3 x4, 750 V third rail | 21.2 | 19.1 | 19.0 | 19.0 |
+| 755/3 x4, 25 kV | 21.0 | 18.8 | 18.7 | 18.5 |
+| 755/3 x4, 25 kV, 1.3 brake | 20.2 | 17.9 | 17.8 | 17.6 |
 
 #### Babylon local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 40.6 | 41.4 | 38.7 | 38.6 |
-| M7, 750 V third rail, full power | 39.6 | 40.9 | 37.8 | 37.5 |
-| M8, 25 kV | 40.0 | 41.0 | 38.1 | 37.9 |
-| Class 700/1, 25 kV | 40.2 | 41.1 | 38.4 | 38.2 |
-| Class 423 x4, AC | 38.3 | 40.2 | 36.4 | 35.9 |
-| FLIRT Sm5 x3, 25 kV | 38.8 | 40.1 | 36.9 | 36.6 |
-| 755/3 x4, 750 V third rail | 38.2 | 39.8 | 36.4 | 36.0 |
-| 755/3 x4, 25 kV | 37.4 | 39.5 | 35.6 | 34.9 |
-| 755/3 x4, 25 kV, 1.3 brake | 36.0 | 38.4 | 34.2 | 33.2 |
+| M7, 750 V third rail | 40.6 | 40.0 | 38.7 | 38.5 |
+| M7, 750 V third rail, full power | 39.6 | 39.0 | 37.7 | 37.5 |
+| M8, 25 kV | 40.0 | 39.3 | 38.1 | 37.9 |
+| Class 700/1, 25 kV | 40.2 | 39.6 | 38.3 | 38.1 |
+| Class 423 x4, AC | 38.3 | 37.7 | 36.4 | 35.8 |
+| FLIRT Sm5 x3, 25 kV | 38.8 | 38.1 | 36.9 | 36.6 |
+| 755/3 x4, 750 V third rail | 38.2 | 37.6 | 36.4 | 35.9 |
+| 755/3 x4, 25 kV | 37.4 | 36.8 | 35.5 | 34.8 |
+| 755/3 x4, 25 kV, 1.3 brake | 36.0 | 35.4 | 34.1 | 33.2 |
 
 #### Long Beach local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 26.3 | 23.5 | 22.8 | 22.8 |
-| M7, 750 V third rail, full power | 26.1 | 23.3 | 22.4 | 22.3 |
-| M8, 25 kV | 26.2 | 23.4 | 22.6 | 22.5 |
-| Class 700/1, 25 kV | 26.2 | 23.5 | 22.7 | 22.6 |
-| Class 423 x4, AC | 25.6 | 22.8 | 21.7 | 21.5 |
-| FLIRT Sm5 x3, 25 kV | 25.6 | 22.8 | 21.8 | 21.8 |
-| 755/3 x4, 750 V third rail | 25.3 | 22.5 | 21.4 | 21.4 |
-| 755/3 x4, 25 kV | 25.1 | 22.3 | 21.1 | 20.9 |
-| 755/3 x4, 25 kV, 1.3 brake | 24.4 | 21.6 | 20.2 | 20.0 |
+| M7, 750 V third rail | 26.3 | 23.3 | 22.8 | 22.8 |
+| M7, 750 V third rail, full power | 26.1 | 23.0 | 22.4 | 22.3 |
+| M8, 25 kV | 26.2 | 23.1 | 22.6 | 22.5 |
+| Class 700/1, 25 kV | 26.2 | 23.2 | 22.7 | 22.6 |
+| Class 423 x4, AC | 25.6 | 22.5 | 21.6 | 21.5 |
+| FLIRT Sm5 x3, 25 kV | 25.6 | 22.5 | 21.8 | 21.8 |
+| 755/3 x4, 750 V third rail | 25.3 | 22.2 | 21.4 | 21.3 |
+| 755/3 x4, 25 kV | 25.1 | 22.0 | 21.1 | 20.9 |
+| 755/3 x4, 25 kV, 1.3 brake | 24.4 | 21.2 | 20.2 | 19.9 |
 
 #### Far Rockaway local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 24.9 | 23.0 | 22.5 | 22.5 |
-| M7, 750 V third rail, full power | 24.6 | 22.6 | 22.1 | 22.0 |
-| M8, 25 kV | 24.7 | 22.8 | 22.2 | 22.2 |
-| Class 700/1, 25 kV | 24.8 | 22.8 | 22.3 | 22.3 |
-| Class 423 x4, AC | 24.3 | 22.1 | 21.4 | 21.3 |
-| FLIRT Sm5 x3, 25 kV | 24.2 | 22.1 | 21.5 | 21.5 |
-| 755/3 x4, 750 V third rail | 24.0 | 21.9 | 21.3 | 21.2 |
-| 755/3 x4, 25 kV | 23.8 | 21.6 | 20.8 | 20.8 |
-| 755/3 x4, 25 kV, 1.3 brake | 23.1 | 20.8 | 19.9 | 19.8 |
+| M7, 750 V third rail | 24.9 | 22.7 | 22.5 | 22.4 |
+| M7, 750 V third rail, full power | 24.6 | 22.3 | 22.0 | 22.0 |
+| M8, 25 kV | 24.7 | 22.4 | 22.2 | 22.2 |
+| Class 700/1, 25 kV | 24.8 | 22.5 | 22.3 | 22.3 |
+| Class 423 x4, AC | 24.3 | 21.8 | 21.4 | 21.3 |
+| FLIRT Sm5 x3, 25 kV | 24.2 | 21.8 | 21.5 | 21.4 |
+| 755/3 x4, 750 V third rail | 24.0 | 21.6 | 21.2 | 21.2 |
+| 755/3 x4, 25 kV | 23.8 | 21.2 | 20.8 | 20.7 |
+| 755/3 x4, 25 kV, 1.3 brake | 23.1 | 20.4 | 19.8 | 19.7 |
 
 #### West Hempstead local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 19.5 | 17.9 | 17.0 | 16.9 |
-| M7, 750 V third rail, full power | 19.2 | 17.6 | 16.6 | 16.5 |
-| M8, 25 kV | 19.3 | 17.7 | 16.7 | 16.6 |
-| Class 700/1, 25 kV | 19.3 | 17.7 | 16.8 | 16.7 |
-| Class 423 x4, AC | 18.8 | 17.3 | 16.1 | 15.9 |
-| FLIRT Sm5 x3, 25 kV | 18.9 | 17.3 | 16.2 | 16.2 |
-| 755/3 x4, 750 V third rail | 18.8 | 17.3 | 16.1 | 16.0 |
-| 755/3 x4, 25 kV | 18.5 | 17.0 | 15.7 | 15.5 |
-| 755/3 x4, 25 kV, 1.3 brake | 18.0 | 16.6 | 15.2 | 14.9 |
+| M7, 750 V third rail | 19.5 | 17.6 | 16.9 | 16.8 |
+| M7, 750 V third rail, full power | 19.2 | 17.3 | 16.5 | 16.4 |
+| M8, 25 kV | 19.3 | 17.4 | 16.6 | 16.6 |
+| Class 700/1, 25 kV | 19.3 | 17.5 | 16.7 | 16.7 |
+| Class 423 x4, AC | 18.8 | 17.0 | 16.0 | 15.8 |
+| FLIRT Sm5 x3, 25 kV | 18.9 | 17.0 | 16.2 | 16.1 |
+| 755/3 x4, 750 V third rail | 18.8 | 16.9 | 16.0 | 15.9 |
+| 755/3 x4, 25 kV | 18.5 | 16.7 | 15.6 | 15.4 |
+| 755/3 x4, 25 kV, 1.3 brake | 18.0 | 16.2 | 15.1 | 14.8 |
 
 #### Huntington local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 40.0 | 38.9 | 36.4 | 36.1 |
-| M7, 750 V third rail, full power | 39.4 | 38.6 | 35.7 | 35.3 |
-| M8, 25 kV | 39.7 | 38.7 | 36.1 | 35.7 |
-| Class 700/1, 25 kV | 39.9 | 38.8 | 36.3 | 36.0 |
-| Class 423 x4, AC | 38.2 | 37.9 | 34.6 | 33.7 |
-| FLIRT Sm5 x3, 25 kV | 38.6 | 37.9 | 35.0 | 34.5 |
-| 755/3 x4, 750 V third rail | 38.0 | 37.5 | 34.3 | 33.6 |
-| 755/3 x4, 25 kV | 37.5 | 37.3 | 33.8 | 32.8 |
-| 755/3 x4, 25 kV, 1.3 brake | 36.3 | 36.3 | 32.5 | 31.4 |
+| M7, 750 V third rail | 40.0 | 36.8 | 36.4 | 36.1 |
+| M7, 750 V third rail, full power | 39.4 | 36.2 | 35.7 | 35.3 |
+| M8, 25 kV | 39.7 | 36.5 | 36.0 | 35.7 |
+| Class 700/1, 25 kV | 39.9 | 36.6 | 36.2 | 36.0 |
+| Class 423 x4, AC | 38.2 | 35.1 | 34.5 | 33.7 |
+| FLIRT Sm5 x3, 25 kV | 38.6 | 35.4 | 34.9 | 34.5 |
+| 755/3 x4, 750 V third rail | 38.0 | 34.8 | 34.3 | 33.6 |
+| 755/3 x4, 25 kV | 37.5 | 34.3 | 33.8 | 32.8 |
+| 755/3 x4, 25 kV, 1.3 brake | 36.3 | 33.1 | 32.5 | 31.4 |
 
 #### Ronkonkoma local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 54.7 | 58.0 | 53.2 | 52.5 |
-| M7, 750 V third rail, full power | 53.6 | 57.5 | 52.1 | 50.9 |
-| M8, 25 kV | 54.1 | 57.7 | 52.5 | 51.5 |
-| Class 700/1, 25 kV | 54.4 | 57.8 | 52.8 | 52.2 |
-| Class 423 x4, AC | 51.8 | 56.6 | 50.3 | 48.4 |
-| FLIRT Sm5 x3, 25 kV | 52.5 | 56.5 | 50.9 | 49.8 |
-| 755/3 x4, 750 V third rail | 51.7 | 56.0 | 50.1 | 48.5 |
-| 755/3 x4, 25 kV | 50.8 | 55.7 | 49.2 | 47.0 |
-| 755/3 x4, 25 kV, 1.3 brake | 48.9 | 54.3 | 47.3 | 44.9 |
+| M7, 750 V third rail | 54.7 | 53.5 | 53.2 | 52.5 |
+| M7, 750 V third rail, full power | 53.6 | 52.4 | 52.0 | 50.8 |
+| M8, 25 kV | 54.1 | 52.8 | 52.5 | 51.5 |
+| Class 700/1, 25 kV | 54.4 | 53.1 | 52.8 | 52.1 |
+| Class 423 x4, AC | 51.8 | 50.6 | 50.3 | 48.3 |
+| FLIRT Sm5 x3, 25 kV | 52.5 | 51.2 | 50.9 | 49.7 |
+| 755/3 x4, 750 V third rail | 51.7 | 50.4 | 50.1 | 48.5 |
+| 755/3 x4, 25 kV | 50.8 | 49.5 | 49.2 | 47.0 |
+| 755/3 x4, 25 kV, 1.3 brake | 48.9 | 47.7 | 47.3 | 44.8 |
 
 ### Busy service
 
@@ -441,30 +445,30 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | PW local | posted | 35.1 | 35.2 | 35.1 | 35.0 | 474 |
-|  | 60 mph | 33.6 | 33.7 | 33.7 | 33.6 | 478 |
-|  | 80 mph | 32.3 | 32.4 | 32.4 | 32.2 | 520 |
-|  | 100 mph | 32.2 | 32.3 | 32.3 | 32.0 | 503 |
+|  | 60 mph | 33.5 | 33.6 | 33.5 | 33.4 | 486 |
+|  | 80 mph | 32.1 | 32.2 | 32.2 | 32.0 | 503 |
+|  | 100 mph | 32.0 | 32.1 | 32.1 | 31.8 | 495 |
 
 #### PW express: 5 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | PW express | posted | 25.6 | 25.6 | 25.6 | 25.6 | 541 |
-|  | 60 mph | 24.0 | 24.0 | 24.0 | 23.9 | 487 |
-|  | 80 mph | 21.5 | 21.5 | 21.5 | 21.4 | 480 |
-|  | 100 mph | 21.1 | 21.2 | 21.2 | 21.0 | 484 |
+|  | 60 mph | 23.8 | 23.8 | 23.8 | 23.8 | 476 |
+|  | 80 mph | 21.2 | 21.3 | 21.2 | 21.1 | 479 |
+|  | 100 mph | 20.9 | 20.9 | 20.9 | 20.7 | 500 |
 
 #### Main Line to Penn: locals and expresses each at 2.5 min headways each way (1.25 min combined)
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Penn local | posted | 17.1 | 17.2 | 17.2 | 17.0 | 487 |
-|  | 60 mph | 15.0 | 15.1 | 15.1 | 15.0 | 556 |
-|  | 80 mph | 13.4 | 13.6 | 13.5 | 13.3 | 474 |
+|  | 60 mph | 14.5 | 14.6 | 14.6 | 14.4 | 518 |
+|  | 80 mph | 13.4 | 13.6 | 13.5 | 13.3 | 478 |
 |  | 100 mph | 13.2 | 13.5 | 13.4 | 13.1 | 483 |
 | Penn express | posted | 13.5 | 13.5 | 13.5 | 13.4 | 487 |
-|  | 60 mph | 11.8 | 11.8 | 11.8 | 11.8 | 556 |
-|  | 80 mph | 9.5 | 9.5 | 9.5 | 9.5 | 474 |
+|  | 60 mph | 10.8 | 10.8 | 10.8 | 10.8 | 518 |
+|  | 80 mph | 9.5 | 9.5 | 9.5 | 9.5 | 478 |
 |  | 100 mph | 9.0 | 9.1 | 9.1 | 9.0 | 483 |
 
 #### Main Line to GCM: 2.5 min headways each way
@@ -472,16 +476,16 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | GCM express | posted | 13.0 | 13.0 | 13.0 | 13.0 | 580 |
-|  | 60 mph | 11.4 | 11.4 | 11.4 | 11.4 | 585 |
-|  | 80 mph | 9.7 | 9.7 | 9.7 | 9.7 | 529 |
-|  | 100 mph | 9.3 | 9.3 | 9.3 | 9.3 | 523 |
+|  | 60 mph | 10.4 | 10.4 | 10.4 | 10.3 | 532 |
+|  | 80 mph | 9.7 | 9.7 | 9.7 | 9.7 | 527 |
+|  | 100 mph | 9.3 | 9.3 | 9.3 | 9.2 | 523 |
 
 #### Atlantic: 5 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Atlantic local | posted | 13.9 | 13.9 | 13.9 | 13.9 | 556 |
-|  | 60 mph | 12.1 | 12.1 | 12.1 | 12.1 | 536 |
+|  | 60 mph | 11.5 | 11.5 | 11.5 | 11.5 | 556 |
 |  | 80 mph | 10.7 | 10.7 | 10.7 | 10.6 | 512 |
 |  | 100 mph | 10.2 | 10.3 | 10.3 | 10.1 | 494 |
 
@@ -490,25 +494,25 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Hempstead local | posted | 22.6 | 22.6 | 22.6 | 22.4 | 477 |
-|  | 60 mph | 20.9 | 20.9 | 20.9 | 20.9 | 476 |
-|  | 80 mph | 20.5 | 20.5 | 20.5 | 20.4 | 483 |
-|  | 100 mph | 20.5 | 20.5 | 20.5 | 20.3 | 483 |
+|  | 60 mph | 20.5 | 20.5 | 20.5 | 20.3 | 484 |
+|  | 80 mph | 20.4 | 20.5 | 20.4 | 20.3 | 484 |
+|  | 100 mph | 20.4 | 20.5 | 20.4 | 20.3 | 485 |
 
 #### Babylon: 7.5 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Babylon local | posted | 40.6 | 40.7 | 40.6 | 40.2 | 497 |
-|  | 60 mph | 41.5 | 41.6 | 41.5 | 41.4 | 502 |
-|  | 80 mph | 38.9 | 39.1 | 39.0 | 38.5 | 512 |
-|  | 100 mph | 38.7 | 38.9 | 38.8 | 38.2 | 518 |
+|  | 60 mph | 40.0 | 40.1 | 40.1 | 39.6 | 504 |
+|  | 80 mph | 38.8 | 39.0 | 39.0 | 38.4 | 513 |
+|  | 100 mph | 38.6 | 38.9 | 38.8 | 38.2 | 519 |
 
 #### Long Beach: 12 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Long Beach local | posted | 26.5 | 26.6 | 26.6 | 26.4 | 523 |
-|  | 60 mph | 23.8 | 23.8 | 23.8 | 23.6 | 535 |
+|  | 60 mph | 23.6 | 23.6 | 23.6 | 23.4 | 531 |
 |  | 80 mph | 23.0 | 23.1 | 23.0 | 22.8 | 527 |
 |  | 100 mph | 23.0 | 23.1 | 23.0 | 22.8 | 527 |
 
@@ -517,36 +521,36 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Far Rockaway local | posted | 25.1 | 25.1 | 25.1 | 25.0 | 497 |
-|  | 60 mph | 23.2 | 23.2 | 23.2 | 23.0 | 496 |
-|  | 80 mph | 22.8 | 22.8 | 22.8 | 22.5 | 495 |
-|  | 100 mph | 22.8 | 22.8 | 22.8 | 22.5 | 495 |
+|  | 60 mph | 23.0 | 23.0 | 23.0 | 22.8 | 495 |
+|  | 80 mph | 22.8 | 22.8 | 22.8 | 22.5 | 494 |
+|  | 100 mph | 22.8 | 22.8 | 22.8 | 22.5 | 494 |
 
 #### West Hempstead: 60 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | West Hempstead local | posted | 19.6 | 19.6 | 19.6 | 19.4 | 528 |
-|  | 60 mph | 18.0 | 18.0 | 18.0 | 17.8 | 528 |
-|  | 80 mph | 17.1 | 17.1 | 17.1 | 16.9 | 528 |
-|  | 100 mph | 17.0 | 17.0 | 17.0 | 16.8 | 528 |
+|  | 60 mph | 17.7 | 17.7 | 17.7 | 17.6 | 528 |
+|  | 80 mph | 17.0 | 17.0 | 17.0 | 16.8 | 528 |
+|  | 100 mph | 16.9 | 16.9 | 16.9 | 16.7 | 528 |
 
 #### Huntington: 10 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Huntington local | posted | 40.1 | 40.1 | 40.1 | 39.9 | 532 |
-|  | 60 mph | 39.1 | 39.1 | 39.1 | 39.0 | 530 |
+|  | 60 mph | 36.9 | 36.9 | 36.9 | 36.7 | 542 |
 |  | 80 mph | 36.5 | 36.6 | 36.6 | 36.3 | 543 |
-|  | 100 mph | 36.1 | 36.2 | 36.2 | 35.8 | 535 |
+|  | 100 mph | 36.1 | 36.2 | 36.2 | 35.8 | 533 |
 
 #### Ronkonkoma: 10 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Ronkonkoma local | posted | 54.9 | 55.1 | 55.0 | 54.5 | 505 |
-|  | 60 mph | 58.3 | 58.3 | 58.3 | 58.1 | 556 |
+|  | 60 mph | 53.7 | 53.8 | 53.7 | 53.2 | 497 |
 |  | 80 mph | 53.4 | 53.4 | 53.4 | 52.9 | 512 |
-|  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 520 |
+|  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 521 |
 
 ### Posted slow zones
 
@@ -701,18 +705,16 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 
 One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 
-#### Port Washington (base: local 32.2 min, express 21.4 min)
+#### Port Washington (base: local 31.9 min, express 21.1 min)
 
 | From mi | To mi | Near | Allows | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: |
-| 5.53 | 6.21 | Woodside | 48 mph | 21 s | 27 s |
-| 17.31 | 19.49 | Port Washington | 15 mph | 23 s | 23 s |
-| 13.30 | 13.94 | Douglaston | 55 mph | 4 s | 15 s |
+| 17.31 | 19.49 | Port Washington | 15 mph | 22 s | 22 s |
+| 5.53 | 6.21 | Woodside | 48 mph | 16 s | 21 s |
+| 13.30 | 13.94 | Douglaston | 55 mph | 3 s | 15 s |
 | 4.29 | 5.06 | Woodside | 57 mph | 9 s | 14 s |
-| 9.41 | 9.81 | Flushing Main Street | 57 mph | 0 s | 10 s |
-| 0.00 | 0.44 | Penn Station | 46 mph | 7 s | 7 s |
-| 10.13 | 10.61 | Murray Hill | 65 mph | 0 s | 5 s |
-| 15.25 | 15.77 | Great Neck | 55 mph | 3 s | 3 s |
+| 9.41 | 9.81 | Flushing Main Street | 57 mph | 0 s | 9 s |
+| 10.13 | 10.61 | Murray Hill | 65 mph | 0 s | 6 s |
 | 8.87 | 9.23 | Mets-Willets Point | 69 mph | 0 s | 3 s |
 
 #### Main Line to Penn (base: local 13.4 min, express 9.6 min)
@@ -721,17 +723,16 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | ---: | ---: | --- | ---: | ---: | ---: |
 | 4.32 | 5.07 | Woodside | 65 mph | 4 s | 7 s |
 | 10.57 | 11.17 | Jamaica | 57 mph | 4 s | 5 s |
-| 5.54 | 6.04 | Woodside | 71 mph | 0 s | 3 s |
 
-#### Main Line to GCM (base: local 13.6 min, express 9.7 min)
+#### Main Line to GCM (base: local 13.5 min, express 9.7 min)
 
 | From mi | To mi | Near | Allows | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: |
 | 2.58 | 3.11 | Woodside | 53 mph | 19 s | 19 s |
-| 0.00 | 1.08 | Grand Central | 44 mph | 18 s | 18 s |
+| 0.00 | 1.08 | Grand Central | 44 mph | 17 s | 17 s |
 | 9.86 | 10.45 | Jamaica | 47 mph | 8 s | 9 s |
 | 3.54 | 4.22 | Woodside | 65 mph | 3 s | 6 s |
-| 4.92 | 5.33 | Woodside | 70 mph | 1 s | 4 s |
+| 4.92 | 5.27 | Woodside | 70 mph | 0 s | 3 s |
 
 #### Atlantic (base: local 10.8 min)
 
@@ -740,27 +741,25 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 0.00 | 0.31 | Atlantic Terminal | 15 mph | 13 s |
 | 1.09 | 1.45 | Nostrand Avenue | 53 mph | 3 s |
 
-#### Hempstead (base: local 20.3 min)
+#### Hempstead (base: local 20.2 min)
 
 | From mi | To mi | Near | Allows | local saves |
 | ---: | ---: | --- | ---: | ---: |
 | 9.27 | 10.23 | Garden City | 38 mph | 8 s |
 | 10.24 | 10.33 | Hempstead | 15 mph | 6 s |
-| 5.56 | 6.20 | Floral Park | 45 mph | 5 s |
 | 0.12 | 0.58 | Jamaica | 54 mph | 4 s |
 
 #### Babylon (base: local 38.7 min)
 
 | From mi | To mi | Near | Allows | local saves |
 | ---: | ---: | --- | ---: | ---: |
-| 0.02 | 0.85 | Jamaica | 39 mph | 11 s |
-| 6.29 | 6.63 | Lynbrook | 68 mph | 5 s |
+| 0.02 | 0.72 | Jamaica | 39 mph | 11 s |
 
 #### Long Beach (base: local 22.8 min)
 
 | From mi | To mi | Near | Allows | local saves |
 | ---: | ---: | --- | ---: | ---: |
-| 0.02 | 0.85 | Jamaica | 39 mph | 11 s |
+| 0.02 | 0.72 | Jamaica | 39 mph | 11 s |
 | 11.31 | 11.87 | Island Park | 60 mph | 9 s |
 | 12.81 | 13.15 | Long Beach | 15 mph | 7 s |
 | 7.81 | 8.44 | Lynbrook | 47 mph | 4 s |
@@ -769,16 +768,16 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 
 | From mi | To mi | Near | Allows | local saves |
 | ---: | ---: | --- | ---: | ---: |
-| 7.74 | 8.22 | Hewlett | 36 mph | 12 s |
-| 0.02 | 0.85 | Jamaica | 39 mph | 11 s |
+| 0.02 | 0.72 | Jamaica | 39 mph | 11 s |
+| 7.74 | 8.22 | Hewlett | 36 mph | 11 s |
 | 6.24 | 6.73 | Valley Stream | 39 mph | 7 s |
 | 10.90 | 11.24 | Far Rockaway | 15 mph | 6 s |
 
-#### West Hempstead (base: local 17.0 min)
+#### West Hempstead (base: local 16.9 min)
 
 | From mi | To mi | Near | Allows | local saves |
 | ---: | ---: | --- | ---: | ---: |
-| 7.24 | 7.74 | Westwood | 44 mph | 26 s |
+| 7.24 | 7.74 | Westwood | 44 mph | 21 s |
 | 1.13 | 1.86 | St. Albans | 62 mph | 11 s |
 | 4.35 | 5.10 | St. Albans | 60 mph | 11 s |
 | 11.57 | 11.66 | West Hempstead | 15 mph | 6 s |
@@ -790,14 +789,13 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | ---: | ---: | --- | ---: | ---: |
 | 22.59 | 23.96 | Cold Spring Harbor | 48 mph | 18 s |
 | 21.54 | 22.56 | Cold Spring Harbor | 56 mph | 10 s |
-| 15.46 | 16.16 | Hicksville | 50 mph | 4 s |
-| 19.33 | 20.12 | Syosset | 60 mph | 4 s |
+| 15.46 | 16.12 | Hicksville | 50 mph | 4 s |
 
 #### Ronkonkoma (base: local 53.2 min)
 
 | From mi | To mi | Near | Allows | local saves |
 | ---: | ---: | --- | ---: | ---: |
-| 15.37 | 15.98 | Hicksville | 49 mph | 7 s |
+| 15.37 | 15.95 | Hicksville | 49 mph | 7 s |
 
 <!-- END results -->
 
