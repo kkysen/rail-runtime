@@ -19,7 +19,7 @@ def fmt(xs: Iterable[float]) -> str:
     return " ".join(f"{x:6.1f}" for x in xs)
 
 
-def report(data: str, date: str) -> None:
+def report(data: str, date: str, every: bool = False) -> None:
     m7 = m.TRAINS[0]
     for name, spec in SPECS.items():
         line, stops, route = spec.line(data), spec.stops, spec.route
@@ -55,6 +55,6 @@ def report(data: str, date: str) -> None:
                 print(f"  {mid:28} n={len(sch):2} sched med {median(sch):4.0f} (min {min(sch):.0f}) {fmt(sims)}")
         for pname, p in (spec.patterns | EXTRA.get(name, {})).items():
             print(f"  {pname}: posted / 60 / 80 / 100")
-            for tr in m.TRAINS:
+            for tr in m.trains(every):
                 print(f"    {tr.name:34} {fmt(line.trip(tr, k, p) for k in KINDS)}")
         print()

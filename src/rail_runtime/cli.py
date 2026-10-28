@@ -16,6 +16,7 @@ app = typer.Typer(no_args_is_help=True)
 
 DataDir = Annotated[Path, typer.Option(help="Downloaded and generated data, from `fetch.sh`.")]
 Date = Annotated[str, typer.Option(help="Timetable service date, YYYYMMDD.")]
+EveryTrain = Annotated[bool, typer.Option(help="Also run the non-LIRR trains, not just the M7 and M8.")]
 
 
 @app.command()
@@ -33,9 +34,9 @@ def geometry(
 
 
 @app.command()
-def report(data: DataDir = Path("data"), date: Date = "20261027") -> None:
-    """Print AM inbound timetable runtimes next to the model, and every train type."""
-    report_.report(str(data), date)
+def report(data: DataDir = Path("data"), date: Date = "20261027", every_train: EveryTrain = False) -> None:
+    """Print AM inbound timetable runtimes next to the model, and the M7 and M8 (or every train)."""
+    report_.report(str(data), date, every_train)
 
 
 @app.command()
@@ -66,6 +67,6 @@ def curves(data: DataDir = Path("data")) -> None:
 
 
 @app.command()
-def results(data: DataDir = Path("data"), date: Date = "20261027") -> None:
+def results(data: DataDir = Path("data"), date: Date = "20261027", every_train: EveryTrain = False) -> None:
     """Regenerate the results tables in `README.md`."""
-    results_.main(str(data), date)
+    results_.main(str(data), date, every_train)

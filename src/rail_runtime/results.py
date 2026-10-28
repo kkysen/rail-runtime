@@ -87,12 +87,12 @@ def timetable(data: str, date: str) -> str:
     return "\n\n".join(out)
 
 
-def trains(data: str) -> str:
+def trains(data: str, every: bool = False) -> str:
     out: list[str] = []
     for name, spec in mt.SPECS.items():
         line, pats = spec.line(data), spec.patterns
         for pname, p in pats.items():
-            rows = [[tr.name, *(f1(line.trip(tr, k, p)) for k in KINDS)] for tr in m.TRAINS]
+            rows = [[tr.name, *(f1(line.trip(tr, k, p)) for k in KINDS)] for tr in m.trains(every)]
             out.append(f"#### {name} {pname}\n\n" + table(["Train", "Posted", "60 mph", "80 mph", "100 mph"], rows))
     return "\n\n".join(out)
 
@@ -150,7 +150,7 @@ def ranking(rank: Ranking) -> str:
     return "\n\n".join(out)
 
 
-def main(data: str, date: str = "20261027") -> None:
+def main(data: str, date: str = "20261027", every: bool = False) -> None:
     print("timetable", file=sys.stderr, flush=True)
     sections = [
         (
@@ -163,7 +163,7 @@ def main(data: str, date: str = "20261027") -> None:
         ),
     ]
     print("trains", file=sys.stderr, flush=True)
-    sections.append(("Trains", "One train alone, minutes.", trains(data)))
+    sections.append(("Trains", "One train alone, minutes.", trains(data, every)))
     print("busy service", file=sys.stderr, flush=True)
     sections.append(
         (

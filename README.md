@@ -106,6 +106,8 @@ uv run rail-runtime results
 
 `rail-runtime report`, `multitrain`, `slowzones` and `curves`
 print the same results as plain text.
+The results cover the LIRR's own M7 and M8;
+`--every-train` on `results` or `report` adds the other trains, for comparison.
 Rerun `rail-runtime results` in any commit that changes results,
 so the tables below change with it.
 
@@ -252,12 +254,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 35.0 | 33.3 | 31.9 | 31.7 |
 | M7, 750 V third rail, full power | 34.6 | 32.9 | 31.4 | 31.2 |
 | M8, 25 kV | 34.8 | 33.1 | 31.6 | 31.4 |
-| Class 700/1, 25 kV | 34.8 | 33.1 | 31.8 | 31.6 |
-| Class 423 x4, AC | 34.0 | 32.3 | 30.6 | 30.2 |
-| FLIRT Sm5 x3, 25 kV | 33.9 | 32.3 | 30.7 | 30.5 |
-| 755/3 x4, 750 V third rail | 33.6 | 31.9 | 30.3 | 29.9 |
-| 755/3 x4, 25 kV | 33.4 | 31.7 | 29.9 | 29.5 |
-| 755/3 x4, 25 kV, 1.3 brake | 32.5 | 30.7 | 28.7 | 28.3 |
 
 #### Port Washington express
 
@@ -266,12 +262,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 25.5 | 23.7 | 21.1 | 20.8 |
 | M7, 750 V third rail, full power | 25.4 | 23.6 | 20.9 | 20.4 |
 | M8, 25 kV | 25.5 | 23.6 | 21.0 | 20.6 |
-| Class 700/1, 25 kV | 25.5 | 23.7 | 21.1 | 20.8 |
-| Class 423 x4, AC | 25.2 | 23.4 | 20.6 | 19.9 |
-| FLIRT Sm5 x3, 25 kV | 25.2 | 23.4 | 20.7 | 20.2 |
-| 755/3 x4, 750 V third rail | 25.2 | 23.3 | 20.5 | 19.9 |
-| 755/3 x4, 25 kV | 25.1 | 23.3 | 20.4 | 19.6 |
-| 755/3 x4, 25 kV, 1.3 brake | 24.8 | 23.0 | 20.0 | 19.2 |
 
 #### Main Line to Penn local
 
@@ -280,12 +270,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 17.0 | 14.4 | 13.4 | 13.2 |
 | M7, 750 V third rail, full power | 16.9 | 14.3 | 13.2 | 12.9 |
 | M8, 25 kV | 16.9 | 14.4 | 13.3 | 13.0 |
-| Class 700/1, 25 kV | 17.0 | 14.4 | 13.4 | 13.2 |
-| Class 423 x4, AC | 16.6 | 14.0 | 12.8 | 12.4 |
-| FLIRT Sm5 x3, 25 kV | 16.6 | 14.1 | 13.0 | 12.7 |
-| 755/3 x4, 750 V third rail | 16.5 | 13.9 | 12.8 | 12.4 |
-| 755/3 x4, 25 kV | 16.4 | 13.8 | 12.6 | 12.2 |
-| 755/3 x4, 25 kV, 1.3 brake | 16.0 | 13.4 | 12.2 | 11.7 |
 
 #### Main Line to Penn express
 
@@ -294,12 +278,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 13.4 | 10.8 | 9.6 | 9.1 |
 | M7, 750 V third rail, full power | 13.3 | 10.7 | 9.5 | 8.9 |
 | M8, 25 kV | 13.4 | 10.7 | 9.5 | 9.0 |
-| Class 700/1, 25 kV | 13.4 | 10.8 | 9.5 | 9.1 |
-| Class 423 x4, AC | 13.3 | 10.6 | 9.4 | 8.7 |
-| FLIRT Sm5 x3, 25 kV | 13.3 | 10.7 | 9.4 | 8.9 |
-| 755/3 x4, 750 V third rail | 13.2 | 10.6 | 9.3 | 8.7 |
-| 755/3 x4, 25 kV | 13.2 | 10.6 | 9.3 | 8.6 |
-| 755/3 x4, 25 kV, 1.3 brake | 13.1 | 10.5 | 9.2 | 8.5 |
 
 #### Main Line to GCM local
 
@@ -308,12 +286,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 16.5 | 14.0 | 13.5 | 13.4 |
 | M7, 750 V third rail, full power | 16.4 | 13.9 | 13.4 | 13.1 |
 | M8, 25 kV | 16.4 | 13.9 | 13.4 | 13.2 |
-| Class 700/1, 25 kV | 16.5 | 14.0 | 13.5 | 13.3 |
-| Class 423 x4, AC | 16.1 | 13.6 | 13.0 | 12.7 |
-| FLIRT Sm5 x3, 25 kV | 16.2 | 13.7 | 13.1 | 12.9 |
-| 755/3 x4, 750 V third rail | 16.0 | 13.5 | 12.9 | 12.6 |
-| 755/3 x4, 25 kV | 15.9 | 13.4 | 12.7 | 12.4 |
-| 755/3 x4, 25 kV, 1.3 brake | 15.5 | 13.0 | 12.4 | 12.0 |
 
 #### Main Line to GCM express
 
@@ -322,12 +294,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 12.9 | 10.4 | 9.7 | 9.2 |
 | M7, 750 V third rail, full power | 12.9 | 10.3 | 9.6 | 9.1 |
 | M8, 25 kV | 12.9 | 10.3 | 9.6 | 9.2 |
-| Class 700/1, 25 kV | 12.9 | 10.3 | 9.7 | 9.3 |
-| Class 423 x4, AC | 12.8 | 10.3 | 9.5 | 8.9 |
-| FLIRT Sm5 x3, 25 kV | 12.8 | 10.3 | 9.6 | 9.1 |
-| 755/3 x4, 750 V third rail | 12.8 | 10.2 | 9.5 | 8.9 |
-| 755/3 x4, 25 kV | 12.8 | 10.2 | 9.4 | 8.8 |
-| 755/3 x4, 25 kV, 1.3 brake | 12.7 | 10.1 | 9.3 | 8.7 |
 
 #### Atlantic local
 
@@ -336,12 +302,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 13.9 | 11.6 | 10.8 | 10.4 |
 | M7, 750 V third rail, full power | 13.9 | 11.4 | 10.5 | 10.0 |
 | M8, 25 kV | 13.9 | 11.5 | 10.6 | 10.1 |
-| Class 700/1, 25 kV | 13.9 | 11.5 | 10.7 | 10.3 |
-| Class 423 x4, AC | 13.7 | 11.3 | 10.2 | 9.5 |
-| FLIRT Sm5 x3, 25 kV | 13.7 | 11.3 | 10.3 | 9.8 |
-| 755/3 x4, 750 V third rail | 13.7 | 11.2 | 10.2 | 9.6 |
-| 755/3 x4, 25 kV | 13.6 | 11.1 | 10.0 | 9.3 |
-| 755/3 x4, 25 kV, 1.3 brake | 13.5 | 10.9 | 9.7 | 9.0 |
 
 #### Hempstead local
 
@@ -350,12 +310,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 22.4 | 20.2 | 20.2 | 20.2 |
 | M7, 750 V third rail, full power | 22.1 | 19.9 | 19.9 | 19.8 |
 | M8, 25 kV | 22.2 | 20.0 | 20.0 | 20.0 |
-| Class 700/1, 25 kV | 22.3 | 20.1 | 20.1 | 20.1 |
-| Class 423 x4, AC | 21.5 | 19.3 | 19.2 | 19.1 |
-| FLIRT Sm5 x3, 25 kV | 21.6 | 19.4 | 19.3 | 19.3 |
-| 755/3 x4, 750 V third rail | 21.2 | 19.1 | 19.0 | 19.0 |
-| 755/3 x4, 25 kV | 21.0 | 18.8 | 18.7 | 18.5 |
-| 755/3 x4, 25 kV, 1.3 brake | 20.2 | 17.9 | 17.8 | 17.6 |
 
 #### Babylon local
 
@@ -364,12 +318,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 40.6 | 40.0 | 38.7 | 38.5 |
 | M7, 750 V third rail, full power | 39.6 | 39.0 | 37.7 | 37.5 |
 | M8, 25 kV | 40.0 | 39.3 | 38.1 | 37.9 |
-| Class 700/1, 25 kV | 40.2 | 39.6 | 38.3 | 38.1 |
-| Class 423 x4, AC | 38.3 | 37.7 | 36.4 | 35.8 |
-| FLIRT Sm5 x3, 25 kV | 38.8 | 38.1 | 36.9 | 36.6 |
-| 755/3 x4, 750 V third rail | 38.2 | 37.6 | 36.4 | 35.9 |
-| 755/3 x4, 25 kV | 37.4 | 36.8 | 35.5 | 34.8 |
-| 755/3 x4, 25 kV, 1.3 brake | 36.0 | 35.4 | 34.1 | 33.2 |
 
 #### Long Beach local
 
@@ -378,12 +326,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 26.3 | 23.3 | 22.8 | 22.8 |
 | M7, 750 V third rail, full power | 26.1 | 23.0 | 22.4 | 22.3 |
 | M8, 25 kV | 26.2 | 23.1 | 22.6 | 22.5 |
-| Class 700/1, 25 kV | 26.2 | 23.2 | 22.7 | 22.6 |
-| Class 423 x4, AC | 25.6 | 22.5 | 21.6 | 21.5 |
-| FLIRT Sm5 x3, 25 kV | 25.6 | 22.5 | 21.8 | 21.8 |
-| 755/3 x4, 750 V third rail | 25.3 | 22.2 | 21.4 | 21.3 |
-| 755/3 x4, 25 kV | 25.1 | 22.0 | 21.1 | 20.9 |
-| 755/3 x4, 25 kV, 1.3 brake | 24.4 | 21.2 | 20.2 | 19.9 |
 
 #### Far Rockaway local
 
@@ -392,12 +334,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 24.9 | 22.7 | 22.5 | 22.4 |
 | M7, 750 V third rail, full power | 24.6 | 22.3 | 22.0 | 22.0 |
 | M8, 25 kV | 24.7 | 22.4 | 22.2 | 22.2 |
-| Class 700/1, 25 kV | 24.8 | 22.5 | 22.3 | 22.3 |
-| Class 423 x4, AC | 24.3 | 21.8 | 21.4 | 21.3 |
-| FLIRT Sm5 x3, 25 kV | 24.2 | 21.8 | 21.5 | 21.4 |
-| 755/3 x4, 750 V third rail | 24.0 | 21.6 | 21.2 | 21.2 |
-| 755/3 x4, 25 kV | 23.8 | 21.2 | 20.8 | 20.7 |
-| 755/3 x4, 25 kV, 1.3 brake | 23.1 | 20.4 | 19.8 | 19.7 |
 
 #### West Hempstead local
 
@@ -406,12 +342,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 19.5 | 17.6 | 16.9 | 16.8 |
 | M7, 750 V third rail, full power | 19.2 | 17.3 | 16.5 | 16.4 |
 | M8, 25 kV | 19.3 | 17.4 | 16.6 | 16.6 |
-| Class 700/1, 25 kV | 19.3 | 17.5 | 16.7 | 16.7 |
-| Class 423 x4, AC | 18.8 | 17.0 | 16.0 | 15.8 |
-| FLIRT Sm5 x3, 25 kV | 18.9 | 17.0 | 16.2 | 16.1 |
-| 755/3 x4, 750 V third rail | 18.8 | 16.9 | 16.0 | 15.9 |
-| 755/3 x4, 25 kV | 18.5 | 16.7 | 15.6 | 15.4 |
-| 755/3 x4, 25 kV, 1.3 brake | 18.0 | 16.2 | 15.1 | 14.8 |
 
 #### Huntington local
 
@@ -420,12 +350,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 40.0 | 36.8 | 36.4 | 36.1 |
 | M7, 750 V third rail, full power | 39.4 | 36.2 | 35.7 | 35.3 |
 | M8, 25 kV | 39.7 | 36.5 | 36.0 | 35.7 |
-| Class 700/1, 25 kV | 39.9 | 36.6 | 36.2 | 36.0 |
-| Class 423 x4, AC | 38.2 | 35.1 | 34.5 | 33.7 |
-| FLIRT Sm5 x3, 25 kV | 38.6 | 35.4 | 34.9 | 34.5 |
-| 755/3 x4, 750 V third rail | 38.0 | 34.8 | 34.3 | 33.6 |
-| 755/3 x4, 25 kV | 37.5 | 34.3 | 33.8 | 32.8 |
-| 755/3 x4, 25 kV, 1.3 brake | 36.3 | 33.1 | 32.5 | 31.4 |
 
 #### Ronkonkoma local
 
@@ -434,12 +358,6 @@ One train alone, minutes.
 | M7, 750 V third rail | 54.7 | 53.5 | 53.2 | 52.5 |
 | M7, 750 V third rail, full power | 53.6 | 52.4 | 52.0 | 50.8 |
 | M8, 25 kV | 54.1 | 52.8 | 52.5 | 51.5 |
-| Class 700/1, 25 kV | 54.4 | 53.1 | 52.8 | 52.1 |
-| Class 423 x4, AC | 51.8 | 50.6 | 50.3 | 48.3 |
-| FLIRT Sm5 x3, 25 kV | 52.5 | 51.2 | 50.9 | 49.7 |
-| 755/3 x4, 750 V third rail | 51.7 | 50.4 | 50.1 | 48.5 |
-| 755/3 x4, 25 kV | 50.8 | 49.5 | 49.2 | 47.0 |
-| 755/3 x4, 25 kV, 1.3 brake | 48.9 | 47.7 | 47.3 | 44.8 |
 
 ### Busy service
 

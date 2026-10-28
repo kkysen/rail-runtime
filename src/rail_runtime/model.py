@@ -89,6 +89,9 @@ TRAINS = [
     m7_like("M7, 750 V third rail", "third rail"),
     m7_like("M7, 750 V third rail, full power", "full power"),
     Train("M8, 25 kV", 5 * 129.2, 10 * 105 * 0.080, 40 * 200e3, 2.0 * MPH, 10, 80, "25 kV"),
+]
+# Other trains, for comparison: left out of the results unless asked for.
+OTHER_TRAINS = [
     Train("Class 700/1, 25 kV", 410.0, 666 * 0.080, 5000e3, 2.0 * MPH, 12, 100, "25 kV"),
     Train("Class 423 x4, AC", 4 * 105.0, 4 * 192 * 0.080, 4 * 2350e3, 1.0, 16, 87, "25 kV"),
     Train("FLIRT Sm5 x3, 25 kV", 3 * 132.0, 3 * 230 * 0.080, 3 * 2000e3, 1.2, 12, 100, "25 kV"),
@@ -96,6 +99,11 @@ TRAINS = [
     c755("755/3 x4, 25 kV", "25 kV"),
     c755("755/3 x4, 25 kV, 1.3 brake", "25 kV", brake=1.3),
 ]
+
+
+def trains(every: bool = False) -> list[Train]:
+    """The LIRR's own M7 and M8, and with `every`, the other trains too."""
+    return TRAINS + OTHER_TRAINS if every else TRAINS
 
 
 def design_voltage(spacing: float, train: Train) -> float:
