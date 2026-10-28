@@ -51,6 +51,30 @@ overpass '[out:json][timeout:90];way["railway"="rail"]["name"="Grand Central Bra
 # Every rail way across Brooklyn to Jamaica.
 overpass '[out:json][timeout:160];way["railway"="rail"](40.66,-73.99,40.71,-73.78);out body geom;' data/rail_bbox_atl.json
 
+# Every rail way across Queens, Nassau and western Suffolk, out to Far Rockaway, Long Beach, Huntington and Ronkonkoma.
+overpass '[out:json][timeout:280];way["railway"="rail"](40.57,-73.84,40.89,-73.07);out body geom;' data/rail_bbox_li.json
+
+# Route relations for the electrified branches beyond Jamaica.
+overpass '[out:json][timeout:90];rel(4600806);out body;way(r);out tags geom;' data/hem_route.json
+overpass '[out:json][timeout:90];rel(8712205);out body;way(r);out tags geom;' data/frk_route.json
+overpass '[out:json][timeout:90];rel(8712202);out body;way(r);out tags geom;' data/lb_route.json
+overpass '[out:json][timeout:90];rel(3917588);out body;way(r);out tags geom;' data/wh_route.json
+overpass '[out:json][timeout:90];rel(1255264);out body;way(r);out tags geom;' data/hun_route.json
+# Ronkonkoma's relation misses much of the Main Line, so take Port Jefferson's for that.
+overpass '[out:json][timeout:90];rel(id:8325874,1255264);out body;way(r);out tags geom;' data/ronk_route.json
+# Babylon's relation runs Jamaica to Valley Stream on the Montauk Branch through St. Albans,
+# but its trains run the Atlantic Branch there, so take Long Beach's ways for that stretch.
+overpass '[out:json][timeout:90];rel(4509484);out body;way(r);out tags geom;' data/bab_route.json
+python3 - data/bab_route.json data/lb_route.json <<'PY'
+import json, sys
+bab, lb = (json.load(open(p))["elements"] for p in sys.argv[1:])
+# East of Valley Stream, about 73.71 W, where the two branches meet.
+ways = [e for e in bab if e["type"] == "way" and min(g["lon"] for g in e["geometry"]) > -73.71]
+ways += [e for e in lb if e["type"] == "way" and e["tags"].get("name") != "Long Beach Branch"]
+with open(sys.argv[1], "w") as f:
+    json.dump({"elements": ways}, f)
+PY
+
 # Substations, to place LIRR traction substations along each line.
 overpass '[out:json][timeout:160];nwr["power"="substation"](40.57,-74.0,40.89,-73.07);out center tags;' data/substations.json
 # Committed, so rewritten one element per line for diffs that line up with substations.
