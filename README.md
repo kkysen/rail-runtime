@@ -8,7 +8,7 @@ into Penn Station, the Port Washington Branch (all stops, and expresses nonstop 
 and the Main Line from Jamaica,
 into Grand Central Madison (GCM), the Main Line from Jamaica through the 63rd Street Tunnel,
 and into Atlantic Terminal, the Atlantic Branch from Jamaica.
-Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon, Long Beach, Far Rockaway and West Hempstead.
+Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon, Long Beach, Far Rockaway, West Hempstead and Huntington.
 
 ## Method
 
@@ -204,6 +204,21 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | West Hempstead, all stops | 4 | 28 | 19.5 | 17.9 | 17.0 | 16.9 |
 
+#### Huntington - Jamaica
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Huntington, skips Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 6 | 48 | 34.8 | 34.6 | 31.2 | 30.3 |
+| Huntington, skips Merillon Avenue, New Hyde Park, Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 2 | 46 | 32.2 | 32.5 | 28.6 | 27.3 |
+| Huntington, stops at Cold Spring Harbor, Syosset | 2 | 42 | 27.4 | 28.3 | 23.6 | 21.4 |
+| Westbury, skips Floral Park | 2 | 25 | 20.1 | 20.2 | 19.1 | 19.1 |
+| Hicksville, skips Elmont-UBS Arena, Queens Village, Hollis | 1 | 27 | 21.5 | 22.3 | 20.3 | 19.7 |
+| Hicksville, skips Floral Park, Elmont-UBS Arena | 1 | 32 | 22.8 | 23.4 | 21.6 | 21.4 |
+| Huntington, stops at Cold Spring Harbor, Syosset, Hicksville, Carle Place, Mineola | 1 | 43 | 30.9 | 31.5 | 27.3 | 25.9 |
+| Huntington, stops at Cold Spring Harbor, Syosset, Hicksville | 1 | 39 | 28.2 | 29.3 | 24.6 | 22.6 |
+| Huntington, skips Elmont-UBS Arena, Queens Village, Hollis | 1 | 48 | 36.2 | 35.7 | 32.6 | 31.9 |
+| Huntington, skips Carle Place, Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 1 | 44 | 33.5 | 33.6 | 29.9 | 28.9 |
+
 ### Trains
 
 One train alone, minutes.
@@ -376,6 +391,20 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 18.5 | 17.0 | 15.7 | 15.5 |
 | 755/3 x4, 25 kV, 1.3 brake | 18.0 | 16.6 | 15.2 | 14.9 |
 
+#### Huntington local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 40.0 | 38.9 | 36.4 | 36.1 |
+| M7, 750 V third rail, full power | 39.4 | 38.6 | 35.7 | 35.3 |
+| M8, 25 kV | 39.7 | 38.7 | 36.1 | 35.7 |
+| Class 700/1, 25 kV | 39.9 | 38.8 | 36.3 | 36.0 |
+| Class 423 x4, AC | 38.2 | 37.9 | 34.6 | 33.7 |
+| FLIRT Sm5 x3, 25 kV | 38.6 | 37.9 | 35.0 | 34.5 |
+| 755/3 x4, 750 V third rail | 38.0 | 37.5 | 34.3 | 33.6 |
+| 755/3 x4, 25 kV | 37.5 | 37.3 | 33.8 | 32.8 |
+| 755/3 x4, 25 kV, 1.3 brake | 36.3 | 36.3 | 32.5 | 31.4 |
+
 ### Busy service
 
 Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking.
@@ -473,6 +502,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 60 mph | 18.0 | 18.0 | 18.0 | 17.8 | 528 |
 |  | 80 mph | 17.1 | 17.1 | 17.1 | 16.9 | 528 |
 |  | 100 mph | 17.0 | 17.0 | 17.0 | 16.8 | 528 |
+
+#### Huntington: 10 min headways each way
+
+| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Huntington local | posted | 40.1 | 40.1 | 40.1 | 39.9 | 532 |
+|  | 60 mph | 39.1 | 39.1 | 39.1 | 39.0 | 530 |
+|  | 80 mph | 36.5 | 36.6 | 36.6 | 36.3 | 543 |
+|  | 100 mph | 36.1 | 36.2 | 36.2 | 35.8 | 535 |
 
 ### Posted slow zones
 
@@ -603,6 +641,17 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 6.76 | 7.41 | Westwood | 60 mph | 80 mph | 4 s |
 | 1.74 | 3.47 | St. Albans | 60 mph | 80 mph | 4 s |
 
+#### Huntington (base: local 40.0 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 24.28 | 25.30 | Huntington | 30 mph | 80 mph | 59 s |
+| 21.40 | 24.28 | Cold Spring Harbor | 45 mph | 80 mph | 47 s |
+| 14.96 | 16.12 | Hicksville | 40 mph | 80 mph | 36 s |
+| 0.00 | 0.32 | Jamaica | 20 mph | 80 mph | 26 s |
+| 0.32 | 0.71 | Jamaica | 35 mph | 80 mph | 18 s |
+| 19.41 | 19.79 | Syosset | 50 mph | 61 mph | 4 s |
+
 ### Limiting curves
 
 One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
@@ -689,6 +738,15 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 4.35 | 5.10 | St. Albans | 60 mph | 11 s |
 | 11.57 | 11.66 | West Hempstead | 15 mph | 6 s |
 | 0.12 | 0.58 | Jamaica | 55 mph | 4 s |
+
+#### Huntington (base: local 36.4 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 22.59 | 23.96 | Cold Spring Harbor | 48 mph | 18 s |
+| 21.54 | 22.56 | Cold Spring Harbor | 56 mph | 10 s |
+| 15.46 | 16.16 | Hicksville | 50 mph | 4 s |
+| 19.33 | 20.12 | Syosset | 60 mph | 4 s |
 
 <!-- END results -->
 

@@ -189,6 +189,22 @@ WH_STOPS = [
     "Hempstead Gardens",
     "West Hempstead",
 ]
+HUN_STOPS = [
+    "Jamaica",
+    "Hollis",
+    "Queens Village",
+    "Elmont-UBS Arena",
+    "Floral Park",
+    "New Hyde Park",
+    "Merillon Avenue",
+    "Mineola",
+    "Carle Place",
+    "Westbury",
+    "Hicksville",
+    "Syosset",
+    "Cold Spring Harbor",
+    "Huntington",
+]
 
 
 class Spec(NamedTuple):
@@ -283,6 +299,14 @@ SPECS = {
         {"local": WH_STOPS[::-1]},
         (False, True),
         "8",
+    ),
+    "Huntington": Spec(
+        "hun_geom.json",
+        "substations.json",
+        HUN_STOPS,
+        {"local": HUN_STOPS[::-1]},
+        (False, False),
+        "10",
     ),
 }
 
@@ -466,7 +490,14 @@ def lines(data: str) -> dict[str, Setup]:
     return out
 
 
-BRANCH_KEYS = {"hem": "Hempstead", "bab": "Babylon", "lb": "Long Beach", "frk": "Far Rockaway", "wh": "West Hempstead"}
+BRANCH_KEYS = {
+    "hem": "Hempstead",
+    "bab": "Babylon",
+    "lb": "Long Beach",
+    "frk": "Far Rockaway",
+    "wh": "West Hempstead",
+    "hun": "Huntington",
+}
 
 # Seconds between trains, from the busiest hour of AM arrivals into Jamaica on 2026-10-27.
 BRANCH_HEADWAYS = {
@@ -477,6 +508,7 @@ BRANCH_HEADWAYS = {
     # 1 an hour, on mostly single track past Valley Stream, which the simulation doesn't model:
     # each direction still gets its own track.
     "West Hempstead": 3600,
+    "Huntington": 600,  # 6 an hour
 }
 
 
