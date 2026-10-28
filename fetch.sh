@@ -52,7 +52,7 @@ overpass '[out:json][timeout:90];way["railway"="rail"]["name"="Grand Central Bra
 overpass '[out:json][timeout:160];way["railway"="rail"](40.66,-73.99,40.71,-73.78);out body geom;' data/rail_bbox_atl.json
 
 # Substations, to place LIRR traction substations along each line.
-overpass '[out:json][timeout:160];nwr["power"="substation"](40.66,-74.0,40.835,-73.68);out center tags;' data/substations.json
+overpass '[out:json][timeout:160];nwr["power"="substation"](40.57,-74.0,40.89,-73.07);out center tags;' data/substations.json
 # Committed, so rewritten one element per line for diffs that line up with substations.
 python3 - data/substations.json <<'PY'
 import json, sys
