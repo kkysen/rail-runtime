@@ -367,7 +367,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| PW local | posted | 35.1 | 35.2 | 35.1 | 35.0 | 474 |
+| PW local | posted | 35.1 | 35.2 | 35.1 | 35.0 | 521 |
 |  | 60 mph | 33.5 | 33.6 | 33.5 | 33.4 | 486 |
 |  | 80 mph | 32.1 | 32.2 | 32.2 | 32.0 | 503 |
 |  | 100 mph | 32.0 | 32.1 | 32.1 | 31.8 | 495 |
@@ -400,7 +400,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | GCM express | posted | 13.0 | 13.0 | 13.0 | 13.0 | 580 |
 |  | 60 mph | 10.4 | 10.4 | 10.4 | 10.3 | 532 |
-|  | 80 mph | 9.7 | 9.7 | 9.7 | 9.7 | 527 |
+|  | 80 mph | 9.7 | 9.7 | 9.7 | 9.7 | 529 |
 |  | 100 mph | 9.3 | 9.3 | 9.3 | 9.2 | 523 |
 
 #### Atlantic: 5 min headways each way
@@ -426,8 +426,8 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Babylon local | posted | 40.6 | 40.7 | 40.6 | 40.2 | 497 |
-|  | 60 mph | 40.0 | 40.1 | 40.1 | 39.6 | 504 |
-|  | 80 mph | 38.8 | 39.0 | 39.0 | 38.4 | 513 |
+|  | 60 mph | 40.0 | 40.1 | 40.0 | 39.6 | 504 |
+|  | 80 mph | 38.8 | 39.0 | 39.0 | 38.4 | 514 |
 |  | 100 mph | 38.6 | 38.9 | 38.8 | 38.2 | 519 |
 
 #### Long Beach: 12 min headways each way
@@ -462,15 +462,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Huntington local | posted | 40.1 | 40.1 | 40.1 | 39.9 | 532 |
-|  | 60 mph | 36.9 | 36.9 | 36.9 | 36.7 | 542 |
+|  | 60 mph | 36.9 | 37.0 | 37.0 | 36.7 | 542 |
 |  | 80 mph | 36.5 | 36.6 | 36.6 | 36.3 | 543 |
-|  | 100 mph | 36.1 | 36.2 | 36.2 | 35.8 | 533 |
+|  | 100 mph | 36.1 | 36.2 | 36.1 | 35.8 | 533 |
 
 #### Ronkonkoma: 10 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Ronkonkoma local | posted | 54.9 | 55.1 | 55.0 | 54.5 | 505 |
+| Ronkonkoma local | posted | 55.0 | 55.1 | 55.1 | 54.5 | 507 |
 |  | 60 mph | 53.7 | 53.8 | 53.7 | 53.2 | 497 |
 |  | 80 mph | 53.4 | 53.4 | 53.4 | 52.9 | 512 |
 |  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 521 |

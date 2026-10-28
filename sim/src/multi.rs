@@ -139,6 +139,9 @@ struct Car {
     t0: f64,
     next_stop: usize,
     done: Option<f64>,
+    /// Contact- and running-rail voltages at the last step's solve, to start the next one from.
+    v_contact: f64,
+    v_return: f64,
 }
 
 /// Electrical power the train wants this step, W (negative when regenerating).
@@ -201,8 +204,10 @@ fn r_return(job: &Job, x: f64) -> f64 {
     r[k] + (r[k + 1] - r[k]) * (x / job.ds - k as f64)
 }
 
-/// Nodal solve of the DC network: power delivered to each active car, W, and the car voltages.
+/// Nodal solve of the DC network: power delivered to each active car, W, and the node voltages.
 /// Returns whether the voltage iteration converged.
+/// The iteration starts from the last step's voltages, `v_subs` and each car's own,
+/// since trains move little in one step.
 ///
 /// Nodes are each substation's positive bus, which every track's contact rail meets,
 /// then each car's contact-rail node, then each car's running-rail node.
@@ -215,6 +220,7 @@ fn solve(
     dem: &[f64],
     train: &Train,
     n_tracks: usize,
+    v_subs: &[f64],
 ) -> (Vec<f64>, Vec<f64>, bool) {
     let subs = &job.subs;
     let n_sub = subs.len();
@@ -260,7 +266,11 @@ fn solve(
         }
     }
     let mut v = vec![0.0; n];
-    v[..n_sub + n_car].fill(V0);
+    v[..n_sub].copy_from_slice(v_subs);
+    for (j, c) in cars.iter().enumerate() {
+        v[contact(j)] = c.v_contact;
+        v[ret(j)] = c.v_return;
+    }
     let mut cur = vec![0.0; n_car];
     let mut shed = vec![1.0; n_car];
     let mut converged = false;
@@ -319,9 +329,10 @@ fn solve(
             *a = 0.7 * *a + 0.3 * c;
         }
     }
-    let volts: Vec<f64> = (0..n_car).map(|j| v[contact(j)] - v[ret(j)]).collect();
-    let power = volts.iter().zip(&cur).map(|(vt, i)| vt * i).collect();
-    (power, volts, converged)
+    let power = (0..n_car)
+        .map(|j| (v[contact(j)] - v[ret(j)]) * cur[j])
+        .collect();
+    (power, v, converged)
 }
 
 pub fn simulate(job: &Job) -> Outcome {
@@ -336,6 +347,7 @@ pub fn simulate(job: &Job) -> Outcome {
     let mut cars: Vec<Car> = Vec::new();
     let mut vmin: Option<f64> = None;
     let mut nonconverged = 0;
+    let mut v_subs = vec![V0; job.subs.len()];
     let mut next_dep: Vec<f64> = job.services.iter().map(|sv| sv.offset).collect();
     let mut t = 0.0;
     while t < job.horizon {
@@ -350,6 +362,8 @@ pub fn simulate(job: &Job) -> Outcome {
                     t0: t,
                     next_stop: 1,
                     done: None,
+                    v_contact: V0,
+                    v_return: 0.0,
                 });
                 next_dep[i] += sv.headway;
             }
@@ -366,12 +380,18 @@ pub fn simulate(job: &Job) -> Outcome {
             .collect();
         let power = if train.supply == Supply::ThirdRail {
             let refs: Vec<&Car> = active.iter().map(|&k| &cars[k]).collect();
-            let (power, volts, converged) = solve(job, &refs, &runs, &dem, train, n_tracks);
-            if let Some(lo) = volts.iter().copied().reduce(f64::min) {
-                vmin = Some(vmin.map_or(lo, |m| m.min(lo)));
-            }
+            let (power, v, converged) = solve(job, &refs, &runs, &dem, train, n_tracks, &v_subs);
             if !converged && !refs.is_empty() {
                 nonconverged += 1;
+            }
+            let n_sub = v_subs.len();
+            v_subs.copy_from_slice(&v[..n_sub]);
+            for (j, &k) in active.iter().enumerate() {
+                let c = &mut cars[k];
+                c.v_contact = v[n_sub + j];
+                c.v_return = v[n_sub + active.len() + j];
+                let lo = c.v_contact - c.v_return;
+                vmin = Some(vmin.map_or(lo, |m| m.min(lo)));
             }
             power
         } else {
