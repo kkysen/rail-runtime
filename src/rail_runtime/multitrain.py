@@ -166,6 +166,20 @@ LB_STOPS = [
     "Island Park",
     "Long Beach",
 ]
+FRK_STOPS = [
+    "Jamaica",
+    "Locust Manor",
+    "Laurelton",
+    "Rosedale",
+    "Valley Stream",
+    "Gibson",
+    "Hewlett",
+    "Woodmere",
+    "Cedarhurst",
+    "Lawrence",
+    "Inwood",
+    "Far Rockaway",
+]
 
 
 class Spec(NamedTuple):
@@ -244,6 +258,14 @@ SPECS = {
         {"local": LB_STOPS[::-1]},
         (False, True),
         "6",
+    ),
+    "Far Rockaway": Spec(
+        "frk_geom.json",
+        "substations.json",
+        FRK_STOPS,
+        {"local": FRK_STOPS[::-1]},
+        (False, True),
+        "7",
     ),
 }
 
@@ -427,13 +449,14 @@ def lines(data: str) -> dict[str, Setup]:
     return out
 
 
-BRANCH_KEYS = {"hem": "Hempstead", "bab": "Babylon", "lb": "Long Beach"}
+BRANCH_KEYS = {"hem": "Hempstead", "bab": "Babylon", "lb": "Long Beach", "frk": "Far Rockaway"}
 
 # Seconds between trains, from the busiest hour of AM arrivals into Jamaica on 2026-10-27.
 BRANCH_HEADWAYS = {
     "Hempstead": 1200,  # 3 an hour
     "Babylon": 450,  # 8 an hour
     "Long Beach": 720,  # 5 an hour
+    "Far Rockaway": 900,  # 4 an hour
 }
 
 

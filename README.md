@@ -8,7 +8,7 @@ into Penn Station, the Port Washington Branch (all stops, and expresses nonstop 
 and the Main Line from Jamaica,
 into Grand Central Madison (GCM), the Main Line from Jamaica through the 63rd Street Tunnel,
 and into Atlantic Terminal, the Atlantic Branch from Jamaica.
-Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon and Long Beach.
+Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon, Long Beach and Far Rockaway.
 
 ## Method
 
@@ -189,6 +189,15 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6
 | Island Park, all stops | 1 | 30 | 22.1 | 21.5 | 20.7 | 20.7 |
 | Long Beach, skips Laurelton, Locust Manor | 1 | 36 | 24.1 | 21.4 | 20.3 | 20.2 |
 
+#### Far Rockaway - Jamaica
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Far Rockaway, all stops | 10 | 36 | 24.9 | 23.0 | 22.5 | 22.5 |
+| Far Rockaway, skips Rosedale, Laurelton, Locust Manor | 1 | 34 | 21.5 | 19.8 | 18.7 | 18.5 |
+| Far Rockaway, skips Rosedale | 1 | 35 | 23.8 | 21.9 | 21.2 | 21.2 |
+| Valley Stream, all stops | 1 | 16 | 10.4 | 10.2 | 9.7 | 9.7 |
+
 ### Trains
 
 One train alone, minutes.
@@ -333,6 +342,20 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 25.1 | 22.3 | 21.1 | 20.9 |
 | 755/3 x4, 25 kV, 1.3 brake | 24.4 | 21.6 | 20.2 | 20.0 |
 
+#### Far Rockaway local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 24.9 | 23.0 | 22.5 | 22.5 |
+| M7, 750 V third rail, full power | 24.6 | 22.6 | 22.1 | 22.0 |
+| M8, 25 kV | 24.7 | 22.8 | 22.2 | 22.2 |
+| Class 700/1, 25 kV | 24.8 | 22.8 | 22.3 | 22.3 |
+| Class 423 x4, AC | 24.3 | 22.1 | 21.4 | 21.3 |
+| FLIRT Sm5 x3, 25 kV | 24.2 | 22.1 | 21.5 | 21.5 |
+| 755/3 x4, 750 V third rail | 24.0 | 21.9 | 21.3 | 21.2 |
+| 755/3 x4, 25 kV | 23.8 | 21.6 | 20.8 | 20.8 |
+| 755/3 x4, 25 kV, 1.3 brake | 23.1 | 20.8 | 19.9 | 19.8 |
+
 ### Busy service
 
 Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking.
@@ -412,6 +435,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 60 mph | 23.8 | 23.8 | 23.8 | 23.6 | 535 |
 |  | 80 mph | 23.0 | 23.1 | 23.0 | 22.8 | 527 |
 |  | 100 mph | 23.0 | 23.1 | 23.0 | 22.8 | 527 |
+
+#### Far Rockaway: 15 min headways each way
+
+| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Far Rockaway local | posted | 25.1 | 25.1 | 25.1 | 25.0 | 497 |
+|  | 60 mph | 23.2 | 23.2 | 23.2 | 23.0 | 496 |
+|  | 80 mph | 22.8 | 22.8 | 22.8 | 22.5 | 495 |
+|  | 100 mph | 22.8 | 22.8 | 22.8 | 22.5 | 495 |
 
 ### Posted slow zones
 
@@ -512,6 +544,21 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 6.20 | 6.70 | Valley Stream | 45 mph | 80 mph | 4 s |
 | 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 3 s |
 
+#### Far Rockaway (base: local 24.9 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 6.41 | 6.61 | Valley Stream | 15 mph | 39 mph | 36 s |
+| 8.11 | 11.09 | Cedarhurst | 40 mph | 80 mph | 26 s |
+| 11.09 | 11.24 | Far Rockaway | 10 mph | 67 mph | 21 s |
+| 0.00 | 0.18 | Jamaica | 20 mph | 80 mph | 13 s |
+| 6.61 | 7.89 | Gibson | 40 mph | 80 mph | 12 s |
+| 3.84 | 6.20 | Rosedale | 60 mph | 80 mph | 9 s |
+| 0.37 | 0.60 | Jamaica | 35 mph | 62 mph | 9 s |
+| 7.89 | 8.10 | Hewlett | 30 mph | 36 mph | 5 s |
+| 0.98 | 1.28 | Jamaica | 60 mph | 77 mph | 4 s |
+| 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 3 s |
+
 ### Limiting curves
 
 One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
@@ -579,6 +626,15 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 11.31 | 11.87 | Island Park | 60 mph | 9 s |
 | 12.81 | 13.15 | Long Beach | 15 mph | 7 s |
 | 7.81 | 8.44 | Lynbrook | 47 mph | 4 s |
+
+#### Far Rockaway (base: local 22.5 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 7.74 | 8.22 | Hewlett | 36 mph | 12 s |
+| 0.02 | 0.85 | Jamaica | 39 mph | 11 s |
+| 6.24 | 6.73 | Valley Stream | 39 mph | 7 s |
+| 10.90 | 11.24 | Far Rockaway | 15 mph | 6 s |
 
 <!-- END results -->
 
