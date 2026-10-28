@@ -69,8 +69,13 @@ Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, 
   so a headway loads the power network but isn't checked against track capacity.
   A branch beyond Jamaica runs one service each way,
   as often as its busiest hour of AM arrivals into Jamaica.
+  That service is a local stopping everywhere, on purpose,
+  even on branches like Huntington and Ronkonkoma where no AM train does.
+  Every line is assumed double-track, one track each way, for now,
+  even where it isn't, like the mostly single-track West Hempstead Branch.
   Each line is its own power network, even where lines share track,
   like Babylon and Long Beach from Jamaica to Lynbrook, so neither loads the other's.
+  Shared networks are still to come.
 - **Timetable:** AM inbound trips from the LIRR GTFS feed.
   A branch beyond Jamaica is timed into Jamaica, from trips that start on it.
 
