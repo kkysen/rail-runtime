@@ -8,7 +8,7 @@ into Penn Station, the Port Washington Branch (all stops, and expresses nonstop 
 and the Main Line from Jamaica,
 into Grand Central Madison (GCM), the Main Line from Jamaica through the 63rd Street Tunnel,
 and into Atlantic Terminal, the Atlantic Branch from Jamaica.
-Beyond Jamaica, it covers the electrified branch into Jamaica from Hempstead.
+Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead and Babylon.
 
 ## Method
 
@@ -161,6 +161,23 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6
 | Hempstead, all stops | 7 | 31 | 22.4 | 20.7 | 20.3 | 20.3 |
 | Hempstead, express | 2 | 30 | 18.7 | 17.6 | 16.6 | 16.2 |
 
+#### Babylon - Jamaica
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre, Lynbrook | 8 | 46 | 32.8 | 34.9 | 30.8 | 29.9 |
+| Wantagh, skips Lynbrook | 7 | 30 | 22.5 | 22.9 | 20.6 | 20.5 |
+| Babylon, skips Lynbrook | 2 | 52 | 39.5 | 40.3 | 37.4 | 37.2 |
+| Wantagh, all stops | 2 | 32 | 23.6 | 24.0 | 22.0 | 21.8 |
+| Babylon, stops at Amityville, Massapequa, Bellmore, Freeport | 1 | 39 | 28.9 | 31.7 | 26.9 | 25.9 |
+| Babylon, skips Bellmore, Merrick, Freeport, Lynbrook | 1 | 49 | 35.5 | 37.1 | 33.4 | 32.8 |
+| Babylon, all stops | 1 | 53 | 40.6 | 41.4 | 38.7 | 38.6 |
+| Babylon, skips Freeport, Baldwin, Rockville Centre, Lynbrook | 1 | 49 | 35.4 | 37.1 | 33.4 | 32.9 |
+| Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre | 1 | 49 | 33.9 | 36.0 | 32.1 | 31.2 |
+| Babylon, stops at Wantagh, Bellmore, Merrick, Freeport, Baldwin, Rockville Centre | 1 | 46 | 31.5 | 33.8 | 29.4 | 28.3 |
+| Babylon, stops at Wantagh, Bellmore, Merrick, Freeport | 1 | 47 | 28.8 | 31.7 | 26.8 | 25.4 |
+| Freeport, skips Lynbrook | 1 | 24 | 15.5 | 15.7 | 13.6 | 13.5 |
+
 ### Trains
 
 One train alone, minutes.
@@ -277,6 +294,20 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 21.0 | 19.6 | 18.7 | 18.6 |
 | 755/3 x4, 25 kV, 1.3 brake | 20.2 | 18.8 | 17.9 | 17.7 |
 
+#### Babylon local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 40.6 | 41.4 | 38.7 | 38.6 |
+| M7, 750 V third rail, full power | 39.6 | 40.9 | 37.8 | 37.5 |
+| M8, 25 kV | 40.0 | 41.0 | 38.1 | 37.9 |
+| Class 700/1, 25 kV | 40.2 | 41.1 | 38.4 | 38.2 |
+| Class 423 x4, AC | 38.3 | 40.2 | 36.4 | 35.9 |
+| FLIRT Sm5 x3, 25 kV | 38.8 | 40.1 | 36.9 | 36.6 |
+| 755/3 x4, 750 V third rail | 38.2 | 39.8 | 36.4 | 36.0 |
+| 755/3 x4, 25 kV | 37.4 | 39.5 | 35.6 | 34.9 |
+| 755/3 x4, 25 kV, 1.3 brake | 36.0 | 38.4 | 34.2 | 33.2 |
+
 ### Busy service
 
 Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking.
@@ -338,6 +369,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 60 mph | 20.9 | 20.9 | 20.9 | 20.9 | 476 |
 |  | 80 mph | 20.5 | 20.5 | 20.5 | 20.4 | 483 |
 |  | 100 mph | 20.5 | 20.5 | 20.5 | 20.3 | 483 |
+
+#### Babylon: 7.5 min headways each way
+
+| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Babylon local | posted | 40.6 | 40.7 | 40.6 | 40.2 | 497 |
+|  | 60 mph | 41.5 | 41.6 | 41.5 | 41.4 | 502 |
+|  | 80 mph | 38.9 | 39.1 | 39.0 | 38.5 | 512 |
+|  | 100 mph | 38.7 | 38.9 | 38.8 | 38.2 | 518 |
 
 ### Posted slow zones
 
@@ -407,6 +447,20 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 9.61 | 10.17 | Country Life Press | 30 mph | 62 mph | 8 s |
 | 5.70 | 5.75 | Floral Park | 25 mph | 45 mph | 7 s |
 
+#### Babylon (base: local 40.6 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 3.84 | 6.20 | Lynbrook | 60 mph | 80 mph | 30 s |
+| 0.00 | 0.18 | Jamaica | 20 mph | 80 mph | 13 s |
+| 25.68 | 26.73 | Babylon | 60 mph | 80 mph | 11 s |
+| 0.37 | 0.60 | Jamaica | 35 mph | 62 mph | 9 s |
+| 6.20 | 6.46 | Lynbrook | 45 mph | 80 mph | 7 s |
+| 6.61 | 8.25 | Lynbrook | 60 mph | 80 mph | 7 s |
+| 3.04 | 3.11 | Jamaica | 60 mph | 80 mph | 5 s |
+| 0.98 | 1.28 | Jamaica | 60 mph | 77 mph | 4 s |
+| 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 3 s |
+
 ### Limiting curves
 
 One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
@@ -458,6 +512,13 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 10.24 | 10.33 | Hempstead | 15 mph | 6 s |
 | 5.56 | 6.20 | Floral Park | 45 mph | 5 s |
 | 0.12 | 0.58 | Jamaica | 54 mph | 4 s |
+
+#### Babylon (base: local 38.7 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 0.02 | 0.85 | Jamaica | 39 mph | 11 s |
+| 6.29 | 6.63 | Lynbrook | 68 mph | 5 s |
 
 <!-- END results -->
 
