@@ -125,10 +125,12 @@ def count_tracks(xy: Arr, ways: list[dict[str, Any]], k_xy: Arr) -> npt.NDArray[
     return np.repeat(smooth, every)[: len(xy)]
 
 
-def trace(rail_json: str, route_json: str, gtfs: str, stop_a: str, stop_b: str, out: str) -> None:
+def trace(rail_json: str, route_json: str, gtfs: str, stop_a: str, stop_b: str, out: str, yard: bool = False) -> None:
     """Trace `stop_a` to `stop_b` and write the geometry to `out`.
 
     `route_json` is Overpass JSON whose relations' members and ways are the route, or `-` for main-line tracks.
+    With `yard`, the route's own yard track counts as running track,
+    for Far Rockaway and Long Beach, whose platform tracks OSM tags as yard.
     """
     d: list[dict[str, Any]] = json.loads(Path(rail_json).read_text())["elements"]
     route_ways: set[int] = set()
@@ -142,7 +144,8 @@ def trace(rail_json: str, route_json: str, gtfs: str, stop_a: str, stop_b: str, 
     adj: dict[int, list[tuple[int, float, int]]] = {}
     for w in d:
         t = w["tags"]
-        if t.get("service") in ("yard", "spur") or t.get("usage") in ("industrial", "military"):
+        own_yard = yard and w["id"] in route_ways and t.get("service") == "yard"
+        if not own_yard and (t.get("service") in ("yard", "spur") or t.get("usage") in ("industrial", "military")):
             continue
         pen = 1.0 if w["id"] in route_ways or (not route_ways and t.get("usage") == "main") else 3.0
         if t.get("service") in ("crossover", "siding"):
