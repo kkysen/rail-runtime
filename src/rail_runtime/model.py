@@ -152,8 +152,8 @@ class Geometry:
             f.write("\n  ]\n}\n")
 
 
-def load_geom(path: str) -> Geometry:
-    """Read a `geom.py` file."""
+def load_geometry(path: str) -> Geometry:
+    """Read a `geometry.py` file."""
     g = json.loads(Path(path).read_text())
     sm: list[dict[str, Any]] = g["samples"]
     return Geometry(
@@ -222,7 +222,7 @@ def lirr_substations(g: Geometry, substations_json: str) -> list[tuple[float, in
 class Line:
     def __init__(
         self,
-        geom_json: str,
+        geometry_json: str,
         substations_json: str,
         stations: list[str],
         bumpers: tuple[bool, bool],
@@ -230,7 +230,7 @@ class Line:
     ) -> None:
         """`spacing` is the usual miles between substations, to fill gaps where OSM maps none."""
         self.bumpers = bumpers  # whether the start and end of the path are bumpers, not through stations
-        g = load_geom(geom_json)
+        g = load_geometry(geometry_json)
         self.s = g.s
         self.ds = float(self.s[1] - self.s[0])
         R = g.R

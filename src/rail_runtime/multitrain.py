@@ -231,7 +231,7 @@ RONK_STOPS = [
 class Spec(NamedTuple):
     """A line: its traced geometry, its stops in path order, and the inbound patterns to compare."""
 
-    geom: str
+    geometry: str
     substations: str
     stops: list[str]
     patterns: dict[str, list[str]]
@@ -240,7 +240,7 @@ class Spec(NamedTuple):
 
     def line(self, data: str) -> Line:
         return m.Line(
-            f"{data}/{self.geom}",
+            f"{data}/{self.geometry}",
             f"{data}/{self.substations}",
             self.stops,
             self.bumpers,
@@ -250,7 +250,7 @@ class Spec(NamedTuple):
 
 SPECS = {
     "Port Washington": Spec(
-        "pw_geom.json",
+        "pw_geometry.json",
         "substations.json",
         PW_STOPS,
         {"local": PW_STOPS[::-1], "express": PW_EXPRESS[::-1]},
@@ -258,7 +258,7 @@ SPECS = {
         "9",
     ),
     "Main Line to Penn": Spec(
-        "jam_geom.json",
+        "jam_geometry.json",
         "substations.json",
         JAM_STOPS,
         {"local": JAM_STOPS[::-1], "express": ["Jamaica", "Penn Station"]},
@@ -266,7 +266,7 @@ SPECS = {
         None,
     ),
     "Main Line to GCM": Spec(
-        "gcm_geom.json",
+        "gcm_geometry.json",
         "substations.json",
         GCM_STOPS,
         {"local": GCM_STOPS[::-1], "express": ["Jamaica", "Grand Central"]},
@@ -274,7 +274,7 @@ SPECS = {
         None,
     ),
     "Atlantic": Spec(
-        "atl_geom.json",
+        "atl_geometry.json",
         "substations.json",
         ATL_STOPS,
         {"local": ATL_STOPS[::-1]},
@@ -282,7 +282,7 @@ SPECS = {
         None,
     ),
     "Hempstead": Spec(
-        "hem_geom.json",
+        "hem_geometry.json",
         "substations.json",
         HEM_STOPS,
         {"local": HEM_STOPS[::-1]},
@@ -290,7 +290,7 @@ SPECS = {
         "2",
     ),
     "Babylon": Spec(
-        "bab_geom.json",
+        "bab_geometry.json",
         "substations.json",
         BAB_STOPS,
         {"local": BAB_STOPS[::-1]},
@@ -298,7 +298,7 @@ SPECS = {
         "1",
     ),
     "Long Beach": Spec(
-        "lb_geom.json",
+        "lb_geometry.json",
         "substations.json",
         LB_STOPS,
         {"local": LB_STOPS[::-1]},
@@ -306,7 +306,7 @@ SPECS = {
         "6",
     ),
     "Far Rockaway": Spec(
-        "frk_geom.json",
+        "frk_geometry.json",
         "substations.json",
         FRK_STOPS,
         {"local": FRK_STOPS[::-1]},
@@ -314,7 +314,7 @@ SPECS = {
         "7",
     ),
     "West Hempstead": Spec(
-        "wh_geom.json",
+        "wh_geometry.json",
         "substations.json",
         WH_STOPS,
         {"local": WH_STOPS[::-1]},
@@ -322,7 +322,7 @@ SPECS = {
         "8",
     ),
     "Huntington": Spec(
-        "hun_geom.json",
+        "hun_geometry.json",
         "substations.json",
         HUN_STOPS,
         {"local": HUN_STOPS[::-1]},
@@ -330,7 +330,7 @@ SPECS = {
         "10",
     ),
     "Ronkonkoma": Spec(
-        "ronk_geom.json",
+        "ronk_geometry.json",
         "substations.json",
         RONK_STOPS,
         {"local": RONK_STOPS[::-1]},
@@ -349,9 +349,9 @@ def spacing(data: str) -> float:
     favors ever tighter spacings, down to whatever floor the fit is given.
     """
     spec = SPECS["Port Washington"]
-    geom = m.load_geom(f"{data}/{spec.geom}")
-    start = dict(geom.stations)["Douglaston"]
-    xs = [x for x, _ in m.lirr_substations(geom, f"{data}/{spec.substations}")]
+    geometry = m.load_geometry(f"{data}/{spec.geometry}")
+    start = dict(geometry.stations)["Douglaston"]
+    xs = [x for x, _ in m.lirr_substations(geometry, f"{data}/{spec.substations}")]
     xs = xs[max(i for i, x in enumerate(xs) if x <= start) :]
     return (xs[-1] - xs[0]) / (len(xs) - 1) / m.MILE
 

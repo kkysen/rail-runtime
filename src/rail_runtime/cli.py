@@ -6,7 +6,7 @@ from typing import Annotated
 import typer
 
 from rail_runtime import curves as curves_
-from rail_runtime import geom as geom_
+from rail_runtime import geometry as geometry_
 from rail_runtime import multitrain as multitrain_
 from rail_runtime import report as report_
 from rail_runtime import results as results_
@@ -19,7 +19,7 @@ Date = Annotated[str, typer.Option(help="Timetable service date, YYYYMMDD.")]
 
 
 @app.command()
-def geom(
+def geometry(
     rail_json: Path,
     route_json: Annotated[str, typer.Argument(help="OSM route relation JSON, or `-` to prefer main-line tracks.")],
     gtfs: Path,
@@ -29,7 +29,7 @@ def geom(
     yard: Annotated[bool, typer.Option(help="Count the route's own yard track as running track.")] = False,
 ) -> None:
     """Trace a route between two stops over OSM rail and write its geometry."""
-    geom_.trace(str(rail_json), route_json, str(gtfs), a, b, str(out), yard)
+    geometry_.trace(str(rail_json), route_json, str(gtfs), a, b, str(out), yard)
 
 
 @app.command()

@@ -12,7 +12,7 @@ Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, 
 
 ## Method
 
-- **Track:** `rail_runtime.geom` traces the route from Penn, GCM, Atlantic Terminal or Jamaica over OpenStreetMap rail ways
+- **Track:** `rail_runtime.geometry` traces the route from Penn, GCM, Atlantic Terminal or Jamaica over OpenStreetMap rail ways
   (the OSM route relation where there is one, otherwise `usage=main` tracks),
   with a shortest-path search that can't reverse through a switch.
   It resamples the path every 5 m and measures curve radius
@@ -80,17 +80,17 @@ Regenerating every result takes about 15 s.
 ```sh
 ./fetch.sh  # GTFS and OSM extracts into data/
 # Optional: retrace the geometry, which is committed in data/.
-uv run rail-runtime geom data/rail_bbox.json data/pw_route.json data/gtfs "Penn Station" "Port Washington" data/pw_geom.json
-uv run rail-runtime geom data/rail_bbox2.json - data/gtfs "Penn Station" Jamaica data/jam_geom.json
-uv run rail-runtime geom data/rail_bbox2.json data/gcm_route.json data/gtfs "Grand Central" Jamaica data/gcm_geom.json
-uv run rail-runtime geom data/rail_bbox_atl.json data/atl_route.json data/gtfs "Atlantic Terminal" Jamaica data/atl_geom.json
-uv run rail-runtime geom data/rail_bbox_li.json data/hem_route.json data/gtfs Jamaica Hempstead data/hem_geom.json
-uv run rail-runtime geom data/rail_bbox_li.json data/bab_route.json data/gtfs Jamaica Babylon data/bab_geom.json
-uv run rail-runtime geom --yard data/rail_bbox_li.json data/lb_route.json data/gtfs Jamaica "Long Beach" data/lb_geom.json
-uv run rail-runtime geom --yard data/rail_bbox_li.json data/frk_route.json data/gtfs Jamaica "Far Rockaway" data/frk_geom.json
-uv run rail-runtime geom data/rail_bbox_li.json data/wh_route.json data/gtfs Jamaica "West Hempstead" data/wh_geom.json
-uv run rail-runtime geom data/rail_bbox_li.json data/hun_route.json data/gtfs Jamaica Huntington data/hun_geom.json
-uv run rail-runtime geom data/rail_bbox_li.json data/ronk_route.json data/gtfs Jamaica Ronkonkoma data/ronk_geom.json
+uv run rail-runtime geometry data/rail_bbox.json data/pw_route.json data/gtfs "Penn Station" "Port Washington" data/pw_geometry.json
+uv run rail-runtime geometry data/rail_bbox2.json - data/gtfs "Penn Station" Jamaica data/jam_geometry.json
+uv run rail-runtime geometry data/rail_bbox2.json data/gcm_route.json data/gtfs "Grand Central" Jamaica data/gcm_geometry.json
+uv run rail-runtime geometry data/rail_bbox_atl.json data/atl_route.json data/gtfs "Atlantic Terminal" Jamaica data/atl_geometry.json
+uv run rail-runtime geometry data/rail_bbox_li.json data/hem_route.json data/gtfs Jamaica Hempstead data/hem_geometry.json
+uv run rail-runtime geometry data/rail_bbox_li.json data/bab_route.json data/gtfs Jamaica Babylon data/bab_geometry.json
+uv run rail-runtime geometry --yard data/rail_bbox_li.json data/lb_route.json data/gtfs Jamaica "Long Beach" data/lb_geometry.json
+uv run rail-runtime geometry --yard data/rail_bbox_li.json data/frk_route.json data/gtfs Jamaica "Far Rockaway" data/frk_geometry.json
+uv run rail-runtime geometry data/rail_bbox_li.json data/wh_route.json data/gtfs Jamaica "West Hempstead" data/wh_geometry.json
+uv run rail-runtime geometry data/rail_bbox_li.json data/hun_route.json data/gtfs Jamaica Huntington data/hun_geometry.json
+uv run rail-runtime geometry data/rail_bbox_li.json data/ronk_route.json data/gtfs Jamaica Ronkonkoma data/ronk_geometry.json
 # Regenerate the results below.
 uv run rail-runtime results
 ```
