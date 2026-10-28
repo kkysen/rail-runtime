@@ -8,7 +8,7 @@ into Penn Station, the Port Washington Branch (all stops, and expresses nonstop 
 and the Main Line from Jamaica,
 into Grand Central Madison (GCM), the Main Line from Jamaica through the 63rd Street Tunnel,
 and into Atlantic Terminal, the Atlantic Branch from Jamaica.
-Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon, Long Beach, Far Rockaway, West Hempstead and Huntington.
+Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon, Long Beach, Far Rockaway, West Hempstead, Huntington and Ronkonkoma.
 
 ## Method
 
@@ -75,7 +75,7 @@ Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, 
 `mise install` sets up `uv` and `pre-commit`;
 `uv` manages Python 3.15 and the dependencies,
 and builds the Rust simulation core in `sim/` with `maturin`, so `cargo` must be installed.
-Regenerating every result takes a couple of seconds.
+Regenerating every result takes about 15 s.
 
 ```sh
 ./fetch.sh  # GTFS and OSM extracts into data/
@@ -218,6 +218,19 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6
 | Huntington, stops at Cold Spring Harbor, Syosset, Hicksville | 1 | 39 | 28.2 | 29.3 | 24.6 | 22.6 |
 | Huntington, skips Elmont-UBS Arena, Queens Village, Hollis | 1 | 48 | 36.2 | 35.7 | 32.6 | 31.9 |
 | Huntington, skips Carle Place, Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 1 | 44 | 33.5 | 33.6 | 29.9 | 28.9 |
+
+#### Ronkonkoma - Jamaica
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage | 6 | 58 | 40.8 | 46.4 | 39.0 | 36.2 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage, Hicksville | 3 | 60 | 41.6 | 47.4 | 40.1 | 37.3 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage, Hicksville, Mineola | 2 | 59 | 42.9 | 48.4 | 41.4 | 39.0 |
+| Farmingdale, skips Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 1 | 38 | 27.6 | 29.0 | 26.0 | 25.2 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park | 1 | 55 | 36.7 | 43.2 | 34.9 | 31.3 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage, Floral Park | 1 | 61 | 42.1 | 47.5 | 40.4 | 38.0 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Hicksville, Merillon Avenue, New Hyde Park | 1 | 61 | 42.9 | 48.4 | 41.3 | 38.9 |
+| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Hicksville, Mineola | 1 | 61 | 40.2 | 46.3 | 38.6 | 35.9 |
 
 ### Trains
 
@@ -405,6 +418,20 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 37.5 | 37.3 | 33.8 | 32.8 |
 | 755/3 x4, 25 kV, 1.3 brake | 36.3 | 36.3 | 32.5 | 31.4 |
 
+#### Ronkonkoma local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 54.7 | 58.0 | 53.2 | 52.5 |
+| M7, 750 V third rail, full power | 53.6 | 57.5 | 52.1 | 50.9 |
+| M8, 25 kV | 54.1 | 57.7 | 52.5 | 51.5 |
+| Class 700/1, 25 kV | 54.4 | 57.8 | 52.8 | 52.2 |
+| Class 423 x4, AC | 51.8 | 56.6 | 50.3 | 48.4 |
+| FLIRT Sm5 x3, 25 kV | 52.5 | 56.5 | 50.9 | 49.8 |
+| 755/3 x4, 750 V third rail | 51.7 | 56.0 | 50.1 | 48.5 |
+| 755/3 x4, 25 kV | 50.8 | 55.7 | 49.2 | 47.0 |
+| 755/3 x4, 25 kV, 1.3 brake | 48.9 | 54.3 | 47.3 | 44.9 |
+
 ### Busy service
 
 Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking.
@@ -511,6 +538,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 60 mph | 39.1 | 39.1 | 39.1 | 39.0 | 530 |
 |  | 80 mph | 36.5 | 36.6 | 36.6 | 36.3 | 543 |
 |  | 100 mph | 36.1 | 36.2 | 36.2 | 35.8 | 535 |
+
+#### Ronkonkoma: 10 min headways each way
+
+| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Ronkonkoma local | posted | 54.9 | 55.1 | 55.0 | 54.5 | 505 |
+|  | 60 mph | 58.3 | 58.3 | 58.3 | 58.1 | 556 |
+|  | 80 mph | 53.4 | 53.4 | 53.4 | 52.9 | 512 |
+|  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 520 |
 
 ### Posted slow zones
 
@@ -652,6 +688,15 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 0.32 | 0.71 | Jamaica | 35 mph | 80 mph | 18 s |
 | 19.41 | 19.79 | Syosset | 50 mph | 61 mph | 4 s |
 
+#### Ronkonkoma (base: local 54.7 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 0.00 | 0.32 | Jamaica | 20 mph | 80 mph | 26 s |
+| 14.97 | 15.95 | Hicksville | 40 mph | 80 mph | 26 s |
+| 0.32 | 0.71 | Jamaica | 35 mph | 80 mph | 18 s |
+| 19.31 | 19.96 | Bethpage | 60 mph | 80 mph | 11 s |
+
 ### Limiting curves
 
 One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
@@ -747,6 +792,12 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 21.54 | 22.56 | Cold Spring Harbor | 56 mph | 10 s |
 | 15.46 | 16.16 | Hicksville | 50 mph | 4 s |
 | 19.33 | 20.12 | Syosset | 60 mph | 4 s |
+
+#### Ronkonkoma (base: local 53.2 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 15.37 | 15.98 | Hicksville | 49 mph | 7 s |
 
 <!-- END results -->
 

@@ -205,6 +205,27 @@ HUN_STOPS = [
     "Cold Spring Harbor",
     "Huntington",
 ]
+RONK_STOPS = [
+    "Jamaica",
+    "Hollis",
+    "Queens Village",
+    "Elmont-UBS Arena",
+    "Floral Park",
+    "New Hyde Park",
+    "Merillon Avenue",
+    "Mineola",
+    "Carle Place",
+    "Westbury",
+    "Hicksville",
+    "Bethpage",
+    "Farmingdale",
+    "Pinelawn",
+    "Wyandanch",
+    "Deer Park",
+    "Brentwood",
+    "Central Islip",
+    "Ronkonkoma",
+]
 
 
 class Spec(NamedTuple):
@@ -307,6 +328,14 @@ SPECS = {
         {"local": HUN_STOPS[::-1]},
         (False, False),
         "10",
+    ),
+    "Ronkonkoma": Spec(
+        "ronk_geom.json",
+        "substations.json",
+        RONK_STOPS,
+        {"local": RONK_STOPS[::-1]},
+        (False, False),
+        "4",
     ),
 }
 
@@ -497,6 +526,7 @@ BRANCH_KEYS = {
     "frk": "Far Rockaway",
     "wh": "West Hempstead",
     "hun": "Huntington",
+    "ronk": "Ronkonkoma",
 }
 
 # Seconds between trains, from the busiest hour of AM arrivals into Jamaica on 2026-10-27.
@@ -509,6 +539,7 @@ BRANCH_HEADWAYS = {
     # each direction still gets its own track.
     "West Hempstead": 3600,
     "Huntington": 600,  # 6 an hour
+    "Ronkonkoma": 600,  # 6 an hour
 }
 
 
