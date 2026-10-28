@@ -155,7 +155,8 @@ def main(data: str, date: str = "20261027") -> None:
     sections = [
         (
             "Timetable vs. model",
-            f"AM inbound trips arriving at Penn, GCM or Atlantic 6-10 AM on {date[:4]}-{date[4:6]}-{date[6:]}, "
+            f"AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6-10 AM "
+            f"on {date[:4]}-{date[4:6]}-{date[6:]}, "
             "grouped by stopping pattern: median scheduled minutes vs. one M7 running flat out "
             "on 750 V third rail with 30 s dwells.",
             timetable(data, date),

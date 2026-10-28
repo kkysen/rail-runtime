@@ -43,7 +43,8 @@ def multitrain(
     which: Annotated[
         str,
         typer.Argument(
-            help="`pw` for Port Washington, `penn` or `gcm` for the Main Line to Penn or GCM, `atl` for Atlantic."
+            help="`pw` for Port Washington, `penn` or `gcm` for the Main Line to Penn or GCM, `atl` for Atlantic, "
+            "or a branch beyond Jamaica: `hem`."
         ),
     ],
     data: DataDir = Path("data"),

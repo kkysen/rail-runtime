@@ -3,15 +3,16 @@
 Minimum train runtimes from track geometry and train performance,
 compared with what timetables schedule.
 
-So far this covers four LIRR services:
+So far this covers four LIRR services into Manhattan and Brooklyn:
 into Penn Station, the Port Washington Branch (all stops, and expresses nonstop from Great Neck)
 and the Main Line from Jamaica,
 into Grand Central Madison (GCM), the Main Line from Jamaica through the 63rd Street Tunnel,
 and into Atlantic Terminal, the Atlantic Branch from Jamaica.
+Beyond Jamaica, it covers the electrified branch into Jamaica from Hempstead.
 
 ## Method
 
-- **Track:** `rail_runtime.geom` traces the route from Penn, GCM or Atlantic Terminal over OpenStreetMap rail ways
+- **Track:** `rail_runtime.geom` traces the route from Penn, GCM, Atlantic Terminal or Jamaica over OpenStreetMap rail ways
   (the OSM route relation where there is one, otherwise `usage=main` tracks),
   with a shortest-path search that can't reverse through a switch.
   It resamples the path every 5 m and measures curve radius
@@ -62,7 +63,10 @@ and into Atlantic Terminal, the Atlantic Branch from Jamaica.
   up to 900 V.
   Each service has its own track, with no signals or terminal turnbacks,
   so a headway loads the power network but isn't checked against track capacity.
+  A branch beyond Jamaica runs one service each way,
+  as often as its busiest hour of AM arrivals into Jamaica.
 - **Timetable:** AM inbound trips from the LIRR GTFS feed.
+  A branch beyond Jamaica is timed into Jamaica, from trips that start on it.
 
 ## Running
 
@@ -108,7 +112,7 @@ cargo test --manifest-path sim/Cargo.toml
 
 ### Timetable vs. model
 
-AM inbound trips arriving at Penn, GCM or Atlantic 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled minutes vs. one M7 running flat out on 750 V third rail with 30 s dwells.
+AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled minutes vs. one M7 running flat out on 750 V third rail with 30 s dwells.
 
 #### Port Washington - Penn
 
@@ -149,6 +153,13 @@ AM inbound trips arriving at Penn, GCM or Atlantic 6-10 AM on 2026-10-27, groupe
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Jamaica, all stops | 26 | 20 | 13.9 | 12.1 | 10.8 | 10.4 |
 | Jamaica, express | 1 | 19 | 12.1 | 10.0 | 8.4 | 7.9 |
+
+#### Hempstead - Jamaica
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Hempstead, all stops | 7 | 31 | 22.4 | 20.7 | 20.3 | 20.3 |
+| Hempstead, express | 2 | 30 | 18.7 | 17.6 | 16.6 | 16.2 |
 
 ### Trains
 
@@ -252,6 +263,20 @@ One train alone, minutes.
 | 755/3 x4, 25 kV | 13.6 | 11.7 | 10.0 | 9.3 |
 | 755/3 x4, 25 kV, 1.3 brake | 13.5 | 11.5 | 9.7 | 9.0 |
 
+#### Hempstead local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 22.4 | 20.7 | 20.3 | 20.3 |
+| M7, 750 V third rail, full power | 22.1 | 20.5 | 19.9 | 19.9 |
+| M8, 25 kV | 22.2 | 20.6 | 20.1 | 20.1 |
+| Class 700/1, 25 kV | 22.3 | 20.6 | 20.2 | 20.2 |
+| Class 423 x4, AC | 21.5 | 20.1 | 19.3 | 19.2 |
+| FLIRT Sm5 x3, 25 kV | 21.6 | 20.0 | 19.4 | 19.4 |
+| 755/3 x4, 750 V third rail | 21.2 | 19.8 | 19.1 | 19.0 |
+| 755/3 x4, 25 kV | 21.0 | 19.6 | 18.7 | 18.6 |
+| 755/3 x4, 25 kV, 1.3 brake | 20.2 | 18.8 | 17.9 | 17.7 |
+
 ### Busy service
 
 Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking.
@@ -304,6 +329,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 60 mph | 12.1 | 12.1 | 12.1 | 12.1 | 536 |
 |  | 80 mph | 10.7 | 10.7 | 10.7 | 10.6 | 512 |
 |  | 100 mph | 10.2 | 10.3 | 10.3 | 10.1 | 494 |
+
+#### Hempstead: 20 min headways each way
+
+| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Hempstead local | posted | 22.6 | 22.6 | 22.6 | 22.4 | 477 |
+|  | 60 mph | 20.9 | 20.9 | 20.9 | 20.9 | 476 |
+|  | 80 mph | 20.5 | 20.5 | 20.5 | 20.4 | 483 |
+|  | 100 mph | 20.5 | 20.5 | 20.5 | 20.3 | 483 |
 
 ### Posted slow zones
 
@@ -362,6 +396,17 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 8.27 | 8.77 | Jamaica | 45 mph | 80 mph | 11 s |
 | 1.25 | 1.40 | Nostrand Avenue | 30 mph | 53 mph | 7 s |
 
+#### Hempstead (base: local 22.4 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 9.37 | 9.60 | Country Life Press | 15 mph | 38 mph | 41 s |
+| 10.17 | 10.33 | Hempstead | 10 mph | 80 mph | 25 s |
+| 0.23 | 0.69 | Jamaica | 35 mph | 80 mph | 22 s |
+| 0.00 | 0.22 | Jamaica | 20 mph | 80 mph | 17 s |
+| 9.61 | 10.17 | Country Life Press | 30 mph | 62 mph | 8 s |
+| 5.70 | 5.75 | Floral Park | 25 mph | 45 mph | 7 s |
+
 ### Limiting curves
 
 One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
@@ -404,6 +449,15 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | ---: | ---: | --- | ---: | ---: |
 | 0.00 | 0.31 | Atlantic Terminal | 15 mph | 13 s |
 | 1.09 | 1.45 | Nostrand Avenue | 53 mph | 3 s |
+
+#### Hempstead (base: local 20.3 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 9.27 | 10.23 | Garden City | 38 mph | 8 s |
+| 10.24 | 10.33 | Hempstead | 15 mph | 6 s |
+| 5.56 | 6.20 | Floral Park | 45 mph | 5 s |
+| 0.12 | 0.58 | Jamaica | 54 mph | 4 s |
 
 <!-- END results -->
 

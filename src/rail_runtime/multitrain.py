@@ -122,6 +122,20 @@ JAM_STOPS = ["Penn Station", "Woodside", "Forest Hills", "Kew Gardens", "Jamaica
 PW_EXPRESS = ["Penn Station", "Great Neck", "Manhasset", "Plandome", "Port Washington"]
 GCM_STOPS = ["Grand Central", "Woodside", "Forest Hills", "Kew Gardens", "Jamaica"]
 ATL_STOPS = ["Atlantic Terminal", "Nostrand Avenue", "East New York", "Jamaica"]
+# Branches beyond Jamaica, out to where the third rail ends, at the stations their AM trains into Jamaica serve.
+HEM_STOPS = [
+    "Jamaica",
+    "Hollis",
+    "Queens Village",
+    "Elmont-UBS Arena",
+    "Bellerose",
+    "Floral Park",
+    "Stewart Manor",
+    "Nassau Boulevard",
+    "Garden City",
+    "Country Life Press",
+    "Hempstead",
+]
 
 
 class Spec(NamedTuple):
@@ -176,6 +190,14 @@ SPECS = {
         {"local": ATL_STOPS[::-1]},
         (True, False),
         None,
+    ),
+    "Hempstead": Spec(
+        "hem_geom.json",
+        "substations.json",
+        HEM_STOPS,
+        {"local": HEM_STOPS[::-1]},
+        (False, True),
+        "2",
     ),
 }
 
@@ -284,7 +306,10 @@ def runtime(c: Finished) -> float:
 
 
 def lines(data: str) -> dict[str, Setup]:
-    """The busy-service setups: Port Washington local and express, the Main Line to Penn and to GCM, and Atlantic."""
+    """The busy-service setups.
+
+    Port Washington local and express, the Main Line to Penn and to GCM, Atlantic, and the branches beyond Jamaica.
+    """
     pw = SPECS["Port Washington"].line(data)
     penn = SPECS["Main Line to Penn"].line(data)
     penn_express = ["Penn Station", "Jamaica"]
@@ -339,12 +364,35 @@ def lines(data: str) -> dict[str, Setup]:
         3 * 3600,
         (3600, 7200),
     )
+    # The branches beyond Jamaica: one service each way at the busiest hour's scheduled AM arrivals into Jamaica.
+    # Branches sharing track toward Jamaica each get their own network, as Penn and GCM do.
+    for name, headway in BRANCH_HEADWAYS.items():
+        spec = SPECS[name]
+        out[name] = Setup(
+            f"{name}: {headway / 60:.4g} min headways each way",
+            spec.line(data),
+            [
+                Service(f"{name} local", spec.stops, True, 0, headway, 0),
+                Service(f"{name} local", spec.stops, False, 1, headway, headway / 2),
+            ],
+            3 * 3600,
+            (3600, 7200),
+        )
     return out
 
 
+BRANCH_KEYS = {"hem": "Hempstead"}
+
+# Seconds between trains, from the busiest hour of AM arrivals into Jamaica on 2026-10-27.
+BRANCH_HEADWAYS = {
+    "Hempstead": 1200,  # 3 an hour
+}
+
+
 def show(data: str, which: str) -> None:
-    """Print busy-service runs for `which`: `pw`, `penn`, `gcm` or `atl`."""
-    prefix = {"pw": "PW", "penn": "Main Line to Penn", "gcm": "Main Line to GCM", "atl": "Atlantic"}[which]
+    """Print busy-service runs for `which`: `pw`, `penn`, `gcm`, `atl`, or a key of `BRANCH_KEYS`."""
+    prefix = {"pw": "PW", "penn": "Main Line to Penn", "gcm": "Main Line to GCM", "atl": "Atlantic"} | BRANCH_KEYS
+    prefix = prefix[which]
     setups = [st for key, st in lines(data).items() if key.startswith(prefix)]
     for st, rows in zip(setups, busy(setups), strict=True):
         print(f"--- {st.title} ---")
