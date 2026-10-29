@@ -116,7 +116,7 @@ On Metro-North, it covers the electric lines into Grand Central (GCT): the Harle
 `mise install` sets up `uv` and `pre-commit`;
 `uv` manages Python 3.15 and the dependencies,
 and builds the Rust simulation core in `sim/` with `maturin`, so `cargo` must be installed.
-Regenerating every result takes about 4 s.
+Regenerating every result takes about 10 s.
 
 ```sh
 ./fetch.sh  # LIRR and Metro-North GTFS and OSM extracts into data/
@@ -143,8 +143,8 @@ uv run rail-runtime results
 
 `rail-runtime report`, `multitrain`, `slowzones` and `curves`
 print the same results as plain text.
-The results cover the LIRR's own M7 and M8;
-`--every-train` on `results` or `report` adds the other trains, for comparison.
+The results cover the LIRR's own M7 and M8, and Metro-North's M7A and M8;
+`--every-train` on `results` or `report` adds the other trains to the LIRR's lines, for comparison.
 Rerun `rail-runtime results` in any commit that changes results,
 so the tables below change with it.
 

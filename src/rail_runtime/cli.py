@@ -16,7 +16,9 @@ app = typer.Typer(no_args_is_help=True)
 
 DataDir = Annotated[Path, typer.Option(help="Downloaded and generated data, from `fetch.sh`.")]
 Date = Annotated[str, typer.Option(help="Timetable service date, YYYYMMDD.")]
-EveryTrain = Annotated[bool, typer.Option(help="Also run the non-LIRR trains, not just the M7 and M8.")]
+EveryTrain = Annotated[
+    bool, typer.Option(help="Also run the other trains on the LIRR's lines, not just its M7 and M8.")
+]
 
 
 @app.command()
