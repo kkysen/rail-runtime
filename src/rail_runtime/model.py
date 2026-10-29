@@ -25,6 +25,16 @@ MILE = 1609.34
 DWELL = 30.0
 EA, EU = 6.0, 3.0  # superelevation and unbalance, inches
 
+
+def hms(minutes: float) -> str:
+    """`minutes` as h:mm:ss, or m:ss under an hour, to the nearest second; blank for NaN."""
+    if minutes != minutes:
+        return ""
+    s = round(minutes * 60)
+    h, m, s = s // 3600, s // 60 % 60, s % 60
+    return f"{h}:{m:02d}:{s:02d}" if h else f"{m}:{s:02d}"
+
+
 # --- Third rail -------------------------------------------------------------
 V0 = _sim.V0  # LIRR substation output, V (ORM tags the line 750 V)
 # Metro-North substation output, V: OSM tags its under-running third rail 700 V.

@@ -642,7 +642,7 @@ def lines(data: str) -> dict[str, Setup]:
     out: dict[str, Setup] = {}
     for name, stops in (("PW local", PW_STOPS), ("PW express", PW_EXPRESS)):
         out[name] = Setup(
-            f"{name}: 5 min headways each way",
+            f"{name}: {m.hms(5)} headways each way",
             pw,
             [Service(name, stops, True, 0, 300, 0), Service(name, stops, False, 1, 300, 150)],
             3 * 3600,
@@ -650,7 +650,7 @@ def lines(data: str) -> dict[str, Setup]:
             busy_trains(SPECS["Port Washington"]),
         )
     out["Main Line to Penn"] = Setup(
-        "Main Line to Penn: locals and expresses each at 2.5 min headways each way (1.25 min combined)",
+        f"Main Line to Penn: locals and expresses each at {m.hms(2.5)} headways each way ({m.hms(1.25)} combined)",
         penn,
         [
             Service("Penn local", JAM_STOPS, True, 0, 150, 0),
@@ -666,7 +666,7 @@ def lines(data: str) -> dict[str, Setup]:
     # 2.5 min headways, as per track to Penn, against about 3.5 min scheduled at the peak (17 to 18 in an hour).
     gcm_express = ["Grand Central", "Jamaica"]
     out["Main Line to GCM"] = Setup(
-        "Main Line to GCM: 2.5 min headways each way",
+        f"Main Line to GCM: {m.hms(2.5)} headways each way",
         SPECS["Main Line to GCM"].line(data),
         [
             Service("GCM express", gcm_express, True, 0, 150, 0),
@@ -684,7 +684,7 @@ def lines(data: str) -> dict[str, Setup]:
     # so the headway only loads the power network.
     atl_headway = 300
     out["Atlantic"] = Setup(
-        "Atlantic: 5 min headways each way",
+        f"Atlantic: {m.hms(5)} headways each way",
         SPECS["Atlantic"].line(data),
         [
             Service("Atlantic local", ATL_STOPS, True, 0, atl_headway, 0),
@@ -699,7 +699,7 @@ def lines(data: str) -> dict[str, Setup]:
     for name, headway in BRANCH_HEADWAYS.items():
         spec = SPECS[name]
         out[name] = Setup(
-            f"{name}: {headway / 60:.3g} min headways each way",
+            f"{name}: {m.hms(headway / 60)} headways each way",
             spec.line(data),
             [
                 Service(f"{name} local", spec.stops, True, 0, headway, 0),
@@ -722,7 +722,7 @@ def lines(data: str) -> dict[str, Setup]:
             ]
         out[name] = Setup(
             f"{name}: "
-            + " and ".join(f"{p}{'es' if p.endswith('s') else 's'} at {h / 60:.3g} min" for p, h in headways.items())
+            + " and ".join(f"{p}{'es' if p.endswith('s') else 's'} at {m.hms(h / 60)}" for p, h in headways.items())
             + " headways each way",
             spec.line(data),
             services,

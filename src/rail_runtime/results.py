@@ -33,7 +33,8 @@ def table(head: list[str], rows: list[list[str]], align: list[str] | None = None
 
 
 def f1(x: float) -> str:
-    return "" if x != x else f"{x:.1f}"
+    """Minutes as h:mm:ss."""
+    return m.hms(x)
 
 
 def short(name: str, railroad: str = "LIRR") -> str:
@@ -148,7 +149,7 @@ def schedules(data: str, date: str) -> dict[str, dict[tuple[str, ...], list[floa
 def scheduled(data: str, date: str, name: str, pat: list[str]) -> str:
     """Median scheduled minutes of line `name`'s trips on inbound pattern `pat`; blank if none run it."""
     sch = schedules(data, date)[name].get(tuple(pat))
-    return f"{median(sch):.0f}" if sch else ""
+    return m.hms(median(sch)) if sch else ""
 
 
 def timetable(data: str, date: str) -> str:
@@ -162,7 +163,7 @@ def timetable(data: str, date: str) -> str:
         for pat, sch in sorted(by.items(), key=lambda kv: (-len(kv[1]), kv[0])):
             sims = [line.trip(m7, k, list(pat)) for k in KINDS]
             label = pattern(list(pat), stops, only_express, spec.railroad)
-            rows.append([label, str(len(sch)), f"{median(sch):.0f}", *map(f1, sims)])
+            rows.append([label, str(len(sch)), m.hms(median(sch)), *map(f1, sims)])
         out.append(
             f"#### {heading(name, spec)}\n\n"
             + table(["Pattern", "Trips", "Scheduled", "Posted", "60 mph", "80 mph", "100 mph"], rows)
@@ -247,8 +248,8 @@ def ranking(rank: Ranking) -> str:
         body: list[list[str]] = []
         for z in rows:
             mid = [f"{z.allows:.0f} mph"] if z.posted is None else [f"{z.posted:.0f} mph", f"{z.allows:.0f} mph"]
-            body.append([f"{z.start:.2f}", f"{z.end:.2f}", z.near, *mid, *(f"{z.saved[p] * 60:.0f} s" for p in pats)])
-        basis = ", ".join(f"{p} {v:.1f} min" for p, v in base.items())
+            body.append([f"{z.start:.2f}", f"{z.end:.2f}", z.near, *mid, *(m.hms(z.saved[p]) for p in pats)])
+        basis = ", ".join(f"{p} {m.hms(v)}" for p, v in base.items())
         out.append(
             f"#### {name} (base: {basis})\n\n"
             + (table(head, body, ["r", "r", "l"] + ["r"] * (len(head) - 3)) if body else "None costs 3 s or more.")
@@ -264,7 +265,7 @@ def main(data: str, date: str = "20261027", every: bool = False) -> None:
             f"AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, "
             "or on Metro-North at GCT, or Stamford from New Canaan, 6-10 AM "
             f"on {date[:4]}-{date[4:6]}-{date[6:]}, "
-            "grouped by stopping pattern: median scheduled minutes vs. one train running flat out with 30 s dwells: "
+            "grouped by stopping pattern: median scheduled time vs. one train running flat out with 30 s dwells: "
             "an M7 on the LIRR's 750 V third rail, an M7A on Metro-North's 700 V, "
             "or on the New Haven Line, an M8 on that third rail to Pelham and 12.5 kV catenary beyond.",
             timetable(data, date),
@@ -274,7 +275,7 @@ def main(data: str, date: str = "20261027", every: bool = False) -> None:
     sections.append(
         (
             "Trains",
-            "One train alone, minutes, next to the median scheduled for trips with that stopping pattern, if any.",
+            "One train alone, next to the median scheduled for trips with that stopping pattern, if any.",
             trains(data, date, every),
         )
     )
@@ -282,7 +283,7 @@ def main(data: str, date: str = "20261027", every: bool = False) -> None:
     sections.append(
         (
             "Busy service",
-            "Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "
+            "Time per inbound trip in steady service, from the time-stepped multi-train simulation. "
             '"Busy" is with the other trains on the line; "+ regen" adds regenerative braking. '
             '"Scheduled" is the median for trips with that stopping pattern, if any.',
             busy(data, date),

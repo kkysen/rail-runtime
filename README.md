@@ -176,947 +176,947 @@ cargo test --manifest-path sim/Cargo.toml
 
 ### Timetable vs. model
 
-AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, or on Metro-North at GCT, or Stamford from New Canaan, 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled minutes vs. one train running flat out with 30 s dwells: an M7 on the LIRR's 750 V third rail, an M7A on Metro-North's 700 V, or on the New Haven Line, an M8 on that third rail to Pelham and 12.5 kV catenary beyond.
+AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, or on Metro-North at GCT, or Stamford from New Canaan, 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled time vs. one train running flat out with 30 s dwells: an M7 on the LIRR's 750 V third rail, an M7A on Metro-North's 700 V, or on the New Haven Line, an M8 on that third rail to Pelham and 12.5 kV catenary beyond.
 
 #### Port Washington - Penn
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Great Neck, skips Mets | 2 | 39 | 26.2 | 24.9 | 23.5 | 23.2 |
-| Port Washington to Great Neck local; Great Neck to Penn express | 2 | 38 | 25.5 | 23.7 | 21.1 | 20.8 |
-| Great Neck, all stops | 1 | 38 | 27.3 | 26.0 | 24.7 | 24.5 |
-| Port Washington to Great Neck local; Great Neck to Penn express, stops at Bayside | 1 | 40 | 26.6 | 24.8 | 22.4 | 22.2 |
-| Port Washington, all stops | 1 | 49 | 35.0 | 33.3 | 31.9 | 31.7 |
-| Port Washington, skips Auburndale, Broadway, Murray Hill, Flushing | 1 | 45 | 30.7 | 29.0 | 27.2 | 27.0 |
-| Port Washington to Bayside local; Bayside to Penn express, stops at Woodside | 1 | 44 | 29.7 | 28.0 | 26.0 | 25.7 |
+| Great Neck, skips Mets | 2 | 39:00 | 26:12 | 24:55 | 23:28 | 23:13 |
+| Port Washington to Great Neck local; Great Neck to Penn express | 2 | 38:30 | 25:32 | 23:42 | 21:09 | 20:46 |
+| Great Neck, all stops | 1 | 38:00 | 27:16 | 25:59 | 24:42 | 24:30 |
+| Port Washington to Great Neck local; Great Neck to Penn express, stops at Bayside | 1 | 40:00 | 26:36 | 24:46 | 22:26 | 22:09 |
+| Port Washington, all stops | 1 | 49:00 | 34:57 | 33:17 | 31:55 | 31:44 |
+| Port Washington, skips Auburndale, Broadway, Murray Hill, Flushing | 1 | 45:00 | 30:44 | 29:02 | 27:13 | 26:59 |
+| Port Washington to Bayside local; Bayside to Penn express, stops at Woodside | 1 | 44:00 | 29:40 | 27:58 | 25:58 | 25:41 |
 
 #### Jamaica - Penn
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Jamaica, nonstop | 38 | 19 | 13.4 | 10.8 | 9.6 | 9.1 |
-| Jamaica, stops at Woodside | 6 | 20 | 14.4 | 11.8 | 10.8 | 10.3 |
-| Jamaica, stops at Forest Hills | 4 | 19 | 14.7 | 12.1 | 10.9 | 10.6 |
-| Jamaica, stops at Kew Gardens | 4 | 19 | 14.6 | 12.1 | 10.9 | 10.5 |
-| Jamaica, skips Woodside | 2 | 22 | 15.9 | 13.4 | 12.2 | 11.9 |
-| Jamaica, all stops | 1 | 22 | 17.0 | 14.4 | 13.4 | 13.2 |
+| Jamaica, nonstop | 38 | 19:00 | 13:22 | 10:45 | 9:33 | 9:03 |
+| Jamaica, stops at Woodside | 6 | 19:30 | 14:26 | 11:49 | 10:47 | 10:17 |
+| Jamaica, stops at Forest Hills | 4 | 19:00 | 14:42 | 12:06 | 10:53 | 10:37 |
+| Jamaica, stops at Kew Gardens | 4 | 19:00 | 14:38 | 12:04 | 10:53 | 10:31 |
+| Jamaica, skips Woodside | 2 | 21:30 | 15:56 | 13:21 | 12:11 | 11:55 |
+| Jamaica, all stops | 1 | 22:00 | 16:59 | 14:25 | 13:25 | 13:10 |
 
 #### Jamaica - GCM
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Jamaica, nonstop | 22 | 19 | 12.9 | 10.4 | 9.7 | 9.2 |
-| Jamaica, stops at Woodside | 8 | 19 | 14.0 | 11.4 | 10.9 | 10.5 |
-| Jamaica, stops at Forest Hills | 4 | 20 | 14.2 | 11.7 | 11.0 | 10.8 |
-| Jamaica, stops at Kew Gardens | 4 | 19 | 14.1 | 11.7 | 11.0 | 10.7 |
-| Jamaica, skips Woodside | 2 | 21 | 15.4 | 13.0 | 12.3 | 12.1 |
+| Jamaica, nonstop | 22 | 19:00 | 12:54 | 10:21 | 9:41 | 9:15 |
+| Jamaica, stops at Woodside | 8 | 19:00 | 13:57 | 11:25 | 10:55 | 10:29 |
+| Jamaica, stops at Forest Hills | 4 | 19:30 | 14:14 | 11:41 | 11:01 | 10:49 |
+| Jamaica, stops at Kew Gardens | 4 | 19:00 | 14:09 | 11:39 | 11:01 | 10:43 |
+| Jamaica, skips Woodside | 2 | 21:00 | 15:27 | 12:57 | 12:18 | 12:08 |
 
 #### Jamaica - Atlantic
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Jamaica, all stops | 26 | 20 | 13.9 | 11.6 | 10.8 | 10.4 |
-| Jamaica, express | 1 | 19 | 12.1 | 9.4 | 8.3 | 7.8 |
+| Jamaica, all stops | 26 | 20:00 | 13:56 | 11:34 | 10:45 | 10:23 |
+| Jamaica, express | 1 | 19:00 | 12:07 | 9:24 | 8:20 | 7:50 |
 
 #### Hempstead - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Hempstead, all stops | 7 | 31 | 22.4 | 20.2 | 20.2 | 20.2 |
-| Hempstead, express | 2 | 30 | 18.7 | 16.6 | 16.5 | 16.2 |
+| Hempstead, all stops | 7 | 31:00 | 22:23 | 20:14 | 20:13 | 20:13 |
+| Hempstead, express | 2 | 29:30 | 18:43 | 16:34 | 16:32 | 16:11 |
 
 #### Babylon via Atlantic Branch - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Wantagh, skips Lynbrook | 4 | 30 | 22.5 | 21.9 | 20.6 | 20.4 |
-| Babylon to Wantagh local; Wantagh to Jamaica express | 3 | 47 | 32.8 | 32.1 | 30.7 | 29.7 |
-| Babylon, skips Lynbrook | 2 | 52 | 39.5 | 38.9 | 37.4 | 37.2 |
-| Babylon, stops at Amityville, Massapequa, Bellmore, Freeport | 1 | 39 | 28.9 | 28.3 | 26.8 | 25.7 |
-| Babylon, skips Bellmore, Merrick, Freeport, Lynbrook | 1 | 49 | 35.5 | 34.9 | 33.4 | 32.8 |
-| Babylon to Merrick local; Merrick to Jamaica express | 1 | 49 | 35.4 | 34.8 | 33.3 | 32.7 |
-| Babylon to Wantagh local; Wantagh to Jamaica express, stops at Lynbrook | 1 | 49 | 33.9 | 33.2 | 32.0 | 31.0 |
-| Babylon, stops at Wantagh, Bellmore, Merrick, Freeport | 1 | 47 | 28.8 | 28.2 | 26.7 | 25.2 |
-| Wantagh, all stops | 1 | 32 | 23.6 | 23.0 | 21.9 | 21.8 |
+| Wantagh, skips Lynbrook | 4 | 29:30 | 22:32 | 21:54 | 20:36 | 20:25 |
+| Babylon to Wantagh local; Wantagh to Jamaica express | 3 | 47:00 | 32:46 | 32:09 | 30:39 | 29:41 |
+| Babylon, skips Lynbrook | 2 | 51:30 | 39:30 | 38:52 | 37:23 | 37:11 |
+| Babylon, stops at Amityville, Massapequa, Bellmore, Freeport | 1 | 39:00 | 28:53 | 28:15 | 26:46 | 25:44 |
+| Babylon, skips Bellmore, Merrick, Freeport, Lynbrook | 1 | 49:00 | 35:29 | 34:52 | 33:23 | 32:46 |
+| Babylon to Merrick local; Merrick to Jamaica express | 1 | 49:00 | 35:27 | 34:49 | 33:20 | 32:41 |
+| Babylon to Wantagh local; Wantagh to Jamaica express, stops at Lynbrook | 1 | 49:00 | 33:52 | 33:15 | 31:59 | 31:03 |
+| Babylon, stops at Wantagh, Bellmore, Merrick, Freeport | 1 | 47:00 | 28:47 | 28:09 | 26:40 | 25:15 |
+| Wantagh, all stops | 1 | 32:00 | 23:37 | 23:00 | 21:56 | 21:46 |
 
 #### Babylon via Babylon Branch - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Babylon to Wantagh local; Wantagh to Jamaica express | 5 | 46 | 33.8 | 32.9 | 31.3 | 30.2 |
-| Wantagh, skips Lynbrook, St. Albans | 2 | 30 | 23.6 | 22.6 | 21.2 | 20.9 |
-| Babylon, all stops | 1 | 53 | 42.6 | 41.8 | 40.6 | 40.4 |
-| Babylon to Wantagh express; Wantagh to Jamaica local, skips Lynbrook, St. Albans | 1 | 46 | 32.5 | 31.6 | 30.0 | 28.7 |
-| Freeport, skips Lynbrook | 1 | 24 | 17.6 | 16.7 | 15.5 | 15.2 |
-| Wantagh, skips St. Albans | 1 | 33 | 24.7 | 23.7 | 22.5 | 22.3 |
-| Wantagh, skips Lynbrook | 1 | 32 | 24.6 | 23.7 | 22.5 | 22.3 |
+| Babylon to Wantagh local; Wantagh to Jamaica express | 5 | 46:00 | 33:49 | 32:51 | 31:16 | 30:10 |
+| Wantagh, skips Lynbrook, St. Albans | 2 | 30:30 | 23:35 | 22:37 | 21:13 | 20:53 |
+| Babylon, all stops | 1 | 53:00 | 42:39 | 41:46 | 40:38 | 40:24 |
+| Babylon to Wantagh express; Wantagh to Jamaica local, skips Lynbrook, St. Albans | 1 | 46:00 | 32:32 | 31:34 | 29:59 | 28:43 |
+| Freeport, skips Lynbrook | 1 | 24:00 | 17:33 | 16:41 | 15:31 | 15:14 |
+| Wantagh, skips St. Albans | 1 | 33:00 | 24:40 | 23:43 | 22:32 | 22:17 |
+| Wantagh, skips Lynbrook | 1 | 32:00 | 24:35 | 23:42 | 22:32 | 22:15 |
 
 #### Long Beach - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Long Beach to Valley Stream local; Valley Stream to Jamaica express | 8 | 33 | 23.0 | 20.0 | 18.9 | 18.8 |
-| Long Beach, all stops | 2 | 37 | 26.3 | 23.3 | 22.8 | 22.8 |
-| Island Park, all stops | 1 | 30 | 22.1 | 21.2 | 20.7 | 20.7 |
-| Long Beach, skips Laurelton, Locust Manor | 1 | 36 | 24.1 | 21.0 | 20.3 | 20.2 |
+| Long Beach to Valley Stream local; Valley Stream to Jamaica express | 8 | 33:00 | 23:01 | 19:58 | 18:56 | 18:48 |
+| Long Beach, all stops | 2 | 37:00 | 26:20 | 23:17 | 22:47 | 22:46 |
+| Island Park, all stops | 1 | 30:00 | 22:08 | 21:15 | 20:44 | 20:43 |
+| Long Beach, skips Laurelton, Locust Manor | 1 | 36:00 | 24:05 | 21:01 | 20:15 | 20:10 |
 
 #### Far Rockaway - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Far Rockaway, all stops | 10 | 36 | 24.9 | 22.7 | 22.5 | 22.4 |
-| Far Rockaway to Valley Stream local; Valley Stream to Jamaica express | 1 | 34 | 21.5 | 19.4 | 18.6 | 18.5 |
-| Far Rockaway, skips Rosedale | 1 | 35 | 23.8 | 21.6 | 21.2 | 21.2 |
-| Valley Stream, all stops | 1 | 16 | 10.4 | 10.0 | 9.7 | 9.7 |
+| Far Rockaway, all stops | 10 | 36:00 | 24:52 | 22:42 | 22:28 | 22:27 |
+| Far Rockaway to Valley Stream local; Valley Stream to Jamaica express | 1 | 34:00 | 21:32 | 19:23 | 18:37 | 18:29 |
+| Far Rockaway, skips Rosedale | 1 | 35:00 | 23:48 | 21:39 | 21:12 | 21:10 |
+| Valley Stream, all stops | 1 | 16:00 | 10:26 | 9:59 | 9:44 | 9:43 |
 
 #### West Hempstead - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| West Hempstead, all stops | 4 | 28 | 19.5 | 17.6 | 16.9 | 16.8 |
+| West Hempstead, all stops | 4 | 28:00 | 19:29 | 17:37 | 16:53 | 16:50 |
 
 #### Huntington - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Huntington to New Hyde Park local; New Hyde Park to Jamaica express | 6 | 48 | 34.8 | 31.6 | 31.2 | 30.3 |
-| Huntington to Mineola local; Mineola to Jamaica express | 2 | 46 | 32.2 | 28.9 | 28.6 | 27.3 |
-| Huntington, stops at Cold Spring Harbor, Syosset | 2 | 42 | 27.4 | 24.0 | 23.5 | 21.4 |
-| Westbury, skips Floral Park | 2 | 25 | 20.1 | 19.2 | 19.1 | 19.1 |
-| Hicksville to Floral Park local; Floral Park to Jamaica express | 1 | 27 | 21.5 | 20.4 | 20.3 | 19.7 |
-| Hicksville, skips Floral Park, Elmont-UBS Arena | 1 | 32 | 22.8 | 21.7 | 21.6 | 21.4 |
-| Huntington to Mineola local, skips Westbury; Mineola to Jamaica express | 1 | 43 | 30.9 | 27.7 | 27.3 | 25.9 |
-| Huntington to Hicksville local; Hicksville to Jamaica express | 1 | 39 | 28.2 | 25.0 | 24.6 | 22.5 |
-| Huntington to Floral Park local; Floral Park to Jamaica express | 1 | 48 | 36.2 | 32.9 | 32.6 | 31.8 |
-| Huntington to New Hyde Park local, skips Carle Place; New Hyde Park to Jamaica express | 1 | 44 | 33.5 | 30.3 | 29.9 | 28.9 |
+| Huntington to New Hyde Park local; New Hyde Park to Jamaica express | 6 | 47:30 | 34:47 | 31:34 | 31:12 | 30:16 |
+| Huntington to Mineola local; Mineola to Jamaica express | 2 | 46:00 | 32:10 | 28:57 | 28:35 | 27:19 |
+| Huntington, stops at Cold Spring Harbor, Syosset | 2 | 42:00 | 27:21 | 23:59 | 23:32 | 21:25 |
+| Westbury, skips Floral Park | 2 | 25:00 | 20:04 | 19:10 | 19:07 | 19:04 |
+| Hicksville to Floral Park local; Floral Park to Jamaica express | 1 | 27:00 | 21:30 | 20:25 | 20:20 | 19:44 |
+| Hicksville, skips Floral Park, Elmont-UBS Arena | 1 | 32:00 | 22:48 | 21:43 | 21:37 | 21:24 |
+| Huntington to Mineola local, skips Westbury; Mineola to Jamaica express | 1 | 43:00 | 30:53 | 27:40 | 27:18 | 25:54 |
+| Huntington to Hicksville local; Hicksville to Jamaica express | 1 | 39:00 | 28:12 | 24:59 | 24:37 | 22:32 |
+| Huntington to Floral Park local; Floral Park to Jamaica express | 1 | 48:00 | 36:09 | 32:56 | 32:34 | 31:51 |
+| Huntington to New Hyde Park local, skips Carle Place; New Hyde Park to Jamaica express | 1 | 44:00 | 33:29 | 30:16 | 29:54 | 28:53 |
 
 #### Ronkonkoma - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Ronkonkoma to Bethpage local, skips Pinelawn; Bethpage to Jamaica express | 6 | 58 | 40.8 | 39.3 | 39.0 | 36.2 |
-| Ronkonkoma to Hicksville local, skips Pinelawn; Hicksville to Jamaica express | 3 | 60 | 41.6 | 40.3 | 40.0 | 37.3 |
-| Ronkonkoma to Hicksville local, skips Pinelawn; Hicksville to Jamaica express, stops at Mineola | 2 | 59 | 42.9 | 41.6 | 41.4 | 39.0 |
-| Farmingdale to New Hyde Park local; New Hyde Park to Jamaica express | 1 | 38 | 27.6 | 26.3 | 26.0 | 25.2 |
-| Ronkonkoma to Deer Park local; Deer Park to Jamaica express | 1 | 55 | 36.7 | 35.2 | 34.8 | 31.2 |
-| Ronkonkoma to Bethpage local, skips Pinelawn; Bethpage to Jamaica express, stops at Floral Park | 1 | 61 | 42.1 | 40.7 | 40.3 | 37.9 |
-| Ronkonkoma to Wyandanch local; Wyandanch to Jamaica express, stops at Farmingdale, Hicksville, Merillon Avenue, New Hyde Park | 1 | 61 | 42.9 | 41.6 | 41.3 | 38.9 |
-| Ronkonkoma to Wyandanch local; Wyandanch to Jamaica express, stops at Hicksville, Mineola | 1 | 61 | 40.2 | 38.9 | 38.6 | 35.8 |
+| Ronkonkoma to Bethpage local, skips Pinelawn; Bethpage to Jamaica express | 6 | 57:30 | 40:45 | 39:19 | 38:58 | 36:10 |
+| Ronkonkoma to Hicksville local, skips Pinelawn; Hicksville to Jamaica express | 3 | 1:00:00 | 41:36 | 40:19 | 40:02 | 37:17 |
+| Ronkonkoma to Hicksville local, skips Pinelawn; Hicksville to Jamaica express, stops at Mineola | 2 | 59:00 | 42:56 | 41:39 | 41:22 | 38:59 |
+| Farmingdale to New Hyde Park local; New Hyde Park to Jamaica express | 1 | 38:00 | 27:34 | 26:17 | 26:00 | 25:10 |
+| Ronkonkoma to Deer Park local; Deer Park to Jamaica express | 1 | 55:00 | 36:40 | 35:14 | 34:50 | 31:15 |
+| Ronkonkoma to Bethpage local, skips Pinelawn; Bethpage to Jamaica express, stops at Floral Park | 1 | 1:01:00 | 42:08 | 40:42 | 40:21 | 37:56 |
+| Ronkonkoma to Wyandanch local; Wyandanch to Jamaica express, stops at Farmingdale, Hicksville, Merillon Avenue, New Hyde Park | 1 | 1:01:00 | 42:54 | 41:37 | 41:18 | 38:55 |
+| Ronkonkoma to Wyandanch local; Wyandanch to Jamaica express, stops at Hicksville, Mineola | 1 | 1:01:00 | 40:13 | 38:56 | 38:37 | 35:50 |
 
 #### Croton-Harmon - GCT
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Croton-Harmon, all stops | 6 | 71 | 56.9 | 51.4 | 50.2 | 49.9 |
-| Croton-Harmon to Hastings-on-Hudson local; Hastings-on-Hudson to GCT express, stops at Yonkers, Marble Hill, Harlem-125 St | 4 | 60 | 49.3 | 43.6 | 41.9 | 41.5 |
-| Croton-Harmon to Tarrytown local; Tarrytown to GCT express, stops at Harlem-125 St | 3 | 55 | 42.1 | 36.3 | 34.5 | 33.6 |
-| Greystone, all stops | 3 | 45 | 33.2 | 27.7 | 26.8 | 26.6 |
-| Croton-Harmon to Tarrytown local; Tarrytown to GCT express | 1 | 60 | 41.2 | 35.2 | 33.4 | 32.4 |
-| Croton-Harmon to Hastings-on-Hudson local; Hastings-on-Hudson to GCT express, stops at Harlem-125 St | 1 | 62 | 47.3 | 41.5 | 39.7 | 39.2 |
-| Croton-Harmon to Hastings-on-Hudson local; Hastings-on-Hudson to GCT express, stops at Yonkers, Harlem-125 St | 1 | 60 | 48.4 | 42.6 | 41.0 | 40.5 |
-| Irvington to Greystone local; Greystone to GCT express, stops at Harlem-125 St | 1 | 46 | 33.6 | 27.9 | 26.5 | 26.1 |
-| Irvington to Hastings-on-Hudson local; Hastings-on-Hudson to GCT express, stops at Yonkers, Harlem-125 St | 1 | 49 | 33.4 | 27.8 | 26.3 | 25.9 |
-| Tarrytown to Greystone local; Greystone to GCT express, stops at Harlem-125 St | 1 | 51 | 36.9 | 31.2 | 29.7 | 29.3 |
+| Croton-Harmon, all stops | 6 | 1:11:00 | 56:56 | 51:23 | 50:13 | 49:56 |
+| Croton-Harmon to Hastings-on-Hudson local; Hastings-on-Hudson to GCT express, stops at Yonkers, Marble Hill, Harlem-125 St | 4 | 1:00:30 | 49:18 | 43:38 | 41:56 | 41:28 |
+| Croton-Harmon to Tarrytown local; Tarrytown to GCT express, stops at Harlem-125 St | 3 | 55:00 | 42:05 | 36:16 | 34:28 | 33:36 |
+| Greystone, all stops | 3 | 45:00 | 33:10 | 27:43 | 26:47 | 26:34 |
+| Croton-Harmon to Tarrytown local; Tarrytown to GCT express | 1 | 1:00:00 | 41:14 | 35:15 | 33:21 | 32:26 |
+| Croton-Harmon to Hastings-on-Hudson local; Hastings-on-Hudson to GCT express, stops at Harlem-125 St | 1 | 1:02:00 | 47:20 | 41:31 | 39:44 | 39:15 |
+| Croton-Harmon to Hastings-on-Hudson local; Hastings-on-Hudson to GCT express, stops at Yonkers, Harlem-125 St | 1 | 1:00:00 | 48:22 | 42:39 | 40:57 | 40:30 |
+| Irvington to Greystone local; Greystone to GCT express, stops at Harlem-125 St | 1 | 46:00 | 33:36 | 27:53 | 26:27 | 26:05 |
+| Irvington to Hastings-on-Hudson local; Hastings-on-Hudson to GCT express, stops at Yonkers, Harlem-125 St | 1 | 49:00 | 33:25 | 27:48 | 26:20 | 25:56 |
+| Tarrytown to Greystone local; Greystone to GCT express, stops at Harlem-125 St | 1 | 51:00 | 36:52 | 31:09 | 29:42 | 29:17 |
 
 #### Southeast - GCT
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| North White Plains, all stops | 6 | 56 | 46.2 | 41.2 | 40.1 | 39.9 |
-| Southeast to White Plains local, skips Mt Pleasant; White Plains to GCT express, stops at Harlem-125 St | 5 | 89 | 74.5 | 67.9 | 62.7 | 61.7 |
-| Crestwood to Mt Vernon West local; Mt Vernon West to GCT express, stops at Harlem-125 St | 4 | 38 | 26.9 | 22.3 | 20.8 | 20.3 |
-| North White Plains to Crestwood local; Crestwood to GCT express, stops at Harlem-125 St | 3 | 46 | 34.2 | 29.2 | 26.8 | 26.3 |
-| Southeast to Goldens Bridge local; Goldens Bridge to GCT express, stops at White Plains, Harlem-125 St | 3 | 90 | 66.6 | 59.3 | 53.2 | 51.8 |
-| Mt Kisco to White Plains local, skips Mt Pleasant; White Plains to GCT express, stops at Harlem-125 St | 2 | 64 | 49.6 | 43.8 | 39.7 | 38.7 |
-| North White Plains to Scarsdale local; Scarsdale to GCT express, stops at Harlem-125 St | 2 | 42 | 33.1 | 28.1 | 25.5 | 24.8 |
-| Southeast to Chappaqua local; Chappaqua to GCT express, stops at White Plains, Harlem-125 St | 2 | 88 | 70.8 | 63.6 | 58.3 | 57.3 |
-| Crestwood to Fleetwood local; Fleetwood to GCT express | 1 | 40 | 25.0 | 20.2 | 18.4 | 17.7 |
-| Crestwood to Mt Vernon West local; Mt Vernon West to GCT express | 1 | 35 | 26.1 | 21.3 | 19.7 | 19.2 |
-| Crestwood, all stops | 1 | 43 | 34.7 | 30.1 | 29.3 | 29.0 |
-| Crestwood to Williams Bridge local; Williams Bridge to GCT express, stops at Harlem-125 St | 1 | 37 | 30.2 | 25.7 | 24.5 | 24.2 |
-| Hartsdale, stops at Scarsdale | 1 | 38 | 26.6 | 21.8 | 19.2 | 18.5 |
-| Hartsdale, stops at Scarsdale, Harlem-125 St | 1 | 39 | 27.4 | 22.8 | 20.3 | 19.6 |
-| Mt Kisco to Scarsdale local, skips Mt Pleasant; Scarsdale to GCT express, stops at Harlem-125 St | 1 | 68 | 51.8 | 46.0 | 42.4 | 41.5 |
-| Mt Kisco to White Plains local, skips Mt Pleasant; White Plains to GCT express, stops at Mt Vernon West, Fordham, Harlem-125 St | 1 | 67 | 51.7 | 45.9 | 42.3 | 41.4 |
-| Mt Vernon West, all stops | 1 | 37 | 26.7 | 22.1 | 21.4 | 21.1 |
-| North White Plains, stops at White Plains | 1 | 45 | 30.1 | 24.9 | 21.7 | 20.8 |
-| North White Plains, stops at White Plains, Harlem-125 St | 1 | 45 | 30.9 | 25.9 | 22.8 | 22.0 |
-| North White Plains to Crestwood local; Crestwood to GCT express | 1 | 43 | 33.3 | 28.2 | 25.7 | 25.1 |
-| Southeast to Chappaqua local; Chappaqua to GCT express, stops at North White Plains, Harlem-125 St | 1 | 90 | 70.9 | 63.6 | 58.3 | 57.3 |
-| Southeast to Chappaqua local; Chappaqua to GCT express, stops at North White Plains, White Plains, Harlem-125 St | 1 | 85 | 71.7 | 64.7 | 59.5 | 58.4 |
-| Southeast to Hawthorne local; Hawthorne to GCT express, stops at Valhalla, White Plains, Harlem-125 St | 1 | 87 | 73.6 | 66.8 | 61.6 | 60.6 |
-| Southeast to Goldens Bridge local; Goldens Bridge to GCT express, stops at North White Plains, White Plains, Harlem-125 St | 1 | 86 | 67.5 | 60.3 | 54.3 | 53.0 |
-| Southeast to Goldens Bridge local; Goldens Bridge to GCT express, stops at North White Plains, White Plains, Hartsdale, Scarsdale, Harlem-125 St | 1 | 89 | 69.7 | 62.5 | 57.0 | 55.8 |
+| North White Plains, all stops | 6 | 56:30 | 46:13 | 41:15 | 40:06 | 39:52 |
+| Southeast to White Plains local, skips Mt Pleasant; White Plains to GCT express, stops at Harlem-125 St | 5 | 1:29:00 | 1:14:32 | 1:07:51 | 1:02:44 | 1:01:43 |
+| Crestwood to Mt Vernon West local; Mt Vernon West to GCT express, stops at Harlem-125 St | 4 | 37:30 | 26:54 | 22:19 | 20:47 | 20:20 |
+| North White Plains to Crestwood local; Crestwood to GCT express, stops at Harlem-125 St | 3 | 46:00 | 34:10 | 29:12 | 26:51 | 26:15 |
+| Southeast to Goldens Bridge local; Goldens Bridge to GCT express, stops at White Plains, Harlem-125 St | 3 | 1:30:00 | 1:06:38 | 59:16 | 53:09 | 51:50 |
+| Mt Kisco to White Plains local, skips Mt Pleasant; White Plains to GCT express, stops at Harlem-125 St | 2 | 1:04:30 | 49:34 | 43:46 | 39:43 | 38:43 |
+| North White Plains to Scarsdale local; Scarsdale to GCT express, stops at Harlem-125 St | 2 | 42:00 | 33:06 | 28:07 | 25:30 | 24:50 |
+| Southeast to Chappaqua local; Chappaqua to GCT express, stops at White Plains, Harlem-125 St | 2 | 1:28:30 | 1:10:47 | 1:03:38 | 58:17 | 57:16 |
+| Crestwood to Fleetwood local; Fleetwood to GCT express | 1 | 40:00 | 25:00 | 20:14 | 18:22 | 17:45 |
+| Crestwood to Mt Vernon West local; Mt Vernon West to GCT express | 1 | 35:00 | 26:03 | 21:18 | 19:40 | 19:10 |
+| Crestwood, all stops | 1 | 43:00 | 34:41 | 30:06 | 29:16 | 29:03 |
+| Crestwood to Williams Bridge local; Williams Bridge to GCT express, stops at Harlem-125 St | 1 | 37:00 | 30:15 | 25:39 | 24:29 | 24:11 |
+| Hartsdale, stops at Scarsdale | 1 | 38:00 | 26:33 | 21:48 | 19:11 | 18:27 |
+| Hartsdale, stops at Scarsdale, Harlem-125 St | 1 | 39:00 | 27:24 | 22:49 | 20:17 | 19:37 |
+| Mt Kisco to Scarsdale local, skips Mt Pleasant; Scarsdale to GCT express, stops at Harlem-125 St | 1 | 1:08:00 | 51:46 | 45:57 | 42:26 | 41:33 |
+| Mt Kisco to White Plains local, skips Mt Pleasant; White Plains to GCT express, stops at Mt Vernon West, Fordham, Harlem-125 St | 1 | 1:07:00 | 51:43 | 45:54 | 42:17 | 41:27 |
+| Mt Vernon West, all stops | 1 | 37:00 | 26:44 | 22:09 | 21:22 | 21:09 |
+| North White Plains, stops at White Plains | 1 | 45:00 | 30:04 | 24:55 | 21:40 | 20:50 |
+| North White Plains, stops at White Plains, Harlem-125 St | 1 | 45:00 | 30:54 | 25:56 | 22:47 | 22:00 |
+| North White Plains to Crestwood local; Crestwood to GCT express | 1 | 43:00 | 33:20 | 28:11 | 25:44 | 25:05 |
+| Southeast to Chappaqua local; Chappaqua to GCT express, stops at North White Plains, Harlem-125 St | 1 | 1:30:00 | 1:10:54 | 1:03:37 | 58:17 | 57:17 |
+| Southeast to Chappaqua local; Chappaqua to GCT express, stops at North White Plains, White Plains, Harlem-125 St | 1 | 1:25:00 | 1:11:42 | 1:04:43 | 59:27 | 58:26 |
+| Southeast to Hawthorne local; Hawthorne to GCT express, stops at Valhalla, White Plains, Harlem-125 St | 1 | 1:27:00 | 1:13:38 | 1:06:47 | 1:01:34 | 1:00:33 |
+| Southeast to Goldens Bridge local; Goldens Bridge to GCT express, stops at North White Plains, White Plains, Harlem-125 St | 1 | 1:26:00 | 1:07:33 | 1:00:20 | 54:19 | 53:00 |
+| Southeast to Goldens Bridge local; Goldens Bridge to GCT express, stops at North White Plains, White Plains, Hartsdale, Scarsdale, Harlem-125 St | 1 | 1:29:00 | 1:09:44 | 1:02:31 | 57:02 | 55:50 |
 
 #### New Haven - GCT
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Stamford, all stops | 6 | 68 | 52.7 | 46.9 | 45.1 | 44.8 |
-| New Haven, stops at Bridgeport, Stamford | 3 | 90 | 76.0 | 67.6 | 61.6 | 59.3 |
-| New Rochelle, skips Fordham | 3 | 37 | 25.4 | 20.1 | 18.5 | 18.2 |
-| Harrison, stops at Mamaroneck, Larchmont | 2 | 44 | 29.9 | 24.0 | 21.8 | 21.4 |
-| Harrison, stops at Mamaroneck, Larchmont, Harlem-125 St | 2 | 44 | 30.7 | 25.0 | 23.0 | 22.6 |
-| New Haven to Greenwich local, skips Rowayton, Darien, Noroton Heights; Greenwich to GCT express, stops at Harlem-125 St | 2 | 128 | 92.6 | 84.8 | 80.2 | 78.7 |
-| South Norwalk to Stamford local; Stamford to GCT express, stops at Greenwich, Harlem-125 St | 2 | 72 | 51.7 | 45.1 | 41.9 | 41.1 |
-| Stamford to Rye local; Rye to GCT express, stops at Harlem-125 St | 2 | 64 | 44.9 | 38.8 | 36.3 | 35.6 |
-| Bridgeport to East Norwalk local; East Norwalk to GCT express | 1 | 93 | 65.8 | 58.2 | 53.9 | 52.9 |
-| Bridgeport to Stamford local; Stamford to GCT express, stops at Harlem-125 St | 1 | 94 | 72.0 | 64.8 | 61.1 | 60.2 |
-| Bridgeport to South Norwalk local; South Norwalk to GCT express, stops at Stamford, Harlem-125 St | 1 | 95 | 68.5 | 61.3 | 57.3 | 56.3 |
-| Fairfield-Black Rock to South Norwalk local; South Norwalk to GCT express, stops at Stamford, Harlem-125 St | 1 | 83 | 63.8 | 57.0 | 53.2 | 52.3 |
-| Greenwich, stops at Port Chester, Rye, Harlem-125 St | 1 | 52 | 36.1 | 30.1 | 27.6 | 26.9 |
-| Harrison, all stops | 1 | 47 | 34.7 | 29.3 | 27.8 | 27.6 |
-| Harrison, skips Fordham, Harlem-125 St | 1 | 45 | 32.8 | 27.2 | 25.5 | 25.1 |
-| New Haven to Fairfield local; Fairfield to GCT express | 1 | 110 | 81.0 | 72.5 | 66.7 | 64.7 |
-| New Haven to Fairfield local; Fairfield to GCT express, stops at Harlem-125 St | 1 | 111 | 81.9 | 73.6 | 67.9 | 65.9 |
-| New Haven to South Norwalk local; South Norwalk to GCT express, stops at Darien, Stamford, Greenwich, Harlem-125 St | 1 | 119 | 90.5 | 82.6 | 77.8 | 76.3 |
-| New Haven to Stamford local; Stamford to GCT express, stops at Harlem-125 St | 1 | 122 | 91.8 | 83.9 | 79.1 | 77.5 |
-| New Haven to South Norwalk local; South Norwalk to GCT express, stops at Stamford, Harlem-125 St | 1 | 116 | 88.3 | 80.3 | 75.3 | 73.6 |
-| New Haven to Fairfield local; Fairfield to GCT express, stops at Stamford, Harlem-125 St | 1 | 116 | 82.8 | 74.6 | 69.1 | 67.1 |
-| New Haven to Rye local, skips Southport, Green's Farms, Rowayton, Noroton Heights; Rye to GCT express, stops at New Rochelle, Harlem-125 St | 1 | 128 | 94.1 | 86.7 | 82.4 | 80.8 |
-| New Haven to Stamford local, skips Southport, Green's Farms, East Norwalk, Rowayton; Stamford to GCT express, stops at Harlem-125 St | 1 | 115 | 87.0 | 79.0 | 74.0 | 72.2 |
-| New Haven to Fairfield local; Fairfield to GCT express, stops at Westport, Stamford, Harlem-125 St | 1 | 110 | 83.7 | 75.7 | 70.4 | 68.5 |
-| New Haven to Bridgeport local; Bridgeport to GCT express, stops at Stamford, Harlem-125 St | 1 | 110 | 80.3 | 72.1 | 66.5 | 64.4 |
-| New Rochelle, skips Fordham, Harlem-125 St | 1 | 37 | 24.5 | 19.0 | 17.4 | 17.1 |
-| South Norwalk to Noroton Heights local; Noroton Heights to GCT express, stops at Harlem-125 St | 1 | 71 | 49.7 | 43.0 | 39.4 | 38.6 |
-| South Norwalk to Stamford local; Stamford to GCT express | 1 | 72 | 49.8 | 43.0 | 39.5 | 38.6 |
-| Stamford, stops at Greenwich, Port Chester, Rye, Harrison, Fordham, Harlem-125 St | 1 | 63 | 44.0 | 37.7 | 35.2 | 34.4 |
-| Stamford to Greenwich express; Greenwich to Larchmont local; Larchmont to GCT express, stops at Harlem-125 St | 1 | 59 | 45.5 | 39.3 | 36.5 | 36.1 |
-| Stamford to Rye local; Rye to GCT express | 1 | 59 | 44.1 | 37.8 | 35.2 | 34.4 |
+| Stamford, all stops | 6 | 1:08:00 | 52:43 | 46:55 | 45:07 | 44:50 |
+| New Haven, stops at Bridgeport, Stamford | 3 | 1:30:00 | 1:15:57 | 1:07:36 | 1:01:36 | 59:19 |
+| New Rochelle, skips Fordham | 3 | 37:00 | 25:22 | 20:04 | 18:32 | 18:14 |
+| Harrison, stops at Mamaroneck, Larchmont | 2 | 44:30 | 29:53 | 23:59 | 21:50 | 21:26 |
+| Harrison, stops at Mamaroneck, Larchmont, Harlem-125 St | 2 | 44:30 | 30:44 | 25:00 | 22:57 | 22:37 |
+| New Haven to Greenwich local, skips Rowayton, Darien, Noroton Heights; Greenwich to GCT express, stops at Harlem-125 St | 2 | 2:08:30 | 1:32:36 | 1:24:49 | 1:20:14 | 1:18:41 |
+| South Norwalk to Stamford local; Stamford to GCT express, stops at Greenwich, Harlem-125 St | 2 | 1:12:00 | 51:43 | 45:08 | 41:54 | 41:05 |
+| Stamford to Rye local; Rye to GCT express, stops at Harlem-125 St | 2 | 1:03:30 | 44:56 | 38:50 | 36:20 | 35:36 |
+| Bridgeport to East Norwalk local; East Norwalk to GCT express | 1 | 1:33:00 | 1:05:51 | 58:12 | 53:56 | 52:52 |
+| Bridgeport to Stamford local; Stamford to GCT express, stops at Harlem-125 St | 1 | 1:34:00 | 1:12:03 | 1:04:47 | 1:01:06 | 1:00:10 |
+| Bridgeport to South Norwalk local; South Norwalk to GCT express, stops at Stamford, Harlem-125 St | 1 | 1:35:00 | 1:08:32 | 1:01:16 | 57:18 | 56:18 |
+| Fairfield-Black Rock to South Norwalk local; South Norwalk to GCT express, stops at Stamford, Harlem-125 St | 1 | 1:23:00 | 1:03:46 | 57:02 | 53:13 | 52:16 |
+| Greenwich, stops at Port Chester, Rye, Harlem-125 St | 1 | 52:00 | 36:05 | 30:04 | 27:38 | 26:55 |
+| Harrison, all stops | 1 | 47:00 | 34:43 | 29:17 | 27:50 | 27:33 |
+| Harrison, skips Fordham, Harlem-125 St | 1 | 45:00 | 32:47 | 27:10 | 25:28 | 25:05 |
+| New Haven to Fairfield local; Fairfield to GCT express | 1 | 1:50:00 | 1:21:02 | 1:12:32 | 1:06:45 | 1:04:41 |
+| New Haven to Fairfield local; Fairfield to GCT express, stops at Harlem-125 St | 1 | 1:51:00 | 1:21:53 | 1:13:33 | 1:07:52 | 1:05:52 |
+| New Haven to South Norwalk local; South Norwalk to GCT express, stops at Darien, Stamford, Greenwich, Harlem-125 St | 1 | 1:59:00 | 1:30:33 | 1:22:37 | 1:17:50 | 1:16:18 |
+| New Haven to Stamford local; Stamford to GCT express, stops at Harlem-125 St | 1 | 2:02:00 | 1:31:47 | 1:23:51 | 1:19:04 | 1:17:31 |
+| New Haven to South Norwalk local; South Norwalk to GCT express, stops at Stamford, Harlem-125 St | 1 | 1:56:00 | 1:28:16 | 1:20:20 | 1:15:17 | 1:13:39 |
+| New Haven to Fairfield local; Fairfield to GCT express, stops at Stamford, Harlem-125 St | 1 | 1:56:00 | 1:22:47 | 1:14:36 | 1:09:06 | 1:07:06 |
+| New Haven to Rye local, skips Southport, Green's Farms, Rowayton, Noroton Heights; Rye to GCT express, stops at New Rochelle, Harlem-125 St | 1 | 2:08:00 | 1:34:09 | 1:26:43 | 1:22:24 | 1:20:48 |
+| New Haven to Stamford local, skips Southport, Green's Farms, East Norwalk, Rowayton; Stamford to GCT express, stops at Harlem-125 St | 1 | 1:55:00 | 1:26:59 | 1:19:02 | 1:13:59 | 1:12:11 |
+| New Haven to Fairfield local; Fairfield to GCT express, stops at Westport, Stamford, Harlem-125 St | 1 | 1:50:00 | 1:23:42 | 1:15:42 | 1:10:25 | 1:08:33 |
+| New Haven to Bridgeport local; Bridgeport to GCT express, stops at Stamford, Harlem-125 St | 1 | 1:50:00 | 1:20:18 | 1:12:08 | 1:06:31 | 1:04:24 |
+| New Rochelle, skips Fordham, Harlem-125 St | 1 | 37:00 | 24:31 | 19:02 | 17:24 | 17:03 |
+| South Norwalk to Noroton Heights local; Noroton Heights to GCT express, stops at Harlem-125 St | 1 | 1:11:00 | 49:43 | 42:59 | 39:25 | 38:35 |
+| South Norwalk to Stamford local; Stamford to GCT express | 1 | 1:12:00 | 49:46 | 43:00 | 39:31 | 38:38 |
+| Stamford, stops at Greenwich, Port Chester, Rye, Harrison, Fordham, Harlem-125 St | 1 | 1:03:00 | 43:59 | 37:44 | 35:10 | 34:26 |
+| Stamford to Greenwich express; Greenwich to Larchmont local; Larchmont to GCT express, stops at Harlem-125 St | 1 | 59:00 | 45:30 | 39:15 | 36:32 | 36:06 |
+| Stamford to Rye local; Rye to GCT express | 1 | 59:00 | 44:05 | 37:49 | 35:13 | 34:26 |
 
 #### New Canaan - Stamford
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| New Canaan, all stops | 5 | 18 | 13.8 | 11.6 | 11.3 | 11.3 |
+| New Canaan, all stops | 5 | 18:00 | 13:48 | 11:36 | 11:20 | 11:20 |
 
 ### Trains
 
-One train alone, minutes, next to the median scheduled for trips with that stopping pattern, if any.
+One train alone, next to the median scheduled for trips with that stopping pattern, if any.
 
 #### Port Washington local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 49 | 35.0 | 33.3 | 31.9 | 31.7 |
-| M7, 750 V third rail, full power |  | 34.6 | 32.9 | 31.4 | 31.2 |
-| M8, 25 kV |  | 34.8 | 33.1 | 31.6 | 31.4 |
+| M7, 750 V third rail | 49:00 | 34:57 | 33:17 | 31:55 | 31:44 |
+| M7, 750 V third rail, full power |  | 34:37 | 32:56 | 31:27 | 31:10 |
+| M8, 25 kV |  | 34:45 | 33:05 | 31:39 | 31:25 |
 
 #### Port Washington express
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 38 | 25.5 | 23.7 | 21.1 | 20.8 |
-| M7, 750 V third rail, full power |  | 25.4 | 23.6 | 20.9 | 20.4 |
-| M8, 25 kV |  | 25.5 | 23.6 | 21.0 | 20.6 |
+| M7, 750 V third rail | 38:30 | 25:32 | 23:42 | 21:09 | 20:46 |
+| M7, 750 V third rail, full power |  | 25:26 | 23:37 | 20:55 | 20:24 |
+| M8, 25 kV |  | 25:28 | 23:39 | 21:00 | 20:33 |
 
 #### Main Line to Penn local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 22 | 17.0 | 14.4 | 13.4 | 13.2 |
-| M7, 750 V third rail, full power |  | 16.9 | 14.3 | 13.2 | 12.9 |
-| M8, 25 kV |  | 16.9 | 14.4 | 13.3 | 13.0 |
+| M7, 750 V third rail | 22:00 | 16:59 | 14:25 | 13:25 | 13:10 |
+| M7, 750 V third rail, full power |  | 16:51 | 14:17 | 13:13 | 12:54 |
+| M8, 25 kV |  | 16:55 | 14:21 | 13:19 | 13:01 |
 
 #### Main Line to Penn express
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 19 | 13.4 | 10.8 | 9.6 | 9.1 |
-| M7, 750 V third rail, full power |  | 13.3 | 10.7 | 9.5 | 8.9 |
-| M8, 25 kV |  | 13.4 | 10.7 | 9.5 | 9.0 |
+| M7, 750 V third rail | 19:00 | 13:22 | 10:45 | 9:33 | 9:03 |
+| M7, 750 V third rail, full power |  | 13:20 | 10:43 | 9:29 | 8:54 |
+| M8, 25 kV |  | 13:21 | 10:45 | 9:31 | 8:58 |
 
 #### Main Line to GCM local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail |  | 16.5 | 14.0 | 13.5 | 13.4 |
-| M7, 750 V third rail, full power |  | 16.4 | 13.9 | 13.4 | 13.1 |
-| M8, 25 kV |  | 16.4 | 13.9 | 13.4 | 13.2 |
+| M7, 750 V third rail |  | 16:30 | 14:01 | 13:33 | 13:22 |
+| M7, 750 V third rail, full power |  | 16:23 | 13:53 | 13:21 | 13:07 |
+| M8, 25 kV |  | 16:27 | 13:57 | 13:26 | 13:14 |
 
 #### Main Line to GCM express
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 19 | 12.9 | 10.4 | 9.7 | 9.2 |
-| M7, 750 V third rail, full power |  | 12.9 | 10.3 | 9.6 | 9.1 |
-| M8, 25 kV |  | 12.9 | 10.3 | 9.6 | 9.2 |
+| M7, 750 V third rail | 19:00 | 12:54 | 10:21 | 9:41 | 9:15 |
+| M7, 750 V third rail, full power |  | 12:52 | 10:19 | 9:36 | 9:06 |
+| M8, 25 kV |  | 12:53 | 10:20 | 9:38 | 9:09 |
 
 #### Atlantic local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 20 | 13.9 | 11.6 | 10.8 | 10.4 |
-| M7, 750 V third rail, full power |  | 13.9 | 11.4 | 10.5 | 10.0 |
-| M8, 25 kV |  | 13.9 | 11.5 | 10.6 | 10.1 |
+| M7, 750 V third rail | 20:00 | 13:56 | 11:34 | 10:45 | 10:23 |
+| M7, 750 V third rail, full power |  | 13:52 | 11:26 | 10:31 | 10:00 |
+| M8, 25 kV |  | 13:53 | 11:29 | 10:36 | 10:08 |
 
 #### Hempstead local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 31 | 22.4 | 20.2 | 20.2 | 20.2 |
-| M7, 750 V third rail, full power |  | 22.1 | 19.9 | 19.9 | 19.8 |
-| M8, 25 kV |  | 22.2 | 20.0 | 20.0 | 20.0 |
+| M7, 750 V third rail | 31:00 | 22:23 | 20:14 | 20:13 | 20:13 |
+| M7, 750 V third rail, full power |  | 22:05 | 19:54 | 19:52 | 19:51 |
+| M8, 25 kV |  | 22:13 | 20:02 | 20:01 | 20:00 |
 
 #### Babylon via Atlantic Branch local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail |  | 40.6 | 40.0 | 38.7 | 38.5 |
-| M7, 750 V third rail, full power |  | 39.6 | 39.0 | 37.7 | 37.5 |
-| M8, 25 kV |  | 40.0 | 39.3 | 38.1 | 37.9 |
+| M7, 750 V third rail |  | 40:36 | 39:58 | 38:43 | 38:32 |
+| M7, 750 V third rail, full power |  | 39:37 | 39:00 | 37:45 | 37:27 |
+| M8, 25 kV |  | 39:58 | 39:21 | 38:06 | 37:51 |
 
 #### Babylon via Babylon Branch local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 53 | 42.6 | 41.8 | 40.6 | 40.4 |
-| M7, 750 V third rail, full power |  | 41.7 | 40.8 | 39.6 | 39.2 |
-| M8, 25 kV |  | 42.0 | 41.2 | 40.0 | 39.7 |
+| M7, 750 V third rail | 53:00 | 42:39 | 41:46 | 40:38 | 40:24 |
+| M7, 750 V third rail, full power |  | 41:41 | 40:48 | 39:36 | 39:15 |
+| M8, 25 kV |  | 42:01 | 41:09 | 39:59 | 39:41 |
 
 #### Long Beach local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 37 | 26.3 | 23.3 | 22.8 | 22.8 |
-| M7, 750 V third rail, full power |  | 26.1 | 23.0 | 22.4 | 22.3 |
-| M8, 25 kV |  | 26.2 | 23.1 | 22.6 | 22.5 |
+| M7, 750 V third rail | 37:00 | 26:20 | 23:17 | 22:47 | 22:46 |
+| M7, 750 V third rail, full power |  | 26:05 | 23:00 | 22:22 | 22:20 |
+| M8, 25 kV |  | 26:11 | 23:07 | 22:33 | 22:31 |
 
 #### Far Rockaway local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 36 | 24.9 | 22.7 | 22.5 | 22.4 |
-| M7, 750 V third rail, full power |  | 24.6 | 22.3 | 22.0 | 22.0 |
-| M8, 25 kV |  | 24.7 | 22.4 | 22.2 | 22.2 |
+| M7, 750 V third rail | 36:00 | 24:52 | 22:42 | 22:28 | 22:27 |
+| M7, 750 V third rail, full power |  | 24:39 | 22:20 | 22:02 | 22:00 |
+| M8, 25 kV |  | 24:43 | 22:27 | 22:11 | 22:10 |
 
 #### West Hempstead local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 28 | 19.5 | 17.6 | 16.9 | 16.8 |
-| M7, 750 V third rail, full power |  | 19.2 | 17.3 | 16.5 | 16.4 |
-| M8, 25 kV |  | 19.3 | 17.4 | 16.6 | 16.6 |
+| M7, 750 V third rail | 28:00 | 19:29 | 17:37 | 16:53 | 16:50 |
+| M7, 750 V third rail, full power |  | 19:11 | 17:21 | 16:30 | 16:25 |
+| M8, 25 kV |  | 19:16 | 17:26 | 16:38 | 16:34 |
 
 #### Huntington local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail |  | 40.0 | 36.8 | 36.4 | 36.1 |
-| M7, 750 V third rail, full power |  | 39.4 | 36.2 | 35.7 | 35.3 |
-| M8, 25 kV |  | 39.7 | 36.5 | 36.0 | 35.7 |
+| M7, 750 V third rail |  | 39:58 | 36:45 | 36:23 | 36:07 |
+| M7, 750 V third rail, full power |  | 39:22 | 36:10 | 35:44 | 35:16 |
+| M8, 25 kV |  | 39:40 | 36:27 | 36:02 | 35:40 |
 
 #### Ronkonkoma local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail |  | 54.7 | 53.5 | 53.2 | 52.5 |
-| M7, 750 V third rail, full power |  | 53.6 | 52.4 | 52.0 | 50.8 |
-| M8, 25 kV |  | 54.1 | 52.8 | 52.5 | 51.5 |
+| M7, 750 V third rail |  | 54:45 | 53:28 | 53:11 | 52:29 |
+| M7, 750 V third rail, full power |  | 53:37 | 52:21 | 52:03 | 50:51 |
+| M8, 25 kV |  | 54:05 | 52:48 | 52:30 | 51:30 |
 
 #### Hudson local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7A, 700 V third rail | 71 | 56.9 | 51.4 | 50.2 | 49.9 |
-| M7A, 700 V third rail, full power |  | 56.3 | 50.7 | 49.4 | 48.9 |
-| M8, 12.5 kV |  | 56.6 | 51.0 | 49.8 | 49.4 |
+| M7A, 700 V third rail | 1:11:00 | 56:56 | 51:23 | 50:13 | 49:56 |
+| M7A, 700 V third rail, full power |  | 56:15 | 50:42 | 49:21 | 48:57 |
+| M8, 12.5 kV |  | 56:36 | 51:02 | 49:47 | 49:26 |
 
 #### Hudson express
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7A, 700 V third rail |  | 37.3 | 31.5 | 29.3 | 28.3 |
-| M7A, 700 V third rail, full power |  | 37.2 | 31.4 | 29.1 | 27.9 |
-| M8, 12.5 kV |  | 37.3 | 31.5 | 29.2 | 28.0 |
+| M7A, 700 V third rail |  | 37:19 | 31:31 | 29:20 | 28:16 |
+| M7A, 700 V third rail, full power |  | 37:13 | 31:25 | 29:08 | 27:53 |
+| M8, 12.5 kV |  | 37:16 | 31:28 | 29:13 | 28:03 |
 
 #### Harlem local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7A, 700 V third rail | 56 | 46.2 | 41.2 | 40.1 | 39.9 |
-| M7A, 700 V third rail, full power |  | 45.7 | 40.7 | 39.2 | 38.8 |
-| M8, 12.5 kV |  | 45.9 | 40.9 | 39.5 | 39.2 |
+| M7A, 700 V third rail | 56:30 | 46:13 | 41:15 | 40:06 | 39:52 |
+| M7A, 700 V third rail, full power |  | 45:43 | 40:41 | 39:11 | 38:51 |
+| M8, 12.5 kV |  | 45:56 | 40:54 | 39:30 | 39:13 |
 
 #### Harlem express
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7A, 700 V third rail |  | 73.9 | 66.8 | 61.6 | 60.6 |
-| M7A, 700 V third rail, full power |  | 73.4 | 66.2 | 60.5 | 59.0 |
-| M8, 12.5 kV |  | 73.5 | 66.4 | 60.8 | 59.5 |
+| M7A, 700 V third rail |  | 1:13:55 | 1:06:46 | 1:01:36 | 1:00:36 |
+| M7A, 700 V third rail, full power |  | 1:13:22 | 1:06:12 | 1:00:28 | 59:01 |
+| M8, 12.5 kV |  | 1:13:33 | 1:06:22 | 1:00:49 | 59:30 |
 
 #### New Haven local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M8, 700 V third rail and 12.5 kV | 68 | 52.7 | 46.9 | 45.1 | 44.8 |
-| M8, 12.5 kV |  | 52.6 | 46.8 | 44.9 | 44.4 |
+| M8, 700 V third rail and 12.5 kV | 1:08:00 | 52:43 | 46:55 | 45:07 | 44:50 |
+| M8, 12.5 kV |  | 52:34 | 46:46 | 44:52 | 44:25 |
 
 #### New Haven express
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M8, 700 V third rail and 12.5 kV |  | 90.9 | 82.8 | 77.8 | 76.3 |
-| M8, 12.5 kV |  | 90.8 | 82.7 | 77.7 | 75.9 |
+| M8, 700 V third rail and 12.5 kV |  | 1:30:53 | 1:22:48 | 1:17:50 | 1:16:17 |
+| M8, 12.5 kV |  | 1:30:48 | 1:22:43 | 1:17:39 | 1:15:56 |
 
 #### New Canaan local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M8, 700 V third rail and 12.5 kV | 18 | 13.8 | 11.6 | 11.3 | 11.3 |
-| M8, 12.5 kV |  | 13.8 | 11.6 | 11.3 | 11.3 |
+| M8, 700 V third rail and 12.5 kV | 18:00 | 13:48 | 11:36 | 11:20 | 11:20 |
+| M8, 12.5 kV |  | 13:48 | 11:36 | 11:20 | 11:20 |
 
 ### Busy service
 
-Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking. "Scheduled" is the median for trips with that stopping pattern, if any.
+Time per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking. "Scheduled" is the median for trips with that stopping pattern, if any.
 
-#### PW local: 5 min headways each way
-
-| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| PW local | 49 | posted | 35.1 | 35.2 | 35.1 | 35.0 | 521 |
-|  |  | 60 mph | 33.5 | 33.6 | 33.5 | 33.4 | 486 |
-|  |  | 80 mph | 32.1 | 32.2 | 32.2 | 32.0 | 502 |
-|  |  | 100 mph | 32.0 | 32.1 | 32.1 | 31.8 | 495 |
-
-#### PW express: 5 min headways each way
+#### PW local: 5:00 headways each way
 
 | Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| PW express | 38 | posted | 25.6 | 25.6 | 25.6 | 25.6 | 541 |
-|  |  | 60 mph | 23.8 | 23.8 | 23.8 | 23.8 | 476 |
-|  |  | 80 mph | 21.2 | 21.3 | 21.2 | 21.1 | 479 |
-|  |  | 100 mph | 20.9 | 20.9 | 20.9 | 20.7 | 500 |
+| PW local | 49:00 | posted | 35:06 | 35:11 | 35:09 | 35:00 | 521 |
+|  |  | 60 mph | 33:30 | 33:35 | 33:31 | 33:23 | 486 |
+|  |  | 80 mph | 32:06 | 32:13 | 32:10 | 31:58 | 502 |
+|  |  | 100 mph | 31:59 | 32:07 | 32:05 | 31:50 | 495 |
 
-#### Main Line to Penn: locals and expresses each at 2.5 min headways each way (1.25 min combined)
-
-| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Penn local | 22 | posted | 17.1 | 17.2 | 17.2 | 17.0 | 487 |
-|  |  | 60 mph | 14.5 | 14.6 | 14.6 | 14.4 | 518 |
-|  |  | 80 mph | 13.4 | 13.6 | 13.5 | 13.3 | 478 |
-|  |  | 100 mph | 13.2 | 13.5 | 13.4 | 13.1 | 483 |
-| Penn express | 19 | posted | 13.5 | 13.5 | 13.5 | 13.4 | 487 |
-|  |  | 60 mph | 10.8 | 10.8 | 10.8 | 10.8 | 518 |
-|  |  | 80 mph | 9.5 | 9.5 | 9.5 | 9.5 | 478 |
-|  |  | 100 mph | 9.0 | 9.1 | 9.1 | 9.0 | 483 |
-
-#### Main Line to GCM: 2.5 min headways each way
+#### PW express: 5:00 headways each way
 
 | Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| GCM express | 19 | posted | 13.0 | 13.0 | 13.0 | 13.0 | 580 |
-|  |  | 60 mph | 10.4 | 10.4 | 10.4 | 10.3 | 532 |
-|  |  | 80 mph | 9.7 | 9.7 | 9.7 | 9.7 | 529 |
-|  |  | 100 mph | 9.3 | 9.3 | 9.3 | 9.2 | 523 |
+| PW express | 38:30 | posted | 25:36 | 25:37 | 25:36 | 25:33 | 541 |
+|  |  | 60 mph | 23:48 | 23:50 | 23:50 | 23:46 | 476 |
+|  |  | 80 mph | 21:12 | 21:15 | 21:15 | 21:08 | 479 |
+|  |  | 100 mph | 20:52 | 20:56 | 20:55 | 20:45 | 500 |
 
-#### Atlantic: 5 min headways each way
-
-| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Atlantic local | 20 | posted | 13.9 | 13.9 | 13.9 | 13.9 | 556 |
-|  |  | 60 mph | 11.5 | 11.5 | 11.5 | 11.5 | 557 |
-|  |  | 80 mph | 10.7 | 10.7 | 10.7 | 10.6 | 512 |
-|  |  | 100 mph | 10.2 | 10.3 | 10.3 | 10.1 | 494 |
-
-#### Hempstead: 20 min headways each way
+#### Main Line to Penn: locals and expresses each at 2:30 headways each way (1:15 combined)
 
 | Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Hempstead local | 31 | posted | 22.6 | 22.6 | 22.6 | 22.4 | 477 |
-|  |  | 60 mph | 20.4 | 20.5 | 20.4 | 20.3 | 483 |
-|  |  | 80 mph | 20.4 | 20.5 | 20.4 | 20.3 | 484 |
-|  |  | 100 mph | 20.4 | 20.4 | 20.4 | 20.3 | 485 |
+| Penn local | 22:00 | posted | 17:08 | 17:15 | 17:14 | 17:02 | 487 |
+|  |  | 60 mph | 14:30 | 14:36 | 14:34 | 14:26 | 518 |
+|  |  | 80 mph | 13:24 | 13:34 | 13:32 | 13:19 | 478 |
+|  |  | 100 mph | 13:14 | 13:28 | 13:26 | 13:07 | 483 |
+| Penn express | 19:00 | posted | 13:28 | 13:30 | 13:30 | 13:26 | 487 |
+|  |  | 60 mph | 10:46 | 10:46 | 10:46 | 10:45 | 518 |
+|  |  | 80 mph | 9:30 | 9:30 | 9:30 | 9:29 | 478 |
+|  |  | 100 mph | 9:01 | 9:06 | 9:05 | 8:59 | 483 |
 
-#### Babylon via Atlantic Branch: 7.5 min headways each way
-
-| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Babylon via Atlantic Branch local |  | posted | 40.6 | 40.7 | 40.6 | 40.2 | 497 |
-|  |  | 60 mph | 40.0 | 40.1 | 40.1 | 39.6 | 504 |
-|  |  | 80 mph | 38.9 | 39.0 | 39.0 | 38.4 | 514 |
-|  |  | 100 mph | 38.7 | 38.9 | 38.8 | 38.2 | 520 |
-
-#### Babylon via Babylon Branch: 7.5 min headways each way
+#### Main Line to GCM: 2:30 headways each way
 
 | Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Babylon via Babylon Branch local | 53 | posted | 42.7 | 42.8 | 42.8 | 42.3 | 499 |
-|  |  | 60 mph | 41.9 | 42.1 | 42.0 | 41.5 | 499 |
-|  |  | 80 mph | 40.8 | 40.9 | 40.9 | 40.3 | 489 |
-|  |  | 100 mph | 40.6 | 40.8 | 40.7 | 40.1 | 493 |
+| GCM express | 19:00 | posted | 13:00 | 13:01 | 13:01 | 12:58 | 580 |
+|  |  | 60 mph | 10:22 | 10:22 | 10:22 | 10:21 | 532 |
+|  |  | 80 mph | 9:43 | 9:43 | 9:43 | 9:41 | 529 |
+|  |  | 100 mph | 9:17 | 9:19 | 9:18 | 9:14 | 523 |
 
-#### Long Beach: 12 min headways each way
-
-| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Long Beach local | 37 | posted | 26.5 | 26.6 | 26.6 | 26.4 | 523 |
-|  |  | 60 mph | 23.6 | 23.6 | 23.6 | 23.4 | 531 |
-|  |  | 80 mph | 23.0 | 23.1 | 23.0 | 22.8 | 527 |
-|  |  | 100 mph | 23.0 | 23.1 | 23.0 | 22.8 | 526 |
-
-#### Far Rockaway: 15 min headways each way
+#### Atlantic: 5:00 headways each way
 
 | Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Far Rockaway local | 36 | posted | 25.1 | 25.1 | 25.1 | 25.0 | 497 |
-|  |  | 60 mph | 22.9 | 23.0 | 23.0 | 22.8 | 495 |
-|  |  | 80 mph | 22.7 | 22.8 | 22.8 | 22.5 | 494 |
-|  |  | 100 mph | 22.7 | 22.8 | 22.8 | 22.5 | 494 |
+| Atlantic local | 20:00 | posted | 13:56 | 13:56 | 13:57 | 13:55 | 556 |
+|  |  | 60 mph | 11:32 | 11:32 | 11:32 | 11:30 | 557 |
+|  |  | 80 mph | 10:41 | 10:42 | 10:42 | 10:36 | 512 |
+|  |  | 100 mph | 10:15 | 10:18 | 10:18 | 10:06 | 494 |
 
-#### West Hempstead: 60 min headways each way
-
-| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| West Hempstead local | 28 | posted | 19.6 | 19.6 | 19.6 | 19.4 | 528 |
-|  |  | 60 mph | 17.7 | 17.7 | 17.7 | 17.6 | 528 |
-|  |  | 80 mph | 17.0 | 17.0 | 17.0 | 16.8 | 528 |
-|  |  | 100 mph | 16.9 | 16.9 | 16.9 | 16.7 | 528 |
-
-#### Huntington: 10 min headways each way
+#### Hempstead: 20:00 headways each way
 
 | Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Huntington local |  | posted | 40.1 | 40.1 | 40.1 | 39.9 | 531 |
-|  |  | 60 mph | 36.9 | 36.9 | 37.0 | 36.7 | 542 |
-|  |  | 80 mph | 36.5 | 36.6 | 36.6 | 36.3 | 543 |
-|  |  | 100 mph | 36.1 | 36.2 | 36.1 | 35.8 | 534 |
+| Hempstead local | 31:00 | posted | 22:33 | 22:34 | 22:34 | 22:26 | 477 |
+|  |  | 60 mph | 20:26 | 20:28 | 20:27 | 20:20 | 483 |
+|  |  | 80 mph | 20:26 | 20:28 | 20:26 | 20:18 | 484 |
+|  |  | 100 mph | 20:25 | 20:27 | 20:25 | 20:18 | 485 |
 
-#### Ronkonkoma: 10 min headways each way
+#### Babylon via Atlantic Branch: 7:30 headways each way
 
 | Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Ronkonkoma local |  | posted | 55.0 | 55.1 | 55.1 | 54.5 | 505 |
-|  |  | 60 mph | 53.7 | 53.8 | 53.7 | 53.2 | 497 |
-|  |  | 80 mph | 53.4 | 53.4 | 53.4 | 52.9 | 512 |
-|  |  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 520 |
+| Babylon via Atlantic Branch local |  | posted | 40:36 | 40:41 | 40:39 | 40:14 | 497 |
+|  |  | 60 mph | 39:58 | 40:06 | 40:03 | 39:36 | 504 |
+|  |  | 80 mph | 38:52 | 39:02 | 38:59 | 38:26 | 514 |
+|  |  | 100 mph | 38:40 | 38:52 | 38:49 | 38:13 | 520 |
 
-#### Hudson: locals at 10 min and expresses at 20 min headways each way
+#### Babylon via Babylon Branch: 7:30 headways each way
+
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Babylon via Babylon Branch local | 53:00 | posted | 42:44 | 42:50 | 42:47 | 42:20 | 499 |
+|  |  | 60 mph | 41:52 | 42:03 | 41:59 | 41:28 | 499 |
+|  |  | 80 mph | 40:47 | 40:57 | 40:53 | 40:20 | 489 |
+|  |  | 100 mph | 40:36 | 40:47 | 40:44 | 40:06 | 493 |
+
+#### Long Beach: 12:00 headways each way
+
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Long Beach local | 37:00 | posted | 26:32 | 26:34 | 26:33 | 26:25 | 523 |
+|  |  | 60 mph | 23:34 | 23:35 | 23:34 | 23:24 | 531 |
+|  |  | 80 mph | 23:00 | 23:04 | 23:01 | 22:48 | 527 |
+|  |  | 100 mph | 22:59 | 23:04 | 23:00 | 22:46 | 526 |
+
+#### Far Rockaway: 15:00 headways each way
+
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Far Rockaway local | 36:00 | posted | 25:07 | 25:07 | 25:06 | 25:00 | 497 |
+|  |  | 60 mph | 22:57 | 22:59 | 22:58 | 22:45 | 495 |
+|  |  | 80 mph | 22:44 | 22:46 | 22:46 | 22:30 | 494 |
+|  |  | 100 mph | 22:44 | 22:46 | 22:46 | 22:28 | 494 |
+
+#### West Hempstead: 1:00:00 headways each way
+
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| West Hempstead local | 28:00 | posted | 19:33 | 19:33 | 19:33 | 19:24 | 528 |
+|  |  | 60 mph | 17:44 | 17:44 | 17:44 | 17:34 | 528 |
+|  |  | 80 mph | 17:00 | 17:00 | 17:00 | 16:47 | 528 |
+|  |  | 100 mph | 16:56 | 16:56 | 16:56 | 16:43 | 528 |
+
+#### Huntington: 10:00 headways each way
+
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Huntington local |  | posted | 40:05 | 40:08 | 40:06 | 39:52 | 531 |
+|  |  | 60 mph | 36:54 | 36:57 | 36:58 | 36:41 | 542 |
+|  |  | 80 mph | 36:30 | 36:34 | 36:34 | 36:16 | 543 |
+|  |  | 100 mph | 36:06 | 36:10 | 36:09 | 35:47 | 534 |
+
+#### Ronkonkoma: 10:00 headways each way
+
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Ronkonkoma local |  | posted | 54:58 | 55:05 | 55:03 | 54:28 | 505 |
+|  |  | 60 mph | 53:42 | 53:47 | 53:44 | 53:14 | 497 |
+|  |  | 80 mph | 53:23 | 53:25 | 53:23 | 52:56 | 512 |
+|  |  | 100 mph | 52:34 | 52:42 | 52:36 | 51:52 | 520 |
+
+#### Hudson: locals at 10:00 and expresses at 20:00 headways each way
 
 | Service | Scheduled | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Hudson local | 71 | posted | 57.1 | 57.2 | 57.1 | 56.9 | 513 |
-|  |  | 60 mph | 51.6 | 51.7 | 51.6 | 51.4 | 504 |
-|  |  | 80 mph | 50.4 | 50.5 | 50.4 | 50.1 | 490 |
-|  |  | 100 mph | 50.1 | 50.2 | 50.2 | 49.8 | 495 |
-| Hudson express |  | posted | 37.3 | 37.3 | 37.3 | 37.3 | 513 |
-|  |  | 60 mph | 31.5 | 31.5 | 31.5 | 31.5 | 504 |
-|  |  | 80 mph | 29.3 | 29.3 | 29.3 | 29.2 | 490 |
-|  |  | 100 mph | 28.2 | 28.2 | 28.2 | 28.1 | 495 |
+| Hudson local | 1:11:00 | posted | 57:06 | 57:09 | 57:07 | 56:56 | 513 |
+|  |  | 60 mph | 51:36 | 51:39 | 51:37 | 51:26 | 504 |
+|  |  | 80 mph | 50:24 | 50:28 | 50:26 | 50:08 | 490 |
+|  |  | 100 mph | 50:06 | 50:12 | 50:11 | 49:48 | 495 |
+| Hudson express |  | posted | 37:18 | 37:20 | 37:20 | 37:16 | 513 |
+|  |  | 60 mph | 31:30 | 31:32 | 31:32 | 31:30 | 504 |
+|  |  | 80 mph | 29:18 | 29:20 | 29:20 | 29:14 | 490 |
+|  |  | 100 mph | 28:11 | 28:14 | 28:14 | 28:04 | 495 |
 
-#### Harlem: locals at 6 min and expresses at 8.57 min headways each way
+#### Harlem: locals at 6:00 and expresses at 8:34 headways each way
 
 | Service | Scheduled | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Harlem local | 56 | posted | 46.6 | 46.7 | 46.7 | 46.4 | 438 |
-|  |  | 60 mph | 41.6 | 41.7 | 41.6 | 41.4 | 461 |
-|  |  | 80 mph | 40.3 | 40.5 | 40.4 | 39.9 | 426 |
-|  |  | 100 mph | 40.0 | 40.3 | 40.3 | 39.6 | 429 |
-| Harlem express |  | posted | 73.9 | 74.0 | 74.0 | 73.8 | 438 |
-|  |  | 60 mph | 66.8 | 66.9 | 66.8 | 66.7 | 461 |
-|  |  | 80 mph | 61.5 | 61.8 | 61.7 | 61.2 | 426 |
-|  |  | 100 mph | 60.4 | 60.7 | 60.6 | 59.9 | 429 |
+| Harlem local | 56:30 | posted | 46:34 | 46:44 | 46:41 | 46:22 | 438 |
+|  |  | 60 mph | 41:35 | 41:40 | 41:36 | 41:22 | 461 |
+|  |  | 80 mph | 40:18 | 40:30 | 40:25 | 39:54 | 426 |
+|  |  | 100 mph | 40:02 | 40:20 | 40:15 | 39:36 | 429 |
+| Harlem express |  | posted | 1:13:56 | 1:14:00 | 1:14:00 | 1:13:47 | 438 |
+|  |  | 60 mph | 1:06:48 | 1:06:53 | 1:06:51 | 1:06:42 | 461 |
+|  |  | 80 mph | 1:01:33 | 1:01:45 | 1:01:42 | 1:01:12 | 426 |
+|  |  | 100 mph | 1:00:22 | 1:00:42 | 1:00:37 | 59:52 | 429 |
 
-#### New Haven: locals at 6.67 min and expresses at 6.67 min headways each way
-
-| Service | Scheduled | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| New Haven local | 68 | posted | 53.1 | 53.1 | 53.1 | 53.0 | 481 |
-|  |  | 60 mph | 47.3 | 47.3 | 47.3 | 47.2 | 479 |
-|  |  | 80 mph | 45.4 | 45.4 | 45.4 | 45.2 | 471 |
-|  |  | 100 mph | 45.0 | 45.1 | 45.1 | 44.8 | 468 |
-| New Haven express |  | posted | 91.2 | 91.2 | 91.2 | 91.2 | 481 |
-|  |  | 60 mph | 83.2 | 83.1 | 83.1 | 83.1 | 479 |
-|  |  | 80 mph | 78.2 | 78.2 | 78.2 | 78.1 | 471 |
-|  |  | 100 mph | 76.5 | 76.5 | 76.5 | 76.3 | 468 |
-
-#### New Canaan: 30 min headways each way
+#### New Haven: locals at 6:40 and expresses at 6:40 headways each way
 
 | Service | Scheduled | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| New Canaan local | 18 | posted | 13.9 | 13.9 | 13.9 | 13.9 |  |
-|  |  | 60 mph | 11.7 | 11.7 | 11.7 | 11.7 |  |
-|  |  | 80 mph | 11.4 | 11.4 | 11.4 | 11.4 |  |
-|  |  | 100 mph | 11.4 | 11.4 | 11.4 | 11.4 |  |
+| New Haven local | 1:08:00 | posted | 53:04 | 53:06 | 53:04 | 52:57 | 481 |
+|  |  | 60 mph | 47:19 | 47:20 | 47:19 | 47:12 | 479 |
+|  |  | 80 mph | 45:24 | 45:26 | 45:26 | 45:12 | 471 |
+|  |  | 100 mph | 45:03 | 45:06 | 45:06 | 44:46 | 468 |
+| New Haven express |  | posted | 1:31:12 | 1:31:14 | 1:31:14 | 1:31:10 | 481 |
+|  |  | 60 mph | 1:23:09 | 1:23:09 | 1:23:09 | 1:23:08 | 479 |
+|  |  | 80 mph | 1:18:10 | 1:18:12 | 1:18:11 | 1:18:06 | 471 |
+|  |  | 100 mph | 1:16:30 | 1:16:33 | 1:16:31 | 1:16:20 | 468 |
+
+#### New Canaan: 30:00 headways each way
+
+| Service | Scheduled | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| New Canaan local | 18:00 | posted | 13:54 | 13:54 | 13:54 | 13:54 |  |
+|  |  | 60 mph | 11:42 | 11:42 | 11:42 | 11:42 |  |
+|  |  | 80 mph | 11:26 | 11:26 | 11:26 | 11:26 |  |
+|  |  | 100 mph | 11:26 | 11:26 | 11:26 | 11:26 |  |
 
 ### Posted slow zones
 
 One train, the timetable's, raising one posted zone at a time to what the curves allow (80 mph cap).
 
-#### Port Washington (base: local 35.0 min, express 25.5 min)
+#### Port Washington (base: local 34:57, express 25:32)
 
 | From mi | To mi | Near | Posted | Raised to | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: | ---: |
-| 2.67 | 4.38 | Woodside | 50 mph | 80 mph | 41 s | 41 s |
-| 9.64 | 13.45 | Auburndale | 60 mph | 80 mph | 1 s | 41 s |
-| 0.00 | 0.25 | Penn Station | 15 mph | 73 mph | 39 s | 39 s |
-| 6.08 | 9.55 | Mets-Willets Point | 60 mph | 80 mph | 24 s | 36 s |
-| 0.26 | 2.67 | Penn Station | 60 mph | 80 mph | 19 s | 19 s |
-| 15.89 | 18.38 | Manhasset | 50 mph | 80 mph | 19 s | 19 s |
-| 13.46 | 13.81 | Douglaston | 40 mph | 77 mph | 9 s | 14 s |
-| 13.81 | 15.89 | Little Neck | 60 mph | 80 mph | 1 s | 9 s |
-| 18.39 | 19.40 | Port Washington | 40 mph | 65 mph | 8 s | 8 s |
-| 5.84 | 6.07 | Woodside | 40 mph | 49 mph | 7 s | 7 s |
+| 2.67 | 4.38 | Woodside | 50 mph | 80 mph | 0:41 | 0:41 |
+| 9.64 | 13.45 | Auburndale | 60 mph | 80 mph | 0:01 | 0:41 |
+| 0.00 | 0.25 | Penn Station | 15 mph | 73 mph | 0:39 | 0:39 |
+| 6.08 | 9.55 | Mets-Willets Point | 60 mph | 80 mph | 0:24 | 0:36 |
+| 0.26 | 2.67 | Penn Station | 60 mph | 80 mph | 0:19 | 0:19 |
+| 15.89 | 18.38 | Manhasset | 50 mph | 80 mph | 0:19 | 0:19 |
+| 13.46 | 13.81 | Douglaston | 40 mph | 77 mph | 0:09 | 0:14 |
+| 13.81 | 15.89 | Little Neck | 60 mph | 80 mph | 0:01 | 0:09 |
+| 18.39 | 19.40 | Port Washington | 40 mph | 65 mph | 0:08 | 0:08 |
+| 5.84 | 6.07 | Woodside | 40 mph | 49 mph | 0:07 | 0:07 |
 
-#### Main Line to Penn (base: local 17.0 min, express 13.4 min)
-
-| From mi | To mi | Near | Posted | Raised to | local saves | express saves |
-| ---: | ---: | --- | ---: | ---: | ---: | ---: |
-| 10.49 | 10.88 | Jamaica | 20 mph | 80 mph | 55 s | 60 s |
-| 0.00 | 0.30 | Penn Station | 15 mph | 80 mph | 48 s | 48 s |
-| 2.55 | 3.98 | Woodside | 50 mph | 80 mph | 32 s | 32 s |
-| 10.98 | 11.27 | Jamaica | 20 mph | 80 mph | 20 s | 20 s |
-| 0.30 | 2.55 | Penn Station | 60 mph | 80 mph | 18 s | 18 s |
-| 4.45 | 5.98 | Woodside | 60 mph | 80 mph | 6 s | 17 s |
-| 3.99 | 4.45 | Woodside | 50 mph | 80 mph | 6 s | 6 s |
-
-#### Main Line to GCM (base: local 16.5 min, express 12.9 min)
+#### Main Line to Penn (base: local 16:59, express 13:22)
 
 | From mi | To mi | Near | Posted | Raised to | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: | ---: |
-| 9.77 | 10.22 | Jamaica | 20 mph | 80 mph | 60 s | 65 s |
-| 0.00 | 0.22 | Grand Central | 15 mph | 73 mph | 28 s | 28 s |
-| 10.27 | 10.56 | Jamaica | 20 mph | 80 mph | 19 s | 19 s |
-| 3.76 | 5.27 | Woodside | 60 mph | 80 mph | 6 s | 16 s |
-| 2.59 | 3.38 | Woodside | 45 mph | 80 mph | 12 s | 12 s |
-| 1.09 | 2.59 | Grand Central | 60 mph | 80 mph | 10 s | 10 s |
-| 0.46 | 1.09 | Grand Central | 45 mph | 80 mph | 9 s | 9 s |
-| 0.22 | 0.45 | Grand Central | 30 mph | 46 mph | 7 s | 7 s |
-| 3.38 | 3.76 | Woodside | 50 mph | 80 mph | 4 s | 4 s |
+| 10.49 | 10.88 | Jamaica | 20 mph | 80 mph | 0:55 | 1:00 |
+| 0.00 | 0.30 | Penn Station | 15 mph | 80 mph | 0:48 | 0:48 |
+| 2.55 | 3.98 | Woodside | 50 mph | 80 mph | 0:32 | 0:32 |
+| 10.98 | 11.27 | Jamaica | 20 mph | 80 mph | 0:20 | 0:20 |
+| 0.30 | 2.55 | Penn Station | 60 mph | 80 mph | 0:18 | 0:18 |
+| 4.45 | 5.98 | Woodside | 60 mph | 80 mph | 0:06 | 0:17 |
+| 3.99 | 4.45 | Woodside | 50 mph | 80 mph | 0:06 | 0:06 |
 
-#### Atlantic (base: local 13.9 min)
-
-| From mi | To mi | Near | Posted | Raised to | local saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 1.41 | 3.98 | East New York | 45 mph | 80 mph | 55 s |
-| 8.77 | 9.19 | Jamaica | 20 mph | 80 mph | 37 s |
-| 0.00 | 0.07 | Atlantic Terminal | 5 mph | 15 mph | 31 s |
-| 4.03 | 8.27 | East New York | 70 mph | 80 mph | 20 s |
-| 0.09 | 1.25 | Atlantic Terminal | 45 mph | 80 mph | 16 s |
-| 8.27 | 8.77 | Jamaica | 45 mph | 80 mph | 11 s |
-| 1.25 | 1.40 | Nostrand Avenue | 30 mph | 53 mph | 7 s |
-
-#### Hempstead (base: local 22.4 min)
-
-| From mi | To mi | Near | Posted | Raised to | local saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 9.37 | 9.60 | Country Life Press | 15 mph | 38 mph | 41 s |
-| 10.17 | 10.33 | Hempstead | 10 mph | 80 mph | 25 s |
-| 0.23 | 0.69 | Jamaica | 35 mph | 80 mph | 22 s |
-| 0.00 | 0.22 | Jamaica | 20 mph | 80 mph | 17 s |
-| 9.61 | 10.17 | Country Life Press | 30 mph | 62 mph | 8 s |
-| 5.70 | 5.75 | Floral Park | 25 mph | 45 mph | 7 s |
-
-#### Babylon via Atlantic Branch (base: local 40.6 min)
-
-| From mi | To mi | Near | Posted | Raised to | local saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 3.84 | 6.20 | Lynbrook | 60 mph | 80 mph | 30 s |
-| 0.00 | 0.18 | Jamaica | 20 mph | 80 mph | 13 s |
-| 25.68 | 26.73 | Babylon | 60 mph | 80 mph | 11 s |
-| 0.37 | 0.60 | Jamaica | 35 mph | 62 mph | 9 s |
-| 6.20 | 6.46 | Lynbrook | 45 mph | 80 mph | 7 s |
-| 6.61 | 8.25 | Lynbrook | 60 mph | 80 mph | 7 s |
-| 3.04 | 3.11 | Jamaica | 60 mph | 80 mph | 5 s |
-| 0.98 | 1.28 | Jamaica | 60 mph | 77 mph | 4 s |
-| 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 3 s |
-
-#### Babylon via Babylon Branch (base: local 42.6 min)
-
-| From mi | To mi | Near | Posted | Raised to | local saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 6.36 | 8.93 | Lynbrook | 60 mph | 80 mph | 27 s |
-| 0.19 | 0.64 | Jamaica | 35 mph | 80 mph | 14 s |
-| 0.00 | 0.18 | Jamaica | 20 mph | 80 mph | 13 s |
-| 26.35 | 27.41 | Babylon | 60 mph | 80 mph | 11 s |
-| 0.65 | 1.69 | Jamaica | 50 mph | 80 mph | 11 s |
-| 3.15 | 3.68 | St. Albans | 50 mph | 80 mph | 10 s |
-| 3.68 | 5.17 | St. Albans | 60 mph | 80 mph | 7 s |
-| 5.32 | 6.35 | Lynbrook | 70 mph | 80 mph | 3 s |
-
-#### Long Beach (base: local 26.3 min)
-
-| From mi | To mi | Near | Posted | Raised to | local saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 12.92 | 13.15 | Long Beach | 5 mph | 55 mph | 108 s |
-| 11.41 | 11.74 | Island Park | 40 mph | 61 mph | 16 s |
-| 12.58 | 12.92 | Long Beach | 30 mph | 80 mph | 14 s |
-| 0.00 | 0.18 | Jamaica | 20 mph | 80 mph | 13 s |
-| 3.84 | 6.20 | Rosedale | 60 mph | 80 mph | 9 s |
-| 0.37 | 0.60 | Jamaica | 35 mph | 62 mph | 9 s |
-| 9.69 | 11.41 | Oceanside | 60 mph | 80 mph | 7 s |
-| 0.98 | 1.28 | Jamaica | 60 mph | 77 mph | 4 s |
-| 6.93 | 8.08 | Lynbrook | 60 mph | 80 mph | 4 s |
-| 8.09 | 8.89 | Centre Avenue | 45 mph | 80 mph | 4 s |
-| 6.20 | 6.70 | Valley Stream | 45 mph | 80 mph | 4 s |
-| 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 3 s |
-
-#### Far Rockaway (base: local 24.9 min)
-
-| From mi | To mi | Near | Posted | Raised to | local saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 6.41 | 6.61 | Valley Stream | 15 mph | 39 mph | 36 s |
-| 8.11 | 11.09 | Cedarhurst | 40 mph | 80 mph | 26 s |
-| 11.09 | 11.24 | Far Rockaway | 10 mph | 67 mph | 21 s |
-| 0.00 | 0.18 | Jamaica | 20 mph | 80 mph | 13 s |
-| 6.61 | 7.89 | Gibson | 40 mph | 80 mph | 12 s |
-| 3.84 | 6.20 | Rosedale | 60 mph | 80 mph | 9 s |
-| 0.37 | 0.60 | Jamaica | 35 mph | 62 mph | 9 s |
-| 7.89 | 8.10 | Hewlett | 30 mph | 36 mph | 5 s |
-| 0.98 | 1.28 | Jamaica | 60 mph | 77 mph | 4 s |
-| 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 3 s |
-
-#### West Hempstead (base: local 19.5 min)
-
-| From mi | To mi | Near | Posted | Raised to | local saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 7.41 | 7.59 | Westwood | 15 mph | 44 mph | 47 s |
-| 0.00 | 0.23 | Jamaica | 20 mph | 80 mph | 17 s |
-| 0.23 | 0.69 | Jamaica | 35 mph | 80 mph | 14 s |
-| 0.80 | 1.73 | Jamaica | 50 mph | 80 mph | 12 s |
-| 11.56 | 11.66 | West Hempstead | 10 mph | 80 mph | 10 s |
-| 3.73 | 5.41 | St. Albans | 60 mph | 80 mph | 9 s |
-| 3.47 | 3.73 | St. Albans | 50 mph | 80 mph | 6 s |
-| 5.41 | 6.76 | Westwood | 70 mph | 80 mph | 5 s |
-| 6.76 | 7.41 | Westwood | 60 mph | 80 mph | 4 s |
-| 1.74 | 3.47 | St. Albans | 60 mph | 80 mph | 4 s |
-
-#### Huntington (base: local 40.0 min)
-
-| From mi | To mi | Near | Posted | Raised to | local saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 24.28 | 25.30 | Huntington | 30 mph | 80 mph | 59 s |
-| 21.40 | 24.28 | Cold Spring Harbor | 45 mph | 80 mph | 47 s |
-| 14.96 | 16.12 | Hicksville | 40 mph | 80 mph | 36 s |
-| 0.00 | 0.32 | Jamaica | 20 mph | 80 mph | 26 s |
-| 0.32 | 0.71 | Jamaica | 35 mph | 80 mph | 18 s |
-| 19.41 | 19.79 | Syosset | 50 mph | 61 mph | 4 s |
-
-#### Ronkonkoma (base: local 54.7 min)
-
-| From mi | To mi | Near | Posted | Raised to | local saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 0.00 | 0.32 | Jamaica | 20 mph | 80 mph | 26 s |
-| 14.97 | 15.95 | Hicksville | 40 mph | 80 mph | 26 s |
-| 0.32 | 0.71 | Jamaica | 35 mph | 80 mph | 18 s |
-| 19.31 | 19.96 | Bethpage | 60 mph | 80 mph | 11 s |
-
-#### Hudson (base: local 56.9 min, express 37.3 min)
+#### Main Line to GCM (base: local 16:30, express 12:54)
 
 | From mi | To mi | Near | Posted | Raised to | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: | ---: |
-| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 249 s | 249 s |
-| 9.82 | 10.72 | Spuyten Duyvil | 30 mph | 80 mph | 36 s | 43 s |
-| 23.69 | 31.75 | Scarborough | 70 mph | 80 mph | 10 s | 33 s |
-| 14.43 | 17.81 | Glenwood | 70 mph | 80 mph | 1 s | 16 s |
-| 6.33 | 9.16 | Morris Heights | 60 mph | 80 mph | 8 s | 15 s |
-| 10.72 | 14.13 | Riverdale | 70 mph | 80 mph | 1 s | 12 s |
-| 5.40 | 6.33 | Harlem-125 St | 45 mph | 80 mph | 11 s | 11 s |
-| 4.46 | 4.93 | Harlem-125 St | 35 mph | 52 mph | 11 s | 11 s |
-| 14.14 | 14.43 | Yonkers | 50 mph | 70 mph | 1 s | 11 s |
-| 2.69 | 3.95 | Harlem-125 St | 60 mph | 80 mph | 7 s | 7 s |
-| 31.75 | 32.04 | Croton-Harmon | 50 mph | 80 mph | 5 s | 5 s |
-| 2.63 | 2.69 | Harlem-125 St | 45 mph | 80 mph | 4 s | 4 s |
+| 9.77 | 10.22 | Jamaica | 20 mph | 80 mph | 1:00 | 1:05 |
+| 0.00 | 0.22 | Grand Central | 15 mph | 73 mph | 0:28 | 0:28 |
+| 10.27 | 10.56 | Jamaica | 20 mph | 80 mph | 0:19 | 0:19 |
+| 3.76 | 5.27 | Woodside | 60 mph | 80 mph | 0:06 | 0:16 |
+| 2.59 | 3.38 | Woodside | 45 mph | 80 mph | 0:12 | 0:12 |
+| 1.09 | 2.59 | Grand Central | 60 mph | 80 mph | 0:10 | 0:10 |
+| 0.46 | 1.09 | Grand Central | 45 mph | 80 mph | 0:09 | 0:09 |
+| 0.22 | 0.45 | Grand Central | 30 mph | 46 mph | 0:07 | 0:07 |
+| 3.38 | 3.76 | Woodside | 50 mph | 80 mph | 0:04 | 0:04 |
 
-#### Harlem (base: local 46.2 min, express 73.9 min)
-
-| From mi | To mi | Near | Posted | Raised to | local saves | express saves |
-| ---: | ---: | --- | ---: | ---: | ---: | ---: |
-| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 249 s | 249 s |
-| 11.39 | 14.55 | Mt Vernon West | 60 mph | 80 mph | 3 s | 45 s |
-| 18.58 | 21.95 | Hartsdale | 60 mph | 80 mph | 9 s | 38 s |
-| 38.97 | 45.45 | Goldens Bridge | 60 mph | 80 mph | 0 s | 34 s |
-| 21.95 | 22.58 | White Plains | 35 mph | 80 mph | 17 s | 33 s |
-| 0.89 | 3.94 | Harlem-125 St | 60 mph | 80 mph | 31 s | 31 s |
-| 51.51 | 52.76 | Brewster | 40 mph | 80 mph | 0 s | 25 s |
-| 25.14 | 25.99 | Valhalla | 40 mph | 80 mph | 0 s | 22 s |
-| 14.66 | 17.21 | Tuckahoe | 60 mph | 80 mph | 0 s | 19 s |
-| 32.22 | 35.65 | Chappaqua | 70 mph | 80 mph | 0 s | 15 s |
-| 4.46 | 4.92 | Harlem-125 St | 35 mph | 54 mph | 12 s | 12 s |
-| 23.73 | 25.14 | Valhalla | 50 mph | 69 mph | 0 s | 11 s |
-
-#### New Haven (base: local 52.7 min, express 90.9 min)
-
-| From mi | To mi | Near | Posted | Raised to | local saves | express saves |
-| ---: | ---: | --- | ---: | ---: | ---: | ---: |
-| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 249 s | 249 s |
-| 15.87 | 16.55 | New Rochelle | 30 mph | 68 mph | 30 s | 43 s |
-| 11.39 | 15.69 | Mt Vernon East  | 60 mph | 80 mph | 21 s | 41 s |
-| 54.48 | 55.16 | Bridgeport | 30 mph | 80 mph | 0 s | 32 s |
-| 33.02 | 34.30 | Stamford | 50 mph | 80 mph | 0 s | 26 s |
-| 29.53 | 30.00 | Cos Cob | 50 mph | 80 mph | 0 s | 16 s |
-| 63.59 | 70.73 | West Haven | 75 mph | 80 mph | 0 s | 13 s |
-| 23.00 | 23.35 | Rye | 50 mph | 80 mph | 13 s | 13 s |
-| 4.46 | 4.92 | Harlem-125 St | 35 mph | 50 mph | 12 s | 12 s |
-| 71.53 | 71.83 | New Haven | 30 mph | 80 mph | 0 s | 10 s |
-| 55.17 | 56.22 | Bridgeport | 45 mph | 80 mph | 0 s | 10 s |
-| 8.70 | 9.89 | Fordham | 60 mph | 80 mph | 1 s | 10 s |
-
-#### New Canaan (base: local 13.8 min)
+#### Atlantic (base: local 13:56)
 
 | From mi | To mi | Near | Posted | Raised to | local saves |
 | ---: | ---: | --- | ---: | ---: | ---: |
-| 2.47 | 7.49 | Talmadge Hill | 40 mph | 80 mph | 113 s |
-| 0.23 | 1.73 | Stamford | 50 mph | 80 mph | 25 s |
-| 2.20 | 2.32 | Glenbrook | 20 mph | 67 mph | 6 s |
+| 1.41 | 3.98 | East New York | 45 mph | 80 mph | 0:55 |
+| 8.77 | 9.19 | Jamaica | 20 mph | 80 mph | 0:37 |
+| 0.00 | 0.07 | Atlantic Terminal | 5 mph | 15 mph | 0:31 |
+| 4.03 | 8.27 | East New York | 70 mph | 80 mph | 0:20 |
+| 0.09 | 1.25 | Atlantic Terminal | 45 mph | 80 mph | 0:16 |
+| 8.27 | 8.77 | Jamaica | 45 mph | 80 mph | 0:11 |
+| 1.25 | 1.40 | Nostrand Avenue | 30 mph | 53 mph | 0:07 |
+
+#### Hempstead (base: local 22:23)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 9.37 | 9.60 | Country Life Press | 15 mph | 38 mph | 0:41 |
+| 10.17 | 10.33 | Hempstead | 10 mph | 80 mph | 0:25 |
+| 0.23 | 0.69 | Jamaica | 35 mph | 80 mph | 0:22 |
+| 0.00 | 0.22 | Jamaica | 20 mph | 80 mph | 0:17 |
+| 9.61 | 10.17 | Country Life Press | 30 mph | 62 mph | 0:08 |
+| 5.70 | 5.75 | Floral Park | 25 mph | 45 mph | 0:07 |
+
+#### Babylon via Atlantic Branch (base: local 40:36)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 3.84 | 6.20 | Lynbrook | 60 mph | 80 mph | 0:30 |
+| 0.00 | 0.18 | Jamaica | 20 mph | 80 mph | 0:13 |
+| 25.68 | 26.73 | Babylon | 60 mph | 80 mph | 0:11 |
+| 0.37 | 0.60 | Jamaica | 35 mph | 62 mph | 0:09 |
+| 6.20 | 6.46 | Lynbrook | 45 mph | 80 mph | 0:07 |
+| 6.61 | 8.25 | Lynbrook | 60 mph | 80 mph | 0:07 |
+| 3.04 | 3.11 | Jamaica | 60 mph | 80 mph | 0:05 |
+| 0.98 | 1.28 | Jamaica | 60 mph | 77 mph | 0:04 |
+| 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 0:03 |
+
+#### Babylon via Babylon Branch (base: local 42:39)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 6.36 | 8.93 | Lynbrook | 60 mph | 80 mph | 0:27 |
+| 0.19 | 0.64 | Jamaica | 35 mph | 80 mph | 0:14 |
+| 0.00 | 0.18 | Jamaica | 20 mph | 80 mph | 0:13 |
+| 26.35 | 27.41 | Babylon | 60 mph | 80 mph | 0:11 |
+| 0.65 | 1.69 | Jamaica | 50 mph | 80 mph | 0:11 |
+| 3.15 | 3.68 | St. Albans | 50 mph | 80 mph | 0:10 |
+| 3.68 | 5.17 | St. Albans | 60 mph | 80 mph | 0:07 |
+| 5.32 | 6.35 | Lynbrook | 70 mph | 80 mph | 0:03 |
+
+#### Long Beach (base: local 26:20)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 12.92 | 13.15 | Long Beach | 5 mph | 55 mph | 1:48 |
+| 11.41 | 11.74 | Island Park | 40 mph | 61 mph | 0:16 |
+| 12.58 | 12.92 | Long Beach | 30 mph | 80 mph | 0:14 |
+| 0.00 | 0.18 | Jamaica | 20 mph | 80 mph | 0:13 |
+| 3.84 | 6.20 | Rosedale | 60 mph | 80 mph | 0:09 |
+| 0.37 | 0.60 | Jamaica | 35 mph | 62 mph | 0:09 |
+| 9.69 | 11.41 | Oceanside | 60 mph | 80 mph | 0:07 |
+| 0.98 | 1.28 | Jamaica | 60 mph | 77 mph | 0:04 |
+| 6.93 | 8.08 | Lynbrook | 60 mph | 80 mph | 0:04 |
+| 8.09 | 8.89 | Centre Avenue | 45 mph | 80 mph | 0:04 |
+| 6.20 | 6.70 | Valley Stream | 45 mph | 80 mph | 0:04 |
+| 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 0:03 |
+
+#### Far Rockaway (base: local 24:52)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 6.41 | 6.61 | Valley Stream | 15 mph | 39 mph | 0:36 |
+| 8.11 | 11.09 | Cedarhurst | 40 mph | 80 mph | 0:26 |
+| 11.09 | 11.24 | Far Rockaway | 10 mph | 67 mph | 0:21 |
+| 0.00 | 0.18 | Jamaica | 20 mph | 80 mph | 0:13 |
+| 6.61 | 7.89 | Gibson | 40 mph | 80 mph | 0:12 |
+| 3.84 | 6.20 | Rosedale | 60 mph | 80 mph | 0:09 |
+| 0.37 | 0.60 | Jamaica | 35 mph | 62 mph | 0:09 |
+| 7.89 | 8.10 | Hewlett | 30 mph | 36 mph | 0:05 |
+| 0.98 | 1.28 | Jamaica | 60 mph | 77 mph | 0:04 |
+| 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 0:03 |
+
+#### West Hempstead (base: local 19:29)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 7.41 | 7.59 | Westwood | 15 mph | 44 mph | 0:47 |
+| 0.00 | 0.23 | Jamaica | 20 mph | 80 mph | 0:17 |
+| 0.23 | 0.69 | Jamaica | 35 mph | 80 mph | 0:14 |
+| 0.80 | 1.73 | Jamaica | 50 mph | 80 mph | 0:12 |
+| 11.56 | 11.66 | West Hempstead | 10 mph | 80 mph | 0:10 |
+| 3.73 | 5.41 | St. Albans | 60 mph | 80 mph | 0:09 |
+| 3.47 | 3.73 | St. Albans | 50 mph | 80 mph | 0:06 |
+| 5.41 | 6.76 | Westwood | 70 mph | 80 mph | 0:05 |
+| 6.76 | 7.41 | Westwood | 60 mph | 80 mph | 0:04 |
+| 1.74 | 3.47 | St. Albans | 60 mph | 80 mph | 0:04 |
+
+#### Huntington (base: local 39:58)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 24.28 | 25.30 | Huntington | 30 mph | 80 mph | 0:59 |
+| 21.40 | 24.28 | Cold Spring Harbor | 45 mph | 80 mph | 0:47 |
+| 14.96 | 16.12 | Hicksville | 40 mph | 80 mph | 0:36 |
+| 0.00 | 0.32 | Jamaica | 20 mph | 80 mph | 0:26 |
+| 0.32 | 0.71 | Jamaica | 35 mph | 80 mph | 0:18 |
+| 19.41 | 19.79 | Syosset | 50 mph | 61 mph | 0:04 |
+
+#### Ronkonkoma (base: local 54:45)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 0.00 | 0.32 | Jamaica | 20 mph | 80 mph | 0:26 |
+| 14.97 | 15.95 | Hicksville | 40 mph | 80 mph | 0:26 |
+| 0.32 | 0.71 | Jamaica | 35 mph | 80 mph | 0:18 |
+| 19.31 | 19.96 | Bethpage | 60 mph | 80 mph | 0:11 |
+
+#### Hudson (base: local 56:56, express 37:19)
+
+| From mi | To mi | Near | Posted | Raised to | local saves | express saves |
+| ---: | ---: | --- | ---: | ---: | ---: | ---: |
+| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 4:09 | 4:09 |
+| 9.82 | 10.72 | Spuyten Duyvil | 30 mph | 80 mph | 0:36 | 0:43 |
+| 23.69 | 31.75 | Scarborough | 70 mph | 80 mph | 0:10 | 0:33 |
+| 14.43 | 17.81 | Glenwood | 70 mph | 80 mph | 0:01 | 0:16 |
+| 6.33 | 9.16 | Morris Heights | 60 mph | 80 mph | 0:08 | 0:15 |
+| 10.72 | 14.13 | Riverdale | 70 mph | 80 mph | 0:01 | 0:12 |
+| 5.40 | 6.33 | Harlem-125 St | 45 mph | 80 mph | 0:11 | 0:11 |
+| 4.46 | 4.93 | Harlem-125 St | 35 mph | 52 mph | 0:11 | 0:11 |
+| 14.14 | 14.43 | Yonkers | 50 mph | 70 mph | 0:01 | 0:11 |
+| 2.69 | 3.95 | Harlem-125 St | 60 mph | 80 mph | 0:07 | 0:07 |
+| 31.75 | 32.04 | Croton-Harmon | 50 mph | 80 mph | 0:05 | 0:05 |
+| 2.63 | 2.69 | Harlem-125 St | 45 mph | 80 mph | 0:04 | 0:04 |
+
+#### Harlem (base: local 46:13, express 1:13:55)
+
+| From mi | To mi | Near | Posted | Raised to | local saves | express saves |
+| ---: | ---: | --- | ---: | ---: | ---: | ---: |
+| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 4:09 | 4:09 |
+| 11.39 | 14.55 | Mt Vernon West | 60 mph | 80 mph | 0:03 | 0:45 |
+| 18.58 | 21.95 | Hartsdale | 60 mph | 80 mph | 0:09 | 0:38 |
+| 38.97 | 45.45 | Goldens Bridge | 60 mph | 80 mph | 0:00 | 0:34 |
+| 21.95 | 22.58 | White Plains | 35 mph | 80 mph | 0:17 | 0:33 |
+| 0.89 | 3.94 | Harlem-125 St | 60 mph | 80 mph | 0:31 | 0:31 |
+| 51.51 | 52.76 | Brewster | 40 mph | 80 mph | 0:00 | 0:25 |
+| 25.14 | 25.99 | Valhalla | 40 mph | 80 mph | 0:00 | 0:22 |
+| 14.66 | 17.21 | Tuckahoe | 60 mph | 80 mph | 0:00 | 0:19 |
+| 32.22 | 35.65 | Chappaqua | 70 mph | 80 mph | 0:00 | 0:15 |
+| 4.46 | 4.92 | Harlem-125 St | 35 mph | 54 mph | 0:12 | 0:12 |
+| 23.73 | 25.14 | Valhalla | 50 mph | 69 mph | 0:00 | 0:11 |
+
+#### New Haven (base: local 52:43, express 1:30:53)
+
+| From mi | To mi | Near | Posted | Raised to | local saves | express saves |
+| ---: | ---: | --- | ---: | ---: | ---: | ---: |
+| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 4:09 | 4:09 |
+| 15.87 | 16.55 | New Rochelle | 30 mph | 68 mph | 0:30 | 0:43 |
+| 11.39 | 15.69 | Mt Vernon East  | 60 mph | 80 mph | 0:21 | 0:41 |
+| 54.48 | 55.16 | Bridgeport | 30 mph | 80 mph | 0:00 | 0:32 |
+| 33.02 | 34.30 | Stamford | 50 mph | 80 mph | 0:00 | 0:26 |
+| 29.53 | 30.00 | Cos Cob | 50 mph | 80 mph | 0:00 | 0:16 |
+| 63.59 | 70.73 | West Haven | 75 mph | 80 mph | 0:00 | 0:13 |
+| 23.00 | 23.35 | Rye | 50 mph | 80 mph | 0:13 | 0:13 |
+| 4.46 | 4.92 | Harlem-125 St | 35 mph | 50 mph | 0:12 | 0:12 |
+| 71.53 | 71.83 | New Haven | 30 mph | 80 mph | 0:00 | 0:10 |
+| 55.17 | 56.22 | Bridgeport | 45 mph | 80 mph | 0:00 | 0:10 |
+| 8.70 | 9.89 | Fordham | 60 mph | 80 mph | 0:01 | 0:10 |
+
+#### New Canaan (base: local 13:48)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 2.47 | 7.49 | Talmadge Hill | 40 mph | 80 mph | 1:53 |
+| 0.23 | 1.73 | Stamford | 50 mph | 80 mph | 0:25 |
+| 2.20 | 2.32 | Glenbrook | 20 mph | 67 mph | 0:06 |
 
 ### Limiting curves
 
 One train, the timetable's, at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 
-#### Port Washington (base: local 31.9 min, express 21.1 min)
+#### Port Washington (base: local 31:55, express 21:09)
 
 | From mi | To mi | Near | Allows | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: |
-| 17.31 | 19.49 | Port Washington | 15 mph | 22 s | 22 s |
-| 5.53 | 6.21 | Woodside | 48 mph | 16 s | 21 s |
-| 13.30 | 13.94 | Douglaston | 55 mph | 3 s | 15 s |
-| 4.29 | 5.06 | Woodside | 57 mph | 9 s | 14 s |
-| 9.41 | 9.81 | Flushing Main Street | 57 mph | 0 s | 9 s |
-| 10.13 | 10.61 | Murray Hill | 65 mph | 0 s | 6 s |
-| 8.87 | 9.23 | Mets-Willets Point | 69 mph | 0 s | 3 s |
+| 17.31 | 19.49 | Port Washington | 15 mph | 0:22 | 0:22 |
+| 5.53 | 6.21 | Woodside | 48 mph | 0:16 | 0:21 |
+| 13.30 | 13.94 | Douglaston | 55 mph | 0:03 | 0:15 |
+| 4.29 | 5.06 | Woodside | 57 mph | 0:09 | 0:14 |
+| 9.41 | 9.81 | Flushing Main Street | 57 mph | 0:00 | 0:09 |
+| 10.13 | 10.61 | Murray Hill | 65 mph | 0:00 | 0:06 |
+| 8.87 | 9.23 | Mets-Willets Point | 69 mph | 0:00 | 0:03 |
 
-#### Main Line to Penn (base: local 13.4 min, express 9.6 min)
-
-| From mi | To mi | Near | Allows | local saves | express saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 4.32 | 5.07 | Woodside | 65 mph | 4 s | 7 s |
-| 10.57 | 11.17 | Jamaica | 57 mph | 4 s | 5 s |
-
-#### Main Line to GCM (base: local 13.5 min, express 9.7 min)
+#### Main Line to Penn (base: local 13:25, express 9:33)
 
 | From mi | To mi | Near | Allows | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: |
-| 2.58 | 3.11 | Woodside | 53 mph | 19 s | 19 s |
-| 0.00 | 1.08 | Grand Central | 44 mph | 17 s | 17 s |
-| 9.86 | 10.45 | Jamaica | 47 mph | 8 s | 9 s |
-| 3.54 | 4.22 | Woodside | 65 mph | 3 s | 6 s |
-| 4.92 | 5.27 | Woodside | 70 mph | 0 s | 3 s |
+| 4.32 | 5.07 | Woodside | 65 mph | 0:04 | 0:07 |
+| 10.57 | 11.17 | Jamaica | 57 mph | 0:04 | 0:05 |
 
-#### Atlantic (base: local 10.8 min)
-
-| From mi | To mi | Near | Allows | local saves |
-| ---: | ---: | --- | ---: | ---: |
-| 0.00 | 0.31 | Atlantic Terminal | 15 mph | 13 s |
-| 1.09 | 1.45 | Nostrand Avenue | 53 mph | 3 s |
-
-#### Hempstead (base: local 20.2 min)
-
-| From mi | To mi | Near | Allows | local saves |
-| ---: | ---: | --- | ---: | ---: |
-| 9.27 | 10.23 | Garden City | 38 mph | 8 s |
-| 10.24 | 10.33 | Hempstead | 15 mph | 6 s |
-| 0.12 | 0.58 | Jamaica | 54 mph | 4 s |
-
-#### Babylon via Atlantic Branch (base: local 38.7 min)
-
-| From mi | To mi | Near | Allows | local saves |
-| ---: | ---: | --- | ---: | ---: |
-| 0.02 | 0.72 | Jamaica | 39 mph | 11 s |
-
-#### Babylon via Babylon Branch (base: local 40.6 min)
-
-| From mi | To mi | Near | Allows | local saves |
-| ---: | ---: | --- | ---: | ---: |
-| 1.09 | 1.81 | St. Albans | 58 mph | 13 s |
-| 4.31 | 5.10 | St. Albans | 60 mph | 11 s |
-| 0.08 | 0.53 | Jamaica | 55 mph | 3 s |
-
-#### Long Beach (base: local 22.8 min)
-
-| From mi | To mi | Near | Allows | local saves |
-| ---: | ---: | --- | ---: | ---: |
-| 0.02 | 0.72 | Jamaica | 39 mph | 11 s |
-| 11.31 | 11.87 | Island Park | 60 mph | 9 s |
-| 12.81 | 13.15 | Long Beach | 15 mph | 7 s |
-| 7.81 | 8.44 | Lynbrook | 47 mph | 4 s |
-
-#### Far Rockaway (base: local 22.5 min)
-
-| From mi | To mi | Near | Allows | local saves |
-| ---: | ---: | --- | ---: | ---: |
-| 0.02 | 0.72 | Jamaica | 39 mph | 11 s |
-| 7.74 | 8.22 | Hewlett | 36 mph | 11 s |
-| 6.24 | 6.73 | Valley Stream | 39 mph | 7 s |
-| 10.90 | 11.24 | Far Rockaway | 15 mph | 6 s |
-
-#### West Hempstead (base: local 16.9 min)
-
-| From mi | To mi | Near | Allows | local saves |
-| ---: | ---: | --- | ---: | ---: |
-| 7.24 | 7.74 | Westwood | 44 mph | 21 s |
-| 1.13 | 1.86 | St. Albans | 62 mph | 11 s |
-| 4.35 | 5.10 | St. Albans | 60 mph | 11 s |
-| 11.57 | 11.66 | West Hempstead | 15 mph | 6 s |
-| 0.12 | 0.58 | Jamaica | 55 mph | 4 s |
-
-#### Huntington (base: local 36.4 min)
-
-| From mi | To mi | Near | Allows | local saves |
-| ---: | ---: | --- | ---: | ---: |
-| 22.59 | 23.96 | Cold Spring Harbor | 48 mph | 18 s |
-| 21.54 | 22.56 | Cold Spring Harbor | 56 mph | 10 s |
-| 15.46 | 16.12 | Hicksville | 50 mph | 4 s |
-
-#### Ronkonkoma (base: local 53.2 min)
-
-| From mi | To mi | Near | Allows | local saves |
-| ---: | ---: | --- | ---: | ---: |
-| 15.37 | 15.95 | Hicksville | 49 mph | 7 s |
-
-#### Hudson (base: local 50.2 min, express 29.3 min)
+#### Main Line to GCM (base: local 13:33, express 9:41)
 
 | From mi | To mi | Near | Allows | local saves | express saves |
 | ---: | ---: | --- | ---: | ---: | ---: |
-| 7.93 | 10.64 | Marble Hill | 42 mph | 13 s | 70 s |
-| 4.29 | 5.56 | Harlem-125 St | 42 mph | 38 s | 38 s |
-| 0.00 | 0.09 | Grand Central | 15 mph | 14 s | 14 s |
-| 5.89 | 6.37 | Harlem-125 St | 52 mph | 14 s | 14 s |
-| 14.03 | 15.01 | Yonkers | 69 mph | 0 s | 7 s |
-| 28.30 | 29.06 | Scarborough | 70 mph | 0 s | 6 s |
-| 7.21 | 7.59 | Morris Heights | 67 mph | 4 s | 5 s |
-| 26.92 | 27.33 | Philipse Manor | 70 mph | 4 s | 4 s |
-| 13.38 | 13.85 | Ludlow | 71 mph | 0 s | 3 s |
+| 2.58 | 3.11 | Woodside | 53 mph | 0:19 | 0:19 |
+| 0.00 | 1.08 | Grand Central | 44 mph | 0:17 | 0:17 |
+| 9.86 | 10.45 | Jamaica | 47 mph | 0:08 | 0:09 |
+| 3.54 | 4.22 | Woodside | 65 mph | 0:03 | 0:06 |
+| 4.92 | 5.27 | Woodside | 70 mph | 0:00 | 0:03 |
 
-#### Harlem (base: local 40.1 min, express 61.6 min)
-
-| From mi | To mi | Near | Allows | local saves | express saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 4.29 | 5.09 | Harlem-125 St | 44 mph | 19 s | 20 s |
-| 23.62 | 25.63 | Valhalla | 57 mph | 0 s | 14 s |
-| 0.00 | 0.09 | Grand Central | 15 mph | 14 s | 14 s |
-| 14.40 | 14.82 | Fleetwood | 55 mph | 1 s | 11 s |
-| 21.79 | 22.42 | White Plains | 60 mph | 2 s | 11 s |
-| 6.14 | 6.60 | Melrose | 60 mph | 0 s | 10 s |
-| 28.76 | 29.67 | Hawthorne | 60 mph | 0 s | 10 s |
-| 9.57 | 10.01 | Botanical Garden | 60 mph | 0 s | 10 s |
-| 50.11 | 51.72 | Brewster | 61 mph | 0 s | 10 s |
-| 37.52 | 38.00 | Bedford Hills | 63 mph | 0 s | 9 s |
-
-#### New Haven (base: local 45.1 min, express 77.8 min)
-
-| From mi | To mi | Near | Allows | local saves | express saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 54.38 | 55.10 | Bridgeport | 40 mph | 0 s | 23 s |
-| 4.28 | 5.09 | Harlem-125 St | 45 mph | 18 s | 18 s |
-| 12.36 | 13.89 | Mt Vernon East  | 64 mph | 10 s | 16 s |
-| 15.54 | 16.60 | New Rochelle | 61 mph | 4 s | 15 s |
-| 0.00 | 0.09 | Grand Central | 15 mph | 14 s | 14 s |
-| 25.41 | 26.27 | Port Chester | 57 mph | 2 s | 13 s |
-| 6.14 | 6.60 | Harlem-125 St | 60 mph | 11 s | 11 s |
-| 55.23 | 56.03 | Bridgeport | 49 mph | 0 s | 10 s |
-| 9.58 | 10.01 | Fordham | 60 mph | 7 s | 10 s |
-| 23.57 | 24.60 | Rye | 66 mph | 0 s | 9 s |
-
-#### New Canaan (base: local 11.3 min)
+#### Atlantic (base: local 10:45)
 
 | From mi | To mi | Near | Allows | local saves |
 | ---: | ---: | --- | ---: | ---: |
-| 3.40 | 5.61 | Springdale | 48 mph | 21 s |
-| 5.83 | 7.49 | New Canaan | 40 mph | 18 s |
-| 0.97 | 1.54 | Stamford | 60 mph | 9 s |
-| 7.52 | 7.61 | New Canaan | 15 mph | 6 s |
+| 0.00 | 0.31 | Atlantic Terminal | 15 mph | 0:13 |
+| 1.09 | 1.45 | Nostrand Avenue | 53 mph | 0:03 |
+
+#### Hempstead (base: local 20:13)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 9.27 | 10.23 | Garden City | 38 mph | 0:08 |
+| 10.24 | 10.33 | Hempstead | 15 mph | 0:06 |
+| 0.12 | 0.58 | Jamaica | 54 mph | 0:04 |
+
+#### Babylon via Atlantic Branch (base: local 38:43)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 0.02 | 0.72 | Jamaica | 39 mph | 0:11 |
+
+#### Babylon via Babylon Branch (base: local 40:38)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 1.09 | 1.81 | St. Albans | 58 mph | 0:13 |
+| 4.31 | 5.10 | St. Albans | 60 mph | 0:11 |
+| 0.08 | 0.53 | Jamaica | 55 mph | 0:03 |
+
+#### Long Beach (base: local 22:47)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 0.02 | 0.72 | Jamaica | 39 mph | 0:11 |
+| 11.31 | 11.87 | Island Park | 60 mph | 0:09 |
+| 12.81 | 13.15 | Long Beach | 15 mph | 0:07 |
+| 7.81 | 8.44 | Lynbrook | 47 mph | 0:04 |
+
+#### Far Rockaway (base: local 22:28)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 0.02 | 0.72 | Jamaica | 39 mph | 0:11 |
+| 7.74 | 8.22 | Hewlett | 36 mph | 0:11 |
+| 6.24 | 6.73 | Valley Stream | 39 mph | 0:07 |
+| 10.90 | 11.24 | Far Rockaway | 15 mph | 0:06 |
+
+#### West Hempstead (base: local 16:53)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 7.24 | 7.74 | Westwood | 44 mph | 0:21 |
+| 1.13 | 1.86 | St. Albans | 62 mph | 0:11 |
+| 4.35 | 5.10 | St. Albans | 60 mph | 0:11 |
+| 11.57 | 11.66 | West Hempstead | 15 mph | 0:06 |
+| 0.12 | 0.58 | Jamaica | 55 mph | 0:04 |
+
+#### Huntington (base: local 36:23)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 22.59 | 23.96 | Cold Spring Harbor | 48 mph | 0:18 |
+| 21.54 | 22.56 | Cold Spring Harbor | 56 mph | 0:10 |
+| 15.46 | 16.12 | Hicksville | 50 mph | 0:04 |
+
+#### Ronkonkoma (base: local 53:11)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 15.37 | 15.95 | Hicksville | 49 mph | 0:07 |
+
+#### Hudson (base: local 50:13, express 29:20)
+
+| From mi | To mi | Near | Allows | local saves | express saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 7.93 | 10.64 | Marble Hill | 42 mph | 0:13 | 1:10 |
+| 4.29 | 5.56 | Harlem-125 St | 42 mph | 0:38 | 0:38 |
+| 0.00 | 0.09 | Grand Central | 15 mph | 0:14 | 0:14 |
+| 5.89 | 6.37 | Harlem-125 St | 52 mph | 0:14 | 0:14 |
+| 14.03 | 15.01 | Yonkers | 69 mph | 0:00 | 0:07 |
+| 28.30 | 29.06 | Scarborough | 70 mph | 0:00 | 0:06 |
+| 7.21 | 7.59 | Morris Heights | 67 mph | 0:04 | 0:05 |
+| 26.92 | 27.33 | Philipse Manor | 70 mph | 0:04 | 0:04 |
+| 13.38 | 13.85 | Ludlow | 71 mph | 0:00 | 0:03 |
+
+#### Harlem (base: local 40:06, express 1:01:36)
+
+| From mi | To mi | Near | Allows | local saves | express saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 4.29 | 5.09 | Harlem-125 St | 44 mph | 0:19 | 0:20 |
+| 23.62 | 25.63 | Valhalla | 57 mph | 0:00 | 0:14 |
+| 0.00 | 0.09 | Grand Central | 15 mph | 0:14 | 0:14 |
+| 14.40 | 14.82 | Fleetwood | 55 mph | 0:01 | 0:11 |
+| 21.79 | 22.42 | White Plains | 60 mph | 0:02 | 0:11 |
+| 6.14 | 6.60 | Melrose | 60 mph | 0:00 | 0:10 |
+| 28.76 | 29.67 | Hawthorne | 60 mph | 0:00 | 0:10 |
+| 9.57 | 10.01 | Botanical Garden | 60 mph | 0:00 | 0:10 |
+| 50.11 | 51.72 | Brewster | 61 mph | 0:00 | 0:10 |
+| 37.52 | 38.00 | Bedford Hills | 63 mph | 0:00 | 0:09 |
+
+#### New Haven (base: local 45:07, express 1:17:50)
+
+| From mi | To mi | Near | Allows | local saves | express saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 54.38 | 55.10 | Bridgeport | 40 mph | 0:00 | 0:23 |
+| 4.28 | 5.09 | Harlem-125 St | 45 mph | 0:18 | 0:18 |
+| 12.36 | 13.89 | Mt Vernon East  | 64 mph | 0:10 | 0:16 |
+| 15.54 | 16.60 | New Rochelle | 61 mph | 0:04 | 0:15 |
+| 0.00 | 0.09 | Grand Central | 15 mph | 0:14 | 0:14 |
+| 25.41 | 26.27 | Port Chester | 57 mph | 0:02 | 0:13 |
+| 6.14 | 6.60 | Harlem-125 St | 60 mph | 0:11 | 0:11 |
+| 55.23 | 56.03 | Bridgeport | 49 mph | 0:00 | 0:10 |
+| 9.58 | 10.01 | Fordham | 60 mph | 0:07 | 0:10 |
+| 23.57 | 24.60 | Rye | 66 mph | 0:00 | 0:09 |
+
+#### New Canaan (base: local 11:20)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 3.40 | 5.61 | Springdale | 48 mph | 0:21 |
+| 5.83 | 7.49 | New Canaan | 40 mph | 0:18 |
+| 0.97 | 1.54 | Stamford | 60 mph | 0:09 |
+| 7.52 | 7.61 | New Canaan | 15 mph | 0:06 |
 
 <!-- END results -->
 
