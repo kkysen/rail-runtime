@@ -93,15 +93,20 @@ On Metro-North, it covers the electric lines into Grand Central (GCT): the Harle
     which is as busy as the Hudson Line to Croton-Harmon and the New Haven Line to Pelham, whose gaps it fills.
     Past Mott Haven, OSM maps none of the Hudson Line's, and past Woodlawn, none of the New Haven Line's.
   - The M7A is an M7 on that third rail; the M8 is an M8 on 12.5 kV AC throughout, like the LIRR's 25 kV one.
-  - Busy service runs locals each way, as on the branches beyond Jamaica,
-    as often as the busiest 60 minutes of AM arrivals into GCT, counting every electric trip along the line,
-    not the clock hour the LIRR's lines count.
-    On the Harlem, that's 17 an hour, short-turning at North White Plains as in practice:
-    7 to Southeast, as many as come from beyond North White Plains, and 10 to North White Plains,
-    each on its own track.
+  - Each line runs two patterns, each way, each on its own track:
+    locals, and expresses that run local beyond where the locals turn,
+    then stop only at Harlem-125 St, as nearly all do.
+    On the Hudson, locals run all stops from Croton-Harmon, and expresses run nonstop from there.
+    Harlem locals turn at North White Plains, and New Haven locals at Stamford,
+    stopping in the Bronx at Mt Vernon East, Fordham and Harlem-125 St, as most do.
+  - Busy service runs them as often as the busiest 60 minutes of AM arrivals into GCT,
+    counting every electric trip along the line, not the clock hour the LIRR's lines count:
+    on the Hudson, 6 locals and 3 expresses an hour,
+    on the Harlem, 10 from North White Plains or nearer and 7 from beyond,
+    and on the New Haven, 9 from Stamford or nearer and 9 from beyond.
     Each line is its own power network,
     though Harlem and New Haven trains share the third rail to Woodlawn, and all three share Park Avenue's.
-  - The Hudson Line's busy service runs 9 an hour: not its trains from Poughkeepsie,
+  - The Hudson Line's busy service leaves out its trains from Poughkeepsie,
     nor the New Haven Line's from Danbury,
     whose dual-mode locomotives take the third rail only within Grand Central.
     Their replacements will take it throughout, and they wait to be modeled with the diesel trains.
@@ -113,7 +118,7 @@ On Metro-North, it covers the electric lines into Grand Central (GCT): the Harle
     The third rail's substations stop where it does.
     Its timetable trips start no farther out than New Haven's Union Station, where the trace ends,
     so not at New Haven-State St,
-    but its busy service counts those, and New Canaan's through trains, for 18 an hour.
+    but its busy service counts those, and New Canaan's through trains.
   - The New Canaan Branch is all catenary, and like the branches beyond Jamaica,
     it's timed into Stamford from trips that start on it, with busy service 2 an hour.
 - **Timetable:** AM inbound trips from the LIRR's and Metro-North's GTFS feeds.
@@ -517,20 +522,43 @@ One train alone, minutes, next to the median scheduled for trips with that stopp
 | M7A, 700 V third rail, full power |  | 56.3 | 50.7 | 49.4 | 48.9 |
 | M8, 12.5 kV |  | 56.6 | 51.0 | 49.8 | 49.4 |
 
+#### Hudson express
+
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7A, 700 V third rail |  | 37.3 | 31.5 | 29.3 | 28.3 |
+| M7A, 700 V third rail, full power |  | 37.2 | 31.4 | 29.1 | 27.9 |
+| M8, 12.5 kV |  | 37.3 | 31.5 | 29.2 | 28.0 |
+
 #### Harlem local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M7A, 700 V third rail |  | 90.9 | 84.3 | 81.3 | 80.8 |
-| M7A, 700 V third rail, full power |  | 90.0 | 83.2 | 79.4 | 78.7 |
-| M8, 12.5 kV |  | 90.3 | 83.5 | 80.0 | 79.4 |
+| M7A, 700 V third rail | 56 | 46.2 | 41.2 | 40.1 | 39.9 |
+| M7A, 700 V third rail, full power |  | 45.7 | 40.7 | 39.2 | 38.8 |
+| M8, 12.5 kV |  | 45.9 | 40.9 | 39.5 | 39.2 |
+
+#### Harlem express
+
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7A, 700 V third rail |  | 73.9 | 66.8 | 61.6 | 60.6 |
+| M7A, 700 V third rail, full power |  | 73.4 | 66.2 | 60.5 | 59.0 |
+| M8, 12.5 kV |  | 73.5 | 66.4 | 60.8 | 59.5 |
 
 #### New Haven local
 
 | Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| M8, 700 V third rail and 12.5 kV |  | 106.0 | 98.6 | 95.1 | 94.1 |
-| M8, 12.5 kV |  | 105.9 | 98.4 | 94.8 | 93.7 |
+| M8, 700 V third rail and 12.5 kV | 68 | 52.7 | 46.9 | 45.1 | 44.8 |
+| M8, 12.5 kV |  | 52.6 | 46.8 | 44.9 | 44.4 |
+
+#### New Haven express
+
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M8, 700 V third rail and 12.5 kV |  | 90.9 | 82.8 | 77.8 | 76.3 |
+| M8, 12.5 kV |  | 90.8 | 82.7 | 77.7 | 75.9 |
 
 #### New Canaan local
 
@@ -664,36 +692,44 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  |  | 80 mph | 53.4 | 53.4 | 53.4 | 52.9 | 512 |
 |  |  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 520 |
 
-#### Hudson: 6.67 min headways each way
+#### Hudson: locals at 10 min and expresses at 20 min headways each way
 
 | Service | Scheduled | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Hudson local | 71 | posted | 57.1 | 57.2 | 57.2 | 56.9 | 525 |
-|  |  | 60 mph | 51.6 | 51.7 | 51.6 | 51.4 | 524 |
-|  |  | 80 mph | 50.4 | 50.5 | 50.5 | 50.1 | 512 |
-|  |  | 100 mph | 50.1 | 50.2 | 50.2 | 49.8 | 518 |
+| Hudson local | 71 | posted | 57.1 | 57.2 | 57.1 | 56.9 | 513 |
+|  |  | 60 mph | 51.6 | 51.7 | 51.6 | 51.4 | 504 |
+|  |  | 80 mph | 50.4 | 50.5 | 50.4 | 50.1 | 490 |
+|  |  | 100 mph | 50.1 | 50.2 | 50.2 | 49.8 | 495 |
+| Hudson express |  | posted | 37.3 | 37.3 | 37.3 | 37.3 | 513 |
+|  |  | 60 mph | 31.5 | 31.5 | 31.5 | 31.5 | 504 |
+|  |  | 80 mph | 29.3 | 29.3 | 29.3 | 29.2 | 490 |
+|  |  | 100 mph | 28.2 | 28.2 | 28.2 | 28.1 | 495 |
 
-#### Harlem: locals to Southeast at 8.57 min and to North White Plains at 6 min headways each way
+#### Harlem: locals at 6 min and expresses at 8.57 min headways each way
 
 | Service | Scheduled | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Southeast local |  | posted | 91.3 | 91.6 | 91.5 | 91.0 | 420 |
-|  |  | 60 mph | 84.7 | 84.9 | 84.8 | 84.3 | 443 |
-|  |  | 80 mph | 81.5 | 82.0 | 81.8 | 80.8 | 422 |
-|  |  | 100 mph | 81.0 | 81.5 | 81.3 | 80.2 | 419 |
-| North White Plains local | 56 | posted | 46.5 | 46.8 | 46.7 | 46.4 | 420 |
-|  |  | 60 mph | 41.6 | 41.8 | 41.6 | 41.4 | 443 |
-|  |  | 80 mph | 40.2 | 40.7 | 40.5 | 39.9 | 422 |
-|  |  | 100 mph | 40.0 | 40.5 | 40.4 | 39.6 | 419 |
+| Harlem local | 56 | posted | 46.6 | 46.7 | 46.7 | 46.4 | 438 |
+|  |  | 60 mph | 41.6 | 41.7 | 41.6 | 41.4 | 461 |
+|  |  | 80 mph | 40.3 | 40.5 | 40.4 | 39.9 | 426 |
+|  |  | 100 mph | 40.0 | 40.3 | 40.3 | 39.6 | 429 |
+| Harlem express |  | posted | 73.9 | 74.0 | 74.0 | 73.8 | 438 |
+|  |  | 60 mph | 66.8 | 66.9 | 66.8 | 66.7 | 461 |
+|  |  | 80 mph | 61.5 | 61.8 | 61.7 | 61.2 | 426 |
+|  |  | 100 mph | 60.4 | 60.7 | 60.6 | 59.9 | 429 |
 
-#### New Haven: 3.33 min headways each way
+#### New Haven: locals at 6.67 min and expresses at 6.67 min headways each way
 
 | Service | Scheduled | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| New Haven local |  | posted | 106.7 | 106.7 | 106.7 | 106.6 | 500 |
-|  |  | 60 mph | 99.3 | 99.3 | 99.3 | 99.2 | 500 |
-|  |  | 80 mph | 95.8 | 95.8 | 95.8 | 95.6 | 506 |
-|  |  | 100 mph | 94.7 | 94.8 | 94.8 | 94.4 | 497 |
+| New Haven local | 68 | posted | 53.1 | 53.1 | 53.1 | 53.0 | 481 |
+|  |  | 60 mph | 47.3 | 47.3 | 47.3 | 47.2 | 479 |
+|  |  | 80 mph | 45.4 | 45.4 | 45.4 | 45.2 | 471 |
+|  |  | 100 mph | 45.0 | 45.1 | 45.1 | 44.8 | 468 |
+| New Haven express |  | posted | 91.2 | 91.2 | 91.2 | 91.2 | 481 |
+|  |  | 60 mph | 83.2 | 83.1 | 83.1 | 83.1 | 479 |
+|  |  | 80 mph | 78.2 | 78.2 | 78.2 | 78.1 | 471 |
+|  |  | 100 mph | 76.5 | 76.5 | 76.5 | 76.3 | 468 |
 
 #### New Canaan: 30 min headways each way
 
@@ -866,56 +902,56 @@ One train, the timetable's, raising one posted zone at a time to what the curves
 | 0.32 | 0.71 | Jamaica | 35 mph | 80 mph | 18 s |
 | 19.31 | 19.96 | Bethpage | 60 mph | 80 mph | 11 s |
 
-#### Hudson (base: local 56.9 min)
+#### Hudson (base: local 56.9 min, express 37.3 min)
 
-| From mi | To mi | Near | Posted | Raised to | local saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 249 s |
-| 9.82 | 10.72 | Spuyten Duyvil | 30 mph | 80 mph | 36 s |
-| 5.40 | 6.33 | Harlem-125 St | 45 mph | 80 mph | 11 s |
-| 4.46 | 4.93 | Harlem-125 St | 35 mph | 52 mph | 11 s |
-| 23.69 | 31.75 | Scarborough | 70 mph | 80 mph | 10 s |
-| 6.33 | 9.16 | Morris Heights | 60 mph | 80 mph | 8 s |
-| 2.69 | 3.95 | Harlem-125 St | 60 mph | 80 mph | 7 s |
-| 31.75 | 32.04 | Croton-Harmon | 50 mph | 80 mph | 5 s |
-| 2.63 | 2.69 | Harlem-125 St | 45 mph | 80 mph | 4 s |
-| 0.89 | 2.13 | Grand Central | 60 mph | 80 mph | 4 s |
-| 2.13 | 2.18 | Harlem-125 St | 45 mph | 80 mph | 4 s |
-| 4.93 | 5.40 | Harlem-125 St | 40 mph | 56 mph | 3 s |
+| From mi | To mi | Near | Posted | Raised to | local saves | express saves |
+| ---: | ---: | --- | ---: | ---: | ---: | ---: |
+| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 249 s | 249 s |
+| 9.82 | 10.72 | Spuyten Duyvil | 30 mph | 80 mph | 36 s | 43 s |
+| 23.69 | 31.75 | Scarborough | 70 mph | 80 mph | 10 s | 33 s |
+| 14.43 | 17.81 | Glenwood | 70 mph | 80 mph | 1 s | 16 s |
+| 6.33 | 9.16 | Morris Heights | 60 mph | 80 mph | 8 s | 15 s |
+| 10.72 | 14.13 | Riverdale | 70 mph | 80 mph | 1 s | 12 s |
+| 5.40 | 6.33 | Harlem-125 St | 45 mph | 80 mph | 11 s | 11 s |
+| 4.46 | 4.93 | Harlem-125 St | 35 mph | 52 mph | 11 s | 11 s |
+| 14.14 | 14.43 | Yonkers | 50 mph | 70 mph | 1 s | 11 s |
+| 2.69 | 3.95 | Harlem-125 St | 60 mph | 80 mph | 7 s | 7 s |
+| 31.75 | 32.04 | Croton-Harmon | 50 mph | 80 mph | 5 s | 5 s |
+| 2.63 | 2.69 | Harlem-125 St | 45 mph | 80 mph | 4 s | 4 s |
 
-#### Harlem (base: local 90.9 min)
+#### Harlem (base: local 46.2 min, express 73.9 min)
 
-| From mi | To mi | Near | Posted | Raised to | local saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 249 s |
-| 38.97 | 45.45 | Goldens Bridge | 60 mph | 80 mph | 34 s |
-| 0.89 | 3.94 | Harlem-125 St | 60 mph | 80 mph | 31 s |
-| 51.51 | 52.76 | Brewster | 40 mph | 80 mph | 25 s |
-| 25.14 | 25.99 | Valhalla | 40 mph | 80 mph | 22 s |
-| 21.95 | 22.58 | White Plains | 35 mph | 80 mph | 17 s |
-| 32.22 | 35.65 | Chappaqua | 70 mph | 80 mph | 15 s |
-| 4.46 | 4.92 | Harlem-125 St | 35 mph | 54 mph | 12 s |
-| 23.73 | 25.14 | Valhalla | 50 mph | 69 mph | 11 s |
-| 48.16 | 50.68 | Croton Falls | 60 mph | 80 mph | 11 s |
-| 50.68 | 51.51 | Brewster | 50 mph | 65 mph | 10 s |
-| 36.68 | 38.79 | Bedford Hills | 60 mph | 80 mph | 10 s |
+| From mi | To mi | Near | Posted | Raised to | local saves | express saves |
+| ---: | ---: | --- | ---: | ---: | ---: | ---: |
+| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 249 s | 249 s |
+| 11.39 | 14.55 | Mt Vernon West | 60 mph | 80 mph | 3 s | 45 s |
+| 18.58 | 21.95 | Hartsdale | 60 mph | 80 mph | 9 s | 38 s |
+| 38.97 | 45.45 | Goldens Bridge | 60 mph | 80 mph | 0 s | 34 s |
+| 21.95 | 22.58 | White Plains | 35 mph | 80 mph | 17 s | 33 s |
+| 0.89 | 3.94 | Harlem-125 St | 60 mph | 80 mph | 31 s | 31 s |
+| 51.51 | 52.76 | Brewster | 40 mph | 80 mph | 0 s | 25 s |
+| 25.14 | 25.99 | Valhalla | 40 mph | 80 mph | 0 s | 22 s |
+| 14.66 | 17.21 | Tuckahoe | 60 mph | 80 mph | 0 s | 19 s |
+| 32.22 | 35.65 | Chappaqua | 70 mph | 80 mph | 0 s | 15 s |
+| 4.46 | 4.92 | Harlem-125 St | 35 mph | 54 mph | 12 s | 12 s |
+| 23.73 | 25.14 | Valhalla | 50 mph | 69 mph | 0 s | 11 s |
 
-#### New Haven (base: local 106.0 min)
+#### New Haven (base: local 52.7 min, express 90.9 min)
 
-| From mi | To mi | Near | Posted | Raised to | local saves |
-| ---: | ---: | --- | ---: | ---: | ---: |
-| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 249 s |
-| 54.48 | 55.16 | Bridgeport | 30 mph | 80 mph | 32 s |
-| 15.87 | 16.55 | New Rochelle | 30 mph | 68 mph | 30 s |
-| 33.02 | 34.30 | Stamford | 50 mph | 80 mph | 26 s |
-| 11.39 | 15.69 | Mt Vernon East  | 60 mph | 80 mph | 21 s |
-| 63.59 | 70.73 | West Haven | 75 mph | 80 mph | 13 s |
-| 23.00 | 23.35 | Rye | 50 mph | 80 mph | 13 s |
-| 4.46 | 4.92 | Harlem-125 St | 35 mph | 50 mph | 12 s |
-| 71.53 | 71.83 | New Haven | 30 mph | 80 mph | 10 s |
-| 55.17 | 56.22 | Bridgeport | 45 mph | 80 mph | 10 s |
-| 16.69 | 17.11 | New Rochelle | 50 mph | 80 mph | 9 s |
-| 4.93 | 5.27 | Harlem-125 St | 40 mph | 80 mph | 9 s |
+| From mi | To mi | Near | Posted | Raised to | local saves | express saves |
+| ---: | ---: | --- | ---: | ---: | ---: | ---: |
+| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 249 s | 249 s |
+| 15.87 | 16.55 | New Rochelle | 30 mph | 68 mph | 30 s | 43 s |
+| 11.39 | 15.69 | Mt Vernon East  | 60 mph | 80 mph | 21 s | 41 s |
+| 54.48 | 55.16 | Bridgeport | 30 mph | 80 mph | 0 s | 32 s |
+| 33.02 | 34.30 | Stamford | 50 mph | 80 mph | 0 s | 26 s |
+| 29.53 | 30.00 | Cos Cob | 50 mph | 80 mph | 0 s | 16 s |
+| 63.59 | 70.73 | West Haven | 75 mph | 80 mph | 0 s | 13 s |
+| 23.00 | 23.35 | Rye | 50 mph | 80 mph | 13 s | 13 s |
+| 4.46 | 4.92 | Harlem-125 St | 35 mph | 50 mph | 12 s | 12 s |
+| 71.53 | 71.83 | New Haven | 30 mph | 80 mph | 0 s | 10 s |
+| 55.17 | 56.22 | Bridgeport | 45 mph | 80 mph | 0 s | 10 s |
+| 8.70 | 9.89 | Fordham | 60 mph | 80 mph | 1 s | 10 s |
 
 #### New Canaan (base: local 13.8 min)
 
@@ -1029,46 +1065,49 @@ One train, the timetable's, at an 80 mph cap, easing one curve-limited zone at a
 | ---: | ---: | --- | ---: | ---: |
 | 15.37 | 15.95 | Hicksville | 49 mph | 7 s |
 
-#### Hudson (base: local 50.2 min)
+#### Hudson (base: local 50.2 min, express 29.3 min)
 
-| From mi | To mi | Near | Allows | local saves |
-| ---: | ---: | --- | ---: | ---: |
-| 4.29 | 5.56 | Harlem-125 St | 42 mph | 38 s |
-| 0.00 | 0.09 | Grand Central | 15 mph | 14 s |
-| 5.89 | 6.37 | Harlem-125 St | 52 mph | 14 s |
-| 7.93 | 10.64 | Marble Hill | 42 mph | 13 s |
-| 7.21 | 7.59 | Morris Heights | 67 mph | 4 s |
-| 26.92 | 27.33 | Philipse Manor | 70 mph | 4 s |
+| From mi | To mi | Near | Allows | local saves | express saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 7.93 | 10.64 | Marble Hill | 42 mph | 13 s | 70 s |
+| 4.29 | 5.56 | Harlem-125 St | 42 mph | 38 s | 38 s |
+| 0.00 | 0.09 | Grand Central | 15 mph | 14 s | 14 s |
+| 5.89 | 6.37 | Harlem-125 St | 52 mph | 14 s | 14 s |
+| 14.03 | 15.01 | Yonkers | 69 mph | 0 s | 7 s |
+| 28.30 | 29.06 | Scarborough | 70 mph | 0 s | 6 s |
+| 7.21 | 7.59 | Morris Heights | 67 mph | 4 s | 5 s |
+| 26.92 | 27.33 | Philipse Manor | 70 mph | 4 s | 4 s |
+| 13.38 | 13.85 | Ludlow | 71 mph | 0 s | 3 s |
 
-#### Harlem (base: local 81.3 min)
+#### Harlem (base: local 40.1 min, express 61.6 min)
 
-| From mi | To mi | Near | Allows | local saves |
-| ---: | ---: | --- | ---: | ---: |
-| 4.29 | 5.09 | Harlem-125 St | 44 mph | 19 s |
-| 0.00 | 0.09 | Grand Central | 15 mph | 14 s |
-| 28.76 | 29.67 | Hawthorne | 60 mph | 10 s |
-| 50.11 | 51.72 | Brewster | 61 mph | 10 s |
-| 37.52 | 38.00 | Bedford Hills | 63 mph | 9 s |
-| 48.87 | 49.44 | Croton Falls | 61 mph | 9 s |
-| 23.62 | 25.63 | Valhalla | 57 mph | 7 s |
-| 39.58 | 40.54 | Bedford Hills | 63 mph | 6 s |
-| 43.38 | 44.60 | Goldens Bridge | 64 mph | 5 s |
-| 46.07 | 46.97 | Purdy's | 60 mph | 4 s |
+| From mi | To mi | Near | Allows | local saves | express saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 4.29 | 5.09 | Harlem-125 St | 44 mph | 19 s | 20 s |
+| 23.62 | 25.63 | Valhalla | 57 mph | 0 s | 14 s |
+| 0.00 | 0.09 | Grand Central | 15 mph | 14 s | 14 s |
+| 14.40 | 14.82 | Fleetwood | 55 mph | 1 s | 11 s |
+| 21.79 | 22.42 | White Plains | 60 mph | 2 s | 11 s |
+| 6.14 | 6.60 | Melrose | 60 mph | 0 s | 10 s |
+| 28.76 | 29.67 | Hawthorne | 60 mph | 0 s | 10 s |
+| 9.57 | 10.01 | Botanical Garden | 60 mph | 0 s | 10 s |
+| 50.11 | 51.72 | Brewster | 61 mph | 0 s | 10 s |
+| 37.52 | 38.00 | Bedford Hills | 63 mph | 0 s | 9 s |
 
-#### New Haven (base: local 95.1 min)
+#### New Haven (base: local 45.1 min, express 77.8 min)
 
-| From mi | To mi | Near | Allows | local saves |
-| ---: | ---: | --- | ---: | ---: |
-| 54.38 | 55.10 | Bridgeport | 40 mph | 23 s |
-| 4.28 | 5.09 | Harlem-125 St | 45 mph | 18 s |
-| 0.00 | 0.09 | Grand Central | 15 mph | 14 s |
-| 6.14 | 6.60 | Harlem-125 St | 60 mph | 11 s |
-| 55.23 | 56.03 | Bridgeport | 49 mph | 10 s |
-| 12.36 | 13.89 | Mt Vernon East  | 64 mph | 10 s |
-| 9.58 | 10.01 | Fordham | 60 mph | 7 s |
-| 34.50 | 35.49 | Noroton Heights | 70 mph | 6 s |
-| 57.42 | 58.16 | Stratford | 70 mph | 4 s |
-| 15.54 | 16.60 | New Rochelle | 61 mph | 4 s |
+| From mi | To mi | Near | Allows | local saves | express saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 54.38 | 55.10 | Bridgeport | 40 mph | 0 s | 23 s |
+| 4.28 | 5.09 | Harlem-125 St | 45 mph | 18 s | 18 s |
+| 12.36 | 13.89 | Mt Vernon East  | 64 mph | 10 s | 16 s |
+| 15.54 | 16.60 | New Rochelle | 61 mph | 4 s | 15 s |
+| 0.00 | 0.09 | Grand Central | 15 mph | 14 s | 14 s |
+| 25.41 | 26.27 | Port Chester | 57 mph | 2 s | 13 s |
+| 6.14 | 6.60 | Harlem-125 St | 60 mph | 11 s | 11 s |
+| 55.23 | 56.03 | Bridgeport | 49 mph | 0 s | 10 s |
+| 9.58 | 10.01 | Fordham | 60 mph | 7 s | 10 s |
+| 23.57 | 24.60 | Rye | 66 mph | 0 s | 9 s |
 
 #### New Canaan (base: local 11.3 min)
 

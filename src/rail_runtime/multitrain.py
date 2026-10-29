@@ -324,6 +324,12 @@ NH_STOPS = [
     "West Haven",
     "New Haven",
 ]
+# Metro-North's patterns: locals turning partway out, and expresses running local beyond them,
+# then stopping only at Harlem-125 St.
+# Harlem locals turn at North White Plains, and New Haven locals at Stamford,
+# stopping at Mt Vernon East, Fordham and Harlem-125 St in the Bronx, as most do.
+HAR_LOCAL = HAR_STOPS[: HAR_STOPS.index("North White Plains") + 1]
+NH_LOCAL = NH_STOPS[: NH_STOPS.index("Stamford") + 1]
 NC_STOPS = ["Stamford", "Glenbrook", "Springdale", "Talmadge Hill", "New Canaan"]
 
 
@@ -466,7 +472,7 @@ SPECS = {
         "hud_geometry.json",
         "substations_mnr.json",
         HUD_STOPS,
-        {"local": HUD_STOPS[::-1]},
+        {"local": HUD_STOPS[::-1], "express": ["Croton-Harmon", "Harlem-125 St", "Grand Central"]},
         (True, False),
         "1",
         railroad="Metro-North",
@@ -476,7 +482,10 @@ SPECS = {
         "har_geometry.json",
         "substations_mnr.json",
         HAR_STOPS,
-        {"local": HAR_STOPS[::-1]},
+        {
+            "local": HAR_LOCAL[::-1],
+            "express": [*HAR_STOPS[: len(HAR_LOCAL) - 1 : -1], "Harlem-125 St", "Grand Central"],
+        },
         (True, False),
         "2",
         railroad="Metro-North",
@@ -486,7 +495,7 @@ SPECS = {
         "nh_geometry.json",
         "substations_mnr.json",
         NH_STOPS,
-        {"local": NH_STOPS[::-1]},
+        {"local": NH_LOCAL[::-1], "express": [*NH_STOPS[: len(NH_LOCAL) - 1 : -1], "Harlem-125 St", "Grand Central"]},
         (True, False),
         "3",
         railroad="Metro-North",
@@ -700,26 +709,29 @@ def lines(data: str) -> dict[str, Setup]:
             (3600, 7200),
             busy_trains(spec),
         )
-    spec = SPECS["Harlem"]
-    services: list[Service] = []
-    for k, (end, headway) in enumerate(HARLEM_HEADWAYS.items()):
-        stops = spec.stops[: spec.stops.index(end) + 1]
-        services += [
-            Service(f"{end} local", stops, True, 2 * k, headway, 0),
-            Service(f"{end} local", stops, False, 2 * k + 1, headway, headway / 2),
-        ]
-    out["Harlem"] = Setup(
-        "Harlem: locals to Southeast at 8.57 min and to North White Plains at 6 min headways each way",
-        spec.line(data),
-        services,
-        3 * 3600,
-        (3600, 7200),
-        busy_trains(spec),
-    )
-    # In `SPECS` order, after the Hudson.
-    keys = list(out)
-    keys.insert(keys.index("Hudson") + 1, keys.pop())
-    return {k: out[k] for k in keys}
+    # Metro-North's locals and expresses, each on their own track, in `SPECS` order before New Canaan.
+    canaan = out.pop("New Canaan")
+    for name, headways in MNR_HEADWAYS.items():
+        spec = SPECS[name]
+        services: list[Service] = []
+        for k, (pname, headway) in enumerate(headways.items()):
+            stops = spec.patterns[pname][::-1]
+            services += [
+                Service(f"{name} {pname}", stops, True, 2 * k, headway, 0),
+                Service(f"{name} {pname}", stops, False, 2 * k + 1, headway, headway / 2),
+            ]
+        out[name] = Setup(
+            f"{name}: "
+            + " and ".join(f"{p}{'es' if p.endswith('s') else 's'} at {h / 60:.3g} min" for p, h in headways.items())
+            + " headways each way",
+            spec.line(data),
+            services,
+            3 * 3600,
+            (3600, 7200),
+            busy_trains(spec),
+        )
+    out["New Canaan"] = canaan
+    return out
 
 
 BRANCH_KEYS = {
@@ -756,17 +768,20 @@ BRANCH_HEADWAYS = {
     # So not the diesel trains, like the Hudson's from Poughkeepsie or the New Haven's from Danbury,
     # whose dual-mode locomotives take the third rail only within Grand Central,
     # until their replacements, which will take it throughout, and which wait to be modeled with the diesel trains.
-    # The Harlem's are split between two services, in `lines()`.
     # Each line runs on its own network, though Harlem and New Haven trains share the third rail to Woodlawn,
     # and all three lines share Park Avenue's into Grand Central.
-    "Hudson": 3600 / 9,  # 7:33 to 8:33
-    "New Haven": 3600 / 18,
     "New Canaan": 3600 / 2,
 }
-# The Harlem's busiest 60 minutes, 7:49 to 8:49, bring 17 trains into Grand Central,
-# 7 from beyond North White Plains and 10 from there or nearer: as in practice,
-# locals short-turn at North White Plains, each on their own track.
-HARLEM_HEADWAYS = {"Southeast": 3600 / 7, "North White Plains": 3600 / 10}
+# Metro-North's locals and expresses, split from the electric trips in each line's busiest 60 minutes,
+# counted as for `BRANCH_HEADWAYS`.
+MNR_HEADWAYS = {
+    # 7:33 to 8:33: 6 locals, and 3 expresses from Croton-Harmon.
+    "Hudson": {"local": 3600 / 6, "express": 3600 / 3},
+    # 7:49 to 8:49: 10 from North White Plains or nearer, and 7 from beyond it.
+    "Harlem": {"local": 3600 / 10, "express": 3600 / 7},
+    # 7:47 to 8:47: 9 from Stamford or nearer, and 9 from beyond it, New Canaan's through trains among them.
+    "New Haven": {"local": 3600 / 9, "express": 3600 / 9},
+}
 
 
 def show(data: str, which: str) -> None:
