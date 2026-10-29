@@ -76,3 +76,10 @@ def test_one_train_simulation_matches_model() -> None:
     services = [mt.Service("x", mt.PW_EXPRESS, True, 0, 300, 0)]
     done, _ = mt.simulate(pw(), M8, "80", services, 3600, single=True)
     assert mt.runtime(done[0]) == pytest.approx(pw().trip(M8, "80", mt.PW_EXPRESS[::-1]), abs=0.2)
+
+
+@pytest.mark.parametrize(("kind", "local"), [("posted", 90.9), ("60", 84.3), ("80", 81.3), ("100", 80.8)])
+def test_harlem(kind: str, local: float) -> None:
+    """An M7A on Metro-North's 700 V third rail, Southeast to Grand Central."""
+    spec = mt.SPECS["Harlem"]
+    assert spec.line(DATA).trip(spec.trains()[0], kind, mt.HAR_STOPS[::-1]) == pytest.approx(local, abs=0.05)

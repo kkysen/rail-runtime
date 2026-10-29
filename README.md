@@ -9,6 +9,7 @@ and the Main Line from Jamaica,
 into Grand Central Madison (GCM), the Main Line from Jamaica through the 63rd Street Tunnel,
 and into Atlantic Terminal, the Atlantic Branch from Jamaica.
 Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon, Long Beach, Far Rockaway, West Hempstead, Huntington and Ronkonkoma.
+On Metro-North, it covers the electric lines into Grand Central (GCT): the Harlem Line to Southeast.
 
 ## Method
 
@@ -81,7 +82,22 @@ Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, 
   Each runs all of the busiest hour's trains, not its share,
   so the stretch they share east of Valley Stream carries the full load either way.
   Shared networks are still to come.
-- **Timetable:** AM inbound trips from the LIRR GTFS feed.
+- **Metro-North:** traced, timed and simulated the same way, from Metro-North's GTFS feed and OSM route relations.
+  - Its under-running third rail is 700 V, as OSM tags it,
+    with the LIRR's rail and substation resistances, since no figures for Metro-North's turned up either.
+    Trains still shed load below 500 V and regen above 900 V,
+    and a train's current limit is its rated draw at 700 V, so with no voltage drop it still gets rated power.
+  - Substations are Metro-North's from OSM, which maps all of the Harlem Line's, from 110th St to Putnam Junction.
+    Their gaps thin out past North White Plains, where most Harlem trains turn,
+    so gaps elsewhere are filled at their mean spacing from Grand Central through North White Plains, 1.29 mi,
+    which is as busy as the Hudson Line to Croton-Harmon and the New Haven Line to Pelham, whose gaps it fills.
+    Past Mott Haven, OSM maps none of the Hudson Line's, and past Woodlawn, none of the New Haven Line's.
+  - The M7A is an M7 on that third rail; the M8 is an M8 on 12.5 kV AC throughout, like the LIRR's 25 kV one.
+  - Busy service runs one local each way, as on the branches beyond Jamaica,
+    as often as the busiest hour of AM arrivals into GCT from trips that start on the line: 16 an hour on the Harlem.
+    Each line is its own power network,
+    though Harlem and New Haven trains share the third rail to Woodlawn, and all three share Park Avenue's.
+- **Timetable:** AM inbound trips from the LIRR's and Metro-North's GTFS feeds.
   A branch beyond Jamaica is timed into Jamaica, from trips that start on it.
   Babylon's trips are timed on the route their GTFS shape follows.
 
@@ -136,7 +152,7 @@ cargo test --manifest-path sim/Cargo.toml
 
 ### Timetable vs. model
 
-AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled minutes vs. one M7 running flat out on 750 V third rail with 30 s dwells.
+AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, or on Metro-North at GCT, 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled minutes vs. one train running flat out with 30 s dwells: an M7 on the LIRR's 750 V third rail or an M7A on Metro-North's 700 V.
 
 #### Port Washington - Penn
 
@@ -263,6 +279,36 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6
 | Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Hicksville, Merillon Avenue, New Hyde Park | 1 | 61 | 42.9 | 41.6 | 41.3 | 38.9 |
 | Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Hicksville, Mineola | 1 | 61 | 40.2 | 38.9 | 38.6 | 35.8 |
 
+#### Southeast - GCT
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| North White Plains, all stops | 6 | 56 | 46.2 | 41.2 | 40.1 | 39.9 |
+| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, Katonah, Bedford Hills, Mt Kisco, Chappaqua, Pleasantville, Hawthorne, Valhalla, North White Plains, White Plains, Harlem-125 St | 5 | 89 | 74.5 | 67.9 | 62.7 | 61.7 |
+| Crestwood, stops at Tuckahoe, Bronxville, Fleetwood, Mt Vernon West, Harlem-125 St | 4 | 38 | 26.9 | 22.3 | 20.8 | 20.3 |
+| North White Plains, stops at White Plains, Hartsdale, Scarsdale, Crestwood, Harlem-125 St | 3 | 46 | 34.2 | 29.2 | 26.8 | 26.3 |
+| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, White Plains, Harlem-125 St | 3 | 90 | 66.6 | 59.3 | 53.2 | 51.8 |
+| Mt Kisco, stops at Chappaqua, Pleasantville, Hawthorne, Valhalla, North White Plains, White Plains, Harlem-125 St | 2 | 64 | 49.6 | 43.8 | 39.7 | 38.7 |
+| North White Plains, stops at White Plains, Hartsdale, Scarsdale, Harlem-125 St | 2 | 42 | 33.1 | 28.1 | 25.5 | 24.8 |
+| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, Katonah, Bedford Hills, Mt Kisco, Chappaqua, White Plains, Harlem-125 St | 2 | 88 | 70.8 | 63.6 | 58.3 | 57.3 |
+| Crestwood, stops at Tuckahoe, Bronxville, Fleetwood | 1 | 40 | 25.0 | 20.2 | 18.4 | 17.7 |
+| Crestwood, stops at Tuckahoe, Bronxville, Fleetwood, Mt Vernon West | 1 | 35 | 26.1 | 21.3 | 19.7 | 19.2 |
+| Crestwood, all stops | 1 | 43 | 34.7 | 30.1 | 29.3 | 29.0 |
+| Crestwood, skips Botanical Garden, Fordham, Tremont, Melrose | 1 | 37 | 30.2 | 25.7 | 24.5 | 24.2 |
+| Hartsdale, stops at Scarsdale | 1 | 38 | 26.6 | 21.8 | 19.2 | 18.5 |
+| Hartsdale, stops at Scarsdale, Harlem-125 St | 1 | 39 | 27.4 | 22.8 | 20.3 | 19.6 |
+| Mt Kisco, stops at Chappaqua, Pleasantville, Hawthorne, Valhalla, North White Plains, White Plains, Hartsdale, Scarsdale, Harlem-125 St | 1 | 68 | 51.8 | 46.0 | 42.4 | 41.5 |
+| Mt Kisco, stops at Chappaqua, Pleasantville, Hawthorne, Valhalla, North White Plains, White Plains, Mt Vernon West, Fordham, Harlem-125 St | 1 | 67 | 51.7 | 45.9 | 42.3 | 41.4 |
+| Mt Vernon West, all stops | 1 | 37 | 26.7 | 22.1 | 21.4 | 21.1 |
+| North White Plains, stops at White Plains | 1 | 45 | 30.1 | 24.9 | 21.7 | 20.8 |
+| North White Plains, stops at White Plains, Harlem-125 St | 1 | 45 | 30.9 | 25.9 | 22.8 | 22.0 |
+| North White Plains, stops at White Plains, Hartsdale, Scarsdale, Crestwood | 1 | 43 | 33.3 | 28.2 | 25.7 | 25.1 |
+| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, Katonah, Bedford Hills, Mt Kisco, Chappaqua, North White Plains, Harlem-125 St | 1 | 90 | 70.9 | 63.6 | 58.3 | 57.3 |
+| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, Katonah, Bedford Hills, Mt Kisco, Chappaqua, North White Plains, White Plains, Harlem-125 St | 1 | 85 | 71.7 | 64.7 | 59.5 | 58.4 |
+| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, Katonah, Bedford Hills, Mt Kisco, Chappaqua, Pleasantville, Hawthorne, Valhalla, White Plains, Harlem-125 St | 1 | 87 | 73.6 | 66.8 | 61.6 | 60.6 |
+| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, North White Plains, White Plains, Harlem-125 St | 1 | 86 | 67.5 | 60.3 | 54.3 | 53.0 |
+| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, North White Plains, White Plains, Hartsdale, Scarsdale, Harlem-125 St | 1 | 89 | 69.7 | 62.5 | 57.0 | 55.8 |
+
 ### Trains
 
 One train alone, minutes.
@@ -386,6 +432,14 @@ One train alone, minutes.
 | M7, 750 V third rail | 54.7 | 53.5 | 53.2 | 52.5 |
 | M7, 750 V third rail, full power | 53.6 | 52.4 | 52.0 | 50.8 |
 | M8, 25 kV | 54.1 | 52.8 | 52.5 | 51.5 |
+
+#### Harlem local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M7A, 700 V third rail | 90.9 | 84.3 | 81.3 | 80.8 |
+| M7A, 700 V third rail, full power | 90.0 | 83.2 | 79.4 | 78.7 |
+| M8, 12.5 kV | 90.3 | 83.5 | 80.0 | 79.4 |
 
 ### Busy service
 
@@ -511,6 +565,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 60 mph | 53.7 | 53.8 | 53.7 | 53.2 | 497 |
 |  | 80 mph | 53.4 | 53.4 | 53.4 | 52.9 | 512 |
 |  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 520 |
+
+#### Harlem: 3.75 min headways each way
+
+| Service | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Harlem local | posted | 91.3 | 91.7 | 91.6 | 91.0 | 456 |
+|  | 60 mph | 84.7 | 85.0 | 84.9 | 84.3 | 458 |
+|  | 80 mph | 81.5 | 82.3 | 82.0 | 80.8 | 449 |
+|  | 100 mph | 81.0 | 81.9 | 81.6 | 80.2 | 446 |
 
 ### Posted slow zones
 
@@ -674,6 +737,23 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 0.32 | 0.71 | Jamaica | 35 mph | 80 mph | 18 s |
 | 19.31 | 19.96 | Bethpage | 60 mph | 80 mph | 11 s |
 
+#### Harlem (base: local 90.9 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 249 s |
+| 38.97 | 45.45 | Goldens Bridge | 60 mph | 80 mph | 34 s |
+| 0.89 | 3.94 | Harlem-125 St | 60 mph | 80 mph | 31 s |
+| 51.51 | 52.76 | Brewster | 40 mph | 80 mph | 25 s |
+| 25.14 | 25.99 | Valhalla | 40 mph | 80 mph | 22 s |
+| 21.95 | 22.58 | White Plains | 35 mph | 80 mph | 17 s |
+| 32.22 | 35.65 | Chappaqua | 70 mph | 80 mph | 15 s |
+| 4.46 | 4.92 | Harlem-125 St | 35 mph | 54 mph | 12 s |
+| 23.73 | 25.14 | Valhalla | 50 mph | 69 mph | 11 s |
+| 48.16 | 50.68 | Croton Falls | 60 mph | 80 mph | 11 s |
+| 50.68 | 51.51 | Brewster | 50 mph | 65 mph | 10 s |
+| 36.68 | 38.79 | Bedford Hills | 60 mph | 80 mph | 10 s |
+
 ### Limiting curves
 
 One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
@@ -777,6 +857,21 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | From mi | To mi | Near | Allows | local saves |
 | ---: | ---: | --- | ---: | ---: |
 | 15.37 | 15.95 | Hicksville | 49 mph | 7 s |
+
+#### Harlem (base: local 81.3 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 4.29 | 5.09 | Harlem-125 St | 44 mph | 19 s |
+| 0.00 | 0.09 | Grand Central | 15 mph | 14 s |
+| 28.76 | 29.67 | Hawthorne | 60 mph | 10 s |
+| 50.11 | 51.72 | Brewster | 61 mph | 10 s |
+| 37.52 | 38.00 | Bedford Hills | 63 mph | 9 s |
+| 48.87 | 49.44 | Croton Falls | 61 mph | 9 s |
+| 23.62 | 25.63 | Valhalla | 57 mph | 7 s |
+| 39.58 | 40.54 | Bedford Hills | 63 mph | 6 s |
+| 43.38 | 44.60 | Goldens Bridge | 64 mph | 5 s |
+| 46.07 | 46.97 | Purdy's | 60 mph | 4 s |
 
 <!-- END results -->
 

@@ -38,7 +38,8 @@ def short(name: str, railroad: str = "LIRR") -> str:
     if name == "Grand Central":  # the LIRR's Grand Central Madison, or Metro-North's Grand Central Terminal
         return "GCM" if railroad == "LIRR" else "GCT"
     return (
-        name.replace(" Station", "")
+        name.strip()  # Metro-North's GTFS has "Mt Vernon East "
+        .replace(" Station", "")
         .replace(" Terminal", "")
         .replace("Mets-Willets Point", "Mets")
         .replace("Flushing Main Street", "Flushing")
@@ -166,10 +167,11 @@ def main(data: str, date: str = "20261027", every: bool = False) -> None:
     sections = [
         (
             "Timetable vs. model",
-            f"AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6-10 AM "
+            f"AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, "
+            "or on Metro-North at GCT, 6-10 AM "
             f"on {date[:4]}-{date[4:6]}-{date[6:]}, "
-            "grouped by stopping pattern: median scheduled minutes vs. one M7 running flat out "
-            "on 750 V third rail with 30 s dwells.",
+            "grouped by stopping pattern: median scheduled minutes vs. one train running flat out with 30 s dwells: "
+            "an M7 on the LIRR's 750 V third rail or an M7A on Metro-North's 700 V.",
             timetable(data, date),
         ),
     ]

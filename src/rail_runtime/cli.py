@@ -46,7 +46,8 @@ def multitrain(
         str,
         typer.Argument(
             help="`pw` for Port Washington, `penn` or `gcm` for the Main Line to Penn or GCM, `atl` for Atlantic, "
-            "or a branch beyond Jamaica: `hem`, `bab`, `lb`, `frk`, `wh`, `hun`, `ronk`."
+            "a branch beyond Jamaica: `hem`, `bab`, `lb`, `frk`, `wh`, `hun`, `ronk`, "
+            "or Metro-North: `har`."
         ),
     ],
     data: DataDir = Path("data"),

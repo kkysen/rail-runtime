@@ -233,6 +233,42 @@ RONK_STOPS = [
     "Ronkonkoma",
 ]
 
+# Metro-North, out of Grand Central to where the third rail ends, or on the New Haven Line, to New Haven.
+# Not Yankees-E 153 St, which only game-day trains serve, nor Highbridge Yard or Springdale's shops.
+HAR_STOPS = [
+    "Grand Central",
+    "Harlem-125 St",
+    "Melrose",
+    "Tremont",
+    "Fordham",
+    "Botanical Garden",
+    "Williams Bridge",
+    "Woodlawn",
+    "Wakefield",
+    "Mt Vernon West",
+    "Fleetwood",
+    "Bronxville",
+    "Tuckahoe",
+    "Crestwood",
+    "Scarsdale",
+    "Hartsdale",
+    "White Plains",
+    "North White Plains",
+    "Valhalla",
+    "Mt Pleasant",
+    "Hawthorne",
+    "Pleasantville",
+    "Chappaqua",
+    "Mt Kisco",
+    "Bedford Hills",
+    "Katonah",
+    "Goldens Bridge",
+    "Purdy's",
+    "Croton Falls",
+    "Brewster",
+    "Southeast",
+]
+
 
 class Spec(NamedTuple):
     """A line: its traced geometry, its stops in path order, and the inbound patterns to compare."""
@@ -253,7 +289,7 @@ class Spec(NamedTuple):
             f"{data}/{self.substations}",
             self.stops,
             self.bumpers,
-            spacing(data),
+            spacing(data, self.railroad),
             m.V0 if self.railroad == "LIRR" else m.V0_MNR,
             self.railroad,
         )
@@ -369,22 +405,41 @@ SPECS = {
         (False, False),
         "4",
     ),
+    "Harlem": Spec(
+        "har_geometry.json",
+        "substations_mnr.json",
+        HAR_STOPS,
+        {"local": HAR_STOPS[::-1]},
+        (True, False),
+        "2",
+        railroad="Metro-North",
+        fleet="Metro-North",
+    ),
 }
 
 
 @cache
-def spacing(data: str) -> float:
-    """The usual miles between substations: the mean gap between known LIRR ones from Douglaston to Port Washington.
+def spacing(data: str, railroad: str = "LIRR") -> float:
+    """The usual miles between `railroad`'s substations, from a stretch OSM seems to map continuously.
 
-    That stretch, from the last one west of Douglaston, is the only one OSM seems to map continuously.
+    On the LIRR, that's the mean gap between known ones from Douglaston to Port Washington,
+    from the last one west of Douglaston.
+    On Metro-North, OSM maps the whole Harlem Line's, but they thin out past North White Plains,
+    where most trains turn, so it's the mean gap from Grand Central to there,
+    as busy as the Hudson Line to Croton-Harmon and the New Haven Line to Pelham, whose gaps it fills.
     Elsewhere a gap might hide any number of them, and fitting the gaps as whole numbers of intervals
     favors ever tighter spacings, down to whatever floor the fit is given.
     """
-    spec = SPECS["Port Washington"]
+    if railroad == "LIRR":
+        spec, start, end = SPECS["Port Washington"], "Douglaston", None
+    else:
+        spec, start, end = SPECS["Harlem"], "Grand Central", "North White Plains"
     geometry = m.load_geometry(f"{data}/{spec.geometry}")
-    start = dict(geometry.stations)["Douglaston"]
-    xs = [x for x, _ in m.own_substations(geometry, f"{data}/{spec.substations}")]
-    xs = xs[max(i for i, x in enumerate(xs) if x <= start) :]
+    at = dict(geometry.stations)
+    xs = [x for x, _ in m.own_substations(geometry, f"{data}/{spec.substations}", railroad)]
+    xs = xs[max(i for i, x in enumerate(xs) if x <= at[start]) if xs[0] <= at[start] else 0 :]
+    if end:
+        xs = [x for x in xs if x <= at[end] + 800]  # both North White Plains substations
     return (xs[-1] - xs[0]) / (len(xs) - 1) / m.MILE
 
 
@@ -548,7 +603,7 @@ def lines(data: str) -> dict[str, Setup]:
     for name, headway in BRANCH_HEADWAYS.items():
         spec = SPECS[name]
         out[name] = Setup(
-            f"{name}: {headway / 60:.4g} min headways each way",
+            f"{name}: {headway / 60:.3g} min headways each way",
             spec.line(data),
             [
                 Service(f"{name} local", spec.stops, True, 0, headway, 0),
@@ -569,6 +624,7 @@ BRANCH_KEYS = {
     "wh": "West Hempstead",
     "hun": "Huntington",
     "ronk": "Ronkonkoma",
+    "har": "Harlem",
 }
 
 # Seconds between trains, from the busiest hour of AM arrivals into Jamaica on 2026-10-27.
@@ -585,6 +641,14 @@ BRANCH_HEADWAYS = {
     "West Hempstead": 3600,
     "Huntington": 600,  # 6 an hour
     "Ronkonkoma": 600,  # 6 an hour
+    # Metro-North, from the busiest hour of AM arrivals into Grand Central, or Stamford from New Canaan,
+    # counting only trips that start on the electrified line.
+    # So not the Hudson's trains from Poughkeepsie, whose dual-mode locomotives take the third rail
+    # only within Grand Central, until their replacements, which will take it throughout,
+    # and which wait to be modeled with the diesel trains.
+    # Each line runs on its own network, though Harlem and New Haven trains share the third rail to Woodlawn,
+    # and all three lines share Park Avenue's into Grand Central.
+    "Harlem": 3600 / 16,
 }
 
 
