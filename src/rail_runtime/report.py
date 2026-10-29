@@ -31,8 +31,8 @@ def report(data: str, date: str, every: bool = False) -> None:
         )
         r = line.r_eff
         print(
-            f"M7 10-car power available: min {min(m7.power(x) for x in r) / 1e6:.1f} MW, "
-            f"mean {sum(m7.power(x) for x in r) / len(r) / 1e6:.1f} MW of {m7.p_shaft / 1e6:.1f} MW rated"
+            f"M7 10-car power available: min {min(m7.power(x, line.v0) for x in r) / 1e6:.1f} MW, "
+            f"mean {sum(m7.power(x, line.v0) for x in r) / len(r) / 1e6:.1f} MW of {m7.p_shaft / 1e6:.1f} MW rated"
         )
         order = list(reversed(stops))
         trips = m.am_inbound(

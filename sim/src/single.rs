@@ -4,7 +4,7 @@ use crate::MPH;
 use crate::train::Train;
 
 /// Seconds from standing at the first sample to standing at the last,
-/// under `lim_mph`, fed through `r_eff` ohms, with samples `ds` m apart.
+/// under `lim_mph`, fed through `r_eff` ohms (NaN under catenary), with samples `ds` m apart.
 pub fn run(train: &Train, lim_mph: &[f64], r_eff: &[f64], ds: f64) -> f64 {
     let n = lim_mph.len();
     assert_eq!(n, r_eff.len());
@@ -46,6 +46,7 @@ mod tests {
             brake: 2.0 * MPH,
             aux: 300e3,
             i_max: f64::INFINITY,
+            v0: 750.0,
             sharing: 1.0,
         }
     }

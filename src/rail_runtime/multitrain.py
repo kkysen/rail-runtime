@@ -38,6 +38,8 @@ class Job:
     subs: list[float]  # substation chainages, m
     r_subs: list[float]  # substation source resistances, ohm
     r_return: list[float]  # running-rail return from chainage 0 to each sample, ohm
+    dc: list[bool]  # whether each sample is on the third rail, not under catenary
+    v0: float  # substation output, V
     services: list[tuple[list[float], bool, int, float, float]]  # stop chainages, inbound, track, headway, offset
     horizon: float  # s
     regen: bool
@@ -74,6 +76,8 @@ def job(
         subs=[float(x) for x in line.subs],
         r_subs=[float(x) for x in line.r_subs],
         r_return=[float(x) for x in line.r_return],
+        dc=[bool(x) for x in line.dc],
+        v0=line.v0,
         services=[([line.st[n] for n in sv.stops], sv.inbound, sv.track, sv.headway, sv.offset) for sv in services],
         horizon=horizon,
         regen=regen,

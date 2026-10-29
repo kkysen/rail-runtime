@@ -26,7 +26,7 @@ DWELL = 30.0
 EA, EU = 6.0, 3.0  # superelevation and unbalance, inches
 
 # --- Third rail -------------------------------------------------------------
-V0 = _sim.V0  # substation output, V (ORM tags the line 750 V)
+V0 = _sim.V0  # LIRR substation output, V (ORM tags the line 750 V)
 R_SUB = 0.010  # source resistance of one rectifier unit, ohm
 TRACKS_PER_UNIT = 2  # a substation has a rectifier unit per this many third-rail tracks it feeds, rounded up
 R_CONTACT = 0.020  # contact rail, ohm per mile: about 150 lb/yd of steel
@@ -64,16 +64,18 @@ class Train:
         self.aux = aux_per_car * cars
         # Trains drawing from the same substation section at once: scales the source resistance.
         self.sharing = sharing
-        # Line current limit: what the propulsion draws at rated power and nominal voltage.
-        self.i_max = (p_shaft / 0.90 + self.aux) / V0
+
+    def i_max(self, v0: float = V0) -> float:
+        """Line current limit, A: what the propulsion draws at rated power and nominal voltage `v0`."""
+        return (self.p_shaft / 0.90 + self.aux) / v0
 
     def resist(self, v: float) -> float:
         t = self.m / 1000
         return 21.7 * t + 0.35 * t * v + 3.0 * self.cars * v * v  # Davis, N
 
-    def power(self, r_eff: float) -> float:
-        """Shaft power available at a point fed through r_eff ohms."""
-        return _sim.power(self, r_eff)
+    def power(self, r_eff: float, v0: float = V0) -> float:
+        """Shaft power available at a point fed through r_eff ohms (NaN under catenary) from a `v0` V third rail."""
+        return _sim.power(self, r_eff, v0)
 
 
 def m7_like(name: str, supply: str, sharing: float = 1.0) -> Train:
@@ -106,14 +108,14 @@ def trains(every: bool = False) -> list[Train]:
     return TRAINS + OTHER_TRAINS if every else TRAINS
 
 
-def design_voltage(spacing: float, train: Train) -> float:
+def design_voltage(spacing: float, train: Train, v0: float = V0) -> float:
     """Volts midway between substations `spacing` miles apart, with `train` at full current on every track.
 
     Each train draws half its current from either side, through half the gap of rail,
     and with a unit per `TRACKS_PER_UNIT` tracks, each unit carries that many trains' halves.
     With every track loaded alike, bonding the running rails doesn't help: each track's return carries its own train.
     """
-    return V0 - train.i_max / 2 * (TRACKS_PER_UNIT * R_SUB + spacing / 2 * (R_CONTACT + R_RETURN))
+    return v0 - train.i_max(v0) / 2 * (TRACKS_PER_UNIT * R_SUB + spacing / 2 * (R_CONTACT + R_RETURN))
 
 
 # --- Lines ------------------------------------------------------------------
@@ -235,8 +237,11 @@ class Line:
         stations: list[str],
         bumpers: tuple[bool, bool],
         spacing: float,
+        v0: float = V0,
     ) -> None:
-        """`spacing` is the usual miles between substations, to fill gaps where OSM maps none."""
+        """`spacing` is the usual miles between substations, to fill gaps where OSM maps none,
+        and `v0` their output, V.
+        """
         self.bumpers = bumpers  # whether the start and end of the path are bumpers, not through stations
         g = load_geometry(geometry_json)
         self.s = g.s
@@ -254,6 +259,9 @@ class Line:
         self.st[stations[-1]] = float(self.s[-1]) - 60  # the last station is at the end of the path
         self.lonlat = g.lonlat
         self.third_rail = g.third_rail
+        # On the third rail, except where only catenary runs: there trains get rated power.
+        self.dc = ~((g.catenary > 0) & (g.third_rail == 0))
+        self.v0 = v0
         self.spacing = spacing
         self.lirr = [x for x, _ in lirr_substations(g, substations_json)]
         self._substations(substations_json)
@@ -322,7 +330,7 @@ class Line:
             (self.s - self.subs[j - 1]) / MILE * R_CONTACT + ret - self.return_at(self.subs[j - 1]) + self.r_subs[j - 1]
         )
         d2 = (self.subs[j] - self.s) / MILE * R_CONTACT + self.return_at(self.subs[j]) - ret + self.r_subs[j]
-        self.r_eff = d1 * d2 / (d1 + d2)
+        self.r_eff = np.where(self.dc, d1 * d2 / (d1 + d2), np.nan)
 
     def return_at(self, x: Arr) -> Arr:
         """Running-rail return resistance from chainage 0 to `x`, carried on linearly past either end."""
@@ -353,7 +361,7 @@ class Line:
     def run(self, train: Train, lim_mph: Arr, a: float, b: float) -> float:
         """Seconds from standing at chainage `a` to standing at `b`."""
         i0, i1 = sorted((round(a / self.ds), round(b / self.ds)))
-        return _sim.run(train, lim_mph[i0 : i1 + 1], self.r_eff[i0 : i1 + 1], self.ds)
+        return _sim.run(train, lim_mph[i0 : i1 + 1], self.r_eff[i0 : i1 + 1], self.ds, self.v0)
 
     def trip(self, train: Train, kind: str, stops: list[str], lim: Arr | None = None) -> float:
         """Minutes from the first stop to the last; `lim` (mph by sample) overrides `kind`'s limits."""

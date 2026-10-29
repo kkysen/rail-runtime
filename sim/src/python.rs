@@ -10,10 +10,12 @@ use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
 use crate::multi::{self, Job, Outcome, Service};
 use crate::train::{Supply, Train, V_MIN, V0};
 
-/// Read a `rail_runtime.model.Train`.
-fn train(t: &Bound<'_, PyAny>) -> PyResult<Train> {
+/// Read a `rail_runtime.model.Train`, running on third rail fed at `v0` volts.
+fn train(t: &Bound<'_, PyAny>, v0: f64) -> PyResult<Train> {
     let f = |name: &str| -> PyResult<f64> { t.getattr(name)?.extract() };
     let supply: String = t.getattr("supply")?.extract()?;
+    // Line current limit: what the propulsion draws at rated power and the line's nominal voltage.
+    let i_max = (f("p_shaft")? / 0.90 + f("aux")?) / v0;
     Ok(Train {
         m: f("m")?,
         m_eff: f("m_eff")?,
@@ -28,15 +30,16 @@ fn train(t: &Bound<'_, PyAny>) -> PyResult<Train> {
         },
         brake: f("brake")?,
         aux: f("aux")?,
-        i_max: f("i_max")?,
+        i_max,
+        v0,
         sharing: f("sharing")?,
     })
 }
 
-/// Shaft power, W, available to `t` fed through `r_eff` ohms.
+/// Shaft power, W, available to `t` fed through `r_eff` ohms (NaN under catenary) from a `v0` V third rail.
 #[pyfunction]
-fn power(t: &Bound<'_, PyAny>, r_eff: f64) -> PyResult<f64> {
-    Ok(train(t)?.power(r_eff))
+fn power(t: &Bound<'_, PyAny>, r_eff: f64, v0: f64) -> PyResult<f64> {
+    Ok(train(t, v0)?.power(r_eff))
 }
 
 /// Seconds from standing at the first sample to standing at the last.
@@ -46,6 +49,7 @@ fn run(
     lim_mph: PyReadonlyArray1<'_, f64>,
     r_eff: PyReadonlyArray1<'_, f64>,
     ds: f64,
+    v0: f64,
 ) -> PyResult<f64> {
     let (lim_mph, r_eff) = (lim_mph.as_slice()?, r_eff.as_slice()?);
     if lim_mph.len() != r_eff.len() || lim_mph.len() < 2 {
@@ -53,7 +57,7 @@ fn run(
             "need matching limits and resistances, at least 2 samples",
         ));
     }
-    Ok(crate::single::run(&train(t)?, lim_mph, r_eff, ds))
+    Ok(crate::single::run(&train(t, v0)?, lim_mph, r_eff, ds))
 }
 
 /// Read a `rail_runtime.multitrain.Job`.
@@ -61,13 +65,14 @@ fn job(j: &Bound<'_, PyAny>) -> PyResult<Job> {
     let services: Vec<(Vec<f64>, bool, usize, f64, f64)> = j.getattr("services")?.extract()?;
     let lim: PyReadonlyArray1<'_, f64> = j.getattr("lim_mph")?.extract()?;
     Ok(Job {
-        train: train(&j.getattr("train")?)?,
+        train: train(&j.getattr("train")?, j.getattr("v0")?.extract()?)?,
         lim_mph: lim.as_slice()?.to_vec(),
         ds: j.getattr("ds")?.extract()?,
         s_end: j.getattr("s_end")?.extract()?,
         subs: j.getattr("subs")?.extract()?,
         r_subs: j.getattr("r_subs")?.extract()?,
         r_return: j.getattr("r_return")?.extract()?,
+        dc: j.getattr("dc")?.extract()?,
         services: services
             .into_iter()
             .map(|(stops, inbound, track, headway, offset)| Service {

@@ -5,7 +5,7 @@
 //! so regen only helps other trains, and a train sheds regen to keep its voltage at or below `V_REGEN_MAX`.
 
 use crate::MPH;
-use crate::train::{Supply, Train, V_MIN, V0};
+use crate::train::{Supply, Train, V_MIN};
 
 /// Time step, s.
 pub const DT: f64 = 0.5;
@@ -52,6 +52,8 @@ pub struct Job {
     /// Running-rail return resistance from chainage 0 to each sample, Ω,
     /// with every parallel track's running rails bonded together.
     pub r_return: Vec<f64>,
+    /// Whether each sample is on the third rail; elsewhere trains run under catenary at rated power.
+    pub dc: Vec<bool>,
     pub services: Vec<Service>,
     pub horizon: f64,
     pub regen: bool,
@@ -74,7 +76,7 @@ pub struct Finished {
 pub struct Outcome {
     /// In departure order.
     pub finished: Vec<Finished>,
-    /// Lowest train voltage over the run, V; `None` off third rail.
+    /// Lowest train voltage over the run, V; `None` if no train ran on third rail.
     pub vmin: Option<f64>,
     /// Steps whose network solve didn't converge.
     pub nonconverged: u32,
@@ -246,6 +248,7 @@ fn solve(
     n_tracks: usize,
     v_subs: &[f64],
 ) -> (Vec<f64>, Vec<f64>, bool) {
+    let v0 = train.v0;
     let subs = &job.subs;
     let n_sub = subs.len();
     let n_car = cars.len();
@@ -303,16 +306,16 @@ fn solve(
             link(&mut g0, a, b, r_return(job, xb) - r_return(job, xa));
         }
     }
-    // Starting no higher than `V0` starts every rectifier conducting;
+    // Starting no higher than `v0` starts every rectifier conducting;
     // starting from a step whose regen floated the network over it would leave them blocking
     // and let Newton's method settle at the clamp with a train drawing power.
     let mut v = vec![0.0; n];
     for (x, &vs) in v.iter_mut().zip(v_subs) {
-        *x = vs.min(V0);
+        *x = vs.min(v0);
     }
     for (j, c) in cars.iter().enumerate() {
         v[ret(j)] = c.v_return;
-        v[contact(j)] = c.v_return + (c.v_contact - c.v_return).min(V0);
+        v[contact(j)] = c.v_return + (c.v_contact - c.v_return).min(v0);
     }
     let mut cur = vec![0.0; n_car];
     // Braking trains held at `V_REGEN_MAX`, returning only the regen the line takes there,
@@ -327,13 +330,13 @@ fn solve(
         b.fill(0.0);
         for k in 0..n_sub {
             // Diode rectifier: conducts only outward (a tiny leak keeps the network grounded).
-            let gk = if v[k] <= V0 + 1e-6 {
+            let gk = if v[k] <= v0 + 1e-6 {
                 1.0 / job.r_subs[k]
             } else {
                 1e-6
             };
             g[slot[k] * n + slot[k]] += gk;
-            b[k] += V0 * gk;
+            b[k] += v0 * gk;
         }
         for j in (0..n_car).filter(|&j| dem[j] < 0.0) {
             let vt = (v[contact(j)] - v[ret(j)]).max(1.0);
@@ -434,7 +437,7 @@ pub fn simulate(job: &Job) -> Outcome {
     let mut cars: Vec<Car> = Vec::new();
     let mut vmin: Option<f64> = None;
     let mut nonconverged = 0;
-    let mut v_subs = vec![V0; job.subs.len()];
+    let mut v_subs = vec![train.v0; job.subs.len()];
     let mut next_dep: Vec<f64> = job.services.iter().map(|sv| sv.offset).collect();
     let mut t = 0.0;
     while t < job.horizon {
@@ -449,7 +452,7 @@ pub fn simulate(job: &Job) -> Outcome {
                     t0: t,
                     next_stop: 1,
                     done: None,
-                    v_contact: V0,
+                    v_contact: train.v0,
                     v_return: 0.0,
                 });
                 next_dep[i] += sv.headway;
@@ -465,25 +468,40 @@ pub fn simulate(job: &Job) -> Outcome {
             .iter()
             .map(|&k| demand(train, &cars[k], &runs[cars[k].run], job.regen))
             .collect();
-        let power = if train.supply == Supply::ThirdRail {
-            let refs: Vec<&Car> = active.iter().map(|&k| &cars[k]).collect();
-            let (power, v, converged) = solve(job, &refs, &runs, &dem, train, n_tracks, &v_subs);
-            if !converged && !refs.is_empty() {
+        // Cars under catenary draw what they want; those on the third rail go through the network solve.
+        let mut power = dem.clone();
+        let on_dc: Vec<usize> = if train.supply == Supply::ThirdRail {
+            (0..active.len())
+                .filter(|&j| {
+                    let c = &cars[active[j]];
+                    let x = runs[c.run].chain(c.p);
+                    job.dc[((x / job.ds).round() as usize).min(job.dc.len() - 1)]
+                })
+                .collect()
+        } else {
+            Vec::new()
+        };
+        if !on_dc.is_empty() {
+            let refs: Vec<&Car> = on_dc.iter().map(|&j| &cars[active[j]]).collect();
+            let dem_dc: Vec<f64> = on_dc.iter().map(|&j| dem[j]).collect();
+            let (p_dc, v, converged) = solve(job, &refs, &runs, &dem_dc, train, n_tracks, &v_subs);
+            if !converged {
                 nonconverged += 1;
             }
             let n_sub = v_subs.len();
             v_subs.copy_from_slice(&v[..n_sub]);
-            for (j, &k) in active.iter().enumerate() {
-                let c = &mut cars[k];
-                c.v_contact = v[n_sub + j];
-                c.v_return = v[n_sub + active.len() + j];
+            for (jj, &j) in on_dc.iter().enumerate() {
+                power[j] = p_dc[jj];
+                let c = &mut cars[active[j]];
+                c.v_contact = v[n_sub + jj];
+                c.v_return = v[n_sub + on_dc.len() + jj];
                 let lo = c.v_contact - c.v_return;
                 vmin = Some(vmin.map_or(lo, |m| m.min(lo)));
             }
-            power
         } else {
-            dem
-        };
+            // With no load, every substation bus sits at its output.
+            v_subs.fill(train.v0);
+        }
         for (&k, pe) in active.iter().zip(power) {
             let c = &mut cars[k];
             let r = &runs[c.run];
@@ -559,7 +577,8 @@ mod tests {
             supply,
             brake: 2.0 * MPH,
             aux: 300e3,
-            i_max: (8e6 / 0.9 + 300e3) / V0,
+            i_max: (8e6 / 0.9 + 300e3) / 750.0,
+            v0: 750.0,
             sharing: 1.0,
         }
     }
@@ -574,6 +593,7 @@ mod tests {
             subs: (0..=4).map(|k| k as f64 * 4000.0).collect(),
             r_subs: vec![0.010; 5],
             r_return: (0..n).map(|k| k as f64 * 5.0 / MILE * 0.020).collect(),
+            dc: vec![true; n],
             services: vec![
                 Service {
                     stops: vec![0.0, 8000.0, 15_900.0],
@@ -613,10 +633,20 @@ mod tests {
         let lone = one.finished[0].done - one.finished[0].t0;
         let busy = simulate(&job(Supply::ThirdRail, false));
         assert!(mean(&busy) > lone, "{} vs {lone}", mean(&busy));
-        assert!(busy.vmin.unwrap() < V0 - 50.0);
+        assert!(busy.vmin.unwrap() < 700.0);
         assert_eq!(busy.nonconverged, 0);
         let ac = simulate(&job(Supply::Ac, false));
         assert!(ac.vmin.is_none());
         assert!(mean(&ac) < mean(&busy));
+    }
+
+    /// A third-rail train under catenary the whole way runs as an AC one does, with no network to solve.
+    #[test]
+    fn catenary_everywhere_matches_ac() {
+        let mut under_wire = job(Supply::ThirdRail, false);
+        under_wire.dc.fill(false);
+        let (wire, ac) = (simulate(&under_wire), simulate(&job(Supply::Ac, false)));
+        assert!(wire.vmin.is_none());
+        assert_eq!(wire.finished, ac.finished);
     }
 }
