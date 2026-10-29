@@ -1,10 +1,10 @@
 /data/*
 !/data/LICENSE
-!/data/pw_geom.json
-!/data/jam_geom.json
+!/data/pw_geometry.json
+!/data/jam_geometry.json
 !/data/substations.json
-!/data/atl_geom.json
-!/data/gcm_geom.json
+!/data/atl_geometry.json
+!/data/gcm_geometry.json
 /.cache/
 __pycache__/
 /sim/target/
@@ -15,10 +15,10 @@ __pycache__/
 
 # Shared editor settings, re-included over a global ignore.
 !.vscode/
-!/data/hem_geom.json
-!/data/bab_geom.json
-!/data/lb_geom.json
-!/data/frk_geom.json
-!/data/wh_geom.json
-!/data/hun_geom.json
-!/data/ronk_geom.json
+!/data/hem_geometry.json
+!/data/bab_geometry.json
+!/data/lb_geometry.json
+!/data/frk_geometry.json
+!/data/wh_geometry.json
+!/data/hun_geometry.json
+!/data/ronk_geometry.json
