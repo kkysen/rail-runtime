@@ -700,7 +700,26 @@ def lines(data: str) -> dict[str, Setup]:
             (3600, 7200),
             busy_trains(spec),
         )
-    return out
+    spec = SPECS["Harlem"]
+    services: list[Service] = []
+    for k, (end, headway) in enumerate(HARLEM_HEADWAYS.items()):
+        stops = spec.stops[: spec.stops.index(end) + 1]
+        services += [
+            Service(f"{end} local", stops, True, 2 * k, headway, 0),
+            Service(f"{end} local", stops, False, 2 * k + 1, headway, headway / 2),
+        ]
+    out["Harlem"] = Setup(
+        "Harlem: locals to Southeast at 8.57 min and to North White Plains at 6 min headways each way",
+        spec.line(data),
+        services,
+        3 * 3600,
+        (3600, 7200),
+        busy_trains(spec),
+    )
+    # In `SPECS` order, after the Hudson.
+    keys = list(out)
+    keys.insert(keys.index("Hudson") + 1, keys.pop())
+    return {k: out[k] for k in keys}
 
 
 BRANCH_KEYS = {
@@ -737,13 +756,17 @@ BRANCH_HEADWAYS = {
     # So not the diesel trains, like the Hudson's from Poughkeepsie or the New Haven's from Danbury,
     # whose dual-mode locomotives take the third rail only within Grand Central,
     # until their replacements, which will take it throughout, and which wait to be modeled with the diesel trains.
+    # The Harlem's are split between two services, in `lines()`.
     # Each line runs on its own network, though Harlem and New Haven trains share the third rail to Woodlawn,
     # and all three lines share Park Avenue's into Grand Central.
     "Hudson": 3600 / 9,  # 7:33 to 8:33
-    "Harlem": 3600 / 17,  # 7:49 to 8:49
     "New Haven": 3600 / 18,
     "New Canaan": 3600 / 2,
 }
+# The Harlem's busiest 60 minutes, 7:49 to 8:49, bring 17 trains into Grand Central,
+# 7 from beyond North White Plains and 10 from there or nearer: as in practice,
+# locals short-turn at North White Plains, each on their own track.
+HARLEM_HEADWAYS = {"Southeast": 3600 / 7, "North White Plains": 3600 / 10}
 
 
 def show(data: str, which: str) -> None:

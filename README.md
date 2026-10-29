@@ -93,9 +93,12 @@ On Metro-North, it covers the electric lines into Grand Central (GCT): the Harle
     which is as busy as the Hudson Line to Croton-Harmon and the New Haven Line to Pelham, whose gaps it fills.
     Past Mott Haven, OSM maps none of the Hudson Line's, and past Woodlawn, none of the New Haven Line's.
   - The M7A is an M7 on that third rail; the M8 is an M8 on 12.5 kV AC throughout, like the LIRR's 25 kV one.
-  - Busy service runs one local each way, as on the branches beyond Jamaica,
+  - Busy service runs locals each way, as on the branches beyond Jamaica,
     as often as the busiest 60 minutes of AM arrivals into GCT, counting every electric trip along the line,
-    not the clock hour the LIRR's lines count: 17 an hour on the Harlem.
+    not the clock hour the LIRR's lines count.
+    On the Harlem, that's 17 an hour, short-turning at North White Plains as in practice:
+    7 to Southeast, as many as come from beyond North White Plains, and 10 to North White Plains,
+    each on its own track.
     Each line is its own power network,
     though Harlem and New Haven trains share the third rail to Woodlawn, and all three share Park Avenue's.
   - The Hudson Line's busy service runs 9 an hour: not its trains from Poughkeepsie,
@@ -670,14 +673,18 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 80 mph | 50.4 | 50.5 | 50.5 | 50.1 | 512 |
 |  | 100 mph | 50.1 | 50.2 | 50.2 | 49.8 | 518 |
 
-#### Harlem: 3.53 min headways each way
+#### Harlem: locals to Southeast at 8.57 min and to North White Plains at 6 min headways each way
 
 | Service | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Harlem local | posted | 91.3 | 91.8 | 91.7 | 91.0 | 440 |
-|  | 60 mph | 84.7 | 85.1 | 85.0 | 84.3 | 448 |
-|  | 80 mph | 81.5 | 82.3 | 82.0 | 80.8 | 443 |
-|  | 100 mph | 81.0 | 81.9 | 81.6 | 80.2 | 442 |
+| Southeast local | posted | 91.3 | 91.6 | 91.5 | 91.0 | 420 |
+|  | 60 mph | 84.7 | 84.9 | 84.8 | 84.3 | 443 |
+|  | 80 mph | 81.5 | 82.0 | 81.8 | 80.8 | 422 |
+|  | 100 mph | 81.0 | 81.5 | 81.3 | 80.2 | 419 |
+| North White Plains local | posted | 46.5 | 46.8 | 46.7 | 46.4 | 420 |
+|  | 60 mph | 41.6 | 41.8 | 41.6 | 41.4 | 443 |
+|  | 80 mph | 40.2 | 40.7 | 40.5 | 39.9 | 422 |
+|  | 100 mph | 40.0 | 40.5 | 40.4 | 39.6 | 419 |
 
 #### New Haven: 3.33 min headways each way
 
