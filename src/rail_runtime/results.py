@@ -34,11 +34,12 @@ def f1(x: float) -> str:
     return "" if x != x else f"{x:.1f}"
 
 
-def short(name: str) -> str:
+def short(name: str, railroad: str = "LIRR") -> str:
+    if name == "Grand Central":  # the LIRR's Grand Central Madison, or Metro-North's Grand Central Terminal
+        return "GCM" if railroad == "LIRR" else "GCT"
     return (
         name.replace(" Station", "")
         .replace(" Terminal", "")
-        .replace("Grand Central", "GCM")
         .replace("Mets-Willets Point", "Mets")
         .replace("Flushing Main Street", "Flushing")
     )
@@ -46,8 +47,8 @@ def short(name: str) -> str:
 
 def heading(name: str, spec: mt.Spec) -> str:
     """The line's ends, and its route when a branch has several, like `Babylon via Atlantic Branch - Jamaica`."""
-    end = name if spec.via else short(spec.stops[-1])
-    return f"{end} - {short(spec.stops[0])}"
+    end = name if spec.via else short(spec.stops[-1], spec.railroad)
+    return f"{end} - {short(spec.stops[0], spec.railroad)}"
 
 
 def pattern(stops: list[str], line_stops: list[str], only_express: bool = False) -> str:
@@ -72,12 +73,12 @@ def pattern(stops: list[str], line_stops: list[str], only_express: bool = False)
 
 def timetable(data: str, date: str) -> str:
     out: list[str] = []
-    m7 = m.TRAINS[0]
     for name, spec in mt.SPECS.items():
         line, stops, route = spec.line(data), spec.stops, spec.route
+        m7 = spec.trains()[0]
         order = list(reversed(stops))
         trips = m.am_inbound(
-            f"{data}/gtfs", date, None if route else stops[-1], set(stops), route, stops[0], via=spec.via
+            spec.gtfs(data), date, None if route else stops[-1], set(stops), route, stops[0], via=spec.via
         )
         by = defaultdict(list)
         for t in trips:
@@ -100,7 +101,7 @@ def trains(data: str, every: bool = False) -> str:
     for name, spec in mt.SPECS.items():
         line, pats = spec.line(data), spec.patterns
         for pname, p in pats.items():
-            rows = [[tr.name, *(f1(line.trip(tr, k, p)) for k in KINDS)] for tr in m.trains(every)]
+            rows = [[tr.name, *(f1(line.trip(tr, k, p)) for k in KINDS)] for tr in spec.trains(every)]
             out.append(f"#### {name} {pname}\n\n" + table(["Train", "Posted", "60 mph", "80 mph", "100 mph"], rows))
     return "\n\n".join(out)
 
@@ -108,7 +109,7 @@ def trains(data: str, every: bool = False) -> str:
 def busy(data: str) -> str:
     out: list[str] = []
     setups = list(mt.lines(data).values())
-    for (title, _, cases, _, _), busy_rows in zip(setups, mt.busy(setups), strict=True):
+    for (title, _, cases, _, _, (dc, ac)), busy_rows in zip(setups, mt.busy(setups), strict=True):
         res: defaultdict[tuple[str, str], dict[str, BusyRow]] = defaultdict(dict)
         for r in busy_rows:
             res[(r.service, r.kind)][r.train.supply] = r
@@ -117,7 +118,7 @@ def busy(data: str) -> str:
         for (service, kind), by in sorted(
             res.items(), key=lambda kv: (services.index(kv[0][0]), KINDS.index(kv[0][1]))
         ):
-            m7, m8 = by["third rail"], by["25 kV"]
+            m7, m8 = by["third rail"], by["AC"]
             rows.append(
                 [
                     service if kind == "posted" else "",
@@ -126,13 +127,15 @@ def busy(data: str) -> str:
                     f1(m7.no_regen),
                     f1(m7.regen),
                     f1(m8.regen),
-                    f"{m7.vmin:.0f}",
+                    "" if m7.vmin != m7.vmin else f"{m7.vmin:.0f}",
                 ]
             )
+        # Each train by its type: "M7" or "M8", and the AC one with its voltage, like "M8 25 kV".
+        t, a = dc.name.split(",")[0], ac.name.replace(",", "")
         out.append(
             f"#### {title}\n\n"
             + table(
-                ["Service", "Speeds", "M7, 1 train", "M7, busy", "M7, busy + regen", "M8 25 kV", "Lowest V (M7)"], rows
+                ["Service", "Speeds", f"{t}, 1 train", f"{t}, busy", f"{t}, busy + regen", a, f"Lowest V ({t})"], rows
             )
         )
     return "\n\n".join(out)

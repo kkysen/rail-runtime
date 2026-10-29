@@ -10,7 +10,7 @@ from rail_runtime import multitrain as mt
 
 DATA = "data"
 M7 = m.TRAINS[0]
-M8 = next(t for t in m.TRAINS if t.name == "M8, 25 kV")
+M8 = next(t for t in m.TRAINS if t.supply == "AC")
 
 
 @cache

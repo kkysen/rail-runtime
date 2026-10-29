@@ -244,6 +244,8 @@ class Spec(NamedTuple):
     bumpers: tuple[bool, bool]  # whether the start and end of the path are bumpers
     route: str | None  # GTFS route_id of its timetable trips; None for every trip through the last stop
     via: str | None = None  # a station its timetable trips' shapes pass, to tell apart a branch's routes
+    railroad: str = "LIRR"  # or "Metro-North"
+    fleet: str = "LIRR"  # a key of `model.FLEETS`
 
     def line(self, data: str) -> Line:
         return m.Line(
@@ -252,7 +254,20 @@ class Spec(NamedTuple):
             self.stops,
             self.bumpers,
             spacing(data),
+            m.V0 if self.railroad == "LIRR" else m.V0_MNR,
+            self.railroad,
         )
+
+    def gtfs(self, data: str) -> str:
+        """Its railroad's GTFS feed."""
+        return f"{data}/{GTFS[self.railroad]}"
+
+    def trains(self, every: bool = False) -> list[Train]:
+        """The trains it runs, the first on third rail; with `every`, the others to compare."""
+        return m.trains(every, self.fleet)
+
+
+GTFS = {"LIRR": "gtfs", "Metro-North": "gtfsmnr"}
 
 
 SPECS = {
@@ -368,12 +383,11 @@ def spacing(data: str) -> float:
     spec = SPECS["Port Washington"]
     geometry = m.load_geometry(f"{data}/{spec.geometry}")
     start = dict(geometry.stations)["Douglaston"]
-    xs = [x for x, _ in m.lirr_substations(geometry, f"{data}/{spec.substations}")]
+    xs = [x for x, _ in m.own_substations(geometry, f"{data}/{spec.substations}")]
     xs = xs[max(i for i, x in enumerate(xs) if x <= start) :]
     return (xs[-1] - xs[0]) / (len(xs) - 1) / m.MILE
 
 
-TRAINS = ("M7, 750 V third rail", "M8, 25 kV")
 KINDS = ("posted", "60", "80", "100")
 
 
@@ -394,6 +408,13 @@ class Setup(NamedTuple):
     services: list[Service]
     horizon: float  # s
     window: tuple[float, float]  # departures counted as steady state, s
+    trains: list[Train]  # one on third rail, one on AC
+
+
+def busy_trains(spec: Spec) -> list[Train]:
+    """The line's first third-rail train and its first AC train, for busy service."""
+    trains = spec.trains()
+    return [next(t for t in trains if t.supply == s) for s in ("third rail", "AC")]
 
 
 def busy(setups: list[Setup]) -> list[list[BusyRow]]:
@@ -401,13 +422,12 @@ def busy(setups: list[Setup]) -> list[list[BusyRow]]:
 
     Every simulation for every setup goes to `sim` in one batch, which runs them in parallel.
     """
-    trains = [t for t in m.TRAINS if t.name in TRAINS]
     # (setup, train, kind, regen, the service run alone or None for all of them busy)
     keys: list[tuple[int, str, str, bool, str | None]] = []
     jobs: list[Job] = []
     services: list[list[Service]] = []
     for si, st in enumerate(setups):
-        for tr in trains:
+        for tr in st.trains:
             for kind in KINDS:
                 for regen in (True, False):
                     if regen or tr.supply == "third rail":
@@ -418,15 +438,15 @@ def busy(setups: list[Setup]) -> list[list[BusyRow]]:
                         keys.append((si, tr.name, kind, True, sv.name))
                         services.append([c for c in st.services if c.name == sv.name])
     for (si, name, kind, regen, alone), svcs in zip(keys, services, strict=True):
-        tr = next(t for t in trains if t.name == name)
         st = setups[si]
+        tr = next(t for t in st.trains if t.name == name)
         jobs.append(job(st.line, tr, kind, svcs, st.horizon, regen, single=alone is not None))
     res = {k: outcome(svcs, out) for k, svcs, out in zip(keys, services, _sim.simulate_many(jobs), strict=True)}
     out: list[list[BusyRow]] = []
     for si, st in enumerate(setups):
         lo, hi = st.window
         rows: list[BusyRow] = []
-        for tr in trains:
+        for tr in st.trains:
             for kind in KINDS:
                 for sv in st.services:
                     if not sv.inbound:
@@ -476,6 +496,7 @@ def lines(data: str) -> dict[str, Setup]:
             [Service(name, stops, True, 0, 300, 0), Service(name, stops, False, 1, 300, 150)],
             3 * 3600,
             (3600, 7200),
+            busy_trains(SPECS["Port Washington"]),
         )
     out["Main Line to Penn"] = Setup(
         "Main Line to Penn: locals and expresses each at 2.5 min headways each way (1.25 min combined)",
@@ -488,6 +509,7 @@ def lines(data: str) -> dict[str, Setup]:
         ],
         5400,
         (1800, 3600),
+        busy_trains(SPECS["Main Line to Penn"]),
     )
     # Two tracks through the 63rd Street Tunnel, so one service each way: the express, most of GCM's AM trips.
     # 2.5 min headways, as per track to Penn, against about 3.5 min scheduled at the peak (17 to 18 in an hour).
@@ -501,6 +523,7 @@ def lines(data: str) -> dict[str, Setup]:
         ],
         5400,
         (1800, 3600),
+        busy_trains(SPECS["Main Line to GCM"]),
     )
     # Two tracks, so one service each way, at 5 min headways,
     # a little tighter than the most Atlantic Terminal has scheduled:
@@ -518,6 +541,7 @@ def lines(data: str) -> dict[str, Setup]:
         ],
         3 * 3600,
         (3600, 7200),
+        busy_trains(SPECS["Atlantic"]),
     )
     # The branches beyond Jamaica: one service each way at the busiest hour's scheduled AM arrivals into Jamaica.
     # Branches sharing track toward Jamaica each get their own network, as Penn and GCM do.
@@ -532,6 +556,7 @@ def lines(data: str) -> dict[str, Setup]:
             ],
             3 * 3600,
             (3600, 7200),
+            busy_trains(spec),
         )
     return out
 

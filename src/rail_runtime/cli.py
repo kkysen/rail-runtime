@@ -28,9 +28,10 @@ def geometry(
     b: Annotated[str, typer.Argument(help="GTFS stop name at the other end.")],
     out: Path,
     yard: Annotated[bool, typer.Option(help="Count the route's own yard track as running track.")] = False,
+    railroad: Annotated[str, typer.Option(help="Whose third rail counts: `LIRR` or `Metro-North`.")] = "LIRR",
 ) -> None:
     """Trace a route between two stops over OSM rail and write its geometry."""
-    geometry_.trace(str(rail_json), route_json, str(gtfs), a, b, str(out), yard)
+    geometry_.trace(str(rail_json), route_json, str(gtfs), a, b, str(out), yard, railroad)
 
 
 @app.command()

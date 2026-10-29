@@ -34,10 +34,10 @@ def top_zones(zones: list[Zone], top: int) -> list[Zone]:
 
 def rank(data: str, top: int = 10) -> Ranking:
     """Per line: (name, base minutes by pattern, the curves costing the most)."""
-    m7 = m.TRAINS[0]
     out: Ranking = []
     for name, spec in SPECS.items():
         line, pats = spec.line(data), spec.patterns
+        m7 = spec.trains()[0]
         lim80 = line.limits("80", 80)
         slow = lim80 < 79.5
         edges = np.flatnonzero(np.diff(np.concatenate([[0], slow.astype(int), [0]])))

@@ -1,4 +1,4 @@
-"""Minimum-runtime model for LIRR lines on OSM geometry, with a third-rail supply model.
+"""Minimum-runtime model for LIRR and Metro-North lines on OSM geometry, with a third-rail supply model.
 
 Every run is flat (no grades), one train on the line, 30 s dwells, no schedule padding.
 """
@@ -27,6 +27,8 @@ EA, EU = 6.0, 3.0  # superelevation and unbalance, inches
 
 # --- Third rail -------------------------------------------------------------
 V0 = _sim.V0  # LIRR substation output, V (ORM tags the line 750 V)
+# Metro-North substation output, V: OSM tags its under-running third rail 700 V.
+V0_MNR = 700.0
 R_SUB = 0.010  # source resistance of one rectifier unit, ohm
 TRACKS_PER_UNIT = 2  # a substation has a rectifier unit per this many third-rail tracks it feeds, rounded up
 R_CONTACT = 0.020  # contact rail, ohm per mile: about 150 lb/yd of steel
@@ -59,7 +61,7 @@ class Train:
         self.f_max = self.m_eff * a0
         self.cars = cars
         self.vmax = vmax
-        self.supply = supply  # "third rail", "full power" (third rail with no voltage drop), or "25 kV"
+        self.supply = supply  # "third rail", "full power" (third rail with no voltage drop), or "AC"
         self.brake = brake
         self.aux = aux_per_car * cars
         # Trains drawing from the same substation section at once: scales the source resistance.
@@ -82,6 +84,10 @@ def m7_like(name: str, supply: str, sharing: float = 1.0) -> Train:
     return Train(name, 5 * 115.0, 10 * 105 * 0.080, 40 * 200e3, 2.0 * MPH, 10, 80, supply, sharing=sharing)
 
 
+def m8(name: str, supply: str) -> Train:
+    return Train(name, 5 * 129.2, 10 * 105 * 0.080, 40 * 200e3, 2.0 * MPH, 10, 80, supply)
+
+
 def c755(name: str, supply: str, sharing: float = 1.0, brake: float = 2.0 * MPH) -> Train:
     # Class 755/3 x4 in electric mode: 2600 kW per unit, 1.3 m/s^2, ~114 t per unit (unverified).
     return Train(name, 4 * 114.0, 4 * 144 * 0.080, 4 * 2600e3, 1.3, 12, 100, supply, brake=brake, sharing=sharing)
@@ -90,22 +96,37 @@ def c755(name: str, supply: str, sharing: float = 1.0, brake: float = 2.0 * MPH)
 TRAINS = [
     m7_like("M7, 750 V third rail", "third rail"),
     m7_like("M7, 750 V third rail, full power", "full power"),
-    Train("M8, 25 kV", 5 * 129.2, 10 * 105 * 0.080, 40 * 200e3, 2.0 * MPH, 10, 80, "25 kV"),
+    m8("M8, 25 kV", "AC"),
 ]
 # Other trains, for comparison: left out of the results unless asked for.
 OTHER_TRAINS = [
-    Train("Class 700/1, 25 kV", 410.0, 666 * 0.080, 5000e3, 2.0 * MPH, 12, 100, "25 kV"),
-    Train("Class 423 x4, AC", 4 * 105.0, 4 * 192 * 0.080, 4 * 2350e3, 1.0, 16, 87, "25 kV"),
-    Train("FLIRT Sm5 x3, 25 kV", 3 * 132.0, 3 * 230 * 0.080, 3 * 2000e3, 1.2, 12, 100, "25 kV"),
+    Train("Class 700/1, 25 kV", 410.0, 666 * 0.080, 5000e3, 2.0 * MPH, 12, 100, "AC"),
+    Train("Class 423 x4, AC", 4 * 105.0, 4 * 192 * 0.080, 4 * 2350e3, 1.0, 16, 87, "AC"),
+    Train("FLIRT Sm5 x3, 25 kV", 3 * 132.0, 3 * 230 * 0.080, 3 * 2000e3, 1.2, 12, 100, "AC"),
     c755("755/3 x4, 750 V third rail", "third rail"),
-    c755("755/3 x4, 25 kV", "25 kV"),
-    c755("755/3 x4, 25 kV, 1.3 brake", "25 kV", brake=1.3),
+    c755("755/3 x4, 25 kV", "AC"),
+    c755("755/3 x4, 25 kV, 1.3 brake", "AC", brake=1.3),
 ]
 
 
-def trains(every: bool = False) -> list[Train]:
-    """The LIRR's own M7 and M8, and with `every`, the other trains too."""
-    return TRAINS + OTHER_TRAINS if every else TRAINS
+# Metro-North's Hudson and Harlem Lines: the M7A, an M7 on Metro-North's third rail, against an M8 on AC throughout.
+MNR_TRAINS = [
+    m7_like("M7A, 700 V third rail", "third rail"),
+    m7_like("M7A, 700 V third rail, full power", "full power"),
+    m8("M8, 12.5 kV", "AC"),
+]
+# The New Haven Line and its branches: the M8 on third rail to Pelham and catenary beyond,
+# against an M8 on catenary throughout, which is also what it gets with no voltage drop on the third rail.
+NH_TRAINS = [
+    m8("M8, 700 V third rail and 12.5 kV", "third rail"),
+    m8("M8, 12.5 kV", "AC"),
+]
+FLEETS = {"LIRR": TRAINS, "Metro-North": MNR_TRAINS, "New Haven": NH_TRAINS}
+
+
+def trains(every: bool = False, fleet: str = "LIRR") -> list[Train]:
+    """`fleet`'s own trains, the first on third rail, and on the LIRR with `every`, the other trains too."""
+    return FLEETS[fleet] + OTHER_TRAINS if every and fleet == "LIRR" else FLEETS[fleet]
 
 
 def design_voltage(spacing: float, train: Train, v0: float = V0) -> float:
@@ -189,9 +210,10 @@ KNOWN = {
 
 
 def system(e: dict[str, Any]) -> str | None:
-    """Whose network an OSM substation feeds: LIRR, Amtrak, NYCT (the subway) or utility; None if untagged.
+    """Whose network an OSM substation feeds: LIRR, Metro-North, Amtrak, NYCT (the subway) or utility;
+    None if untagged.
 
-    Only LIRR substations feed LIRR lines, plus untagged ones beside the track;
+    Only a railroad's own substations feed its lines, plus untagged ones beside the track;
     Amtrak and the subway are kept apart for when their lines are modeled.
     """
     if e["id"] in KNOWN:
@@ -200,6 +222,8 @@ def system(e: dict[str, Any]) -> str | None:
     who = tags.get("operator", "") + " " + tags.get("name", "")
     if "LIRR" in who or "Long Island Rail" in who:
         return "LIRR"
+    if "Metro-North" in who or "Metro North" in who or "MNR" in who.split():
+        return "Metro-North"
     if "Amtrak" in who:
         return "Amtrak"
     if "New York City Transit" in who or re.search(r"\b(IRT|BMT|IND)\b", who):
@@ -209,8 +233,8 @@ def system(e: dict[str, Any]) -> str | None:
     return None
 
 
-def lirr_substations(g: Geometry, substations_json: str) -> list[tuple[float, int]]:
-    """(chainage, OSM id) of each LIRR-tagged substation within 400 m of the path, in order.
+def own_substations(g: Geometry, substations_json: str, railroad: str = "LIRR") -> list[tuple[float, int]]:
+    """(chainage, OSM id) of each of `railroad`'s substations within 400 m of the path, in order.
 
     One substation mapped twice, say as a building and its fence, counts once.
     """
@@ -218,7 +242,7 @@ def lirr_substations(g: Geometry, substations_json: str) -> list[tuple[float, in
     kx, ky = 111320 * math.cos(math.radians(lat0)), 110540
     out: list[tuple[float, int]] = []
     for e in json.loads(Path(substations_json).read_text())["elements"]:
-        if system(e) != "LIRR":
+        if system(e) != railroad:
             continue
         c = e.get("center", e)
         d = np.hypot((g.lonlat[:, 0] - c["lon"]) * kx, (g.lonlat[:, 1] - c["lat"]) * ky)
@@ -238,9 +262,10 @@ class Line:
         bumpers: tuple[bool, bool],
         spacing: float,
         v0: float = V0,
+        railroad: str = "LIRR",
     ) -> None:
         """`spacing` is the usual miles between substations, to fill gaps where OSM maps none,
-        and `v0` their output, V.
+        `v0` their output, V, and `railroad` whose they are.
         """
         self.bumpers = bumpers  # whether the start and end of the path are bumpers, not through stations
         g = load_geometry(geometry_json)
@@ -263,7 +288,7 @@ class Line:
         self.dc = ~((g.catenary > 0) & (g.third_rail == 0))
         self.v0 = v0
         self.spacing = spacing
-        self.lirr = [x for x, _ in lirr_substations(g, substations_json)]
+        self.own = [x for x, _ in own_substations(g, substations_json, railroad)]
         self._substations(substations_json)
 
     def _long_chord_radius(self, lonlat: Arr, half: float) -> Arr:
@@ -293,7 +318,11 @@ class Line:
             i = int(np.argmin(d))
             if d[i] < 50:
                 untagged.append(float(self.s[i]))
-        mapped = list(self.lirr)
+        # Only substations along the third rail feed it, not those beyond where it gives way to catenary.
+        dc = self.s[self.dc]
+        lo, hi = (float(dc[0]), float(dc[-1])) if len(dc) else (0.0, -1.0)
+        untagged = [x for x in untagged if lo <= x <= hi]
+        mapped = [x for x in self.own if lo <= x <= hi]
         # An untagged substation right beside the track counts only where the spacing leaves room for one,
         # at least half the usual spacing from every substation counted so far; that also drops its duplicates.
         for x in sorted(untagged):
@@ -301,19 +330,20 @@ class Line:
                 mapped.append(x)
         mapped.sort()
         # Fill gaps at the usual spacing, as near as whole substations allow.
-        # No substation is assumed at either end of the path: past the outermost mapped ones,
+        # No substation is assumed at either end of the third rail: past the outermost mapped ones,
         # they continue at the usual spacing to the first at or beyond each end.
         sp = self.spacing * MILE
-        pts = sorted(mapped) or [float(self.s[-1]) / 2]
-        while pts[0] > 0:
-            pts.insert(0, pts[0] - sp)
-        while pts[-1] < self.s[-1]:
-            pts.append(pts[-1] + sp)
         subs: list[float] = []
-        for a, b in pairwise(pts):
-            n = max(1, round((b - a) / sp))
-            subs += [a + (b - a) * k / n for k in range(n)]
-        subs.append(pts[-1])
+        if hi >= lo:
+            pts = sorted(mapped) or [(lo + hi) / 2]
+            while pts[0] > lo:
+                pts.insert(0, pts[0] - sp)
+            while pts[-1] < hi:
+                pts.append(pts[-1] + sp)
+            for a, b in pairwise(pts):
+                n = max(1, round((b - a) / sp))
+                subs += [a + (b - a) * k / n for k in range(n)]
+            subs.append(pts[-1])
         self.mapped = sorted(mapped)
         self.subs = np.array(subs)
         # A substation has a rectifier unit per `TRACKS_PER_UNIT` third-rail tracks it feeds, in parallel.
@@ -323,6 +353,9 @@ class Line:
         self.r_return = np.concatenate(
             [[0.0], np.cumsum(R_RETURN / np.maximum(self.third_rail[:-1], 1) * self.ds / MILE)]
         )
+        if not subs:  # no third rail at all
+            self.r_eff = np.full(len(self.s), np.nan)
+            return
         # Effective source resistance at each point for a train alone: fed from both neighbouring substations.
         j = np.clip(np.searchsorted(self.subs, self.s), 1, len(self.subs) - 1)
         ret = self.return_at(self.s)

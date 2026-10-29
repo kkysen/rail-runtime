@@ -1,4 +1,4 @@
-"""Build an ordered track centerline between two LIRR stations from OSM and measure curvature."""
+"""Build an ordered track centerline between two LIRR or Metro-North stations from OSM and measure curvature."""
 
 import heapq
 import json
@@ -17,18 +17,22 @@ from rail_runtime.model import Arr, Geometry, read_csv
 type State = tuple[int, int | None]  # (node, previous node)
 
 
-def third_rail(w: dict[str, Any]) -> bool:
-    """Whether an OSM way is LIRR third-rail running track: not a yard, spur, siding or crossover.
+def third_rail(w: dict[str, Any], railroad: str = "LIRR") -> bool:
+    """Whether an OSM way is `railroad`'s third-rail running track: not a yard, spur, siding or crossover.
 
-    OSM's `electrified` tags are patchy, tagging some third-rail track through Sunnyside as overhead only,
+    On the LIRR, OSM's `electrified` tags are patchy, tagging some third-rail track through Sunnyside as overhead only,
     so this leaves out only what plainly isn't: unelectrified track, Metro-North's,
     and the Northeast Corridor, Amtrak's overhead-only Hell Gate Line through Harold.
+    On Metro-North, whose New Haven Line runs from third rail onto catenary,
+    it takes only track tagged as third rail, and not the LIRR's beneath Grand Central.
     """
     t = w["tags"]
+    if t.get("railway") != "rail" or t.get("service") in ("yard", "spur", "siding", "crossover"):
+        return False
+    if railroad == "Metro-North":
+        return "rail" in t.get("electrified", "").split(";") and "Long Island" not in t.get("operator", "")
     return (
-        t.get("railway") == "rail"
-        and t.get("service") not in ("yard", "spur", "siding", "crossover")
-        and t.get("electrified") != "no"
+        t.get("electrified") != "no"
         and t.get("name") != "Northeast Corridor"
         and "Metro-North" not in t.get("operator", "")
     )
@@ -125,12 +129,22 @@ def count_tracks(xy: Arr, ways: list[dict[str, Any]], k_xy: Arr) -> npt.NDArray[
     return np.repeat(smooth, every)[: len(xy)]
 
 
-def trace(rail_json: str, route_json: str, gtfs: str, stop_a: str, stop_b: str, out: str, yard: bool = False) -> None:
+def trace(
+    rail_json: str,
+    route_json: str,
+    gtfs: str,
+    stop_a: str,
+    stop_b: str,
+    out: str,
+    yard: bool = False,
+    railroad: str = "LIRR",
+) -> None:
     """Trace `stop_a` to `stop_b` and write the geometry to `out`.
 
     `route_json` is Overpass JSON whose relations' members and ways are the route, or `-` for main-line tracks.
     With `yard`, the route's own yard track counts as running track,
     for Far Rockaway and Long Beach, whose platform tracks OSM tags as yard.
+    `railroad`, LIRR or Metro-North, is whose third rail counts.
     """
     d: list[dict[str, Any]] = json.loads(Path(rail_json).read_text())["elements"]
     route_ways: set[int] = set()
@@ -260,7 +274,7 @@ def trace(rail_json: str, route_json: str, gtfs: str, stop_a: str, stop_b: str, 
 
     lonlat = rs / [111320 * math.cos(math.radians(lat0)), 110540]
     k_xy = np.array([111320 * math.cos(math.radians(lat0)), 110540])
-    third = count_tracks(rs, [w for w in d if third_rail(w)], k_xy)
+    third = count_tracks(rs, [w for w in d if third_rail(w, railroad)], k_xy)
     overhead = count_tracks(rs, [w for w in d if catenary(w)], k_xy)
     Geometry(ss, R, np.array(maxspeed), lonlat, stations, third, overhead).save(out)
     print(f"length {s[-1] / 1609.34:.2f} mi, {len(ss)} samples")

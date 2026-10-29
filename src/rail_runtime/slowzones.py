@@ -9,10 +9,10 @@ from rail_runtime.multitrain import SPECS
 
 def rank(data: str, top: int = 12) -> Ranking:
     """Per line: (name, base minutes by pattern, the posted zones costing the most)."""
-    m7 = m.TRAINS[0]
     out: Ranking = []
     for name, spec in SPECS.items():
         line, pats = spec.line(data), spec.patterns
+        m7 = spec.trains()[0]
         posted = line.limits("posted", 80)
         better = np.maximum(posted, line.limits("80", 80))
         # Zones: runs of constant posted speed below 80 mph, where the geometry allows more.

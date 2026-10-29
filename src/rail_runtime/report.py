@@ -20,25 +20,25 @@ def fmt(xs: Iterable[float]) -> str:
 
 
 def report(data: str, date: str, every: bool = False) -> None:
-    m7 = m.TRAINS[0]
     for name, spec in SPECS.items():
         line, stops, route = spec.line(data), spec.stops, spec.route
+        m7 = spec.trains()[0]
         print(f"=== {heading(name, spec)} ===")
         print(
             "substations (mi):",
             " ".join(f"{x / m.MILE:.1f}{'*' if x in line.mapped else ''}" for x in line.subs),
             " (* mapped in OSM)",
         )
-        r = line.r_eff
+        p = [m7.power(x, line.v0) for x in line.r_eff[line.dc]] or [m7.p_shaft]
         print(
-            f"M7 10-car power available: min {min(m7.power(x, line.v0) for x in r) / 1e6:.1f} MW, "
-            f"mean {sum(m7.power(x, line.v0) for x in r) / len(r) / 1e6:.1f} MW of {m7.p_shaft / 1e6:.1f} MW rated"
+            f"{m7.name.split(',')[0]} 10-car power available on third rail: min {min(p) / 1e6:.1f} MW, "
+            f"mean {sum(p) / len(p) / 1e6:.1f} MW of {m7.p_shaft / 1e6:.1f} MW rated"
         )
         order = list(reversed(stops))
         trips = m.am_inbound(
-            f"{data}/gtfs", date, None if route else stops[-1], set(stops), route, stops[0], via=spec.via
+            spec.gtfs(data), date, None if route else stops[-1], set(stops), route, stops[0], via=spec.via
         )
-        print("AM inbound, M7 750 V:   sched  posted     60     80    100")
+        print(f"AM inbound, {m7.name:22} sched  posted     60     80    100")
         if route:
             for t in trips:
                 sims = [line.trip(m7, k, [s for s in order if s in t.stops]) for k in KINDS]
@@ -57,6 +57,6 @@ def report(data: str, date: str, every: bool = False) -> None:
                 print(f"  {mid:28} n={len(sch):2} sched med {median(sch):4.0f} (min {min(sch):.0f}) {fmt(sims)}")
         for pname, p in (spec.patterns | EXTRA.get(name, {})).items():
             print(f"  {pname}: posted / 60 / 80 / 100")
-            for tr in m.trains(every):
+            for tr in spec.trains(every):
                 print(f"    {tr.name:34} {fmt(line.trip(tr, k, p) for k in KINDS)}")
         print()
