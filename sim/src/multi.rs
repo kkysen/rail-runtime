@@ -323,6 +323,9 @@ fn solve(
     // Which are held is settled by the voltages alone, so the solve has one answer whatever it starts from.
     let mut held = vec![false; n_car];
     let mut converged = false;
+    // Which rectifiers conduct, and how many iterations their states and the holds have held.
+    let mut conducting = vec![true; n_sub];
+    let mut settled = 0;
     let (mut g, mut b, mut bs) = (vec![0.0; n * n], vec![0.0; n], vec![0.0; n]);
     for it in 0..200 {
         let mut changed = false;
@@ -330,11 +333,10 @@ fn solve(
         b.fill(0.0);
         for k in 0..n_sub {
             // Diode rectifier: conducts only outward (a tiny leak keeps the network grounded).
-            let gk = if v[k] <= v0 + 1e-6 {
-                1.0 / job.r_subs[k]
-            } else {
-                1e-6
-            };
+            let on = v[k] <= v0 + 1e-6;
+            changed |= on != conducting[k];
+            conducting[k] = on;
+            let gk = if on { 1.0 / job.r_subs[k] } else { 1e-6 };
             g[slot[k] * n + slot[k]] += gk;
             b[k] += v0 * gk;
         }
@@ -413,8 +415,10 @@ fn solve(
             break;
         }
         // Full Newton steps; if the rectifiers' and holds' states ever cycle instead of settling,
-        // damped steps after 20 iterations break the cycle.
-        let step = if it < 20 { 1.0 } else { 0.3 };
+        // damped steps after 20 iterations break the cycle,
+        // and once the states have held for a few iterations, full steps finish the solve.
+        settled = if changed { 0 } else { settled + 1 };
+        let step = if it < 20 || settled >= 3 { 1.0 } else { 0.3 };
         for (a, c) in v.iter_mut().zip(&b) {
             *a += step * (c - *a);
         }
