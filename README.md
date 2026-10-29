@@ -92,7 +92,8 @@ On Metro-North, it covers the electric lines into Grand Central (GCT): the Harle
     so gaps elsewhere are filled at their mean spacing from Grand Central through North White Plains, 1.29 mi,
     which is as busy as the Hudson Line to Croton-Harmon and the New Haven Line to Pelham, whose gaps it fills.
     Past Mott Haven, OSM maps none of the Hudson Line's, and past Woodlawn, none of the New Haven Line's.
-  - The M7A is an M7 on that third rail; the M8 is an M8 on 12.5 kV AC throughout, like the LIRR's 25 kV one.
+  - The M7A is an M7 on that third rail; the M8 is an M8 on 25 kV AC throughout, like the LIRR's,
+    since these lines have no catenary yet to keep at 12.5 kV, unlike the New Haven Line.
   - Each line runs two patterns, each way, each on its own track:
     locals, and expresses that run local beyond where the locals turn,
     then stop only at Harlem-125 St, as nearly all do.
@@ -523,7 +524,7 @@ One train alone, next to the median scheduled for trips with that stopping patte
 | --- | ---: | ---: | ---: | ---: | ---: |
 | M7A, 700 V third rail | 1:11:00 | 56:56 | 51:23 | 50:13 | 49:56 |
 | M7A, 700 V third rail, full power |  | 56:15 | 50:42 | 49:21 | 48:57 |
-| M8, 12.5 kV |  | 56:36 | 51:02 | 49:47 | 49:26 |
+| M8, 25 kV |  | 56:36 | 51:02 | 49:47 | 49:26 |
 
 #### Hudson express
 
@@ -531,7 +532,7 @@ One train alone, next to the median scheduled for trips with that stopping patte
 | --- | ---: | ---: | ---: | ---: | ---: |
 | M7A, 700 V third rail | 50:00 (diesel) | 37:19 | 31:31 | 29:20 | 28:16 |
 | M7A, 700 V third rail, full power |  | 37:13 | 31:25 | 29:08 | 27:53 |
-| M8, 12.5 kV |  | 37:16 | 31:28 | 29:13 | 28:03 |
+| M8, 25 kV |  | 37:16 | 31:28 | 29:13 | 28:03 |
 
 #### Harlem local
 
@@ -539,7 +540,7 @@ One train alone, next to the median scheduled for trips with that stopping patte
 | --- | ---: | ---: | ---: | ---: | ---: |
 | M7A, 700 V third rail | 56:30 | 46:13 | 41:15 | 40:06 | 39:52 |
 | M7A, 700 V third rail, full power |  | 45:43 | 40:41 | 39:11 | 38:51 |
-| M8, 12.5 kV |  | 45:56 | 40:54 | 39:30 | 39:13 |
+| M8, 25 kV |  | 45:56 | 40:54 | 39:30 | 39:13 |
 
 #### Harlem express
 
@@ -547,7 +548,7 @@ One train alone, next to the median scheduled for trips with that stopping patte
 | --- | ---: | ---: | ---: | ---: | ---: |
 | M7A, 700 V third rail | 1:29:00 | 1:14:32 | 1:07:51 | 1:02:44 | 1:01:43 |
 | M7A, 700 V third rail, full power |  | 1:14:02 | 1:07:14 | 1:01:32 | 1:00:05 |
-| M8, 12.5 kV |  | 1:14:12 | 1:07:25 | 1:01:54 | 1:00:35 |
+| M8, 25 kV |  | 1:14:12 | 1:07:25 | 1:01:54 | 1:00:35 |
 
 #### New Haven local
 
@@ -697,7 +698,7 @@ Time per inbound trip in steady service, from the time-stepped multi-train simul
 
 #### Hudson: locals at 10:00 and expresses at 20:00 headways each way
 
-| Service | Scheduled | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
+| Service | Scheduled | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 25 kV | Lowest V (M7A) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | Hudson local | 1:11:00 | posted | 57:06 | 57:09 | 57:07 | 56:56 | 513 |
 |  |  | 60 mph | 51:36 | 51:39 | 51:37 | 51:26 | 504 |
@@ -710,7 +711,7 @@ Time per inbound trip in steady service, from the time-stepped multi-train simul
 
 #### Harlem: locals at 6:00 and expresses at 8:34 headways each way
 
-| Service | Scheduled | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
+| Service | Scheduled | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 25 kV | Lowest V (M7A) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | Harlem local | 56:30 | posted | 46:34 | 46:44 | 46:41 | 46:22 | 438 |
 |  |  | 60 mph | 41:35 | 41:41 | 41:37 | 41:22 | 441 |

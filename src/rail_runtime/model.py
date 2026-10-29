@@ -119,11 +119,12 @@ OTHER_TRAINS = [
 ]
 
 
-# Metro-North's Hudson and Harlem Lines: the M7A, an M7 on Metro-North's third rail, against an M8 on AC throughout.
+# Metro-North's Hudson and Harlem Lines: the M7A, an M7 on Metro-North's third rail, against an M8
+# on 25 kV AC throughout, since they have no catenary yet to keep at 12.5 kV.
 MNR_TRAINS = [
     m7_like("M7A, 700 V third rail", "third rail"),
     m7_like("M7A, 700 V third rail, full power", "full power"),
-    m8("M8, 12.5 kV", "AC"),
+    m8("M8, 25 kV", "AC"),
 ]
 # The New Haven Line and its branches: the M8 on third rail to Pelham and catenary beyond,
 # against an M8 on catenary throughout, which is also what it gets with no voltage drop on the third rail.
