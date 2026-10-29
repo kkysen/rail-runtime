@@ -78,7 +78,8 @@ Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, 
   Babylon is two lines, one per route its trains take from Jamaica to Valley Stream:
   the Atlantic Branch, which Long Beach and Far Rockaway share,
   or the Babylon Branch through St. Albans.
-  Each runs half of the busiest hour's trains.
+  Each runs all of the busiest hour's trains, not its share,
+  so the stretch they share east of Valley Stream carries the full load either way.
   Shared networks are still to come.
 - **Timetable:** AM inbound trips from the LIRR GTFS feed.
   A branch beyond Jamaica is timed into Jamaica, from trips that start on it.
@@ -444,23 +445,23 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 80 mph | 20.4 | 20.5 | 20.4 | 20.3 | 484 |
 |  | 100 mph | 20.4 | 20.5 | 20.4 | 20.3 | 485 |
 
-#### Babylon via Atlantic Branch: 15 min headways each way
+#### Babylon via Atlantic Branch: 7.5 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Babylon via Atlantic Branch local | posted | 40.6 | 40.7 | 40.7 | 40.2 | 537 |
-|  | 60 mph | 40.0 | 40.1 | 40.0 | 39.6 | 540 |
-|  | 80 mph | 38.8 | 38.9 | 38.8 | 38.4 | 525 |
-|  | 100 mph | 38.6 | 38.7 | 38.7 | 38.2 | 516 |
+| Babylon via Atlantic Branch local | posted | 40.6 | 40.7 | 40.6 | 40.2 | 497 |
+|  | 60 mph | 40.0 | 40.1 | 40.0 | 39.6 | 504 |
+|  | 80 mph | 38.8 | 39.0 | 39.0 | 38.4 | 514 |
+|  | 100 mph | 38.6 | 38.9 | 38.8 | 38.2 | 519 |
 
-#### Babylon via Babylon Branch: 15 min headways each way
+#### Babylon via Babylon Branch: 7.5 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Babylon via Babylon Branch local | posted | 42.7 | 42.8 | 42.8 | 42.3 | 529 |
-|  | 60 mph | 41.9 | 41.9 | 41.9 | 41.5 | 500 |
-|  | 80 mph | 40.8 | 40.8 | 40.8 | 40.3 | 510 |
-|  | 100 mph | 40.6 | 40.7 | 40.7 | 40.1 | 527 |
+| Babylon via Babylon Branch local | posted | 42.7 | 42.8 | 42.8 | 42.3 | 499 |
+|  | 60 mph | 41.9 | 42.1 | 42.0 | 41.5 | 499 |
+|  | 80 mph | 40.8 | 40.9 | 40.9 | 40.3 | 489 |
+|  | 100 mph | 40.6 | 40.8 | 40.7 | 40.1 | 493 |
 
 #### Long Beach: 12 min headways each way
 

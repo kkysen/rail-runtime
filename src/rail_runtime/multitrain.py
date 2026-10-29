@@ -545,9 +545,10 @@ BRANCH_KEYS = {
 # Seconds between trains, from the busiest hour of AM arrivals into Jamaica on 2026-10-27.
 BRANCH_HEADWAYS = {
     "Hempstead": 1200,  # 3 an hour
-    # 8 an hour in all, of 17 AM trips: 10 via the Atlantic Branch, 7 via the Babylon Branch.
-    "Babylon via Atlantic Branch": 900,  # 4 an hour
-    "Babylon via Babylon Branch": 900,  # 4 an hour
+    # 8 an hour in all, split between the two routes, but each runs all 8,
+    # so the track and third rail they share east of Valley Stream carry the full load.
+    "Babylon via Atlantic Branch": 450,
+    "Babylon via Babylon Branch": 450,
     "Long Beach": 720,  # 5 an hour
     "Far Rockaway": 900,  # 4 an hour
     # 1 an hour, on mostly single track past Valley Stream, which the simulation doesn't model:
