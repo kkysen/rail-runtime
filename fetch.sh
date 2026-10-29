@@ -63,15 +63,16 @@ overpass '[out:json][timeout:90];rel(1255264);out body;way(r);out tags geom;' da
 # Ronkonkoma's relation misses much of the Main Line, so take Port Jefferson's for that.
 overpass '[out:json][timeout:90];rel(id:8325874,1255264);out body;way(r);out tags geom;' data/ronk_route.json
 # Babylon's relation runs Jamaica to Valley Stream on the Montauk Branch through St. Albans,
-# but its trains run the Atlantic Branch there, so take Long Beach's ways for that stretch.
-overpass '[out:json][timeout:90];rel(4509484);out body;way(r);out tags geom;' data/bab_route.json
-python3 - data/bab_route.json data/lb_route.json <<'PY'
+# which some of its trains take, but most run the Atlantic Branch there,
+# so that route takes Long Beach's ways for that stretch.
+overpass '[out:json][timeout:90];rel(4509484);out body;way(r);out tags geom;' data/bab_branch_route.json
+python3 - data/bab_branch_route.json data/lb_route.json data/bab_route.json <<'PY'
 import json, sys
-bab, lb = (json.load(open(p))["elements"] for p in sys.argv[1:])
+bab, lb = (json.load(open(p))["elements"] for p in sys.argv[1:3])
 # East of Valley Stream, about 73.71 W, where the two branches meet.
 ways = [e for e in bab if e["type"] == "way" and min(g["lon"] for g in e["geometry"]) > -73.71]
 ways += [e for e in lb if e["type"] == "way" and e["tags"].get("name") != "Long Beach Branch"]
-with open(sys.argv[1], "w") as f:
+with open(sys.argv[3], "w") as f:
     json.dump({"elements": ways}, f)
 PY
 

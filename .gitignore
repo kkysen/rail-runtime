@@ -17,6 +17,7 @@ __pycache__/
 !.vscode/
 !/data/hem_geometry.json
 !/data/bab_geometry.json
+!/data/bab_branch_geometry.json
 !/data/lb_geometry.json
 !/data/frk_geometry.json
 !/data/wh_geometry.json

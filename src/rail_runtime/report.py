@@ -5,7 +5,7 @@ from statistics import median
 
 from rail_runtime import model as m
 from rail_runtime.multitrain import SPECS
-from rail_runtime.results import short
+from rail_runtime.results import heading
 
 KINDS = ["posted", "60", "80", "100"]
 # Patterns printed here beyond each line's own.
@@ -23,7 +23,7 @@ def report(data: str, date: str, every: bool = False) -> None:
     m7 = m.TRAINS[0]
     for name, spec in SPECS.items():
         line, stops, route = spec.line(data), spec.stops, spec.route
-        print(f"=== {short(stops[-1])} - {short(stops[0])} ===")
+        print(f"=== {heading(name, spec)} ===")
         print(
             "substations (mi):",
             " ".join(f"{x / m.MILE:.1f}{'*' if x in line.mapped else ''}" for x in line.subs),
@@ -35,7 +35,9 @@ def report(data: str, date: str, every: bool = False) -> None:
             f"mean {sum(m7.power(x) for x in r) / len(r) / 1e6:.1f} MW of {m7.p_shaft / 1e6:.1f} MW rated"
         )
         order = list(reversed(stops))
-        trips = m.am_inbound(f"{data}/gtfs", date, None if route else stops[-1], set(stops), route, stops[0])
+        trips = m.am_inbound(
+            f"{data}/gtfs", date, None if route else stops[-1], set(stops), route, stops[0], via=spec.via
+        )
         print("AM inbound, M7 750 V:   sched  posted     60     80    100")
         if route:
             for t in trips:

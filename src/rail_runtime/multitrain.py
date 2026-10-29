@@ -153,6 +153,8 @@ BAB_STOPS = [
     "Lindenhurst",
     "Babylon",
 ]
+# Via the Babylon Branch through St. Albans, the Montauk Branch's line to Valley Stream, instead of the Atlantic Branch.
+BAB_BRANCH_STOPS = ["Jamaica", "St. Albans", *BAB_STOPS[1:]]
 LB_STOPS = [
     "Jamaica",
     "Locust Manor",
@@ -237,6 +239,7 @@ class Spec(NamedTuple):
     patterns: dict[str, list[str]]
     bumpers: tuple[bool, bool]  # whether the start and end of the path are bumpers
     route: str | None  # GTFS route_id of its timetable trips; None for every trip through the last stop
+    via: str | None = None  # a station its timetable trips' shapes pass, to tell apart a branch's routes
 
     def line(self, data: str) -> Line:
         return m.Line(
@@ -289,13 +292,23 @@ SPECS = {
         (False, True),
         "2",
     ),
-    "Babylon": Spec(
+    "Babylon via Atlantic Branch": Spec(
         "bab_geometry.json",
         "substations.json",
         BAB_STOPS,
         {"local": BAB_STOPS[::-1]},
         (False, False),
         "1",
+        "Locust Manor",
+    ),
+    "Babylon via Babylon Branch": Spec(
+        "bab_branch_geometry.json",
+        "substations.json",
+        BAB_BRANCH_STOPS,
+        {"local": BAB_BRANCH_STOPS[::-1]},
+        (False, False),
+        "1",
+        "St. Albans",
     ),
     "Long Beach": Spec(
         "lb_geometry.json",
@@ -532,7 +545,9 @@ BRANCH_KEYS = {
 # Seconds between trains, from the busiest hour of AM arrivals into Jamaica on 2026-10-27.
 BRANCH_HEADWAYS = {
     "Hempstead": 1200,  # 3 an hour
-    "Babylon": 450,  # 8 an hour
+    # 8 an hour in all, of 17 AM trips: 10 via the Atlantic Branch, 7 via the Babylon Branch.
+    "Babylon via Atlantic Branch": 900,  # 4 an hour
+    "Babylon via Babylon Branch": 900,  # 4 an hour
     "Long Beach": 720,  # 5 an hour
     "Far Rockaway": 900,  # 4 an hour
     # 1 an hour, on mostly single track past Valley Stream, which the simulation doesn't model:

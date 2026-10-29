@@ -44,6 +44,12 @@ def short(name: str) -> str:
     )
 
 
+def heading(name: str, spec: mt.Spec) -> str:
+    """The line's ends, and its route when a branch has several, like `Babylon via Atlantic Branch - Jamaica`."""
+    end = name if spec.via else short(spec.stops[-1])
+    return f"{end} - {short(spec.stops[0])}"
+
+
 def pattern(stops: list[str], line_stops: list[str], only_express: bool = False) -> str:
     """Label a stopping pattern by its origin and the stations it skips.
 
@@ -67,10 +73,12 @@ def pattern(stops: list[str], line_stops: list[str], only_express: bool = False)
 def timetable(data: str, date: str) -> str:
     out: list[str] = []
     m7 = m.TRAINS[0]
-    for spec in mt.SPECS.values():
+    for name, spec in mt.SPECS.items():
         line, stops, route = spec.line(data), spec.stops, spec.route
         order = list(reversed(stops))
-        trips = m.am_inbound(f"{data}/gtfs", date, None if route else stops[-1], set(stops), route, stops[0])
+        trips = m.am_inbound(
+            f"{data}/gtfs", date, None if route else stops[-1], set(stops), route, stops[0], via=spec.via
+        )
         by = defaultdict(list)
         for t in trips:
             by[tuple(s for s in order if s in t.stops)].append(t.sched)
@@ -81,7 +89,7 @@ def timetable(data: str, date: str) -> str:
             label = pattern(list(pat), stops, only_express)
             rows.append([label, str(len(sch)), f"{median(sch):.0f}", *map(f1, sims)])
         out.append(
-            f"#### {short(stops[-1])} - {short(stops[0])}\n\n"
+            f"#### {heading(name, spec)}\n\n"
             + table(["Pattern", "Trips", "Scheduled", "Posted", "60 mph", "80 mph", "100 mph"], rows)
         )
     return "\n\n".join(out)

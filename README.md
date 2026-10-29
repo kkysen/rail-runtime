@@ -75,9 +75,14 @@ Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, 
   even where it isn't, like the mostly single-track West Hempstead Branch.
   Each line is its own power network, even where lines share track,
   like Babylon and Long Beach from Jamaica to Lynbrook, so neither loads the other's.
+  Babylon is two lines, one per route its trains take from Jamaica to Valley Stream:
+  the Atlantic Branch, which Long Beach and Far Rockaway share,
+  or the Babylon Branch through St. Albans.
+  Each runs half of the busiest hour's trains.
   Shared networks are still to come.
 - **Timetable:** AM inbound trips from the LIRR GTFS feed.
   A branch beyond Jamaica is timed into Jamaica, from trips that start on it.
+  Babylon's trips are timed on the route their GTFS shape follows.
 
 ## Running
 
@@ -95,6 +100,7 @@ uv run rail-runtime geometry data/rail_bbox2.json data/gcm_route.json data/gtfs 
 uv run rail-runtime geometry data/rail_bbox_atl.json data/atl_route.json data/gtfs "Atlantic Terminal" Jamaica data/atl_geometry.json
 uv run rail-runtime geometry data/rail_bbox_li.json data/hem_route.json data/gtfs Jamaica Hempstead data/hem_geometry.json
 uv run rail-runtime geometry data/rail_bbox_li.json data/bab_route.json data/gtfs Jamaica Babylon data/bab_geometry.json
+uv run rail-runtime geometry data/rail_bbox_li.json data/bab_branch_route.json data/gtfs Jamaica Babylon data/bab_branch_geometry.json
 uv run rail-runtime geometry --yard data/rail_bbox_li.json data/lb_route.json data/gtfs Jamaica "Long Beach" data/lb_geometry.json
 uv run rail-runtime geometry --yard data/rail_bbox_li.json data/frk_route.json data/gtfs Jamaica "Far Rockaway" data/frk_geometry.json
 uv run rail-runtime geometry data/rail_bbox_li.json data/wh_route.json data/gtfs Jamaica "West Hempstead" data/wh_geometry.json
@@ -174,22 +180,31 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, 6
 | Hempstead, all stops | 7 | 31 | 22.4 | 20.2 | 20.2 | 20.2 |
 | Hempstead, express | 2 | 30 | 18.7 | 16.6 | 16.5 | 16.2 |
 
-#### Babylon - Jamaica
+#### Babylon via Atlantic Branch - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre, Lynbrook | 8 | 46 | 32.8 | 32.1 | 30.7 | 29.7 |
-| Wantagh, skips Lynbrook | 7 | 30 | 22.5 | 21.9 | 20.6 | 20.4 |
+| Wantagh, skips Lynbrook | 4 | 30 | 22.5 | 21.9 | 20.6 | 20.4 |
+| Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre, Lynbrook | 3 | 47 | 32.8 | 32.1 | 30.7 | 29.7 |
 | Babylon, skips Lynbrook | 2 | 52 | 39.5 | 38.9 | 37.4 | 37.2 |
-| Wantagh, all stops | 2 | 32 | 23.6 | 23.0 | 21.9 | 21.8 |
 | Babylon, stops at Amityville, Massapequa, Bellmore, Freeport | 1 | 39 | 28.9 | 28.3 | 26.8 | 25.7 |
 | Babylon, skips Bellmore, Merrick, Freeport, Lynbrook | 1 | 49 | 35.5 | 34.9 | 33.4 | 32.8 |
-| Babylon, all stops | 1 | 53 | 40.6 | 40.0 | 38.7 | 38.5 |
 | Babylon, skips Freeport, Baldwin, Rockville Centre, Lynbrook | 1 | 49 | 35.4 | 34.8 | 33.3 | 32.7 |
 | Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre | 1 | 49 | 33.9 | 33.2 | 32.0 | 31.0 |
-| Babylon, stops at Wantagh, Bellmore, Merrick, Freeport, Baldwin, Rockville Centre | 1 | 46 | 31.5 | 30.9 | 29.4 | 28.3 |
 | Babylon, stops at Wantagh, Bellmore, Merrick, Freeport | 1 | 47 | 28.8 | 28.2 | 26.7 | 25.2 |
-| Freeport, skips Lynbrook | 1 | 24 | 15.5 | 14.9 | 13.6 | 13.4 |
+| Wantagh, all stops | 1 | 32 | 23.6 | 23.0 | 21.9 | 21.8 |
+
+#### Babylon via Babylon Branch - Jamaica
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre, Lynbrook, St. Albans | 5 | 46 | 33.8 | 32.9 | 31.3 | 30.2 |
+| Wantagh, skips Lynbrook, St. Albans | 2 | 30 | 23.6 | 22.6 | 21.2 | 20.9 |
+| Babylon, all stops | 1 | 53 | 42.6 | 41.8 | 40.6 | 40.4 |
+| Babylon, stops at Wantagh, Bellmore, Merrick, Freeport, Baldwin, Rockville Centre | 1 | 46 | 32.5 | 31.6 | 30.0 | 28.7 |
+| Freeport, skips Lynbrook | 1 | 24 | 17.6 | 16.7 | 15.5 | 15.2 |
+| Wantagh, skips St. Albans | 1 | 33 | 24.7 | 23.7 | 22.5 | 22.3 |
+| Wantagh, skips Lynbrook | 1 | 32 | 24.6 | 23.7 | 22.5 | 22.3 |
 
 #### Long Beach - Jamaica
 
@@ -311,13 +326,21 @@ One train alone, minutes.
 | M7, 750 V third rail, full power | 22.1 | 19.9 | 19.9 | 19.8 |
 | M8, 25 kV | 22.2 | 20.0 | 20.0 | 20.0 |
 
-#### Babylon local
+#### Babylon via Atlantic Branch local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
 | M7, 750 V third rail | 40.6 | 40.0 | 38.7 | 38.5 |
 | M7, 750 V third rail, full power | 39.6 | 39.0 | 37.7 | 37.5 |
 | M8, 25 kV | 40.0 | 39.3 | 38.1 | 37.9 |
+
+#### Babylon via Babylon Branch local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 42.6 | 41.8 | 40.6 | 40.4 |
+| M7, 750 V third rail, full power | 41.7 | 40.8 | 39.6 | 39.2 |
+| M8, 25 kV | 42.0 | 41.2 | 40.0 | 39.7 |
 
 #### Long Beach local
 
@@ -421,14 +444,23 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 80 mph | 20.4 | 20.5 | 20.4 | 20.3 | 484 |
 |  | 100 mph | 20.4 | 20.5 | 20.4 | 20.3 | 485 |
 
-#### Babylon: 7.5 min headways each way
+#### Babylon via Atlantic Branch: 15 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Babylon local | posted | 40.6 | 40.7 | 40.6 | 40.2 | 497 |
-|  | 60 mph | 40.0 | 40.1 | 40.0 | 39.6 | 504 |
-|  | 80 mph | 38.8 | 39.0 | 39.0 | 38.4 | 514 |
-|  | 100 mph | 38.6 | 38.9 | 38.8 | 38.2 | 519 |
+| Babylon via Atlantic Branch local | posted | 40.6 | 40.7 | 40.7 | 40.2 | 537 |
+|  | 60 mph | 40.0 | 40.1 | 40.0 | 39.6 | 540 |
+|  | 80 mph | 38.8 | 38.9 | 38.8 | 38.4 | 525 |
+|  | 100 mph | 38.6 | 38.7 | 38.7 | 38.2 | 516 |
+
+#### Babylon via Babylon Branch: 15 min headways each way
+
+| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Babylon via Babylon Branch local | posted | 42.7 | 42.8 | 42.8 | 42.3 | 529 |
+|  | 60 mph | 41.9 | 41.9 | 41.9 | 41.5 | 500 |
+|  | 80 mph | 40.8 | 40.8 | 40.8 | 40.3 | 510 |
+|  | 100 mph | 40.6 | 40.7 | 40.7 | 40.1 | 527 |
 
 #### Long Beach: 12 min headways each way
 
@@ -543,7 +575,7 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 9.61 | 10.17 | Country Life Press | 30 mph | 62 mph | 8 s |
 | 5.70 | 5.75 | Floral Park | 25 mph | 45 mph | 7 s |
 
-#### Babylon (base: local 40.6 min)
+#### Babylon via Atlantic Branch (base: local 40.6 min)
 
 | From mi | To mi | Near | Posted | Raised to | local saves |
 | ---: | ---: | --- | ---: | ---: | ---: |
@@ -556,6 +588,19 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 3.04 | 3.11 | Jamaica | 60 mph | 80 mph | 5 s |
 | 0.98 | 1.28 | Jamaica | 60 mph | 77 mph | 4 s |
 | 0.25 | 0.37 | Jamaica | 30 mph | 39 mph | 3 s |
+
+#### Babylon via Babylon Branch (base: local 42.6 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 6.36 | 8.93 | Lynbrook | 60 mph | 80 mph | 27 s |
+| 0.19 | 0.64 | Jamaica | 35 mph | 80 mph | 14 s |
+| 0.00 | 0.18 | Jamaica | 20 mph | 80 mph | 13 s |
+| 26.35 | 27.41 | Babylon | 60 mph | 80 mph | 11 s |
+| 0.65 | 1.69 | Jamaica | 50 mph | 80 mph | 11 s |
+| 3.15 | 3.68 | St. Albans | 50 mph | 80 mph | 10 s |
+| 3.68 | 5.17 | St. Albans | 60 mph | 80 mph | 7 s |
+| 5.32 | 6.35 | Lynbrook | 70 mph | 80 mph | 3 s |
 
 #### Long Beach (base: local 26.3 min)
 
@@ -672,11 +717,19 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 10.24 | 10.33 | Hempstead | 15 mph | 6 s |
 | 0.12 | 0.58 | Jamaica | 54 mph | 4 s |
 
-#### Babylon (base: local 38.7 min)
+#### Babylon via Atlantic Branch (base: local 38.7 min)
 
 | From mi | To mi | Near | Allows | local saves |
 | ---: | ---: | --- | ---: | ---: |
 | 0.02 | 0.72 | Jamaica | 39 mph | 11 s |
+
+#### Babylon via Babylon Branch (base: local 40.6 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 1.09 | 1.81 | St. Albans | 58 mph | 13 s |
+| 4.31 | 5.10 | St. Albans | 60 mph | 11 s |
+| 0.08 | 0.53 | Jamaica | 55 mph | 3 s |
 
 #### Long Beach (base: local 22.8 min)
 

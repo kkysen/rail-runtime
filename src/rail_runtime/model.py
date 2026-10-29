@@ -392,14 +392,18 @@ def am_inbound(
     route_id: str | None = None,
     terminus: str = "Penn Station",
     arr_window: tuple[float, float] = (360, 600),
+    via: str | None = None,
 ) -> list[Trip]:
     """Scheduled origin->`terminus` times for AM trips, with their stops on this line.
 
     `terminus` may be partway along a trip, like Jamaica for a branch whose trains run on to Penn.
     Without an `origin`, a trip counts only if it starts on this line,
     so not a diesel through train that runs onto it.
+    With `via`, a trip counts only if its shape passes that station, stopping there or not,
+    to tell apart a branch's routes.
     """
-    names = {r["stop_id"]: r["stop_name"] for r in read_csv(f"{gtfs}/stops.txt")}
+    stops_txt = read_csv(f"{gtfs}/stops.txt")
+    names = {r["stop_id"]: r["stop_name"] for r in stops_txt}
     svc = {
         c["service_id"]
         for c in read_csv(f"{gtfs}/calendar_dates.txt")
@@ -410,6 +414,17 @@ def am_inbound(
         for t in read_csv(f"{gtfs}/trips.txt")
         if t["service_id"] in svc and (route_id is None or t["route_id"] == route_id)
     }
+    if via:
+        at = next((float(r["stop_lat"]), float(r["stop_lon"])) for r in stops_txt if r["stop_name"] == via)
+        shapes = {t["shape_id"] for t in trips.values()}
+        # Shapes within 200 m of the station, by an equirectangular distance at the LIRR's latitude.
+        passing = {
+            r["shape_id"]
+            for r in read_csv(f"{gtfs}/shapes.txt")
+            if r["shape_id"] in shapes
+            and math.hypot((float(r["shape_pt_lat"]) - at[0]) * 111e3, (float(r["shape_pt_lon"]) - at[1]) * 84e3) < 200
+        }
+        trips = {tid: t for tid, t in trips.items() if t["shape_id"] in passing}
     sts: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
     for r in read_csv(f"{gtfs}/stop_times.txt"):
         if r["trip_id"] in trips:
