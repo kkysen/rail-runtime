@@ -484,7 +484,13 @@ SPECS = {
         HAR_STOPS,
         {
             "local": HAR_LOCAL[::-1],
-            "express": [*HAR_STOPS[: len(HAR_LOCAL) - 1 : -1], "Harlem-125 St", "Grand Central"],
+            # Local to North White Plains but for Mt Pleasant, which few trains serve, then White Plains too.
+            "express": [
+                *(s for s in HAR_STOPS[: len(HAR_LOCAL) - 2 : -1] if s != "Mt Pleasant"),
+                "White Plains",
+                "Harlem-125 St",
+                "Grand Central",
+            ],
         },
         (True, False),
         "2",
@@ -495,7 +501,7 @@ SPECS = {
         "nh_geometry.json",
         "substations_mnr.json",
         NH_STOPS,
-        {"local": NH_LOCAL[::-1], "express": [*NH_STOPS[: len(NH_LOCAL) - 1 : -1], "Harlem-125 St", "Grand Central"]},
+        {"local": NH_LOCAL[::-1], "express": [*NH_STOPS[: len(NH_LOCAL) - 2 : -1], "Harlem-125 St", "Grand Central"]},
         (True, False),
         "3",
         railroad="Metro-North",

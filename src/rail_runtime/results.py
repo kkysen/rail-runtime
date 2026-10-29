@@ -130,15 +130,25 @@ def pattern(stops: list[str], line_stops: list[str], only_express: bool = False,
 
 
 @cache
-def schedules(data: str, date: str) -> dict[str, dict[tuple[str, ...], list[float]]]:
-    """Per line, the scheduled minutes of its AM inbound trips, by stopping pattern in inbound order."""
+def schedules(data: str, date: str, diesel: bool = False) -> dict[str, dict[tuple[str, ...], list[float]]]:
+    """Per line, the scheduled minutes of its AM inbound trips, by stopping pattern in inbound order.
+
+    With `diesel`, instead the Metro-North trips that start beyond the line and run onto it,
+    like the Hudson's from Poughkeepsie, timed from where they reach it.
+    """
     out: dict[str, dict[tuple[str, ...], list[float]]] = {}
     for name, spec in mt.SPECS.items():
         stops, route = spec.stops, spec.route
         order = list(reversed(stops))
-        trips = m.am_inbound(
-            spec.gtfs(data), date, None if route else stops[-1], set(stops), route, stops[0], via=spec.via
-        )
+        if diesel:
+            if spec.railroad == "LIRR":
+                continue
+            trips = m.am_inbound(spec.gtfs(data), date, stops[-1], set(stops), route, stops[0], via=spec.via)
+            trips = [t for t in trips if t.first not in stops]
+        else:
+            trips = m.am_inbound(
+                spec.gtfs(data), date, None if route else stops[-1], set(stops), route, stops[0], via=spec.via
+            )
         by: defaultdict[tuple[str, ...], list[float]] = defaultdict(list)
         for t in trips:
             by[tuple(s for s in order if s in t.stops)].append(t.sched)
@@ -147,9 +157,15 @@ def schedules(data: str, date: str) -> dict[str, dict[tuple[str, ...], list[floa
 
 
 def scheduled(data: str, date: str, name: str, pat: list[str]) -> str:
-    """Median scheduled minutes of line `name`'s trips on inbound pattern `pat`; blank if none run it."""
+    """Median scheduled time of line `name`'s trips on inbound pattern `pat`; blank if none run it.
+
+    Where only diesel trains run it, like the Hudson's expresses from Croton-Harmon, theirs, marked so.
+    """
     sch = schedules(data, date)[name].get(tuple(pat))
-    return m.hms(median(sch)) if sch else ""
+    if sch:
+        return m.hms(median(sch))
+    sch = schedules(data, date, diesel=True).get(name, {}).get(tuple(pat))
+    return f"{m.hms(median(sch))} (diesel)" if sch else ""
 
 
 def timetable(data: str, date: str) -> str:
