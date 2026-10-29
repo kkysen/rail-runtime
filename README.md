@@ -338,36 +338,36 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, o
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Stamford, skips Wakefield, Woodlawn, Williams Bridge, Botanical Garden, Tremont, Melrose | 6 | 68 | 52.7 | 46.9 | 45.1 | 44.8 |
+| Stamford, all stops | 6 | 68 | 52.7 | 46.9 | 45.1 | 44.8 |
 | New Haven, stops at Bridgeport, Stamford | 3 | 90 | 76.0 | 67.6 | 61.6 | 59.3 |
-| New Rochelle, stops at Pelham, Mt Vernon East, Harlem-125 St | 3 | 37 | 25.4 | 20.1 | 18.5 | 18.2 |
+| New Rochelle, skips Fordham | 3 | 37 | 25.4 | 20.1 | 18.5 | 18.2 |
 | Harrison, stops at Mamaroneck, Larchmont | 2 | 44 | 29.9 | 24.0 | 21.8 | 21.4 |
 | Harrison, stops at Mamaroneck, Larchmont, Harlem-125 St | 2 | 44 | 30.7 | 25.0 | 23.0 | 22.6 |
-| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Stamford, Old Greenwich, Riverside, Cos Cob, Greenwich, Harlem-125 St | 2 | 128 | 92.6 | 84.8 | 80.2 | 78.7 |
+| New Haven, skips Rowayton, Darien, Noroton Heights, Port Chester, Rye, Harrison, Mamaroneck, Larchmont, New Rochelle, Pelham, Mt Vernon East, Fordham | 2 | 128 | 92.6 | 84.8 | 80.2 | 78.7 |
 | South Norwalk, stops at Rowayton, Darien, Noroton Heights, Stamford, Greenwich, Harlem-125 St | 2 | 72 | 51.7 | 45.1 | 41.9 | 41.1 |
-| Stamford, stops at Old Greenwich, Riverside, Cos Cob, Greenwich, Port Chester, Rye, Harlem-125 St | 2 | 64 | 44.9 | 38.8 | 36.3 | 35.6 |
+| Stamford, skips Harrison, Mamaroneck, Larchmont, New Rochelle, Pelham, Mt Vernon East, Fordham | 2 | 64 | 44.9 | 38.8 | 36.3 | 35.6 |
 | Bridgeport, stops at Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk | 1 | 93 | 65.8 | 58.2 | 53.9 | 52.9 |
 | Bridgeport, stops at Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Rowayton, Darien, Noroton Heights, Stamford, Harlem-125 St | 1 | 94 | 72.0 | 64.8 | 61.1 | 60.2 |
 | Bridgeport, stops at Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Stamford, Harlem-125 St | 1 | 95 | 68.5 | 61.3 | 57.3 | 56.3 |
 | Fairfield-Black Rock, stops at Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Stamford, Harlem-125 St | 1 | 83 | 63.8 | 57.0 | 53.2 | 52.3 |
 | Greenwich, stops at Port Chester, Rye, Harlem-125 St | 1 | 52 | 36.1 | 30.1 | 27.6 | 26.9 |
-| Harrison, skips Wakefield, Woodlawn, Williams Bridge, Botanical Garden, Tremont, Melrose | 1 | 47 | 34.7 | 29.3 | 27.8 | 27.6 |
-| Harrison, stops at Mamaroneck, Larchmont, New Rochelle, Pelham, Mt Vernon East | 1 | 45 | 32.8 | 27.2 | 25.5 | 25.1 |
+| Harrison, all stops | 1 | 47 | 34.7 | 29.3 | 27.8 | 27.6 |
+| Harrison, skips Fordham, Harlem-125 St | 1 | 45 | 32.8 | 27.2 | 25.5 | 25.1 |
 | New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield | 1 | 110 | 81.0 | 72.5 | 66.7 | 64.7 |
 | New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Harlem-125 St | 1 | 111 | 81.9 | 73.6 | 67.9 | 65.9 |
-| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Darien, Stamford, Greenwich, Harlem-125 St | 1 | 119 | 90.5 | 82.6 | 77.8 | 76.3 |
-| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Rowayton, Darien, Noroton Heights, Stamford, Harlem-125 St | 1 | 122 | 91.8 | 83.9 | 79.1 | 77.5 |
+| New Haven, skips Rowayton, Noroton Heights, Old Greenwich, Riverside, Cos Cob, Port Chester, Rye, Harrison, Mamaroneck, Larchmont, New Rochelle, Pelham, Mt Vernon East, Fordham | 1 | 119 | 90.5 | 82.6 | 77.8 | 76.3 |
+| New Haven, skips Old Greenwich, Riverside, Cos Cob, Greenwich, Port Chester, Rye, Harrison, Mamaroneck, Larchmont, New Rochelle, Pelham, Mt Vernon East, Fordham | 1 | 122 | 91.8 | 83.9 | 79.1 | 77.5 |
 | New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Stamford, Harlem-125 St | 1 | 116 | 88.3 | 80.3 | 75.3 | 73.6 |
 | New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Stamford, Harlem-125 St | 1 | 116 | 82.8 | 74.6 | 69.1 | 67.1 |
-| New Haven, skips Southport, Green's Farms, Rowayton, Noroton Heights, Harrison, Mamaroneck, Larchmont, Pelham, Mt Vernon East, Wakefield, Woodlawn, Williams Bridge, Botanical Garden, Fordham, Tremont, Melrose | 1 | 128 | 94.1 | 86.7 | 82.4 | 80.8 |
+| New Haven, skips Southport, Green's Farms, Rowayton, Noroton Heights, Harrison, Mamaroneck, Larchmont, Pelham, Mt Vernon East, Fordham | 1 | 128 | 94.1 | 86.7 | 82.4 | 80.8 |
 | New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Westport, South Norwalk, Darien, Noroton Heights, Stamford, Harlem-125 St | 1 | 115 | 87.0 | 79.0 | 74.0 | 72.2 |
 | New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Westport, Stamford, Harlem-125 St | 1 | 110 | 83.7 | 75.7 | 70.4 | 68.5 |
 | New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Stamford, Harlem-125 St | 1 | 110 | 80.3 | 72.1 | 66.5 | 64.4 |
-| New Rochelle, stops at Pelham, Mt Vernon East | 1 | 37 | 24.5 | 19.0 | 17.4 | 17.1 |
+| New Rochelle, skips Fordham, Harlem-125 St | 1 | 37 | 24.5 | 19.0 | 17.4 | 17.1 |
 | South Norwalk, stops at Rowayton, Darien, Noroton Heights, Harlem-125 St | 1 | 71 | 49.7 | 43.0 | 39.4 | 38.6 |
 | South Norwalk, stops at Rowayton, Darien, Noroton Heights, Stamford | 1 | 72 | 49.8 | 43.0 | 39.5 | 38.6 |
 | Stamford, stops at Greenwich, Port Chester, Rye, Harrison, Fordham, Harlem-125 St | 1 | 63 | 44.0 | 37.7 | 35.2 | 34.4 |
-| Stamford, stops at Greenwich, Port Chester, Rye, Harrison, Mamaroneck, Larchmont, Harlem-125 St | 1 | 59 | 45.5 | 39.3 | 36.5 | 36.1 |
+| Stamford, skips Old Greenwich, Riverside, Cos Cob, New Rochelle, Pelham, Mt Vernon East, Fordham | 1 | 59 | 45.5 | 39.3 | 36.5 | 36.1 |
 | Stamford, stops at Old Greenwich, Riverside, Cos Cob, Greenwich, Port Chester, Rye | 1 | 59 | 44.1 | 37.8 | 35.2 | 34.4 |
 
 #### New Canaan - Stamford
@@ -520,8 +520,8 @@ One train alone, minutes.
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: |
-| M8, 700 V third rail and 12.5 kV | 112.8 | 105.4 | 102.4 | 101.5 |
-| M8, 12.5 kV | 112.5 | 105.1 | 102.0 | 101.0 |
+| M8, 700 V third rail and 12.5 kV | 106.0 | 98.6 | 95.1 | 94.1 |
+| M8, 12.5 kV | 105.9 | 98.4 | 94.8 | 93.7 |
 
 #### New Canaan local
 
@@ -677,10 +677,10 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 
 | Service | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| New Haven local | posted | 113.7 | 113.8 | 113.8 | 113.4 | 493 |
-|  | 60 mph | 106.3 | 106.5 | 106.4 | 106.0 | 480 |
-|  | 80 mph | 103.3 | 103.5 | 103.4 | 102.9 | 495 |
-|  | 100 mph | 102.4 | 102.5 | 102.5 | 101.9 | 493 |
+| New Haven local | posted | 106.7 | 106.7 | 106.7 | 106.6 | 504 |
+|  | 60 mph | 99.3 | 99.4 | 99.4 | 99.2 | 500 |
+|  | 80 mph | 95.8 | 95.8 | 95.8 | 95.6 | 517 |
+|  | 100 mph | 94.7 | 94.8 | 94.8 | 94.4 | 500 |
 
 #### New Canaan: 30 min headways each way
 
@@ -887,7 +887,7 @@ One train, the timetable's, raising one posted zone at a time to what the curves
 | 50.68 | 51.51 | Brewster | 50 mph | 65 mph | 10 s |
 | 36.68 | 38.79 | Bedford Hills | 60 mph | 80 mph | 10 s |
 
-#### New Haven (base: local 112.8 min)
+#### New Haven (base: local 106.0 min)
 
 | From mi | To mi | Near | Posted | Raised to | local saves |
 | ---: | ---: | --- | ---: | ---: | ---: |
@@ -895,14 +895,14 @@ One train, the timetable's, raising one posted zone at a time to what the curves
 | 54.48 | 55.16 | Bridgeport | 30 mph | 80 mph | 32 s |
 | 15.87 | 16.55 | New Rochelle | 30 mph | 68 mph | 30 s |
 | 33.02 | 34.30 | Stamford | 50 mph | 80 mph | 26 s |
+| 11.39 | 15.69 | Mt Vernon East  | 60 mph | 80 mph | 21 s |
 | 63.59 | 70.73 | West Haven | 75 mph | 80 mph | 13 s |
 | 23.00 | 23.35 | Rye | 50 mph | 80 mph | 13 s |
 | 4.46 | 4.92 | Harlem-125 St | 35 mph | 50 mph | 12 s |
 | 71.53 | 71.83 | New Haven | 30 mph | 80 mph | 10 s |
 | 55.17 | 56.22 | Bridgeport | 45 mph | 80 mph | 10 s |
 | 16.69 | 17.11 | New Rochelle | 50 mph | 80 mph | 9 s |
-| 4.93 | 5.27 | Melrose | 40 mph | 80 mph | 9 s |
-| 60.87 | 62.87 | Milford | 70 mph | 80 mph | 8 s |
+| 4.93 | 5.27 | Harlem-125 St | 40 mph | 80 mph | 9 s |
 
 #### New Canaan (base: local 13.8 min)
 
@@ -1042,18 +1042,20 @@ One train, the timetable's, at an 80 mph cap, easing one curve-limited zone at a
 | 43.38 | 44.60 | Goldens Bridge | 64 mph | 5 s |
 | 46.07 | 46.97 | Purdy's | 60 mph | 4 s |
 
-#### New Haven (base: local 102.4 min)
+#### New Haven (base: local 95.1 min)
 
 | From mi | To mi | Near | Allows | local saves |
 | ---: | ---: | --- | ---: | ---: |
 | 54.38 | 55.10 | Bridgeport | 40 mph | 23 s |
-| 4.28 | 5.09 | Harlem-125 St | 45 mph | 17 s |
+| 4.28 | 5.09 | Harlem-125 St | 45 mph | 18 s |
 | 0.00 | 0.09 | Grand Central | 15 mph | 14 s |
+| 6.14 | 6.60 | Harlem-125 St | 60 mph | 11 s |
 | 55.23 | 56.03 | Bridgeport | 49 mph | 10 s |
+| 12.36 | 13.89 | Mt Vernon East  | 64 mph | 10 s |
+| 9.58 | 10.01 | Fordham | 60 mph | 7 s |
 | 34.50 | 35.49 | Noroton Heights | 70 mph | 6 s |
 | 57.42 | 58.16 | Stratford | 70 mph | 4 s |
 | 15.54 | 16.60 | New Rochelle | 61 mph | 4 s |
-| 41.05 | 41.68 | South Norwalk | 48 mph | 4 s |
 
 #### New Canaan (base: local 11.3 min)
 

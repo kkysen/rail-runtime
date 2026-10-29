@@ -291,7 +291,10 @@ HAR_STOPS = [
     "Southeast",
 ]
 NH_STOPS = [
-    *HAR_STOPS[:9],
+    # Sharing the Harlem Line to Woodlawn, but stopping only at 125th St and Fordham.
+    "Grand Central",
+    "Harlem-125 St",
+    "Fordham",
     "Mt Vernon East ",  # sic: GTFS names it with a trailing space
     "Pelham",
     "New Rochelle",
