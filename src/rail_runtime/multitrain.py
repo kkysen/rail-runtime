@@ -290,6 +290,37 @@ HAR_STOPS = [
     "Brewster",
     "Southeast",
 ]
+NH_STOPS = [
+    *HAR_STOPS[:9],
+    "Mt Vernon East ",  # sic: GTFS names it with a trailing space
+    "Pelham",
+    "New Rochelle",
+    "Larchmont",
+    "Mamaroneck",
+    "Harrison",
+    "Rye",
+    "Port Chester",
+    "Greenwich",
+    "Cos Cob",
+    "Riverside",
+    "Old Greenwich",
+    "Stamford",
+    "Noroton Heights",
+    "Darien",
+    "Rowayton",
+    "South Norwalk",
+    "East Norwalk",
+    "Westport",
+    "Green's Farms",
+    "Southport",
+    "Fairfield",
+    "Fairfield-Black Rock",
+    "Bridgeport",
+    "Stratford",
+    "Milford",
+    "West Haven",
+    "New Haven",
+]
 
 
 class Spec(NamedTuple):
@@ -446,6 +477,16 @@ SPECS = {
         "2",
         railroad="Metro-North",
         fleet="Metro-North",
+    ),
+    "New Haven": Spec(
+        "nh_geometry.json",
+        "substations_mnr.json",
+        NH_STOPS,
+        {"local": NH_STOPS[::-1]},
+        (True, False),
+        "3",
+        railroad="Metro-North",
+        fleet="New Haven",
     ),
 }
 
@@ -658,6 +699,7 @@ BRANCH_KEYS = {
     "ronk": "Ronkonkoma",
     "hud": "Hudson",
     "har": "Harlem",
+    "nh": "New Haven",
 }
 
 # Seconds between trains, from the busiest hour of AM arrivals into Jamaica on 2026-10-27.
@@ -683,6 +725,7 @@ BRANCH_HEADWAYS = {
     # and all three lines share Park Avenue's into Grand Central.
     "Hudson": 3600 / 7,
     "Harlem": 3600 / 16,
+    "New Haven": 3600 / 15,
 }
 
 

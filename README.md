@@ -9,7 +9,7 @@ and the Main Line from Jamaica,
 into Grand Central Madison (GCM), the Main Line from Jamaica through the 63rd Street Tunnel,
 and into Atlantic Terminal, the Atlantic Branch from Jamaica.
 Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon, Long Beach, Far Rockaway, West Hempstead, Huntington and Ronkonkoma.
-On Metro-North, it covers the electric lines into Grand Central (GCT): the Harlem Line to Southeast, and the Hudson Line to Croton-Harmon.
+On Metro-North, it covers the electric lines into Grand Central (GCT): the Harlem Line to Southeast, the Hudson Line to Croton-Harmon, and the New Haven Line to New Haven.
 
 ## Method
 
@@ -100,6 +100,11 @@ On Metro-North, it covers the electric lines into Grand Central (GCT): the Harle
   - The Hudson Line's busy service runs 7 an hour: not its trains from Poughkeepsie,
     whose dual-mode locomotives take the third rail only within Grand Central.
     Their replacements will take it throughout, and they wait to be modeled with the diesel trains.
+  - On the New Haven Line, the M8 runs on the third rail to just west of Pelham, mile 14.7,
+    where Metro-North's trains change over, and on 12.5 kV catenary beyond, at rated power.
+    The third rail's substations stop where it does.
+    Its timetable trips start no farther out than New Haven's Union Station, where the trace ends,
+    so not at New Haven-State St, and its busy service runs 15 an hour.
 - **Timetable:** AM inbound trips from the LIRR's and Metro-North's GTFS feeds.
   A branch beyond Jamaica is timed into Jamaica, from trips that start on it.
   Babylon's trips are timed on the route their GTFS shape follows.
@@ -155,7 +160,7 @@ cargo test --manifest-path sim/Cargo.toml
 
 ### Timetable vs. model
 
-AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, or on Metro-North at GCT, 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled minutes vs. one train running flat out with 30 s dwells: an M7 on the LIRR's 750 V third rail or an M7A on Metro-North's 700 V.
+AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, or on Metro-North at GCT, 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled minutes vs. one train running flat out with 30 s dwells: an M7 on the LIRR's 750 V third rail, an M7A on Metro-North's 700 V, or on the New Haven Line, an M8 on that third rail to Pelham and 12.5 kV catenary beyond.
 
 #### Port Washington - Penn
 
@@ -327,6 +332,42 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, o
 | Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, North White Plains, White Plains, Harlem-125 St | 1 | 86 | 67.5 | 60.3 | 54.3 | 53.0 |
 | Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, North White Plains, White Plains, Hartsdale, Scarsdale, Harlem-125 St | 1 | 89 | 69.7 | 62.5 | 57.0 | 55.8 |
 
+#### New Haven - GCT
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Stamford, skips Wakefield, Woodlawn, Williams Bridge, Botanical Garden, Tremont, Melrose | 6 | 68 | 52.7 | 46.9 | 45.1 | 44.8 |
+| New Haven, stops at Bridgeport, Stamford | 3 | 90 | 76.0 | 67.6 | 61.6 | 59.3 |
+| New Rochelle, stops at Pelham, Mt Vernon East, Harlem-125 St | 3 | 37 | 25.4 | 20.1 | 18.5 | 18.2 |
+| Harrison, stops at Mamaroneck, Larchmont | 2 | 44 | 29.9 | 24.0 | 21.8 | 21.4 |
+| Harrison, stops at Mamaroneck, Larchmont, Harlem-125 St | 2 | 44 | 30.7 | 25.0 | 23.0 | 22.6 |
+| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Stamford, Old Greenwich, Riverside, Cos Cob, Greenwich, Harlem-125 St | 2 | 128 | 92.6 | 84.8 | 80.2 | 78.7 |
+| South Norwalk, stops at Rowayton, Darien, Noroton Heights, Stamford, Greenwich, Harlem-125 St | 2 | 72 | 51.7 | 45.1 | 41.9 | 41.1 |
+| Stamford, stops at Old Greenwich, Riverside, Cos Cob, Greenwich, Port Chester, Rye, Harlem-125 St | 2 | 64 | 44.9 | 38.8 | 36.3 | 35.6 |
+| Bridgeport, stops at Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk | 1 | 93 | 65.8 | 58.2 | 53.9 | 52.9 |
+| Bridgeport, stops at Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Rowayton, Darien, Noroton Heights, Stamford, Harlem-125 St | 1 | 94 | 72.0 | 64.8 | 61.1 | 60.2 |
+| Bridgeport, stops at Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Stamford, Harlem-125 St | 1 | 95 | 68.5 | 61.3 | 57.3 | 56.3 |
+| Fairfield-Black Rock, stops at Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Stamford, Harlem-125 St | 1 | 83 | 63.8 | 57.0 | 53.2 | 52.3 |
+| Greenwich, stops at Port Chester, Rye, Harlem-125 St | 1 | 52 | 36.1 | 30.1 | 27.6 | 26.9 |
+| Harrison, skips Wakefield, Woodlawn, Williams Bridge, Botanical Garden, Tremont, Melrose | 1 | 47 | 34.7 | 29.3 | 27.8 | 27.6 |
+| Harrison, stops at Mamaroneck, Larchmont, New Rochelle, Pelham, Mt Vernon East | 1 | 45 | 32.8 | 27.2 | 25.5 | 25.1 |
+| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield | 1 | 110 | 81.0 | 72.5 | 66.7 | 64.7 |
+| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Harlem-125 St | 1 | 111 | 81.9 | 73.6 | 67.9 | 65.9 |
+| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Darien, Stamford, Greenwich, Harlem-125 St | 1 | 119 | 90.5 | 82.6 | 77.8 | 76.3 |
+| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Rowayton, Darien, Noroton Heights, Stamford, Harlem-125 St | 1 | 122 | 91.8 | 83.9 | 79.1 | 77.5 |
+| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Stamford, Harlem-125 St | 1 | 116 | 88.3 | 80.3 | 75.3 | 73.6 |
+| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Stamford, Harlem-125 St | 1 | 116 | 82.8 | 74.6 | 69.1 | 67.1 |
+| New Haven, skips Southport, Green's Farms, Rowayton, Noroton Heights, Harrison, Mamaroneck, Larchmont, Pelham, Mt Vernon East, Wakefield, Woodlawn, Williams Bridge, Botanical Garden, Fordham, Tremont, Melrose | 1 | 128 | 94.1 | 86.7 | 82.4 | 80.8 |
+| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Westport, South Norwalk, Darien, Noroton Heights, Stamford, Harlem-125 St | 1 | 115 | 87.0 | 79.0 | 74.0 | 72.2 |
+| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Westport, Stamford, Harlem-125 St | 1 | 110 | 83.7 | 75.7 | 70.4 | 68.5 |
+| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Stamford, Harlem-125 St | 1 | 110 | 80.3 | 72.1 | 66.5 | 64.4 |
+| New Rochelle, stops at Pelham, Mt Vernon East | 1 | 37 | 24.5 | 19.0 | 17.4 | 17.1 |
+| South Norwalk, stops at Rowayton, Darien, Noroton Heights, Harlem-125 St | 1 | 71 | 49.7 | 43.0 | 39.4 | 38.6 |
+| South Norwalk, stops at Rowayton, Darien, Noroton Heights, Stamford | 1 | 72 | 49.8 | 43.0 | 39.5 | 38.6 |
+| Stamford, stops at Greenwich, Port Chester, Rye, Harrison, Fordham, Harlem-125 St | 1 | 63 | 44.0 | 37.7 | 35.2 | 34.4 |
+| Stamford, stops at Greenwich, Port Chester, Rye, Harrison, Mamaroneck, Larchmont, Harlem-125 St | 1 | 59 | 45.5 | 39.3 | 36.5 | 36.1 |
+| Stamford, stops at Old Greenwich, Riverside, Cos Cob, Greenwich, Port Chester, Rye | 1 | 59 | 44.1 | 37.8 | 35.2 | 34.4 |
+
 ### Trains
 
 One train alone, minutes.
@@ -466,6 +507,13 @@ One train alone, minutes.
 | M7A, 700 V third rail | 90.9 | 84.3 | 81.3 | 80.8 |
 | M7A, 700 V third rail, full power | 90.0 | 83.2 | 79.4 | 78.7 |
 | M8, 12.5 kV | 90.3 | 83.5 | 80.0 | 79.4 |
+
+#### New Haven local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M8, 700 V third rail and 12.5 kV | 112.8 | 105.4 | 102.4 | 101.5 |
+| M8, 12.5 kV | 112.5 | 105.1 | 102.0 | 101.0 |
 
 ### Busy service
 
@@ -609,6 +657,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 60 mph | 84.7 | 85.0 | 84.9 | 84.3 | 458 |
 |  | 80 mph | 81.5 | 82.3 | 82.0 | 80.8 | 449 |
 |  | 100 mph | 81.0 | 81.9 | 81.6 | 80.2 | 446 |
+
+#### New Haven: 4 min headways each way
+
+| Service | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| New Haven local | posted | 113.7 | 113.8 | 113.8 | 113.4 | 493 |
+|  | 60 mph | 106.3 | 106.5 | 106.4 | 106.0 | 480 |
+|  | 80 mph | 103.3 | 103.5 | 103.4 | 102.9 | 495 |
+|  | 100 mph | 102.4 | 102.5 | 102.5 | 101.9 | 493 |
 
 ### Posted slow zones
 
@@ -806,6 +863,23 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 50.68 | 51.51 | Brewster | 50 mph | 65 mph | 10 s |
 | 36.68 | 38.79 | Bedford Hills | 60 mph | 80 mph | 10 s |
 
+#### New Haven (base: local 112.8 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 249 s |
+| 54.48 | 55.16 | Bridgeport | 30 mph | 80 mph | 32 s |
+| 15.87 | 16.55 | New Rochelle | 30 mph | 68 mph | 30 s |
+| 33.02 | 34.30 | Stamford | 50 mph | 80 mph | 26 s |
+| 63.59 | 70.73 | West Haven | 75 mph | 80 mph | 13 s |
+| 23.00 | 23.35 | Rye | 50 mph | 80 mph | 13 s |
+| 4.46 | 4.92 | Harlem-125 St | 35 mph | 50 mph | 12 s |
+| 71.53 | 71.83 | New Haven | 30 mph | 80 mph | 10 s |
+| 55.17 | 56.22 | Bridgeport | 45 mph | 80 mph | 10 s |
+| 16.69 | 17.11 | New Rochelle | 50 mph | 80 mph | 9 s |
+| 4.93 | 5.27 | Melrose | 40 mph | 80 mph | 9 s |
+| 60.87 | 62.87 | Milford | 70 mph | 80 mph | 8 s |
+
 ### Limiting curves
 
 One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
@@ -935,6 +1009,19 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 39.58 | 40.54 | Bedford Hills | 63 mph | 6 s |
 | 43.38 | 44.60 | Goldens Bridge | 64 mph | 5 s |
 | 46.07 | 46.97 | Purdy's | 60 mph | 4 s |
+
+#### New Haven (base: local 102.4 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 54.38 | 55.10 | Bridgeport | 40 mph | 23 s |
+| 4.28 | 5.09 | Harlem-125 St | 45 mph | 17 s |
+| 0.00 | 0.09 | Grand Central | 15 mph | 14 s |
+| 55.23 | 56.03 | Bridgeport | 49 mph | 10 s |
+| 34.50 | 35.49 | Noroton Heights | 70 mph | 6 s |
+| 57.42 | 58.16 | Stratford | 70 mph | 4 s |
+| 15.54 | 16.60 | New Rochelle | 61 mph | 4 s |
+| 41.05 | 41.68 | South Norwalk | 48 mph | 4 s |
 
 <!-- END results -->
 

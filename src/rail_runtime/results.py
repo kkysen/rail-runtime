@@ -171,7 +171,8 @@ def main(data: str, date: str = "20261027", every: bool = False) -> None:
             "or on Metro-North at GCT, 6-10 AM "
             f"on {date[:4]}-{date[4:6]}-{date[6:]}, "
             "grouped by stopping pattern: median scheduled minutes vs. one train running flat out with 30 s dwells: "
-            "an M7 on the LIRR's 750 V third rail or an M7A on Metro-North's 700 V.",
+            "an M7 on the LIRR's 750 V third rail, an M7A on Metro-North's 700 V, "
+            "or on the New Haven Line, an M8 on that third rail to Pelham and 12.5 kV catenary beyond.",
             timetable(data, date),
         ),
     ]
