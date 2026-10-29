@@ -90,7 +90,7 @@ Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, 
 `mise install` sets up `uv` and `pre-commit`;
 `uv` manages Python 3.15 and the dependencies,
 and builds the Rust simulation core in `sim/` with `maturin`, so `cargo` must be installed.
-Regenerating every result takes about 7 s.
+Regenerating every result takes about 4 s.
 
 ```sh
 ./fetch.sh  # GTFS and OSM extracts into data/
@@ -393,7 +393,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | PW local | posted | 35.1 | 35.2 | 35.1 | 35.0 | 521 |
 |  | 60 mph | 33.5 | 33.6 | 33.5 | 33.4 | 486 |
-|  | 80 mph | 32.1 | 32.2 | 32.2 | 32.0 | 503 |
+|  | 80 mph | 32.1 | 32.2 | 32.2 | 32.0 | 502 |
 |  | 100 mph | 32.0 | 32.1 | 32.1 | 31.8 | 495 |
 
 #### PW express: 5 min headways each way
@@ -450,7 +450,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Babylon via Atlantic Branch local | posted | 40.6 | 40.7 | 40.6 | 40.2 | 497 |
-|  | 60 mph | 40.0 | 40.1 | 40.0 | 39.6 | 504 |
+|  | 60 mph | 40.0 | 40.1 | 40.1 | 39.6 | 504 |
 |  | 80 mph | 38.9 | 39.0 | 39.0 | 38.4 | 514 |
 |  | 100 mph | 38.7 | 38.9 | 38.8 | 38.2 | 520 |
 
@@ -476,7 +476,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Far Rockaway local | posted | 25.1 | 25.1 | 25.1 | 25.0 | 498 |
+| Far Rockaway local | posted | 25.1 | 25.1 | 25.1 | 25.0 | 497 |
 |  | 60 mph | 22.9 | 23.0 | 23.0 | 22.8 | 495 |
 |  | 80 mph | 22.7 | 22.8 | 22.8 | 22.5 | 494 |
 |  | 100 mph | 22.7 | 22.8 | 22.8 | 22.5 | 494 |
@@ -494,10 +494,10 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Huntington local | posted | 40.1 | 40.1 | 40.1 | 39.9 | 532 |
+| Huntington local | posted | 40.1 | 40.1 | 40.1 | 39.9 | 531 |
 |  | 60 mph | 36.9 | 36.9 | 37.0 | 36.7 | 542 |
 |  | 80 mph | 36.5 | 36.6 | 36.6 | 36.3 | 543 |
-|  | 100 mph | 36.1 | 36.2 | 36.1 | 35.8 | 536 |
+|  | 100 mph | 36.1 | 36.2 | 36.1 | 35.8 | 534 |
 
 #### Ronkonkoma: 10 min headways each way
 

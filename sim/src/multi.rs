@@ -13,8 +13,9 @@ pub const DT: f64 = 0.5;
 pub const REGEN_EFF: f64 = 0.80;
 /// A braking train sheds regen to stay at or below this, V.
 pub const V_REGEN_MAX: f64 = 900.0;
-/// Conductance holding a braking train at `V_REGEN_MAX`, S: stiff enough that it sits within a volt.
-const G_HOLD: f64 = 1e3;
+/// Conductance holding a braking train at `V_REGEN_MAX`, S: stiff enough that it sits within millivolts,
+/// so it can't stay held well below the limit.
+const G_HOLD: f64 = 1e6;
 /// Contact rail, Ω per mile: about 150 lb/yd of steel.
 pub const R_CONTACT: f64 = 0.020;
 pub const MILE: f64 = 1609.34;
@@ -193,6 +194,33 @@ fn solve_banded(g: &mut [f64], b: &mut [f64], n: usize, kb: usize) {
     }
 }
 
+/// Current a car not held at `V_REGEN_MAX` draws at voltage `vt` (negative when regenerating),
+/// and its slope, A/V, for Newton's method.
+fn draw(train: &Train, dem: f64, vt: f64) -> (f64, f64) {
+    if dem < 0.0 {
+        let i = dem / vt;
+        return if i < -train.i_max {
+            (-train.i_max, 0.0)
+        } else {
+            (i, -i / vt)
+        };
+    }
+    let (i, di) = if dem / vt > train.i_max {
+        (train.i_max, 0.0)
+    } else {
+        (dem / vt, -dem / (vt * vt))
+    };
+    if vt >= V_MIN {
+        return (i, di);
+    }
+    // Shed load as voltage collapses.
+    let s = (vt - 0.6 * V_MIN) / (0.4 * V_MIN);
+    if s <= 0.0 {
+        return (0.0, 0.0);
+    }
+    (i * s, di * s + i / (0.4 * V_MIN))
+}
+
 /// Running-rail return resistance from chainage 0 to `x`, Ω, carried on linearly past either end.
 fn r_return(job: &Job, x: f64) -> f64 {
     let r = &job.r_return;
@@ -275,11 +303,16 @@ fn solve(
             link(&mut g0, a, b, r_return(job, xb) - r_return(job, xa));
         }
     }
+    // Starting no higher than `V0` starts every rectifier conducting;
+    // starting from a step whose regen floated the network over it would leave them blocking
+    // and let Newton's method settle at the clamp with a train drawing power.
     let mut v = vec![0.0; n];
-    v[..n_sub].copy_from_slice(v_subs);
+    for (x, &vs) in v.iter_mut().zip(v_subs) {
+        *x = vs.min(V0);
+    }
     for (j, c) in cars.iter().enumerate() {
-        v[contact(j)] = c.v_contact;
         v[ret(j)] = c.v_return;
+        v[contact(j)] = c.v_return + (c.v_contact - c.v_return).min(V0);
     }
     let mut cur = vec![0.0; n_car];
     // Braking trains held at `V_REGEN_MAX`, returning only the regen the line takes there,
@@ -288,7 +321,7 @@ fn solve(
     let mut held = vec![false; n_car];
     let mut converged = false;
     let (mut g, mut b, mut bs) = (vec![0.0; n * n], vec![0.0; n], vec![0.0; n]);
-    for _ in 0..200 {
+    for it in 0..200 {
         let mut changed = false;
         g.copy_from_slice(&g0);
         b.fill(0.0);
@@ -316,26 +349,25 @@ fn solve(
         }
         for j in 0..n_car {
             let vt = (v[contact(j)] - v[ret(j)]).max(1.0);
-            if dem[j] >= 0.0 {
-                cur[j] = (dem[j] / vt).min(train.i_max);
-                if vt < V_MIN {
-                    // Shed load as voltage collapses.
-                    cur[j] *= (vt - 0.6 * V_MIN).max(0.0) / (0.4 * V_MIN);
-                }
-            } else if held[j] {
-                let (c, r) = (slot[contact(j)], slot[ret(j)]);
-                g[c * n + c] += G_HOLD;
-                g[r * n + r] += G_HOLD;
-                g[c * n + r] -= G_HOLD;
-                g[r * n + c] -= G_HOLD;
-                b[contact(j)] += G_HOLD * V_REGEN_MAX;
-                b[ret(j)] -= G_HOLD * V_REGEN_MAX;
-                continue;
+            // Each car is linearized about `vt` for Newton's method, as a conductance `gd` across it
+            // in parallel with a current source `i0`; a held car is a stiff source at `V_REGEN_MAX`.
+            let (gd, i0) = if held[j] {
+                (G_HOLD, -G_HOLD * V_REGEN_MAX)
             } else {
-                cur[j] = (dem[j] / vt).max(-train.i_max);
-            }
-            b[contact(j)] -= cur[j];
-            b[ret(j)] += cur[j];
+                // A load's negative slope would make it a source when every rectifier blocks,
+                // so only a positive slope is linearized.
+                let (i, di) = draw(train, dem[j], vt);
+                let di = di.max(0.0);
+                cur[j] = i;
+                (di, i - di * vt)
+            };
+            let (c, r) = (slot[contact(j)], slot[ret(j)]);
+            g[c * n + c] += gd;
+            g[r * n + r] += gd;
+            g[c * n + r] -= gd;
+            g[r * n + c] -= gd;
+            b[contact(j)] -= i0;
+            b[ret(j)] += i0;
         }
         for (i, &x) in b.iter().enumerate() {
             bs[slot[i]] = x;
@@ -346,10 +378,15 @@ fn solve(
         }
         // A held train returns what its hold passes, within its full regen;
         // past either end, the next iteration releases it.
-        for j in (0..n_car).filter(|&j| dem[j] < 0.0 && held[j]) {
+        // Every other car draws what it does at the new voltage.
+        for j in 0..n_car {
             let vt = (b[contact(j)] - b[ret(j)]).max(1.0);
-            let full = (dem[j] / vt).max(-train.i_max);
-            cur[j] = (-G_HOLD * (V_REGEN_MAX - vt)).clamp(full, 0.0);
+            cur[j] = if held[j] {
+                let full = (dem[j] / vt).max(-train.i_max);
+                (-G_HOLD * (V_REGEN_MAX - vt)).clamp(full, 0.0)
+            } else {
+                draw(train, dem[j], vt).0
+            };
         }
         // Clamp to the physical range: below 0.6 V_MIN trains draw nothing, above V_REGEN_MAX they shed regen.
         // With every rectifier blocking, the positive side floats, so substation buses are clamped too.
@@ -366,14 +403,17 @@ fn solve(
             .map(|(a, c)| (a - c).abs())
             .fold(0.0, f64::max);
         // Tight, since the lowest voltage of a busy run hangs on exactly when trains meet,
-        // which a looser one shifts.
-        if diff < 0.001 && !changed {
+        // which a looser one shifts; Newton's method gets there in a few more iterations.
+        if diff < 1e-6 && !changed {
             v.copy_from_slice(&b);
             converged = true;
             break;
         }
+        // Full Newton steps; if the rectifiers' and holds' states ever cycle instead of settling,
+        // damped steps after 20 iterations break the cycle.
+        let step = if it < 20 { 1.0 } else { 0.3 };
         for (a, c) in v.iter_mut().zip(&b) {
-            *a = 0.7 * *a + 0.3 * c;
+            *a += step * (c - *a);
         }
     }
     let power = (0..n_car)
