@@ -9,7 +9,7 @@ and the Main Line from Jamaica,
 into Grand Central Madison (GCM), the Main Line from Jamaica through the 63rd Street Tunnel,
 and into Atlantic Terminal, the Atlantic Branch from Jamaica.
 Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon, Long Beach, Far Rockaway, West Hempstead, Huntington and Ronkonkoma.
-On Metro-North, it covers the electric lines into Grand Central (GCT): the Harlem Line to Southeast, the Hudson Line to Croton-Harmon, and the New Haven Line to New Haven.
+On Metro-North, it covers the electric lines into Grand Central (GCT): the Harlem Line to Southeast, the Hudson Line to Croton-Harmon, the New Haven Line to New Haven, and into Stamford, its New Canaan Branch.
 
 ## Method
 
@@ -105,6 +105,8 @@ On Metro-North, it covers the electric lines into Grand Central (GCT): the Harle
     The third rail's substations stop where it does.
     Its timetable trips start no farther out than New Haven's Union Station, where the trace ends,
     so not at New Haven-State St, and its busy service runs 15 an hour.
+  - The New Canaan Branch is all catenary, and like the branches beyond Jamaica,
+    it's timed into Stamford from trips that start on it, with busy service 2 an hour.
 - **Timetable:** AM inbound trips from the LIRR's and Metro-North's GTFS feeds.
   A branch beyond Jamaica is timed into Jamaica, from trips that start on it.
   Babylon's trips are timed on the route their GTFS shape follows.
@@ -160,7 +162,7 @@ cargo test --manifest-path sim/Cargo.toml
 
 ### Timetable vs. model
 
-AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, or on Metro-North at GCT, 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled minutes vs. one train running flat out with 30 s dwells: an M7 on the LIRR's 750 V third rail, an M7A on Metro-North's 700 V, or on the New Haven Line, an M8 on that third rail to Pelham and 12.5 kV catenary beyond.
+AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, or on Metro-North at GCT, or Stamford from New Canaan, 6-10 AM on 2026-10-27, grouped by stopping pattern: median scheduled minutes vs. one train running flat out with 30 s dwells: an M7 on the LIRR's 750 V third rail, an M7A on Metro-North's 700 V, or on the New Haven Line, an M8 on that third rail to Pelham and 12.5 kV catenary beyond.
 
 #### Port Washington - Penn
 
@@ -368,6 +370,12 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, o
 | Stamford, stops at Greenwich, Port Chester, Rye, Harrison, Mamaroneck, Larchmont, Harlem-125 St | 1 | 59 | 45.5 | 39.3 | 36.5 | 36.1 |
 | Stamford, stops at Old Greenwich, Riverside, Cos Cob, Greenwich, Port Chester, Rye | 1 | 59 | 44.1 | 37.8 | 35.2 | 34.4 |
 
+#### New Canaan - Stamford
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| New Canaan, all stops | 5 | 18 | 13.8 | 11.6 | 11.3 | 11.3 |
+
 ### Trains
 
 One train alone, minutes.
@@ -514,6 +522,13 @@ One train alone, minutes.
 | --- | ---: | ---: | ---: | ---: |
 | M8, 700 V third rail and 12.5 kV | 112.8 | 105.4 | 102.4 | 101.5 |
 | M8, 12.5 kV | 112.5 | 105.1 | 102.0 | 101.0 |
+
+#### New Canaan local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M8, 700 V third rail and 12.5 kV | 13.8 | 11.6 | 11.3 | 11.3 |
+| M8, 12.5 kV | 13.8 | 11.6 | 11.3 | 11.3 |
 
 ### Busy service
 
@@ -666,6 +681,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 60 mph | 106.3 | 106.5 | 106.4 | 106.0 | 480 |
 |  | 80 mph | 103.3 | 103.5 | 103.4 | 102.9 | 495 |
 |  | 100 mph | 102.4 | 102.5 | 102.5 | 101.9 | 493 |
+
+#### New Canaan: 30 min headways each way
+
+| Service | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| New Canaan local | posted | 13.9 | 13.9 | 13.9 | 13.9 |  |
+|  | 60 mph | 11.7 | 11.7 | 11.7 | 11.7 |  |
+|  | 80 mph | 11.4 | 11.4 | 11.4 | 11.4 |  |
+|  | 100 mph | 11.4 | 11.4 | 11.4 | 11.4 |  |
 
 ### Posted slow zones
 
@@ -880,6 +904,14 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 4.93 | 5.27 | Melrose | 40 mph | 80 mph | 9 s |
 | 60.87 | 62.87 | Milford | 70 mph | 80 mph | 8 s |
 
+#### New Canaan (base: local 13.8 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 2.47 | 7.49 | Talmadge Hill | 40 mph | 80 mph | 113 s |
+| 0.23 | 1.73 | Stamford | 50 mph | 80 mph | 25 s |
+| 2.20 | 2.32 | Glenbrook | 20 mph | 67 mph | 6 s |
+
 ### Limiting curves
 
 One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
@@ -1022,6 +1054,15 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | 57.42 | 58.16 | Stratford | 70 mph | 4 s |
 | 15.54 | 16.60 | New Rochelle | 61 mph | 4 s |
 | 41.05 | 41.68 | South Norwalk | 48 mph | 4 s |
+
+#### New Canaan (base: local 11.3 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 3.40 | 5.61 | Springdale | 48 mph | 21 s |
+| 5.83 | 7.49 | New Canaan | 40 mph | 18 s |
+| 0.97 | 1.54 | Stamford | 60 mph | 9 s |
+| 7.52 | 7.61 | New Canaan | 15 mph | 6 s |
 
 <!-- END results -->
 

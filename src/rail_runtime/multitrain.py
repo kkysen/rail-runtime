@@ -321,6 +321,7 @@ NH_STOPS = [
     "West Haven",
     "New Haven",
 ]
+NC_STOPS = ["Stamford", "Glenbrook", "Springdale", "Talmadge Hill", "New Canaan"]
 
 
 class Spec(NamedTuple):
@@ -485,6 +486,16 @@ SPECS = {
         {"local": NH_STOPS[::-1]},
         (True, False),
         "3",
+        railroad="Metro-North",
+        fleet="New Haven",
+    ),
+    "New Canaan": Spec(
+        "nc_geometry.json",
+        "substations_mnr.json",
+        NC_STOPS,
+        {"local": NC_STOPS[::-1]},
+        (False, True),
+        "4",
         railroad="Metro-North",
         fleet="New Haven",
     ),
@@ -700,6 +711,7 @@ BRANCH_KEYS = {
     "hud": "Hudson",
     "har": "Harlem",
     "nh": "New Haven",
+    "nc": "New Canaan",
 }
 
 # Seconds between trains, from the busiest hour of AM arrivals into Jamaica on 2026-10-27.
@@ -726,6 +738,7 @@ BRANCH_HEADWAYS = {
     "Hudson": 3600 / 7,
     "Harlem": 3600 / 16,
     "New Haven": 3600 / 15,
+    "New Canaan": 3600 / 2,
 }
 
 
