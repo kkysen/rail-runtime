@@ -100,8 +100,11 @@ On Metro-North, it covers the electric lines into Grand Central (GCT): the Harle
   - The Hudson Line's busy service runs 7 an hour: not its trains from Poughkeepsie,
     whose dual-mode locomotives take the third rail only within Grand Central.
     Their replacements will take it throughout, and they wait to be modeled with the diesel trains.
-  - On the New Haven Line, the M8 runs on the third rail to just west of Pelham, mile 14.7,
-    where Metro-North's trains change over, and on 12.5 kV catenary beyond, at rated power.
+  - On the New Haven Line, the M8 runs on the third rail to mile 14.5, and on 12.5 kV catenary beyond, at rated power.
+    The two overlap from there to Pelham, mile 14.9, where trains change over:
+    OSM counts neither there, so a gap between the two is taken as overlap,
+    run on catenary, with the third rail and its substations reaching through it.
+    A gap with the same supply either side, like a moveable bridge, takes that supply.
     The third rail's substations stop where it does.
     Its timetable trips start no farther out than New Haven's Union Station, where the trace ends,
     so not at New Haven-State St, and its busy service runs 15 an hour.
@@ -678,9 +681,9 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Service | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | New Haven local | posted | 106.7 | 106.7 | 106.7 | 106.6 | 504 |
-|  | 60 mph | 99.3 | 99.4 | 99.4 | 99.2 | 500 |
+|  | 60 mph | 99.3 | 99.4 | 99.3 | 99.2 | 500 |
 |  | 80 mph | 95.8 | 95.8 | 95.8 | 95.6 | 517 |
-|  | 100 mph | 94.7 | 94.8 | 94.8 | 94.4 | 500 |
+|  | 100 mph | 94.7 | 94.8 | 94.7 | 94.4 | 501 |
 
 #### New Canaan: 30 min headways each way
 

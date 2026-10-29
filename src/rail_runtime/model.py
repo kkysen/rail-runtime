@@ -284,27 +284,36 @@ class Line:
         self.st[stations[-1]] = float(self.s[-1]) - 60  # the last station is at the end of the path
         self.lonlat = g.lonlat
         self.third_rail = g.third_rail
-        self.dc = self._dc(g)
+        self.dc, self.overlap = self._dc(g)
         self.v0 = v0
         self.spacing = spacing
         self.own = [x for x, _ in own_substations(g, substations_json, railroad)]
         self._substations(substations_json)
 
     @staticmethod
-    def _dc(g: Geometry) -> npt.NDArray[np.bool_]:
-        """Whether each sample is on the third rail, not under catenary, where trains get rated power.
+    def _dc(g: Geometry) -> tuple[npt.NDArray[np.bool_], npt.NDArray[np.bool_]]:
+        """Whether each sample is on the third rail, not under catenary, where trains get rated power,
+        and whether it's where the two overlap, for trains to change over.
 
         Where neither counts any through track, as over a moveable bridge or at a terminal's stub tracks,
         it takes the supply of the nearest sample that does, and with none, the third rail.
+        But between third rail on one side and catenary on the other, as west of Pelham, both run:
+        trains run there on catenary, and the third rail and its substations reach through it.
         """
+        n = len(g.s)
         known = np.flatnonzero((g.third_rail > 0) | (g.catenary > 0))
         if len(known) == 0:
-            return np.ones(len(g.s), dtype=bool)
-        idx = np.arange(len(g.s))
+            return np.ones(n, dtype=bool), np.zeros(n, dtype=bool)
+        idx = np.arange(n)
         j = np.clip(np.searchsorted(known, idx), 1, len(known) - 1)
         nearest = np.where(idx - known[j - 1] <= known[j] - idx, known[j - 1], known[j])
         nearest = np.where(idx <= known[0], known[0], nearest)
-        return g.third_rail[nearest] > 0
+        dc = g.third_rail[nearest] > 0
+        overlap = np.zeros(n, dtype=bool)
+        for a, b in pairwise(known):
+            if b > a + 1 and (g.third_rail[a] > 0) != (g.third_rail[b] > 0):
+                overlap[a + 1 : b] = True
+        return dc & ~overlap, overlap
 
     def _long_chord_radius(self, lonlat: Arr, half: float) -> Arr:
         lat0 = float(np.mean(lonlat[:, 1]))
@@ -334,7 +343,7 @@ class Line:
             if d[i] < 50:
                 untagged.append(float(self.s[i]))
         # Only substations along the third rail feed it, not those beyond where it gives way to catenary.
-        dc = self.s[self.dc]
+        dc = self.s[self.dc | self.overlap]
         lo, hi = (float(dc[0]), float(dc[-1])) if len(dc) else (0.0, -1.0)
         untagged = [x for x in untagged if lo <= x <= hi]
         mapped = [x for x in self.own if lo <= x <= hi]
