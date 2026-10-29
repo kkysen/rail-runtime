@@ -191,14 +191,14 @@ def main(data: str, date: str = "20261027", every: bool = False) -> None:
     sections.append(
         (
             "Posted slow zones",
-            "One M7, raising one posted zone at a time to what the curves allow (80 mph cap).",
+            "One train, the timetable's, raising one posted zone at a time to what the curves allow (80 mph cap).",
             ranking(slowzones.rank(data)),
         )
     )
     sections.append(
         (
             "Limiting curves",
-            "One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.",
+            "One train, the timetable's, at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.",
             ranking(curves.rank(data)),
         )
     )

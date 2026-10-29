@@ -693,7 +693,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 
 ### Posted slow zones
 
-One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
+One train, the timetable's, raising one posted zone at a time to what the curves allow (80 mph cap).
 
 #### Port Washington (base: local 35.0 min, express 25.5 min)
 
@@ -914,7 +914,7 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 
 ### Limiting curves
 
-One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
+One train, the timetable's, at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 
 #### Port Washington (base: local 31.9 min, express 21.1 min)
 
