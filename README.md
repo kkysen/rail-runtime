@@ -387,322 +387,322 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, o
 
 ### Trains
 
-One train alone, minutes.
+One train alone, minutes, next to the median scheduled for trips with that stopping pattern, if any.
 
 #### Port Washington local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 35.0 | 33.3 | 31.9 | 31.7 |
-| M7, 750 V third rail, full power | 34.6 | 32.9 | 31.4 | 31.2 |
-| M8, 25 kV | 34.8 | 33.1 | 31.6 | 31.4 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 49 | 35.0 | 33.3 | 31.9 | 31.7 |
+| M7, 750 V third rail, full power |  | 34.6 | 32.9 | 31.4 | 31.2 |
+| M8, 25 kV |  | 34.8 | 33.1 | 31.6 | 31.4 |
 
 #### Port Washington express
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 25.5 | 23.7 | 21.1 | 20.8 |
-| M7, 750 V third rail, full power | 25.4 | 23.6 | 20.9 | 20.4 |
-| M8, 25 kV | 25.5 | 23.6 | 21.0 | 20.6 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 38 | 25.5 | 23.7 | 21.1 | 20.8 |
+| M7, 750 V third rail, full power |  | 25.4 | 23.6 | 20.9 | 20.4 |
+| M8, 25 kV |  | 25.5 | 23.6 | 21.0 | 20.6 |
 
 #### Main Line to Penn local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 17.0 | 14.4 | 13.4 | 13.2 |
-| M7, 750 V third rail, full power | 16.9 | 14.3 | 13.2 | 12.9 |
-| M8, 25 kV | 16.9 | 14.4 | 13.3 | 13.0 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 22 | 17.0 | 14.4 | 13.4 | 13.2 |
+| M7, 750 V third rail, full power |  | 16.9 | 14.3 | 13.2 | 12.9 |
+| M8, 25 kV |  | 16.9 | 14.4 | 13.3 | 13.0 |
 
 #### Main Line to Penn express
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 13.4 | 10.8 | 9.6 | 9.1 |
-| M7, 750 V third rail, full power | 13.3 | 10.7 | 9.5 | 8.9 |
-| M8, 25 kV | 13.4 | 10.7 | 9.5 | 9.0 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 19 | 13.4 | 10.8 | 9.6 | 9.1 |
+| M7, 750 V third rail, full power |  | 13.3 | 10.7 | 9.5 | 8.9 |
+| M8, 25 kV |  | 13.4 | 10.7 | 9.5 | 9.0 |
 
 #### Main Line to GCM local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 16.5 | 14.0 | 13.5 | 13.4 |
-| M7, 750 V third rail, full power | 16.4 | 13.9 | 13.4 | 13.1 |
-| M8, 25 kV | 16.4 | 13.9 | 13.4 | 13.2 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail |  | 16.5 | 14.0 | 13.5 | 13.4 |
+| M7, 750 V third rail, full power |  | 16.4 | 13.9 | 13.4 | 13.1 |
+| M8, 25 kV |  | 16.4 | 13.9 | 13.4 | 13.2 |
 
 #### Main Line to GCM express
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 12.9 | 10.4 | 9.7 | 9.2 |
-| M7, 750 V third rail, full power | 12.9 | 10.3 | 9.6 | 9.1 |
-| M8, 25 kV | 12.9 | 10.3 | 9.6 | 9.2 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 19 | 12.9 | 10.4 | 9.7 | 9.2 |
+| M7, 750 V third rail, full power |  | 12.9 | 10.3 | 9.6 | 9.1 |
+| M8, 25 kV |  | 12.9 | 10.3 | 9.6 | 9.2 |
 
 #### Atlantic local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 13.9 | 11.6 | 10.8 | 10.4 |
-| M7, 750 V third rail, full power | 13.9 | 11.4 | 10.5 | 10.0 |
-| M8, 25 kV | 13.9 | 11.5 | 10.6 | 10.1 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 20 | 13.9 | 11.6 | 10.8 | 10.4 |
+| M7, 750 V third rail, full power |  | 13.9 | 11.4 | 10.5 | 10.0 |
+| M8, 25 kV |  | 13.9 | 11.5 | 10.6 | 10.1 |
 
 #### Hempstead local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 22.4 | 20.2 | 20.2 | 20.2 |
-| M7, 750 V third rail, full power | 22.1 | 19.9 | 19.9 | 19.8 |
-| M8, 25 kV | 22.2 | 20.0 | 20.0 | 20.0 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 31 | 22.4 | 20.2 | 20.2 | 20.2 |
+| M7, 750 V third rail, full power |  | 22.1 | 19.9 | 19.9 | 19.8 |
+| M8, 25 kV |  | 22.2 | 20.0 | 20.0 | 20.0 |
 
 #### Babylon via Atlantic Branch local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 40.6 | 40.0 | 38.7 | 38.5 |
-| M7, 750 V third rail, full power | 39.6 | 39.0 | 37.7 | 37.5 |
-| M8, 25 kV | 40.0 | 39.3 | 38.1 | 37.9 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail |  | 40.6 | 40.0 | 38.7 | 38.5 |
+| M7, 750 V third rail, full power |  | 39.6 | 39.0 | 37.7 | 37.5 |
+| M8, 25 kV |  | 40.0 | 39.3 | 38.1 | 37.9 |
 
 #### Babylon via Babylon Branch local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 42.6 | 41.8 | 40.6 | 40.4 |
-| M7, 750 V third rail, full power | 41.7 | 40.8 | 39.6 | 39.2 |
-| M8, 25 kV | 42.0 | 41.2 | 40.0 | 39.7 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 53 | 42.6 | 41.8 | 40.6 | 40.4 |
+| M7, 750 V third rail, full power |  | 41.7 | 40.8 | 39.6 | 39.2 |
+| M8, 25 kV |  | 42.0 | 41.2 | 40.0 | 39.7 |
 
 #### Long Beach local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 26.3 | 23.3 | 22.8 | 22.8 |
-| M7, 750 V third rail, full power | 26.1 | 23.0 | 22.4 | 22.3 |
-| M8, 25 kV | 26.2 | 23.1 | 22.6 | 22.5 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 37 | 26.3 | 23.3 | 22.8 | 22.8 |
+| M7, 750 V third rail, full power |  | 26.1 | 23.0 | 22.4 | 22.3 |
+| M8, 25 kV |  | 26.2 | 23.1 | 22.6 | 22.5 |
 
 #### Far Rockaway local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 24.9 | 22.7 | 22.5 | 22.4 |
-| M7, 750 V third rail, full power | 24.6 | 22.3 | 22.0 | 22.0 |
-| M8, 25 kV | 24.7 | 22.4 | 22.2 | 22.2 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 36 | 24.9 | 22.7 | 22.5 | 22.4 |
+| M7, 750 V third rail, full power |  | 24.6 | 22.3 | 22.0 | 22.0 |
+| M8, 25 kV |  | 24.7 | 22.4 | 22.2 | 22.2 |
 
 #### West Hempstead local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 19.5 | 17.6 | 16.9 | 16.8 |
-| M7, 750 V third rail, full power | 19.2 | 17.3 | 16.5 | 16.4 |
-| M8, 25 kV | 19.3 | 17.4 | 16.6 | 16.6 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail | 28 | 19.5 | 17.6 | 16.9 | 16.8 |
+| M7, 750 V third rail, full power |  | 19.2 | 17.3 | 16.5 | 16.4 |
+| M8, 25 kV |  | 19.3 | 17.4 | 16.6 | 16.6 |
 
 #### Huntington local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 40.0 | 36.8 | 36.4 | 36.1 |
-| M7, 750 V third rail, full power | 39.4 | 36.2 | 35.7 | 35.3 |
-| M8, 25 kV | 39.7 | 36.5 | 36.0 | 35.7 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail |  | 40.0 | 36.8 | 36.4 | 36.1 |
+| M7, 750 V third rail, full power |  | 39.4 | 36.2 | 35.7 | 35.3 |
+| M8, 25 kV |  | 39.7 | 36.5 | 36.0 | 35.7 |
 
 #### Ronkonkoma local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7, 750 V third rail | 54.7 | 53.5 | 53.2 | 52.5 |
-| M7, 750 V third rail, full power | 53.6 | 52.4 | 52.0 | 50.8 |
-| M8, 25 kV | 54.1 | 52.8 | 52.5 | 51.5 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7, 750 V third rail |  | 54.7 | 53.5 | 53.2 | 52.5 |
+| M7, 750 V third rail, full power |  | 53.6 | 52.4 | 52.0 | 50.8 |
+| M8, 25 kV |  | 54.1 | 52.8 | 52.5 | 51.5 |
 
 #### Hudson local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7A, 700 V third rail | 56.9 | 51.4 | 50.2 | 49.9 |
-| M7A, 700 V third rail, full power | 56.3 | 50.7 | 49.4 | 48.9 |
-| M8, 12.5 kV | 56.6 | 51.0 | 49.8 | 49.4 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7A, 700 V third rail | 71 | 56.9 | 51.4 | 50.2 | 49.9 |
+| M7A, 700 V third rail, full power |  | 56.3 | 50.7 | 49.4 | 48.9 |
+| M8, 12.5 kV |  | 56.6 | 51.0 | 49.8 | 49.4 |
 
 #### Harlem local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M7A, 700 V third rail | 90.9 | 84.3 | 81.3 | 80.8 |
-| M7A, 700 V third rail, full power | 90.0 | 83.2 | 79.4 | 78.7 |
-| M8, 12.5 kV | 90.3 | 83.5 | 80.0 | 79.4 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M7A, 700 V third rail |  | 90.9 | 84.3 | 81.3 | 80.8 |
+| M7A, 700 V third rail, full power |  | 90.0 | 83.2 | 79.4 | 78.7 |
+| M8, 12.5 kV |  | 90.3 | 83.5 | 80.0 | 79.4 |
 
 #### New Haven local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M8, 700 V third rail and 12.5 kV | 106.0 | 98.6 | 95.1 | 94.1 |
-| M8, 12.5 kV | 105.9 | 98.4 | 94.8 | 93.7 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M8, 700 V third rail and 12.5 kV |  | 106.0 | 98.6 | 95.1 | 94.1 |
+| M8, 12.5 kV |  | 105.9 | 98.4 | 94.8 | 93.7 |
 
 #### New Canaan local
 
-| Train | Posted | 60 mph | 80 mph | 100 mph |
-| --- | ---: | ---: | ---: | ---: |
-| M8, 700 V third rail and 12.5 kV | 13.8 | 11.6 | 11.3 | 11.3 |
-| M8, 12.5 kV | 13.8 | 11.6 | 11.3 | 11.3 |
+| Train | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M8, 700 V third rail and 12.5 kV | 18 | 13.8 | 11.6 | 11.3 | 11.3 |
+| M8, 12.5 kV |  | 13.8 | 11.6 | 11.3 | 11.3 |
 
 ### Busy service
 
-Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking.
+Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "Busy" is with the other trains on the line; "+ regen" adds regenerative braking. "Scheduled" is the median for trips with that stopping pattern, if any.
 
 #### PW local: 5 min headways each way
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| PW local | posted | 35.1 | 35.2 | 35.1 | 35.0 | 521 |
-|  | 60 mph | 33.5 | 33.6 | 33.5 | 33.4 | 486 |
-|  | 80 mph | 32.1 | 32.2 | 32.2 | 32.0 | 502 |
-|  | 100 mph | 32.0 | 32.1 | 32.1 | 31.8 | 495 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| PW local | 49 | posted | 35.1 | 35.2 | 35.1 | 35.0 | 521 |
+|  |  | 60 mph | 33.5 | 33.6 | 33.5 | 33.4 | 486 |
+|  |  | 80 mph | 32.1 | 32.2 | 32.2 | 32.0 | 502 |
+|  |  | 100 mph | 32.0 | 32.1 | 32.1 | 31.8 | 495 |
 
 #### PW express: 5 min headways each way
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| PW express | posted | 25.6 | 25.6 | 25.6 | 25.6 | 541 |
-|  | 60 mph | 23.8 | 23.8 | 23.8 | 23.8 | 476 |
-|  | 80 mph | 21.2 | 21.3 | 21.2 | 21.1 | 479 |
-|  | 100 mph | 20.9 | 20.9 | 20.9 | 20.7 | 500 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| PW express | 38 | posted | 25.6 | 25.6 | 25.6 | 25.6 | 541 |
+|  |  | 60 mph | 23.8 | 23.8 | 23.8 | 23.8 | 476 |
+|  |  | 80 mph | 21.2 | 21.3 | 21.2 | 21.1 | 479 |
+|  |  | 100 mph | 20.9 | 20.9 | 20.9 | 20.7 | 500 |
 
 #### Main Line to Penn: locals and expresses each at 2.5 min headways each way (1.25 min combined)
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Penn local | posted | 17.1 | 17.2 | 17.2 | 17.0 | 487 |
-|  | 60 mph | 14.5 | 14.6 | 14.6 | 14.4 | 518 |
-|  | 80 mph | 13.4 | 13.6 | 13.5 | 13.3 | 478 |
-|  | 100 mph | 13.2 | 13.5 | 13.4 | 13.1 | 483 |
-| Penn express | posted | 13.5 | 13.5 | 13.5 | 13.4 | 487 |
-|  | 60 mph | 10.8 | 10.8 | 10.8 | 10.8 | 518 |
-|  | 80 mph | 9.5 | 9.5 | 9.5 | 9.5 | 478 |
-|  | 100 mph | 9.0 | 9.1 | 9.1 | 9.0 | 483 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Penn local | 22 | posted | 17.1 | 17.2 | 17.2 | 17.0 | 487 |
+|  |  | 60 mph | 14.5 | 14.6 | 14.6 | 14.4 | 518 |
+|  |  | 80 mph | 13.4 | 13.6 | 13.5 | 13.3 | 478 |
+|  |  | 100 mph | 13.2 | 13.5 | 13.4 | 13.1 | 483 |
+| Penn express | 19 | posted | 13.5 | 13.5 | 13.5 | 13.4 | 487 |
+|  |  | 60 mph | 10.8 | 10.8 | 10.8 | 10.8 | 518 |
+|  |  | 80 mph | 9.5 | 9.5 | 9.5 | 9.5 | 478 |
+|  |  | 100 mph | 9.0 | 9.1 | 9.1 | 9.0 | 483 |
 
 #### Main Line to GCM: 2.5 min headways each way
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| GCM express | posted | 13.0 | 13.0 | 13.0 | 13.0 | 580 |
-|  | 60 mph | 10.4 | 10.4 | 10.4 | 10.3 | 532 |
-|  | 80 mph | 9.7 | 9.7 | 9.7 | 9.7 | 529 |
-|  | 100 mph | 9.3 | 9.3 | 9.3 | 9.2 | 523 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| GCM express | 19 | posted | 13.0 | 13.0 | 13.0 | 13.0 | 580 |
+|  |  | 60 mph | 10.4 | 10.4 | 10.4 | 10.3 | 532 |
+|  |  | 80 mph | 9.7 | 9.7 | 9.7 | 9.7 | 529 |
+|  |  | 100 mph | 9.3 | 9.3 | 9.3 | 9.2 | 523 |
 
 #### Atlantic: 5 min headways each way
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Atlantic local | posted | 13.9 | 13.9 | 13.9 | 13.9 | 556 |
-|  | 60 mph | 11.5 | 11.5 | 11.5 | 11.5 | 557 |
-|  | 80 mph | 10.7 | 10.7 | 10.7 | 10.6 | 512 |
-|  | 100 mph | 10.2 | 10.3 | 10.3 | 10.1 | 494 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Atlantic local | 20 | posted | 13.9 | 13.9 | 13.9 | 13.9 | 556 |
+|  |  | 60 mph | 11.5 | 11.5 | 11.5 | 11.5 | 557 |
+|  |  | 80 mph | 10.7 | 10.7 | 10.7 | 10.6 | 512 |
+|  |  | 100 mph | 10.2 | 10.3 | 10.3 | 10.1 | 494 |
 
 #### Hempstead: 20 min headways each way
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Hempstead local | posted | 22.6 | 22.6 | 22.6 | 22.4 | 477 |
-|  | 60 mph | 20.4 | 20.5 | 20.4 | 20.3 | 483 |
-|  | 80 mph | 20.4 | 20.5 | 20.4 | 20.3 | 484 |
-|  | 100 mph | 20.4 | 20.4 | 20.4 | 20.3 | 485 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Hempstead local | 31 | posted | 22.6 | 22.6 | 22.6 | 22.4 | 477 |
+|  |  | 60 mph | 20.4 | 20.5 | 20.4 | 20.3 | 483 |
+|  |  | 80 mph | 20.4 | 20.5 | 20.4 | 20.3 | 484 |
+|  |  | 100 mph | 20.4 | 20.4 | 20.4 | 20.3 | 485 |
 
 #### Babylon via Atlantic Branch: 7.5 min headways each way
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Babylon via Atlantic Branch local | posted | 40.6 | 40.7 | 40.6 | 40.2 | 497 |
-|  | 60 mph | 40.0 | 40.1 | 40.1 | 39.6 | 504 |
-|  | 80 mph | 38.9 | 39.0 | 39.0 | 38.4 | 514 |
-|  | 100 mph | 38.7 | 38.9 | 38.8 | 38.2 | 520 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Babylon via Atlantic Branch local |  | posted | 40.6 | 40.7 | 40.6 | 40.2 | 497 |
+|  |  | 60 mph | 40.0 | 40.1 | 40.1 | 39.6 | 504 |
+|  |  | 80 mph | 38.9 | 39.0 | 39.0 | 38.4 | 514 |
+|  |  | 100 mph | 38.7 | 38.9 | 38.8 | 38.2 | 520 |
 
 #### Babylon via Babylon Branch: 7.5 min headways each way
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Babylon via Babylon Branch local | posted | 42.7 | 42.8 | 42.8 | 42.3 | 499 |
-|  | 60 mph | 41.9 | 42.1 | 42.0 | 41.5 | 499 |
-|  | 80 mph | 40.8 | 40.9 | 40.9 | 40.3 | 489 |
-|  | 100 mph | 40.6 | 40.8 | 40.7 | 40.1 | 493 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Babylon via Babylon Branch local | 53 | posted | 42.7 | 42.8 | 42.8 | 42.3 | 499 |
+|  |  | 60 mph | 41.9 | 42.1 | 42.0 | 41.5 | 499 |
+|  |  | 80 mph | 40.8 | 40.9 | 40.9 | 40.3 | 489 |
+|  |  | 100 mph | 40.6 | 40.8 | 40.7 | 40.1 | 493 |
 
 #### Long Beach: 12 min headways each way
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Long Beach local | posted | 26.5 | 26.6 | 26.6 | 26.4 | 523 |
-|  | 60 mph | 23.6 | 23.6 | 23.6 | 23.4 | 531 |
-|  | 80 mph | 23.0 | 23.1 | 23.0 | 22.8 | 527 |
-|  | 100 mph | 23.0 | 23.1 | 23.0 | 22.8 | 526 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Long Beach local | 37 | posted | 26.5 | 26.6 | 26.6 | 26.4 | 523 |
+|  |  | 60 mph | 23.6 | 23.6 | 23.6 | 23.4 | 531 |
+|  |  | 80 mph | 23.0 | 23.1 | 23.0 | 22.8 | 527 |
+|  |  | 100 mph | 23.0 | 23.1 | 23.0 | 22.8 | 526 |
 
 #### Far Rockaway: 15 min headways each way
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Far Rockaway local | posted | 25.1 | 25.1 | 25.1 | 25.0 | 497 |
-|  | 60 mph | 22.9 | 23.0 | 23.0 | 22.8 | 495 |
-|  | 80 mph | 22.7 | 22.8 | 22.8 | 22.5 | 494 |
-|  | 100 mph | 22.7 | 22.8 | 22.8 | 22.5 | 494 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Far Rockaway local | 36 | posted | 25.1 | 25.1 | 25.1 | 25.0 | 497 |
+|  |  | 60 mph | 22.9 | 23.0 | 23.0 | 22.8 | 495 |
+|  |  | 80 mph | 22.7 | 22.8 | 22.8 | 22.5 | 494 |
+|  |  | 100 mph | 22.7 | 22.8 | 22.8 | 22.5 | 494 |
 
 #### West Hempstead: 60 min headways each way
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| West Hempstead local | posted | 19.6 | 19.6 | 19.6 | 19.4 | 528 |
-|  | 60 mph | 17.7 | 17.7 | 17.7 | 17.6 | 528 |
-|  | 80 mph | 17.0 | 17.0 | 17.0 | 16.8 | 528 |
-|  | 100 mph | 16.9 | 16.9 | 16.9 | 16.7 | 528 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| West Hempstead local | 28 | posted | 19.6 | 19.6 | 19.6 | 19.4 | 528 |
+|  |  | 60 mph | 17.7 | 17.7 | 17.7 | 17.6 | 528 |
+|  |  | 80 mph | 17.0 | 17.0 | 17.0 | 16.8 | 528 |
+|  |  | 100 mph | 16.9 | 16.9 | 16.9 | 16.7 | 528 |
 
 #### Huntington: 10 min headways each way
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Huntington local | posted | 40.1 | 40.1 | 40.1 | 39.9 | 531 |
-|  | 60 mph | 36.9 | 36.9 | 37.0 | 36.7 | 542 |
-|  | 80 mph | 36.5 | 36.6 | 36.6 | 36.3 | 543 |
-|  | 100 mph | 36.1 | 36.2 | 36.1 | 35.8 | 534 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Huntington local |  | posted | 40.1 | 40.1 | 40.1 | 39.9 | 531 |
+|  |  | 60 mph | 36.9 | 36.9 | 37.0 | 36.7 | 542 |
+|  |  | 80 mph | 36.5 | 36.6 | 36.6 | 36.3 | 543 |
+|  |  | 100 mph | 36.1 | 36.2 | 36.1 | 35.8 | 534 |
 
 #### Ronkonkoma: 10 min headways each way
 
-| Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Ronkonkoma local | posted | 55.0 | 55.1 | 55.1 | 54.5 | 505 |
-|  | 60 mph | 53.7 | 53.8 | 53.7 | 53.2 | 497 |
-|  | 80 mph | 53.4 | 53.4 | 53.4 | 52.9 | 512 |
-|  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 520 |
+| Service | Scheduled | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Ronkonkoma local |  | posted | 55.0 | 55.1 | 55.1 | 54.5 | 505 |
+|  |  | 60 mph | 53.7 | 53.8 | 53.7 | 53.2 | 497 |
+|  |  | 80 mph | 53.4 | 53.4 | 53.4 | 52.9 | 512 |
+|  |  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 520 |
 
 #### Hudson: 6.67 min headways each way
 
-| Service | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Hudson local | posted | 57.1 | 57.2 | 57.2 | 56.9 | 525 |
-|  | 60 mph | 51.6 | 51.7 | 51.6 | 51.4 | 524 |
-|  | 80 mph | 50.4 | 50.5 | 50.5 | 50.1 | 512 |
-|  | 100 mph | 50.1 | 50.2 | 50.2 | 49.8 | 518 |
+| Service | Scheduled | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Hudson local | 71 | posted | 57.1 | 57.2 | 57.2 | 56.9 | 525 |
+|  |  | 60 mph | 51.6 | 51.7 | 51.6 | 51.4 | 524 |
+|  |  | 80 mph | 50.4 | 50.5 | 50.5 | 50.1 | 512 |
+|  |  | 100 mph | 50.1 | 50.2 | 50.2 | 49.8 | 518 |
 
 #### Harlem: locals to Southeast at 8.57 min and to North White Plains at 6 min headways each way
 
-| Service | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Southeast local | posted | 91.3 | 91.6 | 91.5 | 91.0 | 420 |
-|  | 60 mph | 84.7 | 84.9 | 84.8 | 84.3 | 443 |
-|  | 80 mph | 81.5 | 82.0 | 81.8 | 80.8 | 422 |
-|  | 100 mph | 81.0 | 81.5 | 81.3 | 80.2 | 419 |
-| North White Plains local | posted | 46.5 | 46.8 | 46.7 | 46.4 | 420 |
-|  | 60 mph | 41.6 | 41.8 | 41.6 | 41.4 | 443 |
-|  | 80 mph | 40.2 | 40.7 | 40.5 | 39.9 | 422 |
-|  | 100 mph | 40.0 | 40.5 | 40.4 | 39.6 | 419 |
+| Service | Scheduled | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Southeast local |  | posted | 91.3 | 91.6 | 91.5 | 91.0 | 420 |
+|  |  | 60 mph | 84.7 | 84.9 | 84.8 | 84.3 | 443 |
+|  |  | 80 mph | 81.5 | 82.0 | 81.8 | 80.8 | 422 |
+|  |  | 100 mph | 81.0 | 81.5 | 81.3 | 80.2 | 419 |
+| North White Plains local | 56 | posted | 46.5 | 46.8 | 46.7 | 46.4 | 420 |
+|  |  | 60 mph | 41.6 | 41.8 | 41.6 | 41.4 | 443 |
+|  |  | 80 mph | 40.2 | 40.7 | 40.5 | 39.9 | 422 |
+|  |  | 100 mph | 40.0 | 40.5 | 40.4 | 39.6 | 419 |
 
 #### New Haven: 3.33 min headways each way
 
-| Service | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| New Haven local | posted | 106.7 | 106.7 | 106.7 | 106.6 | 500 |
-|  | 60 mph | 99.3 | 99.3 | 99.3 | 99.2 | 500 |
-|  | 80 mph | 95.8 | 95.8 | 95.8 | 95.6 | 506 |
-|  | 100 mph | 94.7 | 94.8 | 94.8 | 94.4 | 497 |
+| Service | Scheduled | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| New Haven local |  | posted | 106.7 | 106.7 | 106.7 | 106.6 | 500 |
+|  |  | 60 mph | 99.3 | 99.3 | 99.3 | 99.2 | 500 |
+|  |  | 80 mph | 95.8 | 95.8 | 95.8 | 95.6 | 506 |
+|  |  | 100 mph | 94.7 | 94.8 | 94.8 | 94.4 | 497 |
 
 #### New Canaan: 30 min headways each way
 
-| Service | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| New Canaan local | posted | 13.9 | 13.9 | 13.9 | 13.9 |  |
-|  | 60 mph | 11.7 | 11.7 | 11.7 | 11.7 |  |
-|  | 80 mph | 11.4 | 11.4 | 11.4 | 11.4 |  |
-|  | 100 mph | 11.4 | 11.4 | 11.4 | 11.4 |  |
+| Service | Scheduled | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| New Canaan local | 18 | posted | 13.9 | 13.9 | 13.9 | 13.9 |  |
+|  |  | 60 mph | 11.7 | 11.7 | 11.7 | 11.7 |  |
+|  |  | 80 mph | 11.4 | 11.4 | 11.4 | 11.4 |  |
+|  |  | 100 mph | 11.4 | 11.4 | 11.4 | 11.4 |  |
 
 ### Posted slow zones
 

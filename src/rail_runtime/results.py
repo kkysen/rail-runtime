@@ -6,6 +6,7 @@ Everything between the BEGIN and END results markers in `README.md` is replaced.
 import re
 import sys
 from collections import defaultdict
+from functools import cache
 from pathlib import Path
 from statistics import median
 
@@ -72,18 +73,35 @@ def pattern(stops: list[str], line_stops: list[str], only_express: bool = False)
     return f"{short(stops[0])}, skips {', '.join(short(s) for s in skipped)}"
 
 
-def timetable(data: str, date: str) -> str:
-    out: list[str] = []
+@cache
+def schedules(data: str, date: str) -> dict[str, dict[tuple[str, ...], list[float]]]:
+    """Per line, the scheduled minutes of its AM inbound trips, by stopping pattern in inbound order."""
+    out: dict[str, dict[tuple[str, ...], list[float]]] = {}
     for name, spec in mt.SPECS.items():
-        line, stops, route = spec.line(data), spec.stops, spec.route
-        m7 = spec.trains()[0]
+        stops, route = spec.stops, spec.route
         order = list(reversed(stops))
         trips = m.am_inbound(
             spec.gtfs(data), date, None if route else stops[-1], set(stops), route, stops[0], via=spec.via
         )
-        by = defaultdict(list)
+        by: defaultdict[tuple[str, ...], list[float]] = defaultdict(list)
         for t in trips:
             by[tuple(s for s in order if s in t.stops)].append(t.sched)
+        out[name] = dict(by)
+    return out
+
+
+def scheduled(data: str, date: str, name: str, pat: list[str]) -> str:
+    """Median scheduled minutes of line `name`'s trips on inbound pattern `pat`; blank if none run it."""
+    sch = schedules(data, date)[name].get(tuple(pat))
+    return f"{median(sch):.0f}" if sch else ""
+
+
+def timetable(data: str, date: str) -> str:
+    out: list[str] = []
+    for name, spec in mt.SPECS.items():
+        line, stops = spec.line(data), spec.stops
+        m7 = spec.trains()[0]
+        by = schedules(data, date)[name]
         rows = []
         only_express = sum(len(p) < len(stops) for p in by) == 1
         for pat, sch in sorted(by.items(), key=lambda kv: (-len(kv[1]), kv[0])):
@@ -97,20 +115,30 @@ def timetable(data: str, date: str) -> str:
     return "\n\n".join(out)
 
 
-def trains(data: str, every: bool = False) -> str:
+def trains(data: str, date: str, every: bool = False) -> str:
     out: list[str] = []
     for name, spec in mt.SPECS.items():
         line, pats = spec.line(data), spec.patterns
         for pname, p in pats.items():
-            rows = [[tr.name, *(f1(line.trip(tr, k, p)) for k in KINDS)] for tr in spec.trains(every)]
-            out.append(f"#### {name} {pname}\n\n" + table(["Train", "Posted", "60 mph", "80 mph", "100 mph"], rows))
+            sch = scheduled(data, date, name, p)
+            rows = [
+                [tr.name, sch if i == 0 else "", *(f1(line.trip(tr, k, p)) for k in KINDS)]
+                for i, tr in enumerate(spec.trains(every))
+            ]
+            out.append(
+                f"#### {name} {pname}\n\n"
+                + table(["Train", "Scheduled", "Posted", "60 mph", "80 mph", "100 mph"], rows)
+            )
     return "\n\n".join(out)
 
 
-def busy(data: str) -> str:
+def busy(data: str, date: str) -> str:
     out: list[str] = []
-    setups = list(mt.lines(data).values())
-    for (title, _, cases, _, _, (dc, ac)), busy_rows in zip(setups, mt.busy(setups), strict=True):
+    named = mt.lines(data)
+    setups = list(named.values())
+    for key, (title, _, cases, _, _, (dc, ac)), busy_rows in zip(named, setups, mt.busy(setups), strict=True):
+        name = "Port Washington" if key.startswith("PW") else key
+        inbound = {c.name: c.stops[::-1] for c in cases if c.inbound}
         res: defaultdict[tuple[str, str], dict[str, BusyRow]] = defaultdict(dict)
         for r in busy_rows:
             res[(r.service, r.kind)][r.train.supply] = r
@@ -123,6 +151,7 @@ def busy(data: str) -> str:
             rows.append(
                 [
                     service if kind == "posted" else "",
+                    scheduled(data, date, name, inbound[service]) if kind == "posted" else "",
                     SPEEDS[kind],
                     f1(m7.one),
                     f1(m7.no_regen),
@@ -136,7 +165,17 @@ def busy(data: str) -> str:
         out.append(
             f"#### {title}\n\n"
             + table(
-                ["Service", "Speeds", f"{t}, 1 train", f"{t}, busy", f"{t}, busy + regen", a, f"Lowest V ({t})"], rows
+                [
+                    "Service",
+                    "Scheduled",
+                    "Speeds",
+                    f"{t}, 1 train",
+                    f"{t}, busy",
+                    f"{t}, busy + regen",
+                    a,
+                    f"Lowest V ({t})",
+                ],
+                rows,
             )
         )
     return "\n\n".join(out)
@@ -177,14 +216,21 @@ def main(data: str, date: str = "20261027", every: bool = False) -> None:
         ),
     ]
     print("trains", file=sys.stderr, flush=True)
-    sections.append(("Trains", "One train alone, minutes.", trains(data, every)))
+    sections.append(
+        (
+            "Trains",
+            "One train alone, minutes, next to the median scheduled for trips with that stopping pattern, if any.",
+            trains(data, date, every),
+        )
+    )
     print("busy service", file=sys.stderr, flush=True)
     sections.append(
         (
             "Busy service",
             "Minutes per inbound trip in steady service, from the time-stepped multi-train simulation. "
-            '"Busy" is with the other trains on the line; "+ regen" adds regenerative braking.',
-            busy(data),
+            '"Busy" is with the other trains on the line; "+ regen" adds regenerative braking. '
+            '"Scheduled" is the median for trips with that stopping pattern, if any.',
+            busy(data, date),
         )
     )
     print("rankings", file=sys.stderr, flush=True)
