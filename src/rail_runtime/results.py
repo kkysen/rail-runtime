@@ -3,6 +3,7 @@
 Everything between the BEGIN and END results markers in `README.md` is replaced.
 """
 
+import math
 import re
 import sys
 from collections import defaultdict
@@ -53,24 +54,78 @@ def heading(name: str, spec: mt.Spec) -> str:
     return f"{end} - {short(spec.stops[0], spec.railroad)}"
 
 
-def pattern(stops: list[str], line_stops: list[str], only_express: bool = False) -> str:
-    """Label a stopping pattern by its origin and the stations it skips.
+# Listing stations costs one name each; splitting a pattern into one more segment costs about this many.
+SEGMENT_COST = 2.5
 
+
+def segments(stops: list[str], order: list[str]) -> list[tuple[int, int, bool]]:
+    """Split a pattern at its stops into segments of `order`, each local or express,
+    naming the fewest stations: a local's skips, or an express's stops, plus `SEGMENT_COST` per extra segment.
+
+    Returns (start, end, local) by index into `order`, end inclusive.
+    """
+    at = [order.index(s) for s in stops]
+    n = len(at)
+
+    def cost(i: int, j: int) -> tuple[float, bool]:
+        inside = order[at[i] + 1 : at[j]]
+        made = sum(s in stops for s in inside)
+        return min(made, len(inside) - made), len(inside) - made <= made
+
+    # Fewest names to reach each stop, and the segment that got there.
+    best: list[tuple[float, int, bool]] = [(0.0, -1, True)] + [(math.inf, -1, True)] * (n - 1)
+    for j in range(1, n):
+        for i in range(j):
+            c, local = cost(i, j)
+            total = best[i][0] + c + (SEGMENT_COST if i > 0 else 0.0)
+            if total < best[j][0]:
+                best[j] = (total, i, local)
+    out: list[tuple[int, int, bool]] = []
+    j = n - 1
+    while j > 0:
+        _, i, local = best[j]
+        out.append((at[i], at[j], local))
+        j = i
+    return out[::-1]
+
+
+def pattern(stops: list[str], line_stops: list[str], only_express: bool = False, railroad: str = "LIRR") -> str:
+    """Label a stopping pattern by its origin and the stations it skips, or those it stops at, whichever is fewer.
+
+    A pattern that runs local on one stretch and express on another is labeled by segment,
+    like "New Haven to Stamford local, skips Southport; Stamford to GCT express, stops at Harlem-125 St".
     With `only_express`, the line has one express pattern, so it's just "express".
     """
     order = [s for s in reversed(line_stops)]
     first = order.index(stops[0])
     skipped = [s for s in order[first:] if s not in stops]
+
+    def name(s: str) -> str:
+        return short(s, railroad)
+
     if not skipped:
-        return f"{short(stops[0])}, all stops"
+        return f"{name(stops[0])}, all stops"
     if only_express:
-        return f"{short(stops[0])}, express"
+        return f"{name(stops[0])}, express"
     if len(stops) == 2:
-        return f"{short(stops[0])}, nonstop"
-    via = stops[1:-1]
-    if len(via) < len(skipped):
-        return f"{short(stops[0])}, stops at {', '.join(short(s) for s in via)}"
-    return f"{short(stops[0])}, skips {', '.join(short(s) for s in skipped)}"
+        return f"{name(stops[0])}, nonstop"
+    segs = segments(stops, order)
+    if len(segs) == 1:
+        via = stops[1:-1]
+        if len(via) < len(skipped):
+            return f"{name(stops[0])}, stops at {', '.join(name(s) for s in via)}"
+        return f"{name(stops[0])}, skips {', '.join(name(s) for s in skipped)}"
+    parts = []
+    for a, b, local in segs:
+        inside = order[a + 1 : b]
+        head = f"{name(order[a])} to {name(order[b])} {'local' if local else 'express'}"
+        if local:
+            miss = [name(s) for s in inside if s not in stops]
+            parts.append(f"{head}, skips {', '.join(miss)}" if miss else head)
+        else:
+            made = [name(s) for s in inside if s in stops]
+            parts.append(f"{head}, stops at {', '.join(made)}" if made else head)
+    return "; ".join(parts)
 
 
 @cache
@@ -106,7 +161,7 @@ def timetable(data: str, date: str) -> str:
         only_express = sum(len(p) < len(stops) for p in by) == 1
         for pat, sch in sorted(by.items(), key=lambda kv: (-len(kv[1]), kv[0])):
             sims = [line.trip(m7, k, list(pat)) for k in KINDS]
-            label = pattern(list(pat), stops, only_express)
+            label = pattern(list(pat), stops, only_express, spec.railroad)
             rows.append([label, str(len(sch)), f"{median(sch):.0f}", *map(f1, sims)])
         out.append(
             f"#### {heading(name, spec)}\n\n"

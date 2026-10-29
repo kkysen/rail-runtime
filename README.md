@@ -178,12 +178,12 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, o
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Great Neck, skips Mets | 2 | 39 | 26.2 | 24.9 | 23.5 | 23.2 |
-| Port Washington, stops at Plandome, Manhasset, Great Neck | 2 | 38 | 25.5 | 23.7 | 21.1 | 20.8 |
+| Port Washington to Great Neck local; Great Neck to Penn express | 2 | 38 | 25.5 | 23.7 | 21.1 | 20.8 |
 | Great Neck, all stops | 1 | 38 | 27.3 | 26.0 | 24.7 | 24.5 |
-| Port Washington, stops at Plandome, Manhasset, Great Neck, Bayside | 1 | 40 | 26.6 | 24.8 | 22.4 | 22.2 |
+| Port Washington to Great Neck local; Great Neck to Penn express, stops at Bayside | 1 | 40 | 26.6 | 24.8 | 22.4 | 22.2 |
 | Port Washington, all stops | 1 | 49 | 35.0 | 33.3 | 31.9 | 31.7 |
 | Port Washington, skips Auburndale, Broadway, Murray Hill, Flushing | 1 | 45 | 30.7 | 29.0 | 27.2 | 27.0 |
-| Port Washington, skips Auburndale, Broadway, Murray Hill, Flushing, Mets | 1 | 44 | 29.7 | 28.0 | 26.0 | 25.7 |
+| Port Washington to Bayside local; Bayside to Penn express, stops at Woodside | 1 | 44 | 29.7 | 28.0 | 26.0 | 25.7 |
 
 #### Jamaica - Penn
 
@@ -225,12 +225,12 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, o
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Wantagh, skips Lynbrook | 4 | 30 | 22.5 | 21.9 | 20.6 | 20.4 |
-| Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre, Lynbrook | 3 | 47 | 32.8 | 32.1 | 30.7 | 29.7 |
+| Babylon to Wantagh local; Wantagh to Jamaica express | 3 | 47 | 32.8 | 32.1 | 30.7 | 29.7 |
 | Babylon, skips Lynbrook | 2 | 52 | 39.5 | 38.9 | 37.4 | 37.2 |
 | Babylon, stops at Amityville, Massapequa, Bellmore, Freeport | 1 | 39 | 28.9 | 28.3 | 26.8 | 25.7 |
 | Babylon, skips Bellmore, Merrick, Freeport, Lynbrook | 1 | 49 | 35.5 | 34.9 | 33.4 | 32.8 |
-| Babylon, skips Freeport, Baldwin, Rockville Centre, Lynbrook | 1 | 49 | 35.4 | 34.8 | 33.3 | 32.7 |
-| Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre | 1 | 49 | 33.9 | 33.2 | 32.0 | 31.0 |
+| Babylon to Merrick local; Merrick to Jamaica express | 1 | 49 | 35.4 | 34.8 | 33.3 | 32.7 |
+| Babylon to Wantagh local; Wantagh to Jamaica express, stops at Lynbrook | 1 | 49 | 33.9 | 33.2 | 32.0 | 31.0 |
 | Babylon, stops at Wantagh, Bellmore, Merrick, Freeport | 1 | 47 | 28.8 | 28.2 | 26.7 | 25.2 |
 | Wantagh, all stops | 1 | 32 | 23.6 | 23.0 | 21.9 | 21.8 |
 
@@ -238,10 +238,10 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, o
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Babylon, skips Bellmore, Merrick, Freeport, Baldwin, Rockville Centre, Lynbrook, St. Albans | 5 | 46 | 33.8 | 32.9 | 31.3 | 30.2 |
+| Babylon to Wantagh local; Wantagh to Jamaica express | 5 | 46 | 33.8 | 32.9 | 31.3 | 30.2 |
 | Wantagh, skips Lynbrook, St. Albans | 2 | 30 | 23.6 | 22.6 | 21.2 | 20.9 |
 | Babylon, all stops | 1 | 53 | 42.6 | 41.8 | 40.6 | 40.4 |
-| Babylon, stops at Wantagh, Bellmore, Merrick, Freeport, Baldwin, Rockville Centre | 1 | 46 | 32.5 | 31.6 | 30.0 | 28.7 |
+| Babylon to Wantagh express; Wantagh to Jamaica local, skips Lynbrook, St. Albans | 1 | 46 | 32.5 | 31.6 | 30.0 | 28.7 |
 | Freeport, skips Lynbrook | 1 | 24 | 17.6 | 16.7 | 15.5 | 15.2 |
 | Wantagh, skips St. Albans | 1 | 33 | 24.7 | 23.7 | 22.5 | 22.3 |
 | Wantagh, skips Lynbrook | 1 | 32 | 24.6 | 23.7 | 22.5 | 22.3 |
@@ -250,7 +250,7 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, o
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Long Beach, skips Rosedale, Laurelton, Locust Manor | 8 | 33 | 23.0 | 20.0 | 18.9 | 18.8 |
+| Long Beach to Valley Stream local; Valley Stream to Jamaica express | 8 | 33 | 23.0 | 20.0 | 18.9 | 18.8 |
 | Long Beach, all stops | 2 | 37 | 26.3 | 23.3 | 22.8 | 22.8 |
 | Island Park, all stops | 1 | 30 | 22.1 | 21.2 | 20.7 | 20.7 |
 | Long Beach, skips Laurelton, Locust Manor | 1 | 36 | 24.1 | 21.0 | 20.3 | 20.2 |
@@ -260,7 +260,7 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, o
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Far Rockaway, all stops | 10 | 36 | 24.9 | 22.7 | 22.5 | 22.4 |
-| Far Rockaway, skips Rosedale, Laurelton, Locust Manor | 1 | 34 | 21.5 | 19.4 | 18.6 | 18.5 |
+| Far Rockaway to Valley Stream local; Valley Stream to Jamaica express | 1 | 34 | 21.5 | 19.4 | 18.6 | 18.5 |
 | Far Rockaway, skips Rosedale | 1 | 35 | 23.8 | 21.6 | 21.2 | 21.2 |
 | Valley Stream, all stops | 1 | 16 | 10.4 | 10.0 | 9.7 | 9.7 |
 
@@ -274,74 +274,74 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, o
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Huntington, skips Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 6 | 48 | 34.8 | 31.6 | 31.2 | 30.3 |
-| Huntington, skips Merillon Avenue, New Hyde Park, Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 2 | 46 | 32.2 | 28.9 | 28.6 | 27.3 |
+| Huntington to New Hyde Park local; New Hyde Park to Jamaica express | 6 | 48 | 34.8 | 31.6 | 31.2 | 30.3 |
+| Huntington to Mineola local; Mineola to Jamaica express | 2 | 46 | 32.2 | 28.9 | 28.6 | 27.3 |
 | Huntington, stops at Cold Spring Harbor, Syosset | 2 | 42 | 27.4 | 24.0 | 23.5 | 21.4 |
 | Westbury, skips Floral Park | 2 | 25 | 20.1 | 19.2 | 19.1 | 19.1 |
-| Hicksville, skips Elmont-UBS Arena, Queens Village, Hollis | 1 | 27 | 21.5 | 20.4 | 20.3 | 19.7 |
+| Hicksville to Floral Park local; Floral Park to Jamaica express | 1 | 27 | 21.5 | 20.4 | 20.3 | 19.7 |
 | Hicksville, skips Floral Park, Elmont-UBS Arena | 1 | 32 | 22.8 | 21.7 | 21.6 | 21.4 |
-| Huntington, stops at Cold Spring Harbor, Syosset, Hicksville, Carle Place, Mineola | 1 | 43 | 30.9 | 27.7 | 27.3 | 25.9 |
-| Huntington, stops at Cold Spring Harbor, Syosset, Hicksville | 1 | 39 | 28.2 | 25.0 | 24.6 | 22.5 |
-| Huntington, skips Elmont-UBS Arena, Queens Village, Hollis | 1 | 48 | 36.2 | 32.9 | 32.6 | 31.8 |
-| Huntington, skips Carle Place, Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 1 | 44 | 33.5 | 30.3 | 29.9 | 28.9 |
+| Huntington to Mineola local, skips Westbury; Mineola to Jamaica express | 1 | 43 | 30.9 | 27.7 | 27.3 | 25.9 |
+| Huntington to Hicksville local; Hicksville to Jamaica express | 1 | 39 | 28.2 | 25.0 | 24.6 | 22.5 |
+| Huntington to Floral Park local; Floral Park to Jamaica express | 1 | 48 | 36.2 | 32.9 | 32.6 | 31.8 |
+| Huntington to New Hyde Park local, skips Carle Place; New Hyde Park to Jamaica express | 1 | 44 | 33.5 | 30.3 | 29.9 | 28.9 |
 
 #### Ronkonkoma - Jamaica
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage | 6 | 58 | 40.8 | 39.3 | 39.0 | 36.2 |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage, Hicksville | 3 | 60 | 41.6 | 40.3 | 40.0 | 37.3 |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage, Hicksville, Mineola | 2 | 59 | 42.9 | 41.6 | 41.4 | 39.0 |
-| Farmingdale, skips Floral Park, Elmont-UBS Arena, Queens Village, Hollis | 1 | 38 | 27.6 | 26.3 | 26.0 | 25.2 |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park | 1 | 55 | 36.7 | 35.2 | 34.8 | 31.2 |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Bethpage, Floral Park | 1 | 61 | 42.1 | 40.7 | 40.3 | 37.9 |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Hicksville, Merillon Avenue, New Hyde Park | 1 | 61 | 42.9 | 41.6 | 41.3 | 38.9 |
-| Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Hicksville, Mineola | 1 | 61 | 40.2 | 38.9 | 38.6 | 35.8 |
+| Ronkonkoma to Bethpage local, skips Pinelawn; Bethpage to Jamaica express | 6 | 58 | 40.8 | 39.3 | 39.0 | 36.2 |
+| Ronkonkoma to Hicksville local, skips Pinelawn; Hicksville to Jamaica express | 3 | 60 | 41.6 | 40.3 | 40.0 | 37.3 |
+| Ronkonkoma to Hicksville local, skips Pinelawn; Hicksville to Jamaica express, stops at Mineola | 2 | 59 | 42.9 | 41.6 | 41.4 | 39.0 |
+| Farmingdale to New Hyde Park local; New Hyde Park to Jamaica express | 1 | 38 | 27.6 | 26.3 | 26.0 | 25.2 |
+| Ronkonkoma to Deer Park local; Deer Park to Jamaica express | 1 | 55 | 36.7 | 35.2 | 34.8 | 31.2 |
+| Ronkonkoma to Bethpage local, skips Pinelawn; Bethpage to Jamaica express, stops at Floral Park | 1 | 61 | 42.1 | 40.7 | 40.3 | 37.9 |
+| Ronkonkoma to Wyandanch local; Wyandanch to Jamaica express, stops at Farmingdale, Hicksville, Merillon Avenue, New Hyde Park | 1 | 61 | 42.9 | 41.6 | 41.3 | 38.9 |
+| Ronkonkoma to Wyandanch local; Wyandanch to Jamaica express, stops at Hicksville, Mineola | 1 | 61 | 40.2 | 38.9 | 38.6 | 35.8 |
 
 #### Croton-Harmon - GCT
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Croton-Harmon, all stops | 6 | 71 | 56.9 | 51.4 | 50.2 | 49.9 |
-| Croton-Harmon, skips Greystone, Glenwood, Ludlow, Riverdale, Spuyten Duyvil, University Heights, Morris Heights | 4 | 60 | 49.3 | 43.6 | 41.9 | 41.5 |
-| Croton-Harmon, stops at Ossining, Scarborough, Philipse Manor, Tarrytown, Harlem-125 St | 3 | 55 | 42.1 | 36.3 | 34.5 | 33.6 |
+| Croton-Harmon to Hastings-on-Hudson local; Hastings-on-Hudson to GCT express, stops at Yonkers, Marble Hill, Harlem-125 St | 4 | 60 | 49.3 | 43.6 | 41.9 | 41.5 |
+| Croton-Harmon to Tarrytown local; Tarrytown to GCT express, stops at Harlem-125 St | 3 | 55 | 42.1 | 36.3 | 34.5 | 33.6 |
 | Greystone, all stops | 3 | 45 | 33.2 | 27.7 | 26.8 | 26.6 |
-| Croton-Harmon, stops at Ossining, Scarborough, Philipse Manor, Tarrytown | 1 | 60 | 41.2 | 35.2 | 33.4 | 32.4 |
-| Croton-Harmon, skips Greystone, Glenwood, Yonkers, Ludlow, Riverdale, Spuyten Duyvil, Marble Hill, University Heights, Morris Heights | 1 | 62 | 47.3 | 41.5 | 39.7 | 39.2 |
-| Croton-Harmon, skips Greystone, Glenwood, Ludlow, Riverdale, Spuyten Duyvil, Marble Hill, University Heights, Morris Heights | 1 | 60 | 48.4 | 42.6 | 41.0 | 40.5 |
-| Irvington, stops at Ardsley-on-Hudson, Dobbs Ferry, Hastings-on-Hudson, Greystone, Harlem-125 St | 1 | 46 | 33.6 | 27.9 | 26.5 | 26.1 |
-| Irvington, stops at Ardsley-on-Hudson, Dobbs Ferry, Hastings-on-Hudson, Yonkers, Harlem-125 St | 1 | 49 | 33.4 | 27.8 | 26.3 | 25.9 |
-| Tarrytown, stops at Irvington, Ardsley-on-Hudson, Dobbs Ferry, Hastings-on-Hudson, Greystone, Harlem-125 St | 1 | 51 | 36.9 | 31.2 | 29.7 | 29.3 |
+| Croton-Harmon to Tarrytown local; Tarrytown to GCT express | 1 | 60 | 41.2 | 35.2 | 33.4 | 32.4 |
+| Croton-Harmon to Hastings-on-Hudson local; Hastings-on-Hudson to GCT express, stops at Harlem-125 St | 1 | 62 | 47.3 | 41.5 | 39.7 | 39.2 |
+| Croton-Harmon to Hastings-on-Hudson local; Hastings-on-Hudson to GCT express, stops at Yonkers, Harlem-125 St | 1 | 60 | 48.4 | 42.6 | 41.0 | 40.5 |
+| Irvington to Greystone local; Greystone to GCT express, stops at Harlem-125 St | 1 | 46 | 33.6 | 27.9 | 26.5 | 26.1 |
+| Irvington to Hastings-on-Hudson local; Hastings-on-Hudson to GCT express, stops at Yonkers, Harlem-125 St | 1 | 49 | 33.4 | 27.8 | 26.3 | 25.9 |
+| Tarrytown to Greystone local; Greystone to GCT express, stops at Harlem-125 St | 1 | 51 | 36.9 | 31.2 | 29.7 | 29.3 |
 
 #### Southeast - GCT
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | North White Plains, all stops | 6 | 56 | 46.2 | 41.2 | 40.1 | 39.9 |
-| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, Katonah, Bedford Hills, Mt Kisco, Chappaqua, Pleasantville, Hawthorne, Valhalla, North White Plains, White Plains, Harlem-125 St | 5 | 89 | 74.5 | 67.9 | 62.7 | 61.7 |
-| Crestwood, stops at Tuckahoe, Bronxville, Fleetwood, Mt Vernon West, Harlem-125 St | 4 | 38 | 26.9 | 22.3 | 20.8 | 20.3 |
-| North White Plains, stops at White Plains, Hartsdale, Scarsdale, Crestwood, Harlem-125 St | 3 | 46 | 34.2 | 29.2 | 26.8 | 26.3 |
-| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, White Plains, Harlem-125 St | 3 | 90 | 66.6 | 59.3 | 53.2 | 51.8 |
-| Mt Kisco, stops at Chappaqua, Pleasantville, Hawthorne, Valhalla, North White Plains, White Plains, Harlem-125 St | 2 | 64 | 49.6 | 43.8 | 39.7 | 38.7 |
-| North White Plains, stops at White Plains, Hartsdale, Scarsdale, Harlem-125 St | 2 | 42 | 33.1 | 28.1 | 25.5 | 24.8 |
-| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, Katonah, Bedford Hills, Mt Kisco, Chappaqua, White Plains, Harlem-125 St | 2 | 88 | 70.8 | 63.6 | 58.3 | 57.3 |
-| Crestwood, stops at Tuckahoe, Bronxville, Fleetwood | 1 | 40 | 25.0 | 20.2 | 18.4 | 17.7 |
-| Crestwood, stops at Tuckahoe, Bronxville, Fleetwood, Mt Vernon West | 1 | 35 | 26.1 | 21.3 | 19.7 | 19.2 |
+| Southeast to White Plains local, skips Mt Pleasant; White Plains to GCT express, stops at Harlem-125 St | 5 | 89 | 74.5 | 67.9 | 62.7 | 61.7 |
+| Crestwood to Mt Vernon West local; Mt Vernon West to GCT express, stops at Harlem-125 St | 4 | 38 | 26.9 | 22.3 | 20.8 | 20.3 |
+| North White Plains to Crestwood local; Crestwood to GCT express, stops at Harlem-125 St | 3 | 46 | 34.2 | 29.2 | 26.8 | 26.3 |
+| Southeast to Goldens Bridge local; Goldens Bridge to GCT express, stops at White Plains, Harlem-125 St | 3 | 90 | 66.6 | 59.3 | 53.2 | 51.8 |
+| Mt Kisco to White Plains local, skips Mt Pleasant; White Plains to GCT express, stops at Harlem-125 St | 2 | 64 | 49.6 | 43.8 | 39.7 | 38.7 |
+| North White Plains to Scarsdale local; Scarsdale to GCT express, stops at Harlem-125 St | 2 | 42 | 33.1 | 28.1 | 25.5 | 24.8 |
+| Southeast to Chappaqua local; Chappaqua to GCT express, stops at White Plains, Harlem-125 St | 2 | 88 | 70.8 | 63.6 | 58.3 | 57.3 |
+| Crestwood to Fleetwood local; Fleetwood to GCT express | 1 | 40 | 25.0 | 20.2 | 18.4 | 17.7 |
+| Crestwood to Mt Vernon West local; Mt Vernon West to GCT express | 1 | 35 | 26.1 | 21.3 | 19.7 | 19.2 |
 | Crestwood, all stops | 1 | 43 | 34.7 | 30.1 | 29.3 | 29.0 |
-| Crestwood, skips Botanical Garden, Fordham, Tremont, Melrose | 1 | 37 | 30.2 | 25.7 | 24.5 | 24.2 |
+| Crestwood to Williams Bridge local; Williams Bridge to GCT express, stops at Harlem-125 St | 1 | 37 | 30.2 | 25.7 | 24.5 | 24.2 |
 | Hartsdale, stops at Scarsdale | 1 | 38 | 26.6 | 21.8 | 19.2 | 18.5 |
 | Hartsdale, stops at Scarsdale, Harlem-125 St | 1 | 39 | 27.4 | 22.8 | 20.3 | 19.6 |
-| Mt Kisco, stops at Chappaqua, Pleasantville, Hawthorne, Valhalla, North White Plains, White Plains, Hartsdale, Scarsdale, Harlem-125 St | 1 | 68 | 51.8 | 46.0 | 42.4 | 41.5 |
-| Mt Kisco, stops at Chappaqua, Pleasantville, Hawthorne, Valhalla, North White Plains, White Plains, Mt Vernon West, Fordham, Harlem-125 St | 1 | 67 | 51.7 | 45.9 | 42.3 | 41.4 |
+| Mt Kisco to Scarsdale local, skips Mt Pleasant; Scarsdale to GCT express, stops at Harlem-125 St | 1 | 68 | 51.8 | 46.0 | 42.4 | 41.5 |
+| Mt Kisco to White Plains local, skips Mt Pleasant; White Plains to GCT express, stops at Mt Vernon West, Fordham, Harlem-125 St | 1 | 67 | 51.7 | 45.9 | 42.3 | 41.4 |
 | Mt Vernon West, all stops | 1 | 37 | 26.7 | 22.1 | 21.4 | 21.1 |
 | North White Plains, stops at White Plains | 1 | 45 | 30.1 | 24.9 | 21.7 | 20.8 |
 | North White Plains, stops at White Plains, Harlem-125 St | 1 | 45 | 30.9 | 25.9 | 22.8 | 22.0 |
-| North White Plains, stops at White Plains, Hartsdale, Scarsdale, Crestwood | 1 | 43 | 33.3 | 28.2 | 25.7 | 25.1 |
-| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, Katonah, Bedford Hills, Mt Kisco, Chappaqua, North White Plains, Harlem-125 St | 1 | 90 | 70.9 | 63.6 | 58.3 | 57.3 |
-| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, Katonah, Bedford Hills, Mt Kisco, Chappaqua, North White Plains, White Plains, Harlem-125 St | 1 | 85 | 71.7 | 64.7 | 59.5 | 58.4 |
-| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, Katonah, Bedford Hills, Mt Kisco, Chappaqua, Pleasantville, Hawthorne, Valhalla, White Plains, Harlem-125 St | 1 | 87 | 73.6 | 66.8 | 61.6 | 60.6 |
-| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, North White Plains, White Plains, Harlem-125 St | 1 | 86 | 67.5 | 60.3 | 54.3 | 53.0 |
-| Southeast, stops at Brewster, Croton Falls, Purdy's, Goldens Bridge, North White Plains, White Plains, Hartsdale, Scarsdale, Harlem-125 St | 1 | 89 | 69.7 | 62.5 | 57.0 | 55.8 |
+| North White Plains to Crestwood local; Crestwood to GCT express | 1 | 43 | 33.3 | 28.2 | 25.7 | 25.1 |
+| Southeast to Chappaqua local; Chappaqua to GCT express, stops at North White Plains, Harlem-125 St | 1 | 90 | 70.9 | 63.6 | 58.3 | 57.3 |
+| Southeast to Chappaqua local; Chappaqua to GCT express, stops at North White Plains, White Plains, Harlem-125 St | 1 | 85 | 71.7 | 64.7 | 59.5 | 58.4 |
+| Southeast to Hawthorne local; Hawthorne to GCT express, stops at Valhalla, White Plains, Harlem-125 St | 1 | 87 | 73.6 | 66.8 | 61.6 | 60.6 |
+| Southeast to Goldens Bridge local; Goldens Bridge to GCT express, stops at North White Plains, White Plains, Harlem-125 St | 1 | 86 | 67.5 | 60.3 | 54.3 | 53.0 |
+| Southeast to Goldens Bridge local; Goldens Bridge to GCT express, stops at North White Plains, White Plains, Hartsdale, Scarsdale, Harlem-125 St | 1 | 89 | 69.7 | 62.5 | 57.0 | 55.8 |
 
 #### New Haven - GCT
 
@@ -352,32 +352,32 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, o
 | New Rochelle, skips Fordham | 3 | 37 | 25.4 | 20.1 | 18.5 | 18.2 |
 | Harrison, stops at Mamaroneck, Larchmont | 2 | 44 | 29.9 | 24.0 | 21.8 | 21.4 |
 | Harrison, stops at Mamaroneck, Larchmont, Harlem-125 St | 2 | 44 | 30.7 | 25.0 | 23.0 | 22.6 |
-| New Haven, skips Rowayton, Darien, Noroton Heights, Port Chester, Rye, Harrison, Mamaroneck, Larchmont, New Rochelle, Pelham, Mt Vernon East, Fordham | 2 | 128 | 92.6 | 84.8 | 80.2 | 78.7 |
-| South Norwalk, stops at Rowayton, Darien, Noroton Heights, Stamford, Greenwich, Harlem-125 St | 2 | 72 | 51.7 | 45.1 | 41.9 | 41.1 |
-| Stamford, skips Harrison, Mamaroneck, Larchmont, New Rochelle, Pelham, Mt Vernon East, Fordham | 2 | 64 | 44.9 | 38.8 | 36.3 | 35.6 |
-| Bridgeport, stops at Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk | 1 | 93 | 65.8 | 58.2 | 53.9 | 52.9 |
-| Bridgeport, stops at Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Rowayton, Darien, Noroton Heights, Stamford, Harlem-125 St | 1 | 94 | 72.0 | 64.8 | 61.1 | 60.2 |
-| Bridgeport, stops at Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Stamford, Harlem-125 St | 1 | 95 | 68.5 | 61.3 | 57.3 | 56.3 |
-| Fairfield-Black Rock, stops at Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Stamford, Harlem-125 St | 1 | 83 | 63.8 | 57.0 | 53.2 | 52.3 |
+| New Haven to Greenwich local, skips Rowayton, Darien, Noroton Heights; Greenwich to GCT express, stops at Harlem-125 St | 2 | 128 | 92.6 | 84.8 | 80.2 | 78.7 |
+| South Norwalk to Stamford local; Stamford to GCT express, stops at Greenwich, Harlem-125 St | 2 | 72 | 51.7 | 45.1 | 41.9 | 41.1 |
+| Stamford to Rye local; Rye to GCT express, stops at Harlem-125 St | 2 | 64 | 44.9 | 38.8 | 36.3 | 35.6 |
+| Bridgeport to East Norwalk local; East Norwalk to GCT express | 1 | 93 | 65.8 | 58.2 | 53.9 | 52.9 |
+| Bridgeport to Stamford local; Stamford to GCT express, stops at Harlem-125 St | 1 | 94 | 72.0 | 64.8 | 61.1 | 60.2 |
+| Bridgeport to South Norwalk local; South Norwalk to GCT express, stops at Stamford, Harlem-125 St | 1 | 95 | 68.5 | 61.3 | 57.3 | 56.3 |
+| Fairfield-Black Rock to South Norwalk local; South Norwalk to GCT express, stops at Stamford, Harlem-125 St | 1 | 83 | 63.8 | 57.0 | 53.2 | 52.3 |
 | Greenwich, stops at Port Chester, Rye, Harlem-125 St | 1 | 52 | 36.1 | 30.1 | 27.6 | 26.9 |
 | Harrison, all stops | 1 | 47 | 34.7 | 29.3 | 27.8 | 27.6 |
 | Harrison, skips Fordham, Harlem-125 St | 1 | 45 | 32.8 | 27.2 | 25.5 | 25.1 |
-| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield | 1 | 110 | 81.0 | 72.5 | 66.7 | 64.7 |
-| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Harlem-125 St | 1 | 111 | 81.9 | 73.6 | 67.9 | 65.9 |
-| New Haven, skips Rowayton, Noroton Heights, Old Greenwich, Riverside, Cos Cob, Port Chester, Rye, Harrison, Mamaroneck, Larchmont, New Rochelle, Pelham, Mt Vernon East, Fordham | 1 | 119 | 90.5 | 82.6 | 77.8 | 76.3 |
-| New Haven, skips Old Greenwich, Riverside, Cos Cob, Greenwich, Port Chester, Rye, Harrison, Mamaroneck, Larchmont, New Rochelle, Pelham, Mt Vernon East, Fordham | 1 | 122 | 91.8 | 83.9 | 79.1 | 77.5 |
-| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Southport, Green's Farms, Westport, East Norwalk, South Norwalk, Stamford, Harlem-125 St | 1 | 116 | 88.3 | 80.3 | 75.3 | 73.6 |
-| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Stamford, Harlem-125 St | 1 | 116 | 82.8 | 74.6 | 69.1 | 67.1 |
-| New Haven, skips Southport, Green's Farms, Rowayton, Noroton Heights, Harrison, Mamaroneck, Larchmont, Pelham, Mt Vernon East, Fordham | 1 | 128 | 94.1 | 86.7 | 82.4 | 80.8 |
-| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Westport, South Norwalk, Darien, Noroton Heights, Stamford, Harlem-125 St | 1 | 115 | 87.0 | 79.0 | 74.0 | 72.2 |
-| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Fairfield-Black Rock, Fairfield, Westport, Stamford, Harlem-125 St | 1 | 110 | 83.7 | 75.7 | 70.4 | 68.5 |
-| New Haven, stops at West Haven, Milford, Stratford, Bridgeport, Stamford, Harlem-125 St | 1 | 110 | 80.3 | 72.1 | 66.5 | 64.4 |
+| New Haven to Fairfield local; Fairfield to GCT express | 1 | 110 | 81.0 | 72.5 | 66.7 | 64.7 |
+| New Haven to Fairfield local; Fairfield to GCT express, stops at Harlem-125 St | 1 | 111 | 81.9 | 73.6 | 67.9 | 65.9 |
+| New Haven to South Norwalk local; South Norwalk to GCT express, stops at Darien, Stamford, Greenwich, Harlem-125 St | 1 | 119 | 90.5 | 82.6 | 77.8 | 76.3 |
+| New Haven to Stamford local; Stamford to GCT express, stops at Harlem-125 St | 1 | 122 | 91.8 | 83.9 | 79.1 | 77.5 |
+| New Haven to South Norwalk local; South Norwalk to GCT express, stops at Stamford, Harlem-125 St | 1 | 116 | 88.3 | 80.3 | 75.3 | 73.6 |
+| New Haven to Fairfield local; Fairfield to GCT express, stops at Stamford, Harlem-125 St | 1 | 116 | 82.8 | 74.6 | 69.1 | 67.1 |
+| New Haven to Rye local, skips Southport, Green's Farms, Rowayton, Noroton Heights; Rye to GCT express, stops at New Rochelle, Harlem-125 St | 1 | 128 | 94.1 | 86.7 | 82.4 | 80.8 |
+| New Haven to Stamford local, skips Southport, Green's Farms, East Norwalk, Rowayton; Stamford to GCT express, stops at Harlem-125 St | 1 | 115 | 87.0 | 79.0 | 74.0 | 72.2 |
+| New Haven to Fairfield local; Fairfield to GCT express, stops at Westport, Stamford, Harlem-125 St | 1 | 110 | 83.7 | 75.7 | 70.4 | 68.5 |
+| New Haven to Bridgeport local; Bridgeport to GCT express, stops at Stamford, Harlem-125 St | 1 | 110 | 80.3 | 72.1 | 66.5 | 64.4 |
 | New Rochelle, skips Fordham, Harlem-125 St | 1 | 37 | 24.5 | 19.0 | 17.4 | 17.1 |
-| South Norwalk, stops at Rowayton, Darien, Noroton Heights, Harlem-125 St | 1 | 71 | 49.7 | 43.0 | 39.4 | 38.6 |
-| South Norwalk, stops at Rowayton, Darien, Noroton Heights, Stamford | 1 | 72 | 49.8 | 43.0 | 39.5 | 38.6 |
+| South Norwalk to Noroton Heights local; Noroton Heights to GCT express, stops at Harlem-125 St | 1 | 71 | 49.7 | 43.0 | 39.4 | 38.6 |
+| South Norwalk to Stamford local; Stamford to GCT express | 1 | 72 | 49.8 | 43.0 | 39.5 | 38.6 |
 | Stamford, stops at Greenwich, Port Chester, Rye, Harrison, Fordham, Harlem-125 St | 1 | 63 | 44.0 | 37.7 | 35.2 | 34.4 |
-| Stamford, skips Old Greenwich, Riverside, Cos Cob, New Rochelle, Pelham, Mt Vernon East, Fordham | 1 | 59 | 45.5 | 39.3 | 36.5 | 36.1 |
-| Stamford, stops at Old Greenwich, Riverside, Cos Cob, Greenwich, Port Chester, Rye | 1 | 59 | 44.1 | 37.8 | 35.2 | 34.4 |
+| Stamford to Greenwich express; Greenwich to Larchmont local; Larchmont to GCT express, stops at Harlem-125 St | 1 | 59 | 45.5 | 39.3 | 36.5 | 36.1 |
+| Stamford to Rye local; Rye to GCT express | 1 | 59 | 44.1 | 37.8 | 35.2 | 34.4 |
 
 #### New Canaan - Stamford
 
