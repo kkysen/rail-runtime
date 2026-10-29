@@ -731,16 +731,17 @@ BRANCH_HEADWAYS = {
     "West Hempstead": 3600,
     "Huntington": 600,  # 6 an hour
     "Ronkonkoma": 600,  # 6 an hour
-    # Metro-North, from the busiest hour of AM arrivals into Grand Central, or Stamford from New Canaan,
-    # counting only trips that start on the electrified line.
-    # So not the Hudson's trains from Poughkeepsie, whose dual-mode locomotives take the third rail
-    # only within Grand Central, until their replacements, which will take it throughout,
-    # and which wait to be modeled with the diesel trains.
+    # Metro-North, from the busiest 60 minutes of AM arrivals into Grand Central, or Stamford from New Canaan,
+    # counting every electric trip along the line: on the New Haven Line, New Canaan's through trains
+    # and those from New Haven-State St too, 7:47 to 8:47.
+    # So not the diesel trains, like the Hudson's from Poughkeepsie or the New Haven's from Danbury,
+    # whose dual-mode locomotives take the third rail only within Grand Central,
+    # until their replacements, which will take it throughout, and which wait to be modeled with the diesel trains.
     # Each line runs on its own network, though Harlem and New Haven trains share the third rail to Woodlawn,
     # and all three lines share Park Avenue's into Grand Central.
-    "Hudson": 3600 / 7,
-    "Harlem": 3600 / 16,
-    "New Haven": 3600 / 15,
+    "Hudson": 3600 / 9,  # 7:33 to 8:33
+    "Harlem": 3600 / 17,  # 7:49 to 8:49
+    "New Haven": 3600 / 18,
     "New Canaan": 3600 / 2,
 }
 

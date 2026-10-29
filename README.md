@@ -94,10 +94,12 @@ On Metro-North, it covers the electric lines into Grand Central (GCT): the Harle
     Past Mott Haven, OSM maps none of the Hudson Line's, and past Woodlawn, none of the New Haven Line's.
   - The M7A is an M7 on that third rail; the M8 is an M8 on 12.5 kV AC throughout, like the LIRR's 25 kV one.
   - Busy service runs one local each way, as on the branches beyond Jamaica,
-    as often as the busiest hour of AM arrivals into GCT from trips that start on the line: 16 an hour on the Harlem.
+    as often as the busiest 60 minutes of AM arrivals into GCT, counting every electric trip along the line,
+    not the clock hour the LIRR's lines count: 17 an hour on the Harlem.
     Each line is its own power network,
     though Harlem and New Haven trains share the third rail to Woodlawn, and all three share Park Avenue's.
-  - The Hudson Line's busy service runs 7 an hour: not its trains from Poughkeepsie,
+  - The Hudson Line's busy service runs 9 an hour: not its trains from Poughkeepsie,
+    nor the New Haven Line's from Danbury,
     whose dual-mode locomotives take the third rail only within Grand Central.
     Their replacements will take it throughout, and they wait to be modeled with the diesel trains.
   - On the New Haven Line, the M8 runs on the third rail to mile 14.5, and on 12.5 kV catenary beyond, at rated power.
@@ -107,7 +109,8 @@ On Metro-North, it covers the electric lines into Grand Central (GCT): the Harle
     A gap with the same supply either side, like a moveable bridge, takes that supply.
     The third rail's substations stop where it does.
     Its timetable trips start no farther out than New Haven's Union Station, where the trace ends,
-    so not at New Haven-State St, and its busy service runs 15 an hour.
+    so not at New Haven-State St,
+    but its busy service counts those, and New Canaan's through trains, for 18 an hour.
   - The New Canaan Branch is all catenary, and like the branches beyond Jamaica,
     it's timed into Stamford from trips that start on it, with busy service 2 an hour.
 - **Timetable:** AM inbound trips from the LIRR's and Metro-North's GTFS feeds.
@@ -658,32 +661,32 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 80 mph | 53.4 | 53.4 | 53.4 | 52.9 | 512 |
 |  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 520 |
 
-#### Hudson: 8.57 min headways each way
+#### Hudson: 6.67 min headways each way
 
 | Service | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Hudson local | posted | 57.1 | 57.2 | 57.1 | 56.9 | 526 |
-|  | 60 mph | 51.6 | 51.6 | 51.6 | 51.4 | 501 |
-|  | 80 mph | 50.4 | 50.5 | 50.4 | 50.1 | 521 |
-|  | 100 mph | 50.1 | 50.2 | 50.2 | 49.8 | 529 |
+| Hudson local | posted | 57.1 | 57.2 | 57.2 | 56.9 | 525 |
+|  | 60 mph | 51.6 | 51.7 | 51.6 | 51.4 | 524 |
+|  | 80 mph | 50.4 | 50.5 | 50.5 | 50.1 | 512 |
+|  | 100 mph | 50.1 | 50.2 | 50.2 | 49.8 | 518 |
 
-#### Harlem: 3.75 min headways each way
+#### Harlem: 3.53 min headways each way
 
 | Service | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Harlem local | posted | 91.3 | 91.7 | 91.6 | 91.0 | 456 |
-|  | 60 mph | 84.7 | 85.0 | 84.9 | 84.3 | 458 |
-|  | 80 mph | 81.5 | 82.3 | 82.0 | 80.8 | 449 |
-|  | 100 mph | 81.0 | 81.9 | 81.6 | 80.2 | 446 |
+| Harlem local | posted | 91.3 | 91.8 | 91.7 | 91.0 | 440 |
+|  | 60 mph | 84.7 | 85.1 | 85.0 | 84.3 | 448 |
+|  | 80 mph | 81.5 | 82.3 | 82.0 | 80.8 | 443 |
+|  | 100 mph | 81.0 | 81.9 | 81.6 | 80.2 | 442 |
 
-#### New Haven: 4 min headways each way
+#### New Haven: 3.33 min headways each way
 
 | Service | Speeds | M8, 1 train | M8, busy | M8, busy + regen | M8 12.5 kV | Lowest V (M8) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| New Haven local | posted | 106.7 | 106.7 | 106.7 | 106.6 | 504 |
-|  | 60 mph | 99.3 | 99.4 | 99.3 | 99.2 | 500 |
-|  | 80 mph | 95.8 | 95.8 | 95.8 | 95.6 | 517 |
-|  | 100 mph | 94.7 | 94.8 | 94.7 | 94.4 | 501 |
+| New Haven local | posted | 106.7 | 106.7 | 106.7 | 106.6 | 500 |
+|  | 60 mph | 99.3 | 99.3 | 99.3 | 99.2 | 500 |
+|  | 80 mph | 95.8 | 95.8 | 95.8 | 95.6 | 506 |
+|  | 100 mph | 94.7 | 94.8 | 94.8 | 94.4 | 497 |
 
 #### New Canaan: 30 min headways each way
 
