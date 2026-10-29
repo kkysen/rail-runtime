@@ -32,6 +32,12 @@ rm -rf data/gtfs
 mkdir data/gtfs
 unzip -q data/gtfslirr.zip -d data/gtfs
 
+# Metro-North GTFS schedule.
+curl -sfL -m 60 https://rrgtfsfeeds.s3.amazonaws.com/gtfsmnr.zip -o data/gtfsmnr.zip
+rm -rf data/gtfsmnr
+mkdir data/gtfsmnr
+unzip -q data/gtfsmnr.zip -d data/gtfsmnr
+
 # Port Washington Branch route relation, with its ways and stops.
 overpass '[out:json][timeout:90];rel(1834644);out body;way(r);out tags geom;node(r);out;' data/pw_route.json
 
@@ -76,10 +82,9 @@ with open(sys.argv[3], "w") as f:
     json.dump({"elements": ways}, f)
 PY
 
-# Substations, to place LIRR traction substations along each line.
-overpass '[out:json][timeout:160];nwr["power"="substation"](40.57,-74.0,40.89,-73.07);out center tags;' data/substations.json
-# Committed, so rewritten one element per line for diffs that line up with substations.
-python3 - data/substations.json <<'PY'
+# Committed substation extracts are rewritten one element per line, for diffs that line up with substations.
+one_per_line() {
+    python3 - "$1" <<'PY'
 import json, sys
 path = sys.argv[1]
 with open(path) as f:
@@ -90,3 +95,19 @@ lines += ['  "elements": [', ",\n".join("    " + json.dumps(e, ensure_ascii=Fals
 with open(path, "w") as f:
     f.write("\n".join(lines) + "\n")
 PY
+}
+
+# Substations, to place LIRR traction substations along each line.
+overpass '[out:json][timeout:160];nwr["power"="substation"](40.57,-74.0,40.89,-73.07);out center tags;' data/substations.json
+one_per_line data/substations.json
+
+# Metro-North's Hudson, Harlem and New Haven Line route relations, and the New Canaan Branch's.
+overpass '[out:json][timeout:90];rel(1186686);out body;way(r);out tags geom;' data/hud_route.json
+overpass '[out:json][timeout:90];rel(1158719);out body;way(r);out tags geom;' data/har_route.json
+overpass '[out:json][timeout:90];rel(1260624);out body;way(r);out tags geom;' data/nh_route.json
+overpass '[out:json][timeout:90];rel(1910690);out body;way(r);out tags geom;' data/nc_route.json
+# Every rail way and substation near them: the lines reach New Haven, too far for one box.
+mnr='rel(id:1186686,1158719,1260624,1910690);way(r)->.r;'
+overpass "[out:json][timeout:280];${mnr}way(around.r:120)[\"railway\"=\"rail\"];out body geom;" data/rail_mnr.json
+overpass "[out:json][timeout:280];${mnr}nwr(around.r:600)[\"power\"=\"substation\"];out center tags;" data/substations_mnr.json
+one_per_line data/substations_mnr.json

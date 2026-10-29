@@ -93,7 +93,7 @@ and builds the Rust simulation core in `sim/` with `maturin`, so `cargo` must be
 Regenerating every result takes about 4 s.
 
 ```sh
-./fetch.sh  # GTFS and OSM extracts into data/
+./fetch.sh  # LIRR and Metro-North GTFS and OSM extracts into data/
 # Optional: retrace the geometry, which is committed in data/.
 uv run rail-runtime geometry data/rail_bbox.json data/pw_route.json data/gtfs "Penn Station" "Port Washington" data/pw_geometry.json
 uv run rail-runtime geometry data/rail_bbox2.json - data/gtfs "Penn Station" Jamaica data/jam_geometry.json
@@ -107,6 +107,10 @@ uv run rail-runtime geometry --yard data/rail_bbox_li.json data/frk_route.json d
 uv run rail-runtime geometry data/rail_bbox_li.json data/wh_route.json data/gtfs Jamaica "West Hempstead" data/wh_geometry.json
 uv run rail-runtime geometry data/rail_bbox_li.json data/hun_route.json data/gtfs Jamaica Huntington data/hun_geometry.json
 uv run rail-runtime geometry data/rail_bbox_li.json data/ronk_route.json data/gtfs Jamaica Ronkonkoma data/ronk_geometry.json
+uv run rail-runtime geometry --railroad Metro-North data/rail_mnr.json data/hud_route.json data/gtfsmnr "Grand Central" Croton-Harmon data/hud_geometry.json
+uv run rail-runtime geometry --railroad Metro-North data/rail_mnr.json data/har_route.json data/gtfsmnr "Grand Central" Southeast data/har_geometry.json
+uv run rail-runtime geometry --railroad Metro-North data/rail_mnr.json data/nh_route.json data/gtfsmnr "Grand Central" "New Haven" data/nh_geometry.json
+uv run rail-runtime geometry --railroad Metro-North data/rail_mnr.json data/nc_route.json data/gtfsmnr Stamford "New Canaan" data/nc_geometry.json
 # Regenerate the results below.
 uv run rail-runtime results
 ```

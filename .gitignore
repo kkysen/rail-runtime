@@ -23,3 +23,8 @@ __pycache__/
 !/data/wh_geometry.json
 !/data/hun_geometry.json
 !/data/ronk_geometry.json
+!/data/substations_mnr.json
+!/data/hud_geometry.json
+!/data/har_geometry.json
+!/data/nh_geometry.json
+!/data/nc_geometry.json

@@ -284,12 +284,27 @@ class Line:
         self.st[stations[-1]] = float(self.s[-1]) - 60  # the last station is at the end of the path
         self.lonlat = g.lonlat
         self.third_rail = g.third_rail
-        # On the third rail, except where only catenary runs: there trains get rated power.
-        self.dc = ~((g.catenary > 0) & (g.third_rail == 0))
+        self.dc = self._dc(g)
         self.v0 = v0
         self.spacing = spacing
         self.own = [x for x, _ in own_substations(g, substations_json, railroad)]
         self._substations(substations_json)
+
+    @staticmethod
+    def _dc(g: Geometry) -> npt.NDArray[np.bool_]:
+        """Whether each sample is on the third rail, not under catenary, where trains get rated power.
+
+        Where neither counts any through track, as over a moveable bridge or at a terminal's stub tracks,
+        it takes the supply of the nearest sample that does, and with none, the third rail.
+        """
+        known = np.flatnonzero((g.third_rail > 0) | (g.catenary > 0))
+        if len(known) == 0:
+            return np.ones(len(g.s), dtype=bool)
+        idx = np.arange(len(g.s))
+        j = np.clip(np.searchsorted(known, idx), 1, len(known) - 1)
+        nearest = np.where(idx - known[j - 1] <= known[j] - idx, known[j - 1], known[j])
+        nearest = np.where(idx <= known[0], known[0], nearest)
+        return g.third_rail[nearest] > 0
 
     def _long_chord_radius(self, lonlat: Arr, half: float) -> Arr:
         lat0 = float(np.mean(lonlat[:, 1]))
