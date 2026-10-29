@@ -235,6 +235,28 @@ RONK_STOPS = [
 
 # Metro-North, out of Grand Central to where the third rail ends, or on the New Haven Line, to New Haven.
 # Not Yankees-E 153 St, which only game-day trains serve, nor Highbridge Yard or Springdale's shops.
+HUD_STOPS = [
+    "Grand Central",
+    "Harlem-125 St",
+    "Morris Heights",
+    "University Heights",
+    "Marble Hill",
+    "Spuyten Duyvil",
+    "Riverdale",
+    "Ludlow",
+    "Yonkers",
+    "Glenwood",
+    "Greystone",
+    "Hastings-on-Hudson",
+    "Dobbs Ferry",
+    "Ardsley-on-Hudson",
+    "Irvington",
+    "Tarrytown",
+    "Philipse Manor",
+    "Scarborough",
+    "Ossining",
+    "Croton-Harmon",
+]
 HAR_STOPS = [
     "Grand Central",
     "Harlem-125 St",
@@ -404,6 +426,16 @@ SPECS = {
         {"local": RONK_STOPS[::-1]},
         (False, False),
         "4",
+    ),
+    "Hudson": Spec(
+        "hud_geometry.json",
+        "substations_mnr.json",
+        HUD_STOPS,
+        {"local": HUD_STOPS[::-1]},
+        (True, False),
+        "1",
+        railroad="Metro-North",
+        fleet="Metro-North",
     ),
     "Harlem": Spec(
         "har_geometry.json",
@@ -624,6 +656,7 @@ BRANCH_KEYS = {
     "wh": "West Hempstead",
     "hun": "Huntington",
     "ronk": "Ronkonkoma",
+    "hud": "Hudson",
     "har": "Harlem",
 }
 
@@ -648,6 +681,7 @@ BRANCH_HEADWAYS = {
     # and which wait to be modeled with the diesel trains.
     # Each line runs on its own network, though Harlem and New Haven trains share the third rail to Woodlawn,
     # and all three lines share Park Avenue's into Grand Central.
+    "Hudson": 3600 / 7,
     "Harlem": 3600 / 16,
 }
 

@@ -9,7 +9,7 @@ and the Main Line from Jamaica,
 into Grand Central Madison (GCM), the Main Line from Jamaica through the 63rd Street Tunnel,
 and into Atlantic Terminal, the Atlantic Branch from Jamaica.
 Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, Babylon, Long Beach, Far Rockaway, West Hempstead, Huntington and Ronkonkoma.
-On Metro-North, it covers the electric lines into Grand Central (GCT): the Harlem Line to Southeast.
+On Metro-North, it covers the electric lines into Grand Central (GCT): the Harlem Line to Southeast, and the Hudson Line to Croton-Harmon.
 
 ## Method
 
@@ -97,6 +97,9 @@ On Metro-North, it covers the electric lines into Grand Central (GCT): the Harle
     as often as the busiest hour of AM arrivals into GCT from trips that start on the line: 16 an hour on the Harlem.
     Each line is its own power network,
     though Harlem and New Haven trains share the third rail to Woodlawn, and all three share Park Avenue's.
+  - The Hudson Line's busy service runs 7 an hour: not its trains from Poughkeepsie,
+    whose dual-mode locomotives take the third rail only within Grand Central.
+    Their replacements will take it throughout, and they wait to be modeled with the diesel trains.
 - **Timetable:** AM inbound trips from the LIRR's and Metro-North's GTFS feeds.
   A branch beyond Jamaica is timed into Jamaica, from trips that start on it.
   Babylon's trips are timed on the route their GTFS shape follows.
@@ -279,6 +282,21 @@ AM inbound trips arriving at Penn, GCM or Atlantic, or Jamaica from beyond it, o
 | Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Farmingdale, Hicksville, Merillon Avenue, New Hyde Park | 1 | 61 | 42.9 | 41.6 | 41.3 | 38.9 |
 | Ronkonkoma, stops at Central Islip, Brentwood, Deer Park, Wyandanch, Hicksville, Mineola | 1 | 61 | 40.2 | 38.9 | 38.6 | 35.8 |
 
+#### Croton-Harmon - GCT
+
+| Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Croton-Harmon, all stops | 6 | 71 | 56.9 | 51.4 | 50.2 | 49.9 |
+| Croton-Harmon, skips Greystone, Glenwood, Ludlow, Riverdale, Spuyten Duyvil, University Heights, Morris Heights | 4 | 60 | 49.3 | 43.6 | 41.9 | 41.5 |
+| Croton-Harmon, stops at Ossining, Scarborough, Philipse Manor, Tarrytown, Harlem-125 St | 3 | 55 | 42.1 | 36.3 | 34.5 | 33.6 |
+| Greystone, all stops | 3 | 45 | 33.2 | 27.7 | 26.8 | 26.6 |
+| Croton-Harmon, stops at Ossining, Scarborough, Philipse Manor, Tarrytown | 1 | 60 | 41.2 | 35.2 | 33.4 | 32.4 |
+| Croton-Harmon, skips Greystone, Glenwood, Yonkers, Ludlow, Riverdale, Spuyten Duyvil, Marble Hill, University Heights, Morris Heights | 1 | 62 | 47.3 | 41.5 | 39.7 | 39.2 |
+| Croton-Harmon, skips Greystone, Glenwood, Ludlow, Riverdale, Spuyten Duyvil, Marble Hill, University Heights, Morris Heights | 1 | 60 | 48.4 | 42.6 | 41.0 | 40.5 |
+| Irvington, stops at Ardsley-on-Hudson, Dobbs Ferry, Hastings-on-Hudson, Greystone, Harlem-125 St | 1 | 46 | 33.6 | 27.9 | 26.5 | 26.1 |
+| Irvington, stops at Ardsley-on-Hudson, Dobbs Ferry, Hastings-on-Hudson, Yonkers, Harlem-125 St | 1 | 49 | 33.4 | 27.8 | 26.3 | 25.9 |
+| Tarrytown, stops at Irvington, Ardsley-on-Hudson, Dobbs Ferry, Hastings-on-Hudson, Greystone, Harlem-125 St | 1 | 51 | 36.9 | 31.2 | 29.7 | 29.3 |
+
 #### Southeast - GCT
 
 | Pattern | Trips | Scheduled | Posted | 60 mph | 80 mph | 100 mph |
@@ -433,6 +451,14 @@ One train alone, minutes.
 | M7, 750 V third rail, full power | 53.6 | 52.4 | 52.0 | 50.8 |
 | M8, 25 kV | 54.1 | 52.8 | 52.5 | 51.5 |
 
+#### Hudson local
+
+| Train | Posted | 60 mph | 80 mph | 100 mph |
+| --- | ---: | ---: | ---: | ---: |
+| M7A, 700 V third rail | 56.9 | 51.4 | 50.2 | 49.9 |
+| M7A, 700 V third rail, full power | 56.3 | 50.7 | 49.4 | 48.9 |
+| M8, 12.5 kV | 56.6 | 51.0 | 49.8 | 49.4 |
+
 #### Harlem local
 
 | Train | Posted | 60 mph | 80 mph | 100 mph |
@@ -565,6 +591,15 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 |  | 60 mph | 53.7 | 53.8 | 53.7 | 53.2 | 497 |
 |  | 80 mph | 53.4 | 53.4 | 53.4 | 52.9 | 512 |
 |  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 520 |
+
+#### Hudson: 8.57 min headways each way
+
+| Service | Speeds | M7A, 1 train | M7A, busy | M7A, busy + regen | M8 12.5 kV | Lowest V (M7A) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Hudson local | posted | 57.1 | 57.2 | 57.1 | 56.9 | 526 |
+|  | 60 mph | 51.6 | 51.6 | 51.6 | 51.4 | 501 |
+|  | 80 mph | 50.4 | 50.5 | 50.4 | 50.1 | 521 |
+|  | 100 mph | 50.1 | 50.2 | 50.2 | 49.8 | 529 |
 
 #### Harlem: 3.75 min headways each way
 
@@ -737,6 +772,23 @@ One M7, raising one posted zone at a time to what the curves allow (80 mph cap).
 | 0.32 | 0.71 | Jamaica | 35 mph | 80 mph | 18 s |
 | 19.31 | 19.96 | Bethpage | 60 mph | 80 mph | 11 s |
 
+#### Hudson (base: local 56.9 min)
+
+| From mi | To mi | Near | Posted | Raised to | local saves |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 0.00 | 0.88 | Grand Central | 10 mph | 80 mph | 249 s |
+| 9.82 | 10.72 | Spuyten Duyvil | 30 mph | 80 mph | 36 s |
+| 5.40 | 6.33 | Harlem-125 St | 45 mph | 80 mph | 11 s |
+| 4.46 | 4.93 | Harlem-125 St | 35 mph | 52 mph | 11 s |
+| 23.69 | 31.75 | Scarborough | 70 mph | 80 mph | 10 s |
+| 6.33 | 9.16 | Morris Heights | 60 mph | 80 mph | 8 s |
+| 2.69 | 3.95 | Harlem-125 St | 60 mph | 80 mph | 7 s |
+| 31.75 | 32.04 | Croton-Harmon | 50 mph | 80 mph | 5 s |
+| 2.63 | 2.69 | Harlem-125 St | 45 mph | 80 mph | 4 s |
+| 0.89 | 2.13 | Grand Central | 60 mph | 80 mph | 4 s |
+| 2.13 | 2.18 | Harlem-125 St | 45 mph | 80 mph | 4 s |
+| 4.93 | 5.40 | Harlem-125 St | 40 mph | 56 mph | 3 s |
+
 #### Harlem (base: local 90.9 min)
 
 | From mi | To mi | Near | Posted | Raised to | local saves |
@@ -857,6 +909,17 @@ One M7 at an 80 mph cap, easing one curve-limited zone at a time to 80 mph.
 | From mi | To mi | Near | Allows | local saves |
 | ---: | ---: | --- | ---: | ---: |
 | 15.37 | 15.95 | Hicksville | 49 mph | 7 s |
+
+#### Hudson (base: local 50.2 min)
+
+| From mi | To mi | Near | Allows | local saves |
+| ---: | ---: | --- | ---: | ---: |
+| 4.29 | 5.56 | Harlem-125 St | 42 mph | 38 s |
+| 0.00 | 0.09 | Grand Central | 15 mph | 14 s |
+| 5.89 | 6.37 | Harlem-125 St | 52 mph | 14 s |
+| 7.93 | 10.64 | Marble Hill | 42 mph | 13 s |
+| 7.21 | 7.59 | Morris Heights | 67 mph | 4 s |
+| 26.92 | 27.33 | Philipse Manor | 70 mph | 4 s |
 
 #### Harlem (base: local 81.3 min)
 
