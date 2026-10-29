@@ -2,7 +2,7 @@
 //!
 //! Each service runs on its own track at a fixed headway with one stopping pattern.
 //! Braking trains regenerate into the third rail; substations are diode rectifiers and can't absorb it,
-//! so regen only helps other trains, and a train sheds regen once its voltage reaches `V_REGEN_MAX`.
+//! so regen only helps other trains, and a train sheds regen to keep its voltage at or below `V_REGEN_MAX`.
 
 use crate::MPH;
 use crate::train::{Supply, Train, V_MIN, V0};
@@ -11,8 +11,10 @@ use crate::train::{Supply, Train, V_MIN, V0};
 pub const DT: f64 = 0.5;
 /// Wheel to line.
 pub const REGEN_EFF: f64 = 0.80;
-/// A train sheds regen above this, V.
+/// A braking train sheds regen to stay at or below this, V.
 pub const V_REGEN_MAX: f64 = 900.0;
+/// Conductance holding a braking train at `V_REGEN_MAX`, S: stiff enough that it sits within a volt.
+const G_HOLD: f64 = 1e3;
 /// Contact rail, Ω per mile: about 150 lb/yd of steel.
 pub const R_CONTACT: f64 = 0.020;
 pub const MILE: f64 = 1609.34;
@@ -280,10 +282,14 @@ fn solve(
         v[ret(j)] = c.v_return;
     }
     let mut cur = vec![0.0; n_car];
-    let mut shed = vec![1.0; n_car];
+    // Braking trains held at `V_REGEN_MAX`, returning only the regen the line takes there,
+    // the rest going to the friction brake.
+    // Which are held is settled by the voltages alone, so the solve has one answer whatever it starts from.
+    let mut held = vec![false; n_car];
     let mut converged = false;
     let (mut g, mut b, mut bs) = (vec![0.0; n * n], vec![0.0; n], vec![0.0; n]);
     for _ in 0..200 {
+        let mut changed = false;
         g.copy_from_slice(&g0);
         b.fill(0.0);
         for k in 0..n_sub {
@@ -296,6 +302,18 @@ fn solve(
             g[slot[k] * n + slot[k]] += gk;
             b[k] += V0 * gk;
         }
+        for j in (0..n_car).filter(|&j| dem[j] < 0.0) {
+            let vt = (v[contact(j)] - v[ret(j)]).max(1.0);
+            let full = (dem[j] / vt).max(-train.i_max);
+            // Release a hold that took more than full regen or drew from the line; hold a train over the limit.
+            let hold = if held[j] {
+                cur[j] > full && cur[j] < 0.0 || vt > V_REGEN_MAX
+            } else {
+                vt > V_REGEN_MAX
+            };
+            changed |= hold != held[j];
+            held[j] = hold;
+        }
         for j in 0..n_car {
             let vt = (v[contact(j)] - v[ret(j)]).max(1.0);
             if dem[j] >= 0.0 {
@@ -304,11 +322,17 @@ fn solve(
                     // Shed load as voltage collapses.
                     cur[j] *= (vt - 0.6 * V_MIN).max(0.0) / (0.4 * V_MIN);
                 }
+            } else if held[j] {
+                let (c, r) = (slot[contact(j)], slot[ret(j)]);
+                g[c * n + c] += G_HOLD;
+                g[r * n + r] += G_HOLD;
+                g[c * n + r] -= G_HOLD;
+                g[r * n + c] -= G_HOLD;
+                b[contact(j)] += G_HOLD * V_REGEN_MAX;
+                b[ret(j)] -= G_HOLD * V_REGEN_MAX;
+                continue;
             } else {
-                if vt > V_REGEN_MAX {
-                    shed[j] *= 0.8; // line not receptive: blend to friction brake
-                }
-                cur[j] = (dem[j] * shed[j] / vt).max(-train.i_max);
+                cur[j] = (dem[j] / vt).max(-train.i_max);
             }
             b[contact(j)] -= cur[j];
             b[ret(j)] += cur[j];
@@ -319,6 +343,13 @@ fn solve(
         solve_banded(&mut g, &mut bs, n, kb);
         for (i, x) in b.iter_mut().enumerate() {
             *x = bs[slot[i]];
+        }
+        // A held train returns what its hold passes, within its full regen;
+        // past either end, the next iteration releases it.
+        for j in (0..n_car).filter(|&j| dem[j] < 0.0 && held[j]) {
+            let vt = (b[contact(j)] - b[ret(j)]).max(1.0);
+            let full = (dem[j] / vt).max(-train.i_max);
+            cur[j] = (-G_HOLD * (V_REGEN_MAX - vt)).clamp(full, 0.0);
         }
         // Clamp to the physical range: below 0.6 V_MIN trains draw nothing, above V_REGEN_MAX they shed regen.
         // With every rectifier blocking, the positive side floats, so substation buses are clamped too.
@@ -334,7 +365,9 @@ fn solve(
             .zip(&b)
             .map(|(a, c)| (a - c).abs())
             .fold(0.0, f64::max);
-        if diff < 0.2 {
+        // Tight, since the lowest voltage of a busy run hangs on exactly when trains meet,
+        // which a looser one shifts.
+        if diff < 0.001 && !changed {
             v.copy_from_slice(&b);
             converged = true;
             break;

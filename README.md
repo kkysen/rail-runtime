@@ -90,7 +90,7 @@ Beyond Jamaica, it covers the electrified branches into Jamaica from Hempstead, 
 `mise install` sets up `uv` and `pre-commit`;
 `uv` manages Python 3.15 and the dependencies,
 and builds the Rust simulation core in `sim/` with `maturin`, so `cargo` must be installed.
-Regenerating every result takes about 4 s.
+Regenerating every result takes about 7 s.
 
 ```sh
 ./fetch.sh  # GTFS and OSM extracts into data/
@@ -432,7 +432,7 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Atlantic local | posted | 13.9 | 13.9 | 13.9 | 13.9 | 556 |
-|  | 60 mph | 11.5 | 11.5 | 11.5 | 11.5 | 556 |
+|  | 60 mph | 11.5 | 11.5 | 11.5 | 11.5 | 557 |
 |  | 80 mph | 10.7 | 10.7 | 10.7 | 10.6 | 512 |
 |  | 100 mph | 10.2 | 10.3 | 10.3 | 10.1 | 494 |
 
@@ -441,9 +441,9 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Hempstead local | posted | 22.6 | 22.6 | 22.6 | 22.4 | 477 |
-|  | 60 mph | 20.5 | 20.5 | 20.5 | 20.3 | 484 |
+|  | 60 mph | 20.4 | 20.5 | 20.4 | 20.3 | 483 |
 |  | 80 mph | 20.4 | 20.5 | 20.4 | 20.3 | 484 |
-|  | 100 mph | 20.4 | 20.5 | 20.4 | 20.3 | 485 |
+|  | 100 mph | 20.4 | 20.4 | 20.4 | 20.3 | 485 |
 
 #### Babylon via Atlantic Branch: 7.5 min headways each way
 
@@ -451,8 +451,8 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Babylon via Atlantic Branch local | posted | 40.6 | 40.7 | 40.6 | 40.2 | 497 |
 |  | 60 mph | 40.0 | 40.1 | 40.0 | 39.6 | 504 |
-|  | 80 mph | 38.8 | 39.0 | 39.0 | 38.4 | 514 |
-|  | 100 mph | 38.6 | 38.9 | 38.8 | 38.2 | 519 |
+|  | 80 mph | 38.9 | 39.0 | 39.0 | 38.4 | 514 |
+|  | 100 mph | 38.7 | 38.9 | 38.8 | 38.2 | 520 |
 
 #### Babylon via Babylon Branch: 7.5 min headways each way
 
@@ -470,16 +470,16 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Long Beach local | posted | 26.5 | 26.6 | 26.6 | 26.4 | 523 |
 |  | 60 mph | 23.6 | 23.6 | 23.6 | 23.4 | 531 |
 |  | 80 mph | 23.0 | 23.1 | 23.0 | 22.8 | 527 |
-|  | 100 mph | 23.0 | 23.1 | 23.0 | 22.8 | 527 |
+|  | 100 mph | 23.0 | 23.1 | 23.0 | 22.8 | 526 |
 
 #### Far Rockaway: 15 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Far Rockaway local | posted | 25.1 | 25.1 | 25.1 | 25.0 | 497 |
-|  | 60 mph | 23.0 | 23.0 | 23.0 | 22.8 | 495 |
-|  | 80 mph | 22.8 | 22.8 | 22.8 | 22.5 | 494 |
-|  | 100 mph | 22.8 | 22.8 | 22.8 | 22.5 | 494 |
+| Far Rockaway local | posted | 25.1 | 25.1 | 25.1 | 25.0 | 498 |
+|  | 60 mph | 22.9 | 23.0 | 23.0 | 22.8 | 495 |
+|  | 80 mph | 22.7 | 22.8 | 22.8 | 22.5 | 494 |
+|  | 100 mph | 22.7 | 22.8 | 22.8 | 22.5 | 494 |
 
 #### West Hempstead: 60 min headways each way
 
@@ -495,18 +495,18 @@ Minutes per inbound trip in steady service, from the time-stepped multi-train si
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Huntington local | posted | 40.1 | 40.1 | 40.1 | 39.9 | 532 |
-|  | 60 mph | 36.9 | 37.0 | 37.0 | 36.7 | 542 |
+|  | 60 mph | 36.9 | 36.9 | 37.0 | 36.7 | 542 |
 |  | 80 mph | 36.5 | 36.6 | 36.6 | 36.3 | 543 |
-|  | 100 mph | 36.1 | 36.2 | 36.1 | 35.8 | 533 |
+|  | 100 mph | 36.1 | 36.2 | 36.1 | 35.8 | 536 |
 
 #### Ronkonkoma: 10 min headways each way
 
 | Service | Speeds | M7, 1 train | M7, busy | M7, busy + regen | M8 25 kV | Lowest V (M7) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Ronkonkoma local | posted | 55.0 | 55.1 | 55.1 | 54.5 | 507 |
+| Ronkonkoma local | posted | 55.0 | 55.1 | 55.1 | 54.5 | 505 |
 |  | 60 mph | 53.7 | 53.8 | 53.7 | 53.2 | 497 |
 |  | 80 mph | 53.4 | 53.4 | 53.4 | 52.9 | 512 |
-|  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 521 |
+|  | 100 mph | 52.6 | 52.7 | 52.6 | 51.9 | 520 |
 
 ### Posted slow zones
 
